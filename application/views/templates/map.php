@@ -5,7 +5,7 @@
 <div id="map_canvas" class="hide-for-small"></div> 
 
 <!-- Search Bar -->
-<div class="row full-width">
+<div class="row full-width with100">
 	<div class="small-9 large-centered columns">
 	<!--<div class="large-12 columns" id="search-bar">-->
 		<div class="panel radius callout opacity07 text-color-white padding-10px">
@@ -49,22 +49,6 @@
 				</form>
 				</div>
 			</div>
-			<!--<h2 id="date" class="docs float-left"></h2>-->
 		</div>
 	</div>
 </div>
-
-<!-- contextual menu -->
-	<div class="row hide" id="context-menu">
-		<div class="large-2 columns">
-			<div class="panel radius">
-				<ul class="side-nav">
-				  <li class="active"><a href="#">Link 1</a></li>
-				  <li><a href="#">Link 2</a></li>
-				  <li class="divider"></li>
-				  <li><a href="#">Link 3</a></li>
-				  <li><a href="#">Link 4</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>

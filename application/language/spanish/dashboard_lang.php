@@ -8,10 +8,11 @@ $lang['dashboard.about'] = "Quienes Somos";
 $lang['dashboard.searchform.searchtext'] = "Tu texto a buscar aqui!";
 $lang['dashboard.searchform.searchbtn'] = "Buscar";
 $lang['dashboard.searchform.advsearch'] = "B&uacute;squeda Avanzada";
-$lang['dashboard.searchform.hideadvsearch'] = "Ocultar B&uacute;squeda Avanzada";
+$lang['dashboard.searchform.hideadvsearch'] = "Ocultar";
 $lang['dashboard.searchform.radio'] = "Buscar por distancia";
 $lang['dashboard.searchform.noradio'] = "Cualquier Distancia";
 $lang['dashboard.searchform.maxresults'] = "Cantidad de Resultados:";
+$lang['dashboard.searchform.all'] = "Todos (Pueden ser muchos)";
 
 
 
