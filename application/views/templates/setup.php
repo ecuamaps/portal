@@ -1,0 +1,16 @@
+<h1><?=lang('setup.title')?></h1>
+
+
+
+<div class="button-bar">
+  <ul class="button-group">
+    <li><a href="#" class="small button">Button 1</a></li>
+    <li><a href="#" class="small button">Button 2</a></li>
+    <li><a href="#" class="small button">Button 3</a></li>
+  </ul>
+  <ul class="button-group">
+    <li><a href="#" class="small button">Button 1</a></li>
+    <li><a href="#" class="small button">Button 2</a></li>
+    <li><a href="#" class="small button">Button 3</a></li>
+  </ul>
+</div>
