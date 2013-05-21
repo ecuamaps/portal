@@ -77,19 +77,7 @@ $user = $this->session->userdata('user');
 	</div>
 		
 	<!-- Content -->
-	<div class="row full-width with100" id="wrapper">
 	<?=$content?>
-	</div>
-
-	<div class="row full-width with100 footer">
-		<div class="small-9 large-centered columns">
-			<div class="panel radius callout opacity07 text-color-white padding-10px">
-				Hola mundo!!!
-			</div>
-		</div>
-	</div>
-
-	
 	<!-- End Content -->
 	
 	<!-- SignIn Form -->
