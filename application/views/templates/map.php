@@ -3,6 +3,7 @@
 <script src="<?=base_url()?>assets/js/mochkino.js"></script>
 
 <div class="row full-width with100" id="wrapper">
+	
 	<div id="map_canvas" class="hide-for-small"></div> 
 	
 	<!-- Search Bar -->
@@ -56,22 +57,22 @@
 
 
 
-	<div class="row full-width with100 footer hide-for-small">
-		<div class="small-9 large-centered columns">
-			<div class="panel radius callout opacity07 text-color-white padding-10px">
-				<div class="row">
-				<?php foreach($bztop5types as $type):?>
-					<div class="small-2 columns">
-						<label class="text-color-white" for="<?="type_".$type['id']?>"><input class="bz-type" type="checkbox" name="<?="type_".$type['id']?>" id="<?="type_".$type['id']?>"><?=$type['name']?></label>
-  					</div>				
-				<?php endforeach; ?>
-					<div class="small-2 columns">
-						<a href="javascript:void(0)" id="view-all-types"><span id="hiden-types-bar"><?=lang('dashboard.searchform.viewmore')?></span><span class="hide" id="visible-types-bar"><?=lang('dashboard.searchform.hide')?></span></a>
-	  				</div>				
-				</div>
-				
-				<div class="hide" id="extra-types"></div>
-								
+<div class="row full-width with100 footer hide-for-small">
+	<div class="small-10 large-centered columns">
+		<div class="panel radius callout opacity07 text-color-white padding-10px">
+			<div class="row">
+			<?php foreach($bztop5types as $type):?>
+				<div class="small-2 columns">
+					<label class="text-color-white" for="<?="type_".$type['id']?>"><input class="bz-type" type="checkbox" name="<?="type_".$type['id']?>" id="<?="type_".$type['id']?>"><?=$type['name']?></label>
+				</div>				
+			<?php endforeach; ?>
+				<div class="small-2 columns">
+					<a href="javascript:void(0)" id="view-all-types"><span id="hiden-types-bar"><?=lang('dashboard.searchform.viewmore')?></span><span class="hide" id="visible-types-bar"><?=lang('dashboard.searchform.hide')?></span></a>
+  				</div>				
 			</div>
+				
+			<div class="hide" id="extra-types"></div>
+								
 		</div>
 	</div>
+</div>

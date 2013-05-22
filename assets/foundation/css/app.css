@@ -81,14 +81,14 @@ height: 100%;
 }
 
 #wrapper {
-min-height: 95%;
+min-height: 93%;
 height: auto !important;
-height: 95%;
+height: 93%;
 margin: 0 auto -4em;
 }
 
 footer, .push {
-height: 4em;
+	height: 4em;
 }
 
 .with100{
