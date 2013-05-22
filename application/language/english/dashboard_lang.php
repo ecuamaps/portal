@@ -14,6 +14,9 @@ $lang['dashboard.searchform.noradio'] = "Search for All";
 $lang['dashboard.searchform.orderby'] = "Order by:";
 $lang['dashboard.searchform.maxresults'] = "Results Amount:";
 $lang['dashboard.searchform.all'] = "All (Can be a bunch)";
+$lang['dashboard.searchform.viewmore'] = "View All";
+$lang['dashboard.searchform.hide'] = "Hide";
+
 
 
 $lang['dashboard.pagetitle'] = "Dashboard";

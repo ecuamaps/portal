@@ -13,6 +13,8 @@ $lang['dashboard.searchform.radio'] = "Buscar por distancia";
 $lang['dashboard.searchform.noradio'] = "Cualquier Distancia";
 $lang['dashboard.searchform.maxresults'] = "Cantidad de Resultados:";
 $lang['dashboard.searchform.all'] = "Todos (Pueden ser muchos)";
+$lang['dashboard.searchform.viewmore'] = "Ver Todas";
+$lang['dashboard.searchform.hide'] = "Ocultar";
 
 
 

@@ -60,31 +60,18 @@
 		<div class="small-9 large-centered columns">
 			<div class="panel radius callout opacity07 text-color-white padding-10px">
 				<div class="row">
+				<?php foreach($bztop5types as $type):?>
 					<div class="small-2 columns">
-						<label for="checkbox1"><input type="checkbox" id="checkbox1">Farmacias</label>
-  					</div>
-
+						<label class="text-color-white" for="<?="type_".$type['id']?>"><input class="bz-type" type="checkbox" name="<?="type_".$type['id']?>" id="<?="type_".$type['id']?>"><?=$type['name']?></label>
+  					</div>				
+				<?php endforeach; ?>
 					<div class="small-2 columns">
-						<label for="checkbox1"><input type="checkbox" id="checkbox1">Restaurantes</label>
-  					</div>
-
-					<div class="small-2 columns">
-						<label for="checkbox1"><input type="checkbox" id="checkbox1">Hoteles</label>
-  					</div>
-
-					<div class="small-2 columns">
-						<label for="checkbox1"><input type="checkbox" id="checkbox1">Tecnología</label>
-  					</div>
-
-					<div class="small-2 columns">
-						<label for="checkbox1"><input type="checkbox" id="checkbox1">Autos</label>
-  					</div>
-
-					<div class="small-2 columns">
-						<a href="javascript:void(0)" id="adv-search"><span id="hiden-advsearch"><?=lang('dashboard.searchform.viewmore')?></span><span class="hide" id="visible-advsearch"><?=lang('dashboard.searchform.hideviewmore')?></span></a>
-  					</div>
-
+						<a href="javascript:void(0)" id="view-all-types"><span id="hiden-types-bar"><?=lang('dashboard.searchform.viewmore')?></span><span class="hide" id="visible-types-bar"><?=lang('dashboard.searchform.hide')?></span></a>
+	  				</div>				
 				</div>
+				
+				<div class="hide" id="extra-types"></div>
+								
 			</div>
 		</div>
 	</div>

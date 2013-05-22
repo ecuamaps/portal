@@ -100,9 +100,7 @@ $user = $this->session->userdata('user');
 
 
   <script>
-  document.write('<script src=' +
-  ('__proto__' in {} ? '<?=base_url()?>assets/foundation/js/vendor/zepto' : '<?=base_url()?>assets/foundation/js/vendor/jquery') +
-  '.js><\/script>')
+  document.write('<script src="' +('__proto__' in {} ? '<?=base_url()?>assets/foundation/js/vendor/zepto' : '<?=base_url()?>assets/foundation/js/vendor/jquery') +'.js"><\/script>')
   </script>
   <script src="<?=base_url()?>assets/foundation/js/foundation/foundation.js"></script>
   <script src="<?=base_url()?>assets/foundation/js/foundation/foundation.alerts.js"></script>
@@ -118,9 +116,14 @@ $user = $this->session->userdata('user');
   <script src="<?=base_url()?>assets/foundation/js/foundation/foundation.section.js"></script>
   <script src="<?=base_url()?>assets/foundation/js/foundation/foundation.tooltips.js"></script>
   <script src="<?=base_url()?>assets/foundation/js/foundation/foundation.topbar.js"></script>
-  
+ 
   <script>
-  $(document).foundation();
+  $(function(){
+    $(document).foundation();    
+  })
+  </script>
+
+  <script>
   
   $(document).ready(function(){  
   	$('#send-form').click(function(e){
