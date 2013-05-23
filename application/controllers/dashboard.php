@@ -20,7 +20,7 @@ class Dashboard extends CI_Controller {
 		
 		$this->template->write('title', $this->title);
 		
-		$this->template->add_js('https://www.google.com/jsapi', 'import', FALSE, FALSE);
+		//$this->template->add_js('https://www.google.com/jsapi', 'import', FALSE, FALSE);
 
 		$this->template->write_view('content', 'templates/map', $this->dasboard_params, TRUE);
 		
@@ -39,32 +39,5 @@ class Dashboard extends CI_Controller {
 		);
 	}
 	
-	function ajax_get_all_types(){
-		die(json_encode($this->get_all_types()));
-	}
-	
-	/* get all primary types (without parent) exucluding the top five*/
-	private function get_all_types(){
-		//TODO: hardoded by now, get from DB and exclude the top five		
-		return array(
-			array('id' => 6, 'name' => 'Mascotas'),
-			array('id' => 7, 'name' => 'Belleza'),
-			array('id' => 8, 'name' => 'Viveres'),
-			array('id' => 9, 'name' => 'Serv. Financieros'),
-			array('id' => 10, 'name' => 'Serv. Públicos'),
-			array('id' => 11, 'name' => 'Internet'),
-			array('id' => 12, 'name' => 'Muebles'),
-			array('id' => 13, 'name' => 'Finca Raíz'),
-			array('id' => 14, 'name' => 'Ropa'),
-			array('id' => 15, 'name' => 'Viajes'),
-			array('id' => 16, 'name' => 'Gimnasio'),
-			array('id' => 17, 'name' => 'C. Comerciales'),
-			array('id' => 18, 'name' => 'Cines'),
-			array('id' => 19, 'name' => 'Teatros'),
-			array('id' => 20, 'name' => 'Diversión'),
-			array('id' => 21, 'name' => 'Música'),
-			array('id' => 22, 'name' => 'Sitios de interes'),
-			array('id' => 23, 'name' => 'Transportes'),
-		);
-	}
+
 }

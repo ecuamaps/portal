@@ -15,6 +15,8 @@ $lang['dashboard.searchform.maxresults'] = "Cantidad de Resultados:";
 $lang['dashboard.searchform.all'] = "Todos (Pueden ser muchos)";
 $lang['dashboard.searchform.viewmore'] = "Ver Todas";
 $lang['dashboard.searchform.hide'] = "Ocultar";
+$lang['dashboard.searchform.currlocation'] = 'Tu ubicación actual.\nArrastrar y soltar cambiarla';
+$lang['dashboard.searchform.accuracyerror'] = 'No hemos podido saber exactamente donde estas, cambia tu ubicación manualmente o trata con otro navegador.';
 
 
 

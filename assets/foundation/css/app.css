@@ -84,13 +84,33 @@ height: 100%;
 min-height: 93%;
 height: auto !important;
 height: 93%;
-margin: 0 auto -4em;
+margin: 0 auto -3em;
 }
 
 footer, .push {
-	height: 4em;
+	height: 3em;
 }
 
 .with100{
 	 width: 100% !important;
+}
+
+#extra-types{
+	max-height: 9em;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+#map-canvas, #map_canvas {
+  height: 95%;
+}
+
+@media print {
+  html, body {
+    height: auto;
+  }
+
+  #map-canvas, #map_canvas {
+    height: 650px;
+  }
 }

@@ -17,11 +17,15 @@ $user = $this->session->userdata('user');
   <link rel="stylesheet" href="<?=base_url()?>assets/foundation/css/app.css" />
   <link rel="stylesheet" href="<?=base_url()?>assets/foundation/css/foundation.min.css" />
   <link rel="stylesheet" href="<?=base_url()?>assets/webicons-master/fc-webicons.css">
+
   
   <?=$_styles?>
 
   <script src="<?=base_url()?>assets/js/jquery-1.9.1.min.js"></script>
   <script src="<?=base_url()?>assets/foundation/js/vendor/custom.modernizr.js"></script>
+
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;region=EC"></script>
+  <script src="<?=base_url()?>assets/js/mochkino.js"></script>
   
   <?=$_scripts?>
 

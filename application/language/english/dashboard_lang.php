@@ -16,7 +16,8 @@ $lang['dashboard.searchform.maxresults'] = "Results Amount:";
 $lang['dashboard.searchform.all'] = "All (Can be a bunch)";
 $lang['dashboard.searchform.viewmore'] = "View All";
 $lang['dashboard.searchform.hide'] = "Hide";
-
+$lang['dashboard.searchform.currlocation'] = 'Your current position.\nDrag and drop to change it.';
+$lang['dashboard.searchform.accuracyerror'] = 'Maybe we could not get your current location, you can change it manually or try another browser.';
 
 
 $lang['dashboard.pagetitle'] = "Dashboard";
