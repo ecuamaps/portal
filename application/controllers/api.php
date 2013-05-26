@@ -36,4 +36,39 @@ class Api extends CI_Controller {
 		);
 	}
 	
+	function add_location(){
+		
+		$lat = $this->input->post('lat', TRUE); 
+		$lng = $this->input->post('lng', TRUE);
+		$name = $this->input->post('name', TRUE);
+		$def = $this->input->post('def', TRUE);
+				
+		if(!$lat || !$lng || !$name || $def === null){ 
+			$result = array('status' => 'error', 'msg' => 'Missing input params lat, lng, name or def');
+			die(json_encode($result));
+		}
+		
+		$this->load->model('account_model');
+		$user = $this->session->userdata('user');
+
+		if($this->account_model->add_location($user->id, $name, $lat, $lng, $def)){
+			die(json_encode(array('status' => 'ok')));
+		}
+	}
+	
+	function set_default_location(){
+		$name = $this->input->post('name', TRUE);		
+
+		if(!$name){ 
+			$result = array('status' => 'error', 'msg' => 'Missing input params name');
+			die(json_encode($result));
+		}
+		
+		$this->load->model('account_model');
+		$user = $this->session->userdata('user');
+
+		if($this->account_model->set_default_location($user->id, $name)){
+			die(json_encode(array('status' => 'ok')));
+		}
+	}
 }

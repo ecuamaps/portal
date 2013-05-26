@@ -6,13 +6,49 @@ class Dashboard extends CI_Controller {
 	var $dasboard_params = array();
 		
 	function __construct(){
-		parent::__construct();		
+		parent::__construct();
+		
+		$this->load->model('account_model');
+		$this->load->library('recaptcha');
+		
 	}
 	
 	function index(){
 		
 		//Get the top five of business types
 		$this->dasboard_params['bztop5types'] = $this->get_top5_bztypes();
+		
+		//Get the follow us urls
+		$this->dasboard_params['follow_us_links'] = $this->config_model->get_follow_us_links();
+		
+		//Load the configuration for logged in users
+		if($user = $this->session->userdata('user')){
+			$this->lang->switch_uri($user->lang);		
+			$this->dasboard_params['user_locations'] = $this->account_model->get_locations($user->id);
+			
+			//Define the user default location
+			if(is_array($this->dasboard_params['user_locations'])){
+				foreach($this->dasboard_params['user_locations'] as $l){
+					if($l->def == '1'){
+						$this->dasboard_params['userDefaultLocation'][0] = $l->lat;
+						$this->dasboard_params['userDefaultLocation'][1] = $l->lng;
+						break;
+					}
+				}
+			}
+			
+		} 
+
+		//Get the system dafault location
+		$sdl = get_config_val('default_latlang');
+		$this->dasboard_params['system_location'] = explode(',', $sdl);
+		
+		//Get The map zoom
+		$this->dasboard_params['map_zoom'] = get_config_val('map_zoom');
+		
+		//get The captcha code
+		$this->dasboard_params['recaptcha_html'] = $this->recaptcha->recaptcha_get_html();
+		
 		$this->render();
 	}
 	
@@ -24,7 +60,7 @@ class Dashboard extends CI_Controller {
 
 		$this->template->write_view('content', 'templates/map', $this->dasboard_params, TRUE);
 		
-		$this->template->render();		
+		$this->template->render();
 	}
 	
 	/*Load the top five of the business types*/

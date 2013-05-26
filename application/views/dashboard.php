@@ -18,6 +18,7 @@ $user = $this->session->userdata('user');
   <link rel="stylesheet" href="<?=base_url()?>assets/foundation/css/foundation.min.css" />
   <link rel="stylesheet" href="<?=base_url()?>assets/webicons-master/fc-webicons.css">
 
+  <!-- <link rel="stylesheet" href="<?=base_url()?>assets/js/jquery_modal/jquery.modal.css"> -->
   
   <?=$_styles?>
 
@@ -26,6 +27,7 @@ $user = $this->session->userdata('user');
 
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;region=EC"></script>
   <script src="<?=base_url()?>assets/js/mochkino.js"></script>
+  <script src="<?=base_url()?>assets/js/jquery_modal/jquery.modal.min.js"></script>
   
   <?=$_scripts?>
 
@@ -42,7 +44,7 @@ $user = $this->session->userdata('user');
 	        <!-- Title Area -->
 	        <li class="name">
 	        	<? if(!$user): ?>
-	           	<a href="" class="button alert"><?=lang('dashboard.login')?></a>
+	           	<a href="#login-form-wrapper" rel="modal:open" class="button alert"><?=lang('dashboard.login')?></a>
 	           	<? else: ?>
 	            <h1 style="color: white;"><?=$user->name?></h1>
 	           	<? endif; ?>
@@ -56,25 +58,70 @@ $user = $this->session->userdata('user');
 		<!-- END Left Nav Section -->
 	      <section class="top-bar-section">
 	        <ul class="left">
-
+			  <? if($user): ?>
+	          <li class="divider"></li>
+	          <li class="has-dropdown"><a href="javascript:void(0)"><?=lang('dashboard.myaccount')?></a>
+	          	 <ul class="dropdown">
+	          	 	<li class="has-dropdown"><a href="javascript:void(0)"><?=lang('dashboard.mylocations')?></a>
+	          	 		<ul class="dropdown" id="saved-locations">
+	          	 			<li><a href="#add-location-form-wrapper" rel="modal:open"><?=lang('dashboard.addnewlocation')?></a></li>
+	          	 		<? if(isset($user_locations)): ?>
+	          	 			<li><a href="<?=base_url($this->lang->lang().'/api/set_default_location')?>" id="set-default-location"><?=lang('dashboard.setdefaullocation')?></a></li>
+	          	 			<li><a href="<?=base_url($this->lang->lang().'/api/delete_location')?>" id="delete-location"><?=lang('dashboard.deletelocation')?></a></li>
+	          	 			<li class="divider"></li>
+	          	 			<? foreach($user_locations as $l): ?>
+	          	 			<? $name = ($l->def == '1') ?  $l->name.'*' : $l->name ?>
+	          	 			<li><a href="javascript:void(0)" class="user-locations" lat="<?= $l->lat ?>" lng="<?= $l->lng ?>" name="<?= $l->name ?>" current="<?= $l->def ?>"><?= $name; ?></a></li>
+	          	 			<? endforeach; ?> 
+	          	 		<? endif; ?>
+	          	 		</ul>
+	          	 	</li>
+              	 </ul> 
+	          </li>			  	
+			  <? endif; ?>
+			  
 			  <? if(!$user): ?>
 	          <li class="divider"></li>
-	          <li><a href="javascript:void(0)" id="signin"><?=lang('dashboard.signin')?></a></li>
+	          <li><a href="#signin-form-wrapper" rel="modal:open"><?=lang('dashboard.signin')?></a></li>
 	          <? endif; ?>
 	        	
 	        </ul>
 	      </section>
-		
+		 
 		 <!-- Right Nav Section -->
 	      <section class="top-bar-section">
 	        <ul class="right">
 	          
 	          <li class="divider"></li>
-	          <li><a href="javascript:void(0)" id="followus" ><?=lang('dashboard.followus')?></a></li>
+	          <li class="has-dropdown"><a href="javascript:void(0)" id="followus" ><?=lang('dashboard.followus')?></a>
+	          	 <ul class="dropdown">
+	          	 	<? foreach($follow_us_links as $f): ?>
+	          	 		<? $name = ucfirst(str_replace('follow_us_', '', $f->keyname)) ?>
+	          	 		<li><a href="<?= $f->value; ?>" target="_blank"><?= $name; ?></a></li>	
+	          	 	<? endforeach; ?>
+              	 </ul>
+	          </li>
 	          
 	          <li class="divider"></li>
 	          <li><a href="javascript:void(0)" id="about"><?=lang('dashboard.about')?></a></li>
-	          	          
+			
+       	<?
+       		if($this->lang->lang() == 'en'){
+       			$other_lang = 'es';
+       			$other_lang_txt = 'Español';            			
+       		}else{
+       			$other_lang = 'en';
+       			$other_lang_txt = 'English';            			
+       		}
+       	?>			
+	          <li class="divider"></li>
+	          <li><a href="<?=base_url($other_lang)?>" id="about"><?=$other_lang_txt?></a></li>
+			
+			<? if($user): ?>
+	          <li class="divider"></li>
+	          <li><?=anchor('account/logout', lang('dashboard.logout') )?></li>
+	        <? endif; ?>
+	             
 	        </ul>
 	      </section>
 	    </nav>
@@ -83,9 +130,125 @@ $user = $this->session->userdata('user');
 	<!-- Content -->
 	<?=$content?>
 	<!-- End Content -->
+
+	<!-- Login Form -->
+	<div class="panel radius hide" id="login-form-wrapper">
+		<?= form_open('account/login', array('id' => 'login-form', 'class' => '')) ?>
+			<h4><?=lang('dashboard.loginform.title')?></h4>
+			<div class="row hide" id="login-error-wrapper">
+				<div data-alert class="alert-box alert">
+  					<span id="login-error-msg"></span>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="large-12 columns">
+			    	<label><?=lang('dashboard.loginform.username')?></label>
+			        <input type="text" name="email"/>
+			    </div>
+    		</div>
+
+			<div class="row">
+				<div class="large-12 columns">
+			    	<label><?=lang('dashboard.loginform.password')?></label>
+			        <input type="password" name="passwd"/>
+			    </div>
+    		</div>
+			<div class="row">
+				<div class="large-12 columns"><a href="javascript:void(0)" id="login-action" class="button"><?=lang('dashboard.loginform.button')?></a></div>
+    		</div>
+		</form>
+	</div>
+	<!-- End Login Form-->
+	
+	<!-- Add Location Form -->
+	<div class="panel radius hide" id="add-location-form-wrapper">
+		<?= form_open('api/add_location', array('id' => 'add-location-form', 'class' => '')) ?>
+			<h4><?=lang('dashboard.locationform.title')?></h4>
+			<p><?=lang('dashboard.locationform.help')?></p>
+			
+			<div class="row hide" id="add-location-error-wrapper">
+				<div data-alert class="alert-box alert">
+  					<span id="add-location-error-msg"></span>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="large-12 columns">
+			    	<label><?=lang('dashboard.locationform.name')?></label>
+			        <input type="text" name="location-name"/>
+			    </div>
+    		</div>
+
+			<div class="row">
+				<div class="large-12 columns">
+			    	<label>
+			    		<input type="checkbox" name="location-def" value="1" />&nbsp;<?=lang('dashboard.locationform.def')?>
+			    	</label>
+			    </div>
+    		</div>
+			<div class="row">
+				<div class="large-12 columns"><a href="javascript:void(0)" id="add-location-action" class="button"><?=lang('dashboard.locationform.button')?></a></div>
+    		</div>
+		</form>
+		<script>
+			var err_msg_missing_field = '<?=lang('dashboard.locationform.errmsg')?>';
+		</script>
+	</div>	
+	<!-- End Add Location Form-->
 	
 	<!-- SignIn Form -->
-	
+	<div class="panel radius hide" id="signin-form-wrapper">
+		<?= form_open('account/signin', array('id' => 'signin-form', 'class' => '')) ?>
+			<h4><?=lang('dashboard.signinform.title')?></h4>
+			<div class="row hide" id="signin-error-wrapper">
+				<div data-alert class="alert-box alert">
+  					<span id="signin-error-msg"></span>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="large-12 columns">
+			    	<label><?=lang('dashboard.signinform.name')?></label>
+			        <input type="text" name="user_name"/>
+			    </div>
+    		</div>
+			
+			<div class="row">
+				<div class="large-12 columns">
+			    	<label><?=lang('dashboard.signinform.email')?></label>
+			        <input type="email" name="user_email"/>
+			    </div>
+			</div>
+			<div class="row">
+				<div class="large-12 columns">
+			    	<label><?=lang('dashboard.signinform.pass')?></label>
+			        <input type="password" name="user_passwd"/>
+			    </div>
+			</div>
+			<div class="row">
+				<div class="large-12 columns">
+			    	<label><?=lang('dashboard.signinform.pass2')?></label>
+			        <input type="password" name="user_passwd2"/>
+			    </div>
+			</div>
+			<div class="row">
+				<div class="large-12 columns">
+			    	<label><?=lang('dashboard.signinform.captcha')?></label>
+			        <?=$recaptcha_html?>
+			    </div>
+			</div>
+			<div class="row">
+				<div class="large-12 columns"><a href="javascript:void(0)" id="signin-action" class="button"><?=lang('dashboard.signinform.button')?></a></div>
+    		</div>
+		</form>
+		<script>
+			var err_msg_missing_field_signin = '<?=lang('dashboard.signinform.errmsg')?>';
+			var err_msg_mismatch_pass = '<?=lang('dashboard.signinform.errmsg.pass')?>'
+			var err_msg_wrong_email_format = '<?=lang('dashboard.signinform.errmsg.emailformat')?>';
+			
+		</script>
+	</div>
 	<!-- End SignIn Form -->
 	
 	<!-- Footer -->

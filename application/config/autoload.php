@@ -109,7 +109,7 @@ $autoload['language'] = array('dashboard');
 |
 */
 
-$autoload['model'] = array();
+$autoload['model'] = array('config_model');
 
 
 /* End of file autoload.php */

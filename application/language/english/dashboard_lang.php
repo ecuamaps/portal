@@ -4,6 +4,13 @@ $lang['dashboard.login'] = "LOGIN";
 $lang['dashboard.signin'] = "Sign in";
 $lang['dashboard.followus'] = "Follow Us!";
 $lang['dashboard.about'] = "About Us";
+$lang['dashboard.logout'] = "Logout";
+$lang['dashboard.myaccount'] = "My Account";
+$lang['dashboard.mylocations'] = "My Locations";
+$lang['dashboard.addnewlocation'] = "Add New";
+$lang['dashboard.setdefaullocation'] = "Set as Default";
+$lang['dashboard.deletelocation'] = "Delete";
+
 
 $lang['dashboard.searchform.searchtext'] = "Your search text here!";
 $lang['dashboard.searchform.searchbtn'] = "Search";
@@ -19,7 +26,32 @@ $lang['dashboard.searchform.hide'] = "Hide";
 $lang['dashboard.searchform.currlocation'] = 'Your current position.\nDrag and drop to change it.';
 $lang['dashboard.searchform.accuracyerror'] = 'Maybe we could not get your current location, you can change it manually or try another browser.';
 
+$lang['dashboard.loginform.title'] = "User Login";
+$lang['dashboard.loginform.username'] = "Email";
+$lang['dashboard.loginform.password'] = "Password";
+$lang['dashboard.loginform.button'] = "Login";
 
+$lang['dashboard.locationform.title'] = "Add Location";
+$lang['dashboard.locationform.help'] = "You'll add the current location at the map.";
+$lang['dashboard.locationform.name'] = "Name (Required)";
+$lang['dashboard.locationform.def'] = "Set as Default?";
+$lang['dashboard.locationform.button'] = "Add";
+$lang['dashboard.locationform.errmsg'] = "The name is required";
+
+
+$lang['dashboard.signinform.title'] = "User Sign In";
+$lang['dashboard.signinform.name'] = "Name";
+$lang['dashboard.signinform.email'] = "Email";
+$lang['dashboard.signinform.pass'] = "Password";
+$lang['dashboard.signinform.pass2'] = "Password Confirmation";
+$lang['dashboard.signinform.captcha'] = "Please, confirm your are human";
+$lang['dashboard.signinform.button'] = "Sign In!";
+$lang['dashboard.signinform.errmsg'] = "All fields are required";
+$lang['dashboard.signinform.errmsg.pass'] = "the passwords mismatch";
+$lang['dashboard.signinform.errmsg.emailformat'] = "Wrong email format";
+
+
+//TODO: Eliminar
 $lang['dashboard.pagetitle'] = "Dashboard";
 $lang['dashboard.logout'] = "Logout";
 $lang['dashboard.reservations'] = "Reservations";

@@ -51,7 +51,7 @@
 	</form>	
 </div>
 
-<div class="row full-width with100 footer">
+<div class="row full-width with100 footer hide-for-small">
 	<div class="small-11 large-centered columns">
 		<?= form_open() ?>
 		
@@ -78,6 +78,16 @@
 <script>
 	var map = new Object();
 	var myLocation = new Object();
+	var myLatlng = new Object();
+	
+	var sysDefaultLocation = new google.maps.LatLng('<?= $system_location[0] ?>', '<?= $system_location[1] ?>');
+	<? if(isset($userDefaultLocation)): ?>
+	var userDefaultLocation = new google.maps.LatLng('<?= $userDefaultLocation[0] ?>', '<?= $userDefaultLocation[1] ?>');	
+	<? else: ?>
+	var userDefaultLocation = null;		
+	<? endif; ?>
+	var map_zoom = <?= $map_zoom ?>;
+	
 	var currentPosLbl = '<?=lang('dashboard.searchform.currlocation')?>';
 	var accuracyErrorMsg = '<?=lang('dashboard.searchform.accuracyerror')?>';
 </script>

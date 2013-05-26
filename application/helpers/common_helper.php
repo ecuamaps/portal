@@ -1,5 +1,11 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+function get_config_val($key){
+
+	$CI =& get_instance();
+	return $CI->config_model->get_value($key);
+}
+
 function get_domain(){
 	$CI =& get_instance();
 	$bar_url_pieces = explode('.', $CI->config->item('base_url'));

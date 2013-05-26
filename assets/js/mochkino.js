@@ -1,9 +1,17 @@
 
 function mapInitialize(location) {
 	
-	var myLatlng = new google.maps.LatLng(location.coords.latitude,
-			location.coords.longitude);
+	if(location){
+		myLatlng = currLatlng = new google.maps.LatLng(location.coords.latitude,
+				location.coords.longitude);		
+	}else{
+		myLatlng = sysDefaultLocation;
+	}
 
+	if(userDefaultLocation){
+		myLatlng = userDefaultLocation;
+	}
+	
 	var styles = [ {
 		"featureType" : "poi.business",
 		"stylers" : [ {
@@ -47,7 +55,7 @@ function mapInitialize(location) {
 	} ];
 
 	var mapOptions = {
-		zoom : 17,
+		zoom : map_zoom,
 		center : myLatlng,
 		mapTypeId : google.maps.MapTypeId.ROADMAP,
 		mapTypeControl : true,
@@ -83,23 +91,42 @@ function mapInitialize(location) {
 	        fillColor: "#5882FA",
 	        strokeColor: "#2E2EFE",
 	        strokeWeight: 1
-	        
-	        
 	        });
-	    
 	    myLocationAccuracy.bindTo('center', myLocation, 'position');		
 	}else{
 		alert(accuracyErrorMsg);
 	}
+	
+	google.maps.event.addListener(myLocation, 'dragend', function(e){
+		changeLocation(e.latLng);
+	});
+	google.maps.event.addListener(map, 'click', function(event) {
+		    placeMarker(event.latLng);
+		  });
+}
 
+function changeLocation(latLng){
+	myLatlng = latLng;
+	map.setCenter(myLatlng);
+}
+
+function placeMarker(location) {
+	  var marker = new google.maps.Marker({
+	      position: location,
+	      map: map
+	  });
+	  map.setCenter(location);
 }
 
 function errorHandler(err) {
-	  if(err.code == 1) {
+	
+	mapInitialize(null);
+	
+	/*if(err.code == 1) {
 	    alert("Error: Access is denied!");
 	  }else if( err.code == 2) {
 	    alert("Error: Position is unavailable!");
-	  }
+	  }*/
 }
 
 function get_tyes_html_row(data) {
@@ -129,6 +156,25 @@ function pullUpWrapper() {
 function pullDownWrapper() {
 	$('#wrapper').css('margin-bottom', '-4em');
 }
+
+function set_map_location(elem){
+	var name = elem.attr('name');
+	var lat = elem.attr('lat');
+	var lng = elem.attr('lng');
+	
+	myLatlng = new google.maps.LatLng(lat, lng);
+	myLocation.setPosition(myLatlng);
+	map.setCenter(myLatlng);
+	
+	$( ".user-locations" ).each(function( index ) {
+		$(this).text($(this).attr('name'));
+		$(this).attr('current', '0');
+	});
+	
+	elem.text(name + '*');
+	elem.attr('current', '1');	
+}
+
 
 $(document).ready(function() {
 
@@ -210,11 +256,198 @@ $(document).ready(function() {
 
 	});
 	
+	$('#login-action').click(function(e){
+		e.preventDefault();
+		
+		$.ajax({
+			type : "POST",
+			url : $('#login-form').attr('action'),
+			dataType : "json",
+			data : {
+				email: $('input[name="email"]').val(),
+				passwd: $('input[name="passwd"]').val(),
+				hms1: $('input[name="hms1"]').val()
+			}
+		}).done(function(response) {
+			if(response.status == 'error'){
+				$('#login-error-msg').html(response.msg);
+				$('#login-error-wrapper').show();
+			}else{
+				window.location.reload(true);
+			}
+		});
+		
+	});
+	
+	$('.user-locations').click(function(e){
+		e.preventDefault();
+		set_map_location($(this));		
+	});
+	
+	$('#add-location-action').click(function(e){
+		e.preventDefault();
+		
+		var name = $('input[name="location-name"]').val();
+		if(!name){
+			$('#add-location-error-msg').html(err_msg_missing_field);
+			$('#add-location-error-wrapper').show();			
+			return false;
+		}
+		
+		var def = $('input[name="location-def"]').is(':checked') ? '1' : '0';
+		var lat = myLatlng.lat();
+		var lng = myLatlng.lng();
+		
+		$.ajax({
+			type : "POST",
+			url : $('#add-location-form').attr('action'),
+			dataType : "json",
+			data : {
+				name: name,
+				lat: lat,
+				lng: lng,
+				def: def,
+				hms1: $('input[name="hms1"]').val()
+			}
+		}).done(function(response) {
+			if(response.status == 'error'){
+				$('#add-location-error-msg').html(response.msg);
+				$('#add-location-error-wrapper').show();
+				return false;
+			}
+			
+			$('input[name="location-name"]').val('');
+			$.modal.close();
+
+			$( ".user-locations" ).each(function( index ) {
+				$(this).text($(this).attr('name'));
+				$(this).attr('current', '0');
+			});
+
+			$('#saved-locations').append('<li><a href="javascript:void(0)" class="user-locations" lat="' + lat + '" lng="' + lng + '" name="' + name + '" current="1">' + name + '*</a></li>');
+
+			$('.user-locations').click(function(e){
+				e.preventDefault();
+				set_map_location($(this));		
+			});
+		
+		});
+		
+	});
+	
+	$('#set-default-location').click(function(e){
+		e.preventDefault();
+
+		var name = '';
+		$( ".user-locations" ).each(function( index ) {
+			if($(this).attr('current') == '1')
+				name = $(this).attr('name');
+		});
+		
+		if(!name)
+			return false;
+		
+		$.ajax({
+			type : "POST",
+			url : $(this).attr('href'),
+			dataType : "json",
+			data : {
+				name: name,
+				hms1: $('input[name="hms1"]').val()
+			}
+		}).done(function(response) {
+				return true;		
+		});		
+	});
+	
+	$('#delete-location').click(function (e){
+		e.preventDefault();
+		
+		var name = '';
+		$( ".user-locations" ).each(function( index ) {
+			if($(this).attr('current') == '1')
+				name = $(this).attr('name');
+		});
+		
+		if(!name)
+			return false;
+
+		$.ajax({
+			type : "POST",
+			url : $(this).attr('href'),
+			dataType : "json",
+			data : {
+				name: name,
+				hms1: $('input[name="hms1"]').val()
+			}
+		}).done(function(response) {
+				return true;		
+		});		
+
+	});
+	
+	$('#signin-action').click(function (e){
+		e.preventDefault();
+		
+		var hms1 = $('input[name="hms1"]').val();
+		var name = $('input[name="user_name"]').val();
+		var email = $('input[name="user_email"]').val(); 
+		var passwd = $('input[name="user_passwd"]').val();
+		var passwd2 = $('input[name="user_passwd2"]').val();
+		var recaptcha_challenge_field = $('input[name="recaptcha_challenge_field"]').val();
+		var recaptcha_response_field = $('input[name="recaptcha_response_field"]').val();
+				
+		if(!name || !email || !passwd){
+			$('#signin-error-msg').html(err_msg_missing_field_signin);
+			$('#signin-error-wrapper').show();			
+			return false;
+		}
+		
+		if(passwd != passwd2){
+			$('#signin-error-msg').html(err_msg_mismatch_pass);
+			$('#signin-error-wrapper').show();			
+			return false;			
+		}
+		
+		//Email format validation
+		var emailReg = /^[a-zA-Z0-9._-]+([+][a-zA-Z0-9._-]+){0,1}[@][a-zA-Z0-9._-]+[.][a-zA-Z]{2,6}$/;
+		if( !emailReg.test( email ) ) {
+			$('#signin-error-msg').html(err_msg_wrong_email_format);
+			$('#signin-error-wrapper').show();			
+			return false;
+		}
+		
+		$.ajax({
+			type : "POST",
+			url : $('#signin-form').attr('action'),
+			dataType : "json",
+			data : {
+				hms1: hms1,
+				name : name,
+				email : email,
+				passwd: passwd,
+				recaptcha_challenge_field: recaptcha_challenge_field,
+				recaptcha_response_field: recaptcha_response_field
+			}
+		}).done(function(response) {
+			if(response.status == 'error'){
+				$('#signin-error-msg').html(response.msg);
+				$('#signin-error-wrapper').show();
+				return false;
+			}
+			
+			window.location.reload(true);
+			
+		});		
+		
+	});
+	
 	$('.bz-type').click(function(e){
-		get_bz_by_type($(this).val());
+		put_bz_by_type($(this).val());
 	});
 
 });
+
 
 function put_bz_by_type(type_id){
 	console.log(type_id);
