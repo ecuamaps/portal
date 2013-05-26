@@ -1,7 +1,7 @@
 <?php
 
 $lang['dashboard.login'] = "INICIAR SESI&Oacute;N";
-$lang['dashboard.signin'] = "Registrate";
+$lang['dashboard.signin'] = "Registrate gratis!";
 $lang['dashboard.followus'] = "Siguenos!";
 $lang['dashboard.about'] = "Quienes Somos";
 $lang['dashboard.logout'] = "Salir";

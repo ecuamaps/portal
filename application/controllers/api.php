@@ -54,6 +54,9 @@ class Api extends CI_Controller {
 		if($this->account_model->add_location($user->id, $name, $lat, $lng, $def)){
 			die(json_encode(array('status' => 'ok')));
 		}
+
+		$result = array('status' => 'error', 'msg' => 'Something went wrong');
+		die(json_encode($result));
 	}
 	
 	function set_default_location(){
@@ -70,5 +73,28 @@ class Api extends CI_Controller {
 		if($this->account_model->set_default_location($user->id, $name)){
 			die(json_encode(array('status' => 'ok')));
 		}
+
+		$result = array('status' => 'error', 'msg' => 'Something went wrong');
+		die(json_encode($result));
+	}
+	
+	function delete_location(){
+		$name = $this->input->post('name', TRUE);
+
+		if(!$name){ 
+			$result = array('status' => 'error', 'msg' => 'Missing input params name');
+			die(json_encode($result));
+		}
+
+		$this->load->model('account_model');
+		$user = $this->session->userdata('user');
+		
+		if($this->account_model->delete_location($user->id, $name)){
+			die(json_encode(array('status' => 'ok')));
+		}
+		
+		$result = array('status' => 'error', 'msg' => 'Something went wrong');
+		die(json_encode($result));
+		
 	}
 }

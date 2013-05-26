@@ -82,7 +82,7 @@ $user = $this->session->userdata('user');
 			  
 			  <? if(!$user): ?>
 	          <li class="divider"></li>
-	          <li><a href="#signin-form-wrapper" rel="modal:open"><?=lang('dashboard.signin')?></a></li>
+	          <li><a href="#signin-form-wrapper" rel="modal:open"><?=lang('dashboard.signup')?></a></li>
 	          <? endif; ?>
 	        	
 	        </ul>
@@ -197,10 +197,10 @@ $user = $this->session->userdata('user');
 	</div>	
 	<!-- End Add Location Form-->
 	
-	<!-- SignIn Form -->
+	<!-- Sign Up Form -->
 	<div class="panel radius hide" id="signin-form-wrapper">
 		<?= form_open('account/signin', array('id' => 'signin-form', 'class' => '')) ?>
-			<h4><?=lang('dashboard.signinform.title')?></h4>
+			<h4><?=lang('dashboard.signupform.title')?></h4>
 			<div class="row hide" id="signin-error-wrapper">
 				<div data-alert class="alert-box alert">
   					<span id="signin-error-msg"></span>
@@ -209,43 +209,43 @@ $user = $this->session->userdata('user');
 			
 			<div class="row">
 				<div class="large-12 columns">
-			    	<label><?=lang('dashboard.signinform.name')?></label>
+			    	<label><?=lang('dashboard.signupform.name')?></label>
 			        <input type="text" name="user_name"/>
 			    </div>
     		</div>
 			
 			<div class="row">
 				<div class="large-12 columns">
-			    	<label><?=lang('dashboard.signinform.email')?></label>
+			    	<label><?=lang('dashboard.signupform.email')?></label>
 			        <input type="email" name="user_email"/>
 			    </div>
 			</div>
 			<div class="row">
 				<div class="large-12 columns">
-			    	<label><?=lang('dashboard.signinform.pass')?></label>
+			    	<label><?=lang('dashboard.signupform.pass')?></label>
 			        <input type="password" name="user_passwd"/>
 			    </div>
 			</div>
 			<div class="row">
 				<div class="large-12 columns">
-			    	<label><?=lang('dashboard.signinform.pass2')?></label>
+			    	<label><?=lang('dashboard.signupform.pass2')?></label>
 			        <input type="password" name="user_passwd2"/>
 			    </div>
 			</div>
 			<div class="row">
 				<div class="large-12 columns">
-			    	<label><?=lang('dashboard.signinform.captcha')?></label>
+			    	<label><?=lang('dashboard.signupform.captcha')?></label>
 			        <?=$recaptcha_html?>
 			    </div>
 			</div>
 			<div class="row">
-				<div class="large-12 columns"><a href="javascript:void(0)" id="signin-action" class="button"><?=lang('dashboard.signinform.button')?></a></div>
+				<div class="large-12 columns"><a href="javascript:void(0)" id="signin-action" class="button"><?=lang('dashboard.signupform.button')?></a></div>
     		</div>
 		</form>
 		<script>
-			var err_msg_missing_field_signin = '<?=lang('dashboard.signinform.errmsg')?>';
-			var err_msg_mismatch_pass = '<?=lang('dashboard.signinform.errmsg.pass')?>'
-			var err_msg_wrong_email_format = '<?=lang('dashboard.signinform.errmsg.emailformat')?>';
+			var err_msg_missing_field_signin = '<?=lang('dashboard.signupform.errmsg')?>';
+			var err_msg_mismatch_pass = '<?=lang('dashboard.signupform.errmsg.pass')?>'
+			var err_msg_wrong_email_format = '<?=lang('dashboard.signupform.errmsg.emailformat')?>';
 			
 		</script>
 	</div>

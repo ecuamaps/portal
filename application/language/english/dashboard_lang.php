@@ -1,7 +1,7 @@
 <?php
 
-$lang['dashboard.login'] = "LOGIN";
-$lang['dashboard.signin'] = "Sign in";
+$lang['dashboard.login'] = "Sign In";
+$lang['dashboard.signup'] = "Sign up for free!";
 $lang['dashboard.followus'] = "Follow Us!";
 $lang['dashboard.about'] = "About Us";
 $lang['dashboard.logout'] = "Logout";
@@ -39,16 +39,16 @@ $lang['dashboard.locationform.button'] = "Add";
 $lang['dashboard.locationform.errmsg'] = "The name is required";
 
 
-$lang['dashboard.signinform.title'] = "User Sign In";
-$lang['dashboard.signinform.name'] = "Name";
-$lang['dashboard.signinform.email'] = "Email";
-$lang['dashboard.signinform.pass'] = "Password";
-$lang['dashboard.signinform.pass2'] = "Password Confirmation";
-$lang['dashboard.signinform.captcha'] = "Please, confirm your are human";
-$lang['dashboard.signinform.button'] = "Sign In!";
-$lang['dashboard.signinform.errmsg'] = "All fields are required";
-$lang['dashboard.signinform.errmsg.pass'] = "the passwords mismatch";
-$lang['dashboard.signinform.errmsg.emailformat'] = "Wrong email format";
+$lang['dashboard.signupform.title'] = "Sign up for free!";
+$lang['dashboard.signupform.name'] = "Name";
+$lang['dashboard.signupform.email'] = "Email";
+$lang['dashboard.signupform.pass'] = "Password";
+$lang['dashboard.signupform.pass2'] = "Password Confirmation";
+$lang['dashboard.signupform.captcha'] = "Please, confirm your are human";
+$lang['dashboard.signupform.button'] = "Sign Up!";
+$lang['dashboard.signupform.errmsg'] = "All fields are required";
+$lang['dashboard.signupform.errmsg.pass'] = "the passwords mismatch";
+$lang['dashboard.signupform.errmsg.emailformat'] = "Wrong email format";
 
 
 //TODO: Eliminar

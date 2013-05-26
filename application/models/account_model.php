@@ -96,6 +96,20 @@ class Account_model extends CI_Model {
 		return true;		
 	}
 	
+	function delete_location($user_id, $location_name){
+		$locations = $this->get_locations($user_id);
+				
+		//Clear default if come in one		
+		for($x=0; $x<count($locations); $x++){
+			if($locations[$x]->name != $location_name)
+				$new_locations[] = $locations[$x];
+		}
+		
+		$this->set_usermeta($user_id, 'locations', json_encode($new_locations));
+		return true;		
+	}
+	
+	
 	function signin($name, $email, $passwd){
 		
 		//Md5 has for password

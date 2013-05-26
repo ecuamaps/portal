@@ -100,9 +100,11 @@ function mapInitialize(location) {
 	google.maps.event.addListener(myLocation, 'dragend', function(e){
 		changeLocation(e.latLng);
 	});
-	google.maps.event.addListener(map, 'click', function(event) {
+	
+	/*google.maps.event.addListener(map, 'click', function(event) {
 		    placeMarker(event.latLng);
-		  });
+	});*/
+	
 }
 
 function changeLocation(latLng){
@@ -381,7 +383,17 @@ $(document).ready(function() {
 				hms1: $('input[name="hms1"]').val()
 			}
 		}).done(function(response) {
-				return true;		
+			
+			if(response.status == 'error'){
+				alert(response.msg);
+				return false;
+			}
+			
+			$( ".user-locations" ).each(function( index ) {
+				if($(this).attr('current') == '1')
+					$(this).hide();
+			});
+
 		});		
 
 	});
