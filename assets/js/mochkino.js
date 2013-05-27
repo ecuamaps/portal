@@ -12,6 +12,14 @@ function mapInitialize(location) {
 		myLatlng = userDefaultLocation;
 	}
 	
+	var cookie_latlng = cookie('latlng');
+	
+	if(cookie_latlng){
+		myLatlng = new google.maps.LatLng(cookie_latlng.lat, cookie_latlng.lng);
+	}
+	
+	cookie('latlng', {'lat': myLatlng.lat(), 'lng': myLatlng.lng()});
+	
 	var styles = [ {
 		"featureType" : "poi.business",
 		"stylers" : [ {
@@ -84,17 +92,19 @@ function mapInitialize(location) {
 		draggable : true,
 	});
 	
-	if(location.coords.accuracy < 200){
-	    var myLocationAccuracy = new google.maps.Circle({
-	        map: map,
-	        radius: location.coords.accuracy,
-	        fillColor: "#5882FA",
-	        strokeColor: "#2E2EFE",
-	        strokeWeight: 1
-	        });
-	    myLocationAccuracy.bindTo('center', myLocation, 'position');		
-	}else{
-		alert(accuracyErrorMsg);
+	if(location){
+		if(location.coords.accuracy < 200){
+		    var myLocationAccuracy = new google.maps.Circle({
+		        map: map,
+		        radius: location.coords.accuracy,
+		        fillColor: "#5882FA",
+		        strokeColor: "#2E2EFE",
+		        strokeWeight: 1
+		        });
+		    myLocationAccuracy.bindTo('center', myLocation, 'position');		
+		}else{
+			alert(accuracyErrorMsg);
+		}		
 	}
 	
 	google.maps.event.addListener(myLocation, 'dragend', function(e){
@@ -110,6 +120,7 @@ function mapInitialize(location) {
 function changeLocation(latLng){
 	myLatlng = latLng;
 	map.setCenter(myLatlng);
+	cookie('latlng', {'lat': myLatlng.lat(), 'lng': myLatlng.lng()});
 }
 
 function placeMarker(location) {
@@ -164,7 +175,8 @@ function set_map_location(elem){
 	var lat = elem.attr('lat');
 	var lng = elem.attr('lng');
 	
-	myLatlng = new google.maps.LatLng(lat, lng);
+	changeLocation(new google.maps.LatLng(lat, lng));
+//	myLatlng = new google.maps.LatLng(lat, lng);
 	myLocation.setPosition(myLatlng);
 	map.setCenter(myLatlng);
 	
@@ -180,6 +192,7 @@ function set_map_location(elem){
 
 $(document).ready(function() {
 
+	$.cookie.json = true;
 	navigator.geolocation.getCurrentPosition(mapInitialize, errorHandler);
 
 	$('#adv-search').click(function(e) {
@@ -398,7 +411,7 @@ $(document).ready(function() {
 
 	});
 	
-	$('#signin-action').click(function (e){
+	$('#signup-action').click(function (e){
 		e.preventDefault();
 		
 		var hms1 = $('input[name="hms1"]').val();
@@ -454,12 +467,40 @@ $(document).ready(function() {
 		
 	});
 	
+	$('#nav-menu-back').click(function(e){
+		map.setCenter(myLatlng);
+	});
+
+	$('#nav-menu-move').click(function(e){
+		changeLocation(map.getCenter());
+		myLocation.setPosition(myLatlng);
+	});
+	
+	$('.nav-location').click(function(e){
+		
+		var lat = $(this).attr('lat');
+		var lng = $(this).attr('lng');
+		
+		changeLocation(new google.maps.LatLng(lat, lng));
+		myLocation.setPosition(myLatlng);
+		map.setCenter(myLatlng);
+	});
+	
 	$('.bz-type').click(function(e){
 		put_bz_by_type($(this).val());
 	});
 
 });
 
+function cookie(name, val){
+	
+	
+	if(val){
+		return $.cookie(name, val);
+	}else{
+		return $.cookie(name);
+	}
+}
 
 function put_bz_by_type(type_id){
 	console.log(type_id);

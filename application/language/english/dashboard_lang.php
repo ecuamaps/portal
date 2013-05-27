@@ -10,7 +10,11 @@ $lang['dashboard.mylocations'] = "My Locations";
 $lang['dashboard.addnewlocation'] = "Add New";
 $lang['dashboard.setdefaullocation'] = "Set as Default";
 $lang['dashboard.deletelocation'] = "Delete";
+$lang['dashboard.navmenu'] = "Locations";
 
+$lang['dashboard.navmenu.back'] = "Back to my last location";
+$lang['dashboard.navmenu.move'] = "Move here";
+$lang['dashboard.navmenu.location'] = "Go to";
 
 $lang['dashboard.searchform.searchtext'] = "Your search text here!";
 $lang['dashboard.searchform.searchbtn'] = "Search";

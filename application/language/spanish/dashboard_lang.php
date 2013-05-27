@@ -1,7 +1,7 @@
 <?php
 
-$lang['dashboard.login'] = "INICIAR SESI&Oacute;N";
-$lang['dashboard.signin'] = "Registrate gratis!";
+$lang['dashboard.login'] = "Iniciar Sesi&oacute;n";
+$lang['dashboard.signup'] = "Registrate gratis!";
 $lang['dashboard.followus'] = "Siguenos!";
 $lang['dashboard.about'] = "Quienes Somos";
 $lang['dashboard.logout'] = "Salir";
@@ -10,6 +10,12 @@ $lang['dashboard.mylocations'] = "Mis Ubicaciones";
 $lang['dashboard.addnewlocation'] = "Adicionar Nueva";
 $lang['dashboard.setdefaullocation'] = "Marcar Como Principal";
 $lang['dashboard.deletelocation'] = "Eliminar";
+$lang['dashboard.navmenu'] = "Navegar";
+
+$lang['dashboard.navmenu.back'] = "Regresar a mi ubicaci&oacute;n";
+$lang['dashboard.navmenu.move'] = "Mover mi ubicaci&oacute;n aqui";
+$lang['dashboard.navmenu.location'] = "Ir a";
+
 
 $lang['dashboard.searchform.searchtext'] = "Tu texto a buscar aqui!";
 $lang['dashboard.searchform.searchbtn'] = "Buscar";
@@ -36,16 +42,16 @@ $lang['dashboard.locationform.def'] = "Definir como principal?";
 $lang['dashboard.locationform.button'] = "Adicionar";
 $lang['dashboard.locationform.errmsg'] = "El nombre es obligatorio";
 
-$lang['dashboard.signinform.title'] = "Registro de usuario";
-$lang['dashboard.signinform.name'] = "Nombre";
-$lang['dashboard.signinform.email'] = "Email";
-$lang['dashboard.signinform.pass'] = "Clave";
-$lang['dashboard.signinform.pass2'] = "Confirmar la Clave";
-$lang['dashboard.signinform.captcha'] = "Confirma que eres humano";
-$lang['dashboard.signinform.button'] = "Registrate!";
-$lang['dashboard.signinform.errmsg'] = "Todos los campos son obligatorias";
-$lang['dashboard.signinform.errmsg.pass'] = "Las claves no concuerdan";
-$lang['dashboard.signinform.errmsg.emailformat'] = "Formato de email incorrecto";
+$lang['dashboard.signupform.title'] = "Registro de usuario";
+$lang['dashboard.signupform.name'] = "Nombre";
+$lang['dashboard.signupform.email'] = "Email";
+$lang['dashboard.signupform.pass'] = "Clave";
+$lang['dashboard.signupform.pass2'] = "Confirmar la Clave";
+$lang['dashboard.signupform.captcha'] = "Confirma que eres humano";
+$lang['dashboard.signupform.button'] = "Registrate!";
+$lang['dashboard.signupform.errmsg'] = "Todos los campos son obligatorias";
+$lang['dashboard.signupform.errmsg.pass'] = "Las claves no concuerdan";
+$lang['dashboard.signupform.errmsg.emailformat'] = "Formato de email incorrecto";
 
 
 //TODO: Eliminar

@@ -49,6 +49,17 @@ class Dashboard extends CI_Controller {
 		//get The captcha code
 		$this->dasboard_params['recaptcha_html'] = $this->recaptcha->recaptcha_get_html();
 		
+		//get the nav locatinos
+		$str_nav_locations = get_config_val('nav_locations');
+		if($str_nav_locations){
+			$str = explode(';', $str_nav_locations);
+			foreach($str as $row){
+				$tmp = explode(',', $row);
+				$this->dasboard_params['nav_locations'][] = array('name' => $tmp[0], 'lat' => $tmp[1], 'lng' => $tmp[2]);			
+			}
+
+		}
+		
 		$this->render();
 	}
 	

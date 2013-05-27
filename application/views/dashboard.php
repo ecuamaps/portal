@@ -28,6 +28,7 @@ $user = $this->session->userdata('user');
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;region=EC"></script>
   <script src="<?=base_url()?>assets/js/mochkino.js"></script>
   <script src="<?=base_url()?>assets/js/jquery_modal/jquery.modal.min.js"></script>
+  <script src="<?=base_url()?>assets/js/jquery.cookie.js"></script>
   
   <?=$_scripts?>
 
@@ -85,6 +86,17 @@ $user = $this->session->userdata('user');
 	          <li><a href="#signin-form-wrapper" rel="modal:open"><?=lang('dashboard.signup')?></a></li>
 	          <? endif; ?>
 	        	
+	          <li class="has-dropdown"><a href="javascript:void(0)"><?=lang('dashboard.navmenu')?></a>
+	          	<ul class="dropdown">
+	          		<li><a href="javascript:void(0)" id="nav-menu-back"><?=lang('dashboard.navmenu.back')?></a></li>
+	          		<li><a href="javascript:void(0)" id="nav-menu-move"><?=lang('dashboard.navmenu.move')?></a></li>
+	          		<? if(isset($nav_locations)): ?>
+	          			<? foreach($nav_locations  as $nav): ?>
+	          				<li><a href="javascript:void(0)" class="nav-location" lat="<?=$nav['lat']?>" lng="<?=$nav['lng']?>"><?=lang('dashboard.navmenu.location').' '.$nav['name']?></a></li>
+	          			<? endforeach; ?>
+	          		<? endif; ?>
+	          	</ul>
+	          </li>
 	        </ul>
 	      </section>
 		 
@@ -200,7 +212,7 @@ $user = $this->session->userdata('user');
 	<!-- Sign Up Form -->
 	<div class="panel radius hide" id="signin-form-wrapper">
 		<?= form_open('account/signin', array('id' => 'signin-form', 'class' => '')) ?>
-			<h4><?=lang('dashboard.signupform.title')?></h4>
+			<h5><?=lang('dashboard.signupform.title')?></h5>
 			<div class="row hide" id="signin-error-wrapper">
 				<div data-alert class="alert-box alert">
   					<span id="signin-error-msg"></span>
@@ -209,37 +221,37 @@ $user = $this->session->userdata('user');
 			
 			<div class="row">
 				<div class="large-12 columns">
-			    	<label><?=lang('dashboard.signupform.name')?></label>
-			        <input type="text" name="user_name"/>
+			    	<label></label>
+			        <input type="text" name="user_name" placeholder="<?=lang('dashboard.signupform.name')?>"/>
 			    </div>
     		</div>
 			
 			<div class="row">
 				<div class="large-12 columns">
-			    	<label><?=lang('dashboard.signupform.email')?></label>
-			        <input type="email" name="user_email"/>
+			    	<label></label>
+			        <input type="email" name="user_email" placeholder="<?=lang('dashboard.signupform.email')?>"/>
 			    </div>
 			</div>
 			<div class="row">
 				<div class="large-12 columns">
-			    	<label><?=lang('dashboard.signupform.pass')?></label>
-			        <input type="password" name="user_passwd"/>
+			    	<label></label>
+			        <input type="password" name="user_passwd" placeholder="<?=lang('dashboard.signupform.pass')?>"/>
 			    </div>
 			</div>
 			<div class="row">
 				<div class="large-12 columns">
-			    	<label><?=lang('dashboard.signupform.pass2')?></label>
-			        <input type="password" name="user_passwd2"/>
+			    	<label></label>
+			        <input type="password" name="user_passwd2" placeholder="<?=lang('dashboard.signupform.pass2')?>"/>
 			    </div>
 			</div>
 			<div class="row">
 				<div class="large-12 columns">
-			    	<label><?=lang('dashboard.signupform.captcha')?></label>
+			    	<label></label>
 			        <?=$recaptcha_html?>
 			    </div>
 			</div>
 			<div class="row">
-				<div class="large-12 columns"><a href="javascript:void(0)" id="signin-action" class="button"><?=lang('dashboard.signupform.button')?></a></div>
+				<div class="large-12 columns"><a href="javascript:void(0)" id="signup-action" class="small  button"><?=lang('dashboard.signupform.button')?></a></div>
     		</div>
 		</form>
 		<script>
