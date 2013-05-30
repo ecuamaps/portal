@@ -9,31 +9,26 @@ class Account extends CI_Controller {
 		
 		$this->load->model('account_model');
 		$this->lang->load('account');
-		$this->load->library('recaptcha');
+		//$this->load->library('recaptcha');
+		$this->load->library('email');
 	}
 	
-	function signin(){
+	function signup(){
 		
 		$name = $this->input->post('name', TRUE); 
 		$email = $this->input->post('email', TRUE); 
 		$passwd = $this->input->post('passwd', TRUE);
+		
+		//Avoid duplicated emails
+		if($this->account_model->get_user($email)){
+			die(json_encode(array('status' => 'error', 'msg' => lang('signup.error.duplicatedmail'))));
+		}
 				
-		$this->recaptcha->recaptcha_check_answer(
-                    $_SERVER['REMOTE_ADDR'],
-                    $this->input->post('recaptcha_challenge_field', TRUE),
-                    $this->input->post('recaptcha_response_field', TRUE));
-       
-     	if(!$this->recaptcha->getIsValid()){
-     		if($this->recaptcha->getError() == 'incorrect-captcha-sol'){
-     			die(json_encode(array('status' => 'error', 'msg' => lang('signin.error.captcha'))));
-     		}else{
-     			die(json_encode(array('status' => 'error', 'msg' => $this->recaptcha->getError())));
-     		}
-     	}
-     	
-     	//TODO: Send email account confirmation
-
-     	if($this->account_model->signin($name, $email, $passwd)){
+		//Generate the activation hash
+		$hash = get_hash();
+		$date = date('Y-m-d');
+     	if($this->account_model->signup($name, $email, $passwd, $date, $hash)){
+     		$this->email->send_activation($name, $email, $passwd, $hash);
      		$this->login($email, $passwd);
      	}else{
      		die(json_encode(array('status' => 'error', 'msg' => 'Error Creating User')));
@@ -54,6 +49,12 @@ class Account extends CI_Controller {
 			die(json_encode($this->response));
 		}
 		
+		if(in_array($user->status, array('I', 'C'))){
+			$this->response['status'] = 'error';
+			$this->response['msg'] = lang('login.error.inactiveac');
+			die(json_encode($this->response));			
+		}
+		
 		//Create the session
 		$user->passwd = NULL;
 		$this->session->set_userdata('user', $user);
@@ -68,5 +69,31 @@ class Account extends CI_Controller {
 	function logout(){
 		$this->session->sess_destroy();
 		redirect('/'); 
+	}
+	
+	function verify($hash){
+		
+		$user = $this->account_model->get_user_by_hash($hash);
+
+		if(!$user){
+			$this->session->set_flashdata('flash_msg', array('status' => 'error', 'msg' => lang('activation.wornglink')));
+			redirect('/');			
+		}
+		
+		if(in_array($user->status, array('I', 'C'))){
+			$this->session->set_flashdata('flash_msg', array('status' => 'error', 'msg' => lang('activation.error')));
+			redirect('/');		
+		}
+		
+		if($user->status == 'A'){
+			$this->session->set_flashdata('flash_msg', array('status' => 'error', 'msg' => lang('activation.alreadyactivated')));
+			redirect('/');		
+		}
+		
+		if($this->account_model->activate_account($user->id)){
+			$this->session->set_flashdata('flash_msg', array('status' => 'ok', 'msg' => lang('activation.successfully')));
+			redirect('/');			
+		}
+		
 	}
 }

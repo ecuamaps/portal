@@ -12,9 +12,12 @@ $lang['dashboard.setdefaullocation'] = "Set as Default";
 $lang['dashboard.deletelocation'] = "Delete";
 $lang['dashboard.navmenu'] = "Locations";
 
-$lang['dashboard.navmenu.back'] = "Back to my last location";
-$lang['dashboard.navmenu.move'] = "Move here";
+$lang['dashboard.navmenu.back'] = "Where is the blue icon?";
+$lang['dashboard.navmenu.move'] = "Center the map here";
 $lang['dashboard.navmenu.location'] = "Go to";
+
+$lang['dashboard.leftpanel.clearresults'] = "Clear";
+$lang['dashboard.leftpanel.viewall'] = "View All";
 
 $lang['dashboard.searchform.searchtext'] = "Your search text here!";
 $lang['dashboard.searchform.searchbtn'] = "Search";
@@ -29,6 +32,10 @@ $lang['dashboard.searchform.viewmore'] = "View All";
 $lang['dashboard.searchform.hide'] = "Hide";
 $lang['dashboard.searchform.currlocation'] = 'Your current position.\nDrag and drop to change it.';
 $lang['dashboard.searchform.accuracyerror'] = 'Maybe we could not get your current location, you can change it manually or try another browser.';
+$lang['dashboard.searchform.posttype'] = 'Post Type';
+$lang['dashboard.searchform.nearto'] = 'Search near to';
+$lang['dashboard.searchform.locationerror'] = "We couldn't found this address, please try set it manually";
+
 
 $lang['dashboard.loginform.title'] = "User Login";
 $lang['dashboard.loginform.username'] = "Email";

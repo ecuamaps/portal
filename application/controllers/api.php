@@ -5,7 +5,11 @@ class Api extends CI_Controller {
 	function __construct(){
 		parent::__construct();		
 	}
-		
+	
+	function search(){
+		die( json_encode(array('status' => 'ok')) );	
+	}
+	
 	function ajax_get_all_types(){
 		die(json_encode($this->get_all_types()));
 	}

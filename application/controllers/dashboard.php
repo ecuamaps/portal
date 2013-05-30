@@ -9,7 +9,7 @@ class Dashboard extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->model('account_model');
-		$this->load->library('recaptcha');
+		//$this->load->library('recaptcha');
 		
 	}
 	
@@ -47,7 +47,7 @@ class Dashboard extends CI_Controller {
 		$this->dasboard_params['map_zoom'] = get_config_val('map_zoom');
 		
 		//get The captcha code
-		$this->dasboard_params['recaptcha_html'] = $this->recaptcha->recaptcha_get_html();
+		//$this->dasboard_params['recaptcha_html'] = $this->recaptcha->recaptcha_get_html();
 		
 		//get the nav locatinos
 		$str_nav_locations = get_config_val('nav_locations');

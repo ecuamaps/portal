@@ -110,7 +110,7 @@ class Account_model extends CI_Model {
 	}
 	
 	
-	function signin($name, $email, $passwd){
+	function signup($name, $email, $passwd, $creation, $hash){
 		
 		//Md5 has for password
      	$passwd = md5($passwd);
@@ -118,10 +118,52 @@ class Account_model extends CI_Model {
 		$data = array(
    			'email' => $email,
    			'passwd' => $passwd,
-   			'name' => $name
+   			'name' => $name,
+   			'creation' => $creation,
+   			'hash' => $hash
 		);
 
 		return $this->db->insert('user', $data);     	
 		
+	}
+	
+	function get_user($email){
+		$sql = "SELECT * FROM user WHERE email='$email'";
+		$user = $this->db->query($sql)->result();
+		if(count($user))
+			return $user[0];
+			
+		return null;		
+	}
+	
+	function get_user_by_hash($hash){
+		$sql = "SELECT * FROM user WHERE hash='$hash'";
+		$user = $this->db->query($sql)->result();
+		if(count($user))
+			return $user[0];
+			
+		return null;		
+	}
+	
+	function activate_account($account_id){
+		return $this->update_account($account_id, array('status' => 'A'));
+	}
+	
+	function inactiavte_account($account_id){
+		return $this->update_account($account_id, array('status' => 'I'));
+	}
+
+	function cancel_account($account_id){
+		return $this->update_account($account_id, array('status' => 'C'));
+	}
+	
+	function update_account($account_id, $data){
+		
+		foreach($data as $field => $value){
+			$this->db->set($field, $value);	
+		}
+		
+		$this->db->where('id', $account_id);
+		return $this->db->update('user');			
 	}
 }

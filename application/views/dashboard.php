@@ -26,8 +26,9 @@ $user = $this->session->userdata('user');
   <script src="<?=base_url()?>assets/foundation/js/vendor/custom.modernizr.js"></script>
 
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;region=EC"></script>
+  
   <script src="<?=base_url()?>assets/js/mochkino.js"></script>
-  <script src="<?=base_url()?>assets/js/jquery_modal/jquery.modal.min.js"></script>
+  <script src="<?=base_url()?>assets/js/jquery_modal/jquery.modal.js"></script>
   <script src="<?=base_url()?>assets/js/jquery.cookie.js"></script>
   
   <?=$_scripts?>
@@ -36,8 +37,16 @@ $user = $this->session->userdata('user');
 <body>
 
   <!-- body content/ here -->
-
-	<div class="sticky">
+	
+	<!-- Errors/messages here --> 
+	<? if($flash_msg = $this->session->flashdata('flash_msg')): ?>
+	<div data-alert class="alert-box <?= ($flash_msg['status'] == 'error') ? 'alert' : 'success'?>">
+		<?= $flash_msg['msg'] ?>
+	  <a href="#" class="close">&times;</a>
+	</div>
+	<? endif; ?>
+	
+	<div class="stickyww">
 	    <nav class="top-bar">
 	      <ul class="title-area">
 	      
@@ -66,9 +75,9 @@ $user = $this->session->userdata('user');
 	          	 	<li class="has-dropdown"><a href="javascript:void(0)"><?=lang('dashboard.mylocations')?></a>
 	          	 		<ul class="dropdown" id="saved-locations">
 	          	 			<li><a href="#add-location-form-wrapper" rel="modal:open"><?=lang('dashboard.addnewlocation')?></a></li>
+	          	 			<li><a href="<?=base_url($this->lang->lang().'/api/set_default_location')?>" <?= !isset($user_locations) ? 'style="display:none"' : ''?> id="set-default-location"><?=lang('dashboard.setdefaullocation')?></a></li>
+	          	 			<li><a href="<?=base_url($this->lang->lang().'/api/delete_location')?>" <?= !isset($user_locations) ? 'style="display:none"' : ''?> id="delete-location"><?=lang('dashboard.deletelocation')?></a></li>
 	          	 		<? if(isset($user_locations)): ?>
-	          	 			<li><a href="<?=base_url($this->lang->lang().'/api/set_default_location')?>" id="set-default-location"><?=lang('dashboard.setdefaullocation')?></a></li>
-	          	 			<li><a href="<?=base_url($this->lang->lang().'/api/delete_location')?>" id="delete-location"><?=lang('dashboard.deletelocation')?></a></li>
 	          	 			<li class="divider"></li>
 	          	 			<? foreach($user_locations as $l): ?>
 	          	 			<? $name = ($l->def == '1') ?  $l->name.'*' : $l->name ?>
@@ -83,7 +92,7 @@ $user = $this->session->userdata('user');
 			  
 			  <? if(!$user): ?>
 	          <li class="divider"></li>
-	          <li><a href="#signin-form-wrapper" rel="modal:open"><?=lang('dashboard.signup')?></a></li>
+	          <li><a href="#signup-form-wrapper" rel="modal:open" id="signup-modal-open"><?=lang('dashboard.signup')?></a></li>
 	          <? endif; ?>
 	        	
 	          <li class="has-dropdown"><a href="javascript:void(0)"><?=lang('dashboard.navmenu')?></a>
@@ -140,9 +149,133 @@ $user = $this->session->userdata('user');
 	</div>
 		
 	<!-- Content -->
-	<?=$content?>
-	<!-- End Content -->
+	<div class="row full-width">
+	<!-- Search Bar -->
+	<?= form_open('api/search', array('id' => 'search-form', 'class' => 'clear-margin')) ?>
+	<div class="row full-width">
+		<div class="large-12 columns">
+			<div class="panel callout opacity07 text-color-white padding-10px clear-margin">
+				<div class="row">
+					<div class="small-2 columns">Logo</div>
+					<div class="small-8 columns">
+						<input type="text" name="search-text" placeholder="<?=lang('dashboard.searchform.searchtext')?>" class="radius clear-margin" />
+						<h6><small class="text-color-white"><?=lang('dashboard.searchform.nearto')?>: <span id="current-address"><span></small></h6>
+						<a href="javascript:void(0)" id="adv-search">
+							<span id="hiden-advsearch"><?=lang('dashboard.searchform.advsearch')?></span>
+							<span class="hide" id="visible-advsearch"><?=lang('dashboard.searchform.hideadvsearch')?></span>
+						</a>		
+					</div>
+					<div class="small-2 columns">
+						<a href="javascript:void(0)" id="search-btn" class="small button alert"><?icon_magni_glass(12, 13)?></a>
+						<a href="javascript:void(0)" id="chlocation-btn" class="small button success"><?icon_location(7, 13)?></a>
+					</div>
+					<!--<div class="small-1 columns"></div>-->
+				</div>
+				
+				<div class="row hide" id="adv-search-block">
+					<div class="small-4 columns">
+						<label for="radio" class="text-color-white"><h5><?=lang('dashboard.searchform.radio')?></h5></label>
+						<select id="radio" name="radio" class="medium">
+							<option value="1" selected>1Km</option>
+						    <option value="2">2Km</option>
+						    <option value="3">3Km</option>
+						    <option value="0"><?=lang('dashboard.searchform.noradio')?></option>
+						</select>
+					</div>
+					<div class="small-4 columns">
+						<label for="results-amt" class="text-color-white"><h5><?=lang('dashboard.searchform.maxresults')?></h5></label>
+						<select id="results-amt" name="results-amt" class="medium">
+							<option value="5" selected>5</option>
+						    <option value="10">10</option>
+						    <option value="20">20</option>
+						    <option value="all" selected>All</option>
+						</select>
+					</div>
+					<div class="small-4 columns">
+						<label for="results-amt" class="text-color-white"><h5><?=lang('dashboard.searchform.posttype')?></h5></label>
+						<select id="results-amt" name="results-amt" class="medium">
+							<option value="5" selected>5</option>
+						    <option value="10">10</option>
+						    <option value="20">20</option>
+						    <option value="all" selected>All</option>
+						</select>					
+					</div>										
+				</div>
+					
+			</div>
+		</div>
+	</div>
+	</form>	
+	<!-- End Search Bar -->		
+	</div>
 
+
+	<div class="row full-width" id="main-content-wrapper">
+  		<div class="large-1 columns" id="left-panel" style="max-height: inherit; height: 100%; padding: 0 !important">
+  			<div class="panel white-bg" style="max-height: inherit; height: 100%;">
+  				<div class="row" style="border-bottom: 1px solid #D9D9D9">
+				  <div style="float: left;" class="hide" id="clear-button-wrapper">
+				  	<ul class="button-group">
+  						<li><a href="#" class="tiny secondary radius button"><?=lang('dashboard.leftpanel.viewall')?></a></li>
+  						<li><a href="#" class="tiny secondary radius button"><?=lang('dashboard.leftpanel.clearresults')?></a></li>
+					</ul>
+				  </div>
+				  <div style="float: right;">
+				  	<a href="javascript:void(0)" id="close-panel-button" class="small secondary radius button hide-for-small" style="display: none !important;"><? icon_arraw_left(10, 10) ?></a>
+				  	<a href="javascript:void(0)" id="open-panel-button" class="small secondary radius button hide-for-small"><? icon_arraw_right(10, 10) ?></a>
+				  </div>				  
+  				</div>
+
+			  <div class="row full-width" id="results-wrapper">
+
+
+			  	
+			  	<div class="search-results-panel" id="123">
+			  		<input type="hidden" name="123-lat"  value="-0.17286542654272" />
+			  		<input type="hidden" name="123-lng"  value="-78.4804487228393" />
+			  		
+			  		<div class="row">
+			  			<div class="small-1 columns"><?icon_location(10, 16)?></div> 
+			  			<div class="small-6 columns"><h6 class="clear-margin">El Rincón del sabor</h6></div>
+			  			<div class="small-4 columns"><h5 class="clear-margin"><small>3.5</small></h5></div>
+			  		</div>
+			  		<div class="row">
+			  			<div class="small-12 columns"><h6 class="clear-margin"><small>E845, Quito</small></h6></div>
+			  		</div>
+			  		<div class="row">
+			  			<div class="small-12 columns"><h6 class="clear-margin"><small>Tels: 2264124 -2246453</small></h6></div>
+			  		</div>
+			  	</div>
+
+			  	<div class="search-results-panel" id="124">
+			  		<input type="hidden" name="124-lat"  value="-0.17273936329235" />
+			  		<input type="hidden" name="124-lng"  value="-78.4803253412246" />
+			  		
+			  		<div class="row">
+			  			<div class="small-1 columns"><?icon_location(10, 16)?></div> 
+			  			<div class="small-6 columns"><h6 class="clear-margin">Papeletek</h6></div>
+			  			<div class="small-4 columns"><h5 class="clear-margin"><small>N/A</small></h5></div>
+			  		</div>
+			  		<div class="row">
+			  			<div class="small-12 columns"><h6 class="clear-margin"><small>N3909</small></h6></div>
+			  		</div>
+			  		<div class="row">
+			  			<div class="small-12 columns"><h6 class="clear-margin"><small>Tels: no</small></h6></div>
+			  		</div>
+			  	</div>
+
+			  
+			  </div>
+  				
+			</div>
+		</div>
+		
+  		<div class="large-11 columns" id="right-panel" style="max-height: inherit; height: 100%; padding: 0 !important">
+  			<?=$content?>
+  		</div>	
+  	</div>
+	<!-- End Content -->
+	
 	<!-- Login Form -->
 	<div class="panel radius hide" id="login-form-wrapper">
 		<?= form_open('account/login', array('id' => 'login-form', 'class' => '')) ?>
@@ -210,8 +343,8 @@ $user = $this->session->userdata('user');
 	<!-- End Add Location Form-->
 	
 	<!-- Sign Up Form -->
-	<div class="panel radius hide" id="signin-form-wrapper">
-		<?= form_open('account/signin', array('id' => 'signin-form', 'class' => '')) ?>
+	<div class="panel radius hide" id="signup-form-wrapper">
+		<?= form_open('account/signup', array('id' => 'signup-form', 'class' => '')) ?>
 			<h5><?=lang('dashboard.signupform.title')?></h5>
 			<div class="row hide" id="signin-error-wrapper">
 				<div data-alert class="alert-box alert">
@@ -228,13 +361,11 @@ $user = $this->session->userdata('user');
 			
 			<div class="row">
 				<div class="large-12 columns">
-			    	<label></label>
 			        <input type="email" name="user_email" placeholder="<?=lang('dashboard.signupform.email')?>"/>
 			    </div>
 			</div>
 			<div class="row">
 				<div class="large-12 columns">
-			    	<label></label>
 			        <input type="password" name="user_passwd" placeholder="<?=lang('dashboard.signupform.pass')?>"/>
 			    </div>
 			</div>
@@ -244,17 +375,13 @@ $user = $this->session->userdata('user');
 			        <input type="password" name="user_passwd2" placeholder="<?=lang('dashboard.signupform.pass2')?>"/>
 			    </div>
 			</div>
-			<div class="row">
-				<div class="large-12 columns">
-			    	<label></label>
-			        <?=$recaptcha_html?>
-			    </div>
-			</div>
+
 			<div class="row">
 				<div class="large-12 columns"><a href="javascript:void(0)" id="signup-action" class="small  button"><?=lang('dashboard.signupform.button')?></a></div>
     		</div>
 		</form>
 		<script>
+			var lang = '<?=$this->lang->lang()?>';
 			var err_msg_missing_field_signin = '<?=lang('dashboard.signupform.errmsg')?>';
 			var err_msg_mismatch_pass = '<?=lang('dashboard.signupform.errmsg.pass')?>'
 			var err_msg_wrong_email_format = '<?=lang('dashboard.signupform.errmsg.emailformat')?>';
@@ -304,11 +431,7 @@ $user = $this->session->userdata('user');
 
   <script>
   
-  $(document).ready(function(){  
-  	$('#send-form').click(function(e){
-  		e.preventDefault();
-  		$('#login-form').submit();
-  	});
+  $(document).ready(function(){
   	
 	var monthNames = [<?=lang('dashboard.months_names')?>];
 	var dayNames= [<?=lang('dashboard.weekdays_names')?>]

@@ -12,10 +12,12 @@ $lang['dashboard.setdefaullocation'] = "Marcar Como Principal";
 $lang['dashboard.deletelocation'] = "Eliminar";
 $lang['dashboard.navmenu'] = "Navegar";
 
-$lang['dashboard.navmenu.back'] = "Regresar a mi ubicaci&oacute;n";
-$lang['dashboard.navmenu.move'] = "Mover mi ubicaci&oacute;n aqui";
+$lang['dashboard.navmenu.back'] = "Donde esta el icono azul?";
+$lang['dashboard.navmenu.move'] = "Centrar el mapa aqui";
 $lang['dashboard.navmenu.location'] = "Ir a";
 
+$lang['dashboard.leftpanel.clearresults'] = "Limpiar";
+$lang['dashboard.leftpanel.viewall'] = "Ver Todos";
 
 $lang['dashboard.searchform.searchtext'] = "Tu texto a buscar aqui!";
 $lang['dashboard.searchform.searchbtn'] = "Buscar";
@@ -29,6 +31,9 @@ $lang['dashboard.searchform.viewmore'] = "Ver Todas";
 $lang['dashboard.searchform.hide'] = "Ocultar";
 $lang['dashboard.searchform.currlocation'] = 'Tu ubicación actual.\nArrastrar y soltar cambiarla';
 $lang['dashboard.searchform.accuracyerror'] = 'No hemos podido saber exactamente donde estas, cambia tu ubicación manualmente o trata con otro navegador.';
+$lang['dashboard.searchform.posttype'] = 'Tipo de Publicaci&oacute;n';
+$lang['dashboard.searchform.nearto'] = 'Buscar cerca a';
+$lang['dashboard.searchform.locationerror'] = "No pudimos encontrar esta dirección, por favor, intente configurarlo manualmente";
 
 $lang['dashboard.loginform.title'] = "Ingreso de usuario";
 $lang['dashboard.loginform.username'] = "Email";
