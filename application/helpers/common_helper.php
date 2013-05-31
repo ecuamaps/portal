@@ -81,7 +81,7 @@ function icon_magni_glass($w, $h){
 	<?php
 }
 
-function icon_arraw_left($w, $h){
+function icon_arrow_left($w, $h){
 	?>
 <svg 
      version="1.1" 
@@ -153,7 +153,7 @@ kPEFpAGph3+ZciUAAAAASUVORK5CYII=
 	
 }
 
-function icon_arraw_right($w, $h){
+function icon_arrow_right($w, $h){
 	?>
 		<svg 
 		     version="1.1" 

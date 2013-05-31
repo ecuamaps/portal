@@ -35,6 +35,7 @@
 	var map = new Object();
 	var myLocation = new Object();
 	var myLatlng = new Object();
+	var markers = new Object();
 	
 	var geocoder = new google.maps.Geocoder();
 	var infowindow = new google.maps.InfoWindow();

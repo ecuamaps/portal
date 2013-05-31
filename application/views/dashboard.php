@@ -211,31 +211,32 @@ $user = $this->session->userdata('user');
 
 
 	<div class="row full-width" id="main-content-wrapper">
-  		<div class="large-1 columns" id="left-panel" style="max-height: inherit; height: 100%; padding: 0 !important">
+  		<div class="large-3 columns" id="left-panel" style="max-height: inherit; height: 100%; padding: 0 !important">
   			<div class="panel white-bg" style="max-height: inherit; height: 100%;">
   				<div class="row" style="border-bottom: 1px solid #D9D9D9">
-				  <div style="float: left;" class="hide" id="clear-button-wrapper">
+				  <div style="float: left;" class="" id="clear-button-wrapper">
 				  	<ul class="button-group">
   						<li><a href="#" class="tiny secondary radius button"><?=lang('dashboard.leftpanel.viewall')?></a></li>
   						<li><a href="#" class="tiny secondary radius button"><?=lang('dashboard.leftpanel.clearresults')?></a></li>
 					</ul>
 				  </div>
 				  <div style="float: right;">
-				  	<a href="javascript:void(0)" id="close-panel-button" class="small secondary radius button hide-for-small" style="display: none !important;"><? icon_arraw_left(10, 10) ?></a>
-				  	<a href="javascript:void(0)" id="open-panel-button" class="small secondary radius button hide-for-small"><? icon_arraw_right(10, 10) ?></a>
+				  	<a href="javascript:void(0)" id="close-panel-button" class="small secondary radius button hide-for-small"><? icon_arrow_left(10, 10) ?></a>
+				  	<a href="javascript:void(0)" id="open-panel-button" class="small secondary radius button hide-for-small" style="display: none !important;"><? icon_arrow_right(10, 10) ?></a>
 				  </div>				  
   				</div>
 
-			  <div class="row full-width" id="results-wrapper">
+			  <div class="row full-width" id="results-wrapper" style="display: none !important;">
 
 
-			  	
+			  	<? /*TODO: OJO pones esto dinamico*/ ?>
 			  	<div class="search-results-panel" id="123">
 			  		<input type="hidden" name="123-lat"  value="-0.17286542654272" />
 			  		<input type="hidden" name="123-lng"  value="-78.4804487228393" />
+			  		<input type="hidden" name="123-inmap"  value="0" />
 			  		
 			  		<div class="row">
-			  			<div class="small-1 columns"><?icon_location(10, 16)?></div> 
+			  			<div class="small-1 columns"></div> 
 			  			<div class="small-6 columns"><h6 class="clear-margin">El Rincón del sabor</h6></div>
 			  			<div class="small-4 columns"><h5 class="clear-margin"><small>3.5</small></h5></div>
 			  		</div>
@@ -250,9 +251,10 @@ $user = $this->session->userdata('user');
 			  	<div class="search-results-panel" id="124">
 			  		<input type="hidden" name="124-lat"  value="-0.17273936329235" />
 			  		<input type="hidden" name="124-lng"  value="-78.4803253412246" />
+			  		<input type="hidden" name="124-inmap"  value="0" />
 			  		
 			  		<div class="row">
-			  			<div class="small-1 columns"><?icon_location(10, 16)?></div> 
+			  			<div class="small-1 columns"></div> 
 			  			<div class="small-6 columns"><h6 class="clear-margin">Papeletek</h6></div>
 			  			<div class="small-4 columns"><h5 class="clear-margin"><small>N/A</small></h5></div>
 			  		</div>
@@ -270,7 +272,7 @@ $user = $this->session->userdata('user');
 			</div>
 		</div>
 		
-  		<div class="large-11 columns" id="right-panel" style="max-height: inherit; height: 100%; padding: 0 !important">
+  		<div class="large-9 columns" id="right-panel" style="max-height: inherit; height: 100%; padding: 0 !important">
   			<?=$content?>
   		</div>	
   	</div>
