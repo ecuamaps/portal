@@ -19,6 +19,12 @@ $lang['dashboard.navmenu.location'] = "Ir a";
 $lang['dashboard.leftpanel.clearresults'] = "Limpiar";
 $lang['dashboard.leftpanel.viewall'] = "Ver Todos";
 
+$lang['dashboard.chlocationform.title'] = "Cambia tu ubicaci&oacute;n";
+$lang['dashboard.chlocationform.newaddr'] = "Digita la nueva direcci&oacute;n";
+$lang['dashboard.chlocationform.button'] = "Ir!";
+$lang['dashboard.chlocationform.ex'] = "Ej: La Carolina, Quito";
+$lang['dashboard.chlocationform.change'] = "Cambiar";
+
 $lang['dashboard.searchform.searchtext'] = "Tu texto a buscar aqui!";
 $lang['dashboard.searchform.searchbtn'] = "Buscar";
 $lang['dashboard.searchform.advsearch'] = "B&uacute;squeda Avanzada";

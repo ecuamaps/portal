@@ -54,7 +54,7 @@ $user = $this->session->userdata('user');
 	        <!-- Title Area -->
 	        <li class="name">
 	        	<? if(!$user): ?>
-	           	<a href="#login-form-wrapper" rel="modal:open" class="button alert"><?=lang('dashboard.login')?></a>
+	           	<a href="#" data-reveal-id="login-form-wrapper" class="button alert"><?=lang('dashboard.login')?></a>
 	           	<? else: ?>
 	            <h1 style="color: white;"><?=$user->name?></h1>
 	           	<? endif; ?>
@@ -74,7 +74,7 @@ $user = $this->session->userdata('user');
 	          	 <ul class="dropdown">
 	          	 	<li class="has-dropdown"><a href="javascript:void(0)"><?=lang('dashboard.mylocations')?></a>
 	          	 		<ul class="dropdown" id="saved-locations">
-	          	 			<li><a href="#add-location-form-wrapper" rel="modal:open"><?=lang('dashboard.addnewlocation')?></a></li>
+	          	 			<li><a href="#" data-reveal-id="add-location-form-wrapper"><?=lang('dashboard.addnewlocation')?></a></li>
 	          	 			<li><a href="<?=base_url($this->lang->lang().'/api/set_default_location')?>" <?= !isset($user_locations) ? 'style="display:none"' : ''?> id="set-default-location"><?=lang('dashboard.setdefaullocation')?></a></li>
 	          	 			<li><a href="<?=base_url($this->lang->lang().'/api/delete_location')?>" <?= !isset($user_locations) ? 'style="display:none"' : ''?> id="delete-location"><?=lang('dashboard.deletelocation')?></a></li>
 	          	 		<? if(isset($user_locations)): ?>
@@ -92,7 +92,7 @@ $user = $this->session->userdata('user');
 			  
 			  <? if(!$user): ?>
 	          <li class="divider"></li>
-	          <li><a href="#signup-form-wrapper" rel="modal:open" id="signup-modal-open"><?=lang('dashboard.signup')?></a></li>
+	          <li><a href="#" data-reveal-id="signup-form-wrapper"><?=lang('dashboard.signup')?></a></li>
 	          <? endif; ?>
 	        	
 	          <li class="has-dropdown"><a href="javascript:void(0)"><?=lang('dashboard.navmenu')?></a>
@@ -156,10 +156,10 @@ $user = $this->session->userdata('user');
 		<div class="large-12 columns">
 			<div class="panel callout opacity07 text-color-white padding-10px clear-margin">
 				<div class="row">
-					<div class="small-2 columns">Logo</div>
+					<div class="small-2 columns"><h3>buskoo.com</h3></div>
 					<div class="small-8 columns">
 						<input type="text" name="search-text" placeholder="<?=lang('dashboard.searchform.searchtext')?>" class="radius clear-margin" />
-						<h6><small class="text-color-white"><?=lang('dashboard.searchform.nearto')?>: <span id="current-address"><span></small></h6>
+						<h6><small class="text-color-white"><?=lang('dashboard.searchform.nearto')?>: <span id="current-address"></span> <a href="#" data-dropdown="change-location-wrapper" class="text-color-red" id="chlocation"><?=lang('dashboard.chlocationform.change')?></a></small></h6>
 						<a href="javascript:void(0)" id="adv-search">
 							<span id="hiden-advsearch"><?=lang('dashboard.searchform.advsearch')?></span>
 							<span class="hide" id="visible-advsearch"><?=lang('dashboard.searchform.hideadvsearch')?></span>
@@ -167,7 +167,6 @@ $user = $this->session->userdata('user');
 					</div>
 					<div class="small-2 columns">
 						<a href="javascript:void(0)" id="search-btn" class="small button alert"><?icon_magni_glass(12, 13)?></a>
-						<a href="javascript:void(0)" id="chlocation-btn" class="small button success"><?icon_location(7, 13)?></a>
 					</div>
 					<!--<div class="small-1 columns"></div>-->
 				</div>
@@ -216,8 +215,8 @@ $user = $this->session->userdata('user');
   				<div class="row" style="border-bottom: 1px solid #D9D9D9">
 				  <div style="float: left;" class="" id="clear-button-wrapper">
 				  	<ul class="button-group">
-  						<li><a href="#" class="tiny secondary radius button"><?=lang('dashboard.leftpanel.viewall')?></a></li>
-  						<li><a href="#" class="tiny secondary radius button"><?=lang('dashboard.leftpanel.clearresults')?></a></li>
+  						<li><a href="javascript:void(0)" class="tiny secondary radius button"><?=lang('dashboard.leftpanel.viewall')?></a></li>
+  						<li><a href="javascript:void(0)" class="tiny secondary radius button"><?=lang('dashboard.leftpanel.clearresults')?></a></li>
 					</ul>
 				  </div>
 				  <div style="float: right;">
@@ -229,7 +228,7 @@ $user = $this->session->userdata('user');
 			  <div class="row full-width" id="results-wrapper" style="display: none !important;">
 
 
-			  	<? /*TODO: OJO pones esto dinamico*/ ?>
+			  	<? /*TODO: OJO poner esto dinamico desde JS luego de las busquedas*/ ?>
 			  	<div class="search-results-panel" id="123">
 			  		<input type="hidden" name="123-lat"  value="-0.17286542654272" />
 			  		<input type="hidden" name="123-lng"  value="-78.4804487228393" />
@@ -279,7 +278,7 @@ $user = $this->session->userdata('user');
 	<!-- End Content -->
 	
 	<!-- Login Form -->
-	<div class="panel radius hide" id="login-form-wrapper">
+	<div class="reveal-modal" id="login-form-wrapper">
 		<?= form_open('account/login', array('id' => 'login-form', 'class' => '')) ?>
 			<h4><?=lang('dashboard.loginform.title')?></h4>
 			<div class="row hide" id="login-error-wrapper">
@@ -305,11 +304,12 @@ $user = $this->session->userdata('user');
 				<div class="large-12 columns"><a href="javascript:void(0)" id="login-action" class="button"><?=lang('dashboard.loginform.button')?></a></div>
     		</div>
 		</form>
+		<a class="close-reveal-modal">&#215;</a>
 	</div>
 	<!-- End Login Form-->
 	
 	<!-- Add Location Form -->
-	<div class="panel radius hide" id="add-location-form-wrapper">
+	<div class="reveal-modal" id="add-location-form-wrapper">
 		<?= form_open('api/add_location', array('id' => 'add-location-form', 'class' => '')) ?>
 			<h4><?=lang('dashboard.locationform.title')?></h4>
 			<p><?=lang('dashboard.locationform.help')?></p>
@@ -341,11 +341,12 @@ $user = $this->session->userdata('user');
 		<script>
 			var err_msg_missing_field = '<?=lang('dashboard.locationform.errmsg')?>';
 		</script>
+		<a class="close-reveal-modal">&#215;</a>
 	</div>	
 	<!-- End Add Location Form-->
 	
 	<!-- Sign Up Form -->
-	<div class="panel radius hide" id="signup-form-wrapper">
+	<div class="reveal-modal" id="signup-form-wrapper">
 		<?= form_open('account/signup', array('id' => 'signup-form', 'class' => '')) ?>
 			<h5><?=lang('dashboard.signupform.title')?></h5>
 			<div class="row hide" id="signin-error-wrapper">
@@ -389,8 +390,24 @@ $user = $this->session->userdata('user');
 			var err_msg_wrong_email_format = '<?=lang('dashboard.signupform.errmsg.emailformat')?>';
 			
 		</script>
+		<a class="close-reveal-modal">&#215;</a>
 	</div>
 	<!-- End SignIn Form -->
+
+	<!-- Change location Form -->
+	<div class="f-dropdown content" id="change-location-wrapper" data-dropdown-content>	
+		<h5><?=lang('dashboard.chlocationform.title')?></h5>
+		<div class="row">
+			<div class="large-12 columns">
+				<input type="text" name="new_addr" placeholder="<?=lang('dashboard.chlocationform.newaddr')?>" value=""/>
+				<h6><small><?=lang('dashboard.chlocationform.ex')?></small></h6>
+			</div>
+    	</div>	
+		<div class="row">
+			<div class="large-12 columns"><a href="javascript:void(0)" id="chlocation-action" class="small button"><?=lang('dashboard.chlocationform.button')?></a></div>
+    	</div>
+	</div>	
+	<!-- End Change location Form -->
 	
 	<!-- Footer -->
 	<!--

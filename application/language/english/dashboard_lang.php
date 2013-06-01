@@ -19,6 +19,12 @@ $lang['dashboard.navmenu.location'] = "Go to";
 $lang['dashboard.leftpanel.clearresults'] = "Clear";
 $lang['dashboard.leftpanel.viewall'] = "View All";
 
+$lang['dashboard.chlocationform.title'] = "Change your location";
+$lang['dashboard.chlocationform.newaddr'] = "Enter the new address";
+$lang['dashboard.chlocationform.button'] = "Go!";
+$lang['dashboard.chlocationform.ex'] = "e.g. La Carolina, Quito";
+$lang['dashboard.chlocationform.change'] = "Change";
+
 $lang['dashboard.searchform.searchtext'] = "Your search text here!";
 $lang['dashboard.searchform.searchbtn'] = "Search";
 $lang['dashboard.searchform.advsearch'] = "Advanced Search";
@@ -48,7 +54,6 @@ $lang['dashboard.locationform.name'] = "Name (Required)";
 $lang['dashboard.locationform.def'] = "Set as Default?";
 $lang['dashboard.locationform.button'] = "Add";
 $lang['dashboard.locationform.errmsg'] = "The name is required";
-
 
 $lang['dashboard.signupform.title'] = "Sign up for free!";
 $lang['dashboard.signupform.name'] = "Name";

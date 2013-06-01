@@ -581,17 +581,23 @@ $(document).ready(function() {
 						map.setCenter(myLatlng);
 					});
 
-					$('#chlocation-btn').click(function(e){
-						var address = $('input[name="search-text"]').val();
-						geocoder.geocode( { 'address': address}, function(results, status) {
-							if (status == google.maps.GeocoderStatus.OK) {
-								changeLocation(results[0].geometry.location);
-								myLocation.setPosition(results[0].geometry.location);
-							} else {
-								alert(locationErrorMsg);
-							}
-						});						
-					});
+	$('#chlocation-action').click(function(e){
+		var address = $('input[name="new_addr"]').val();
+		if(address){
+			geocoder.geocode( { 'address': address}, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					changeLocation(results[0].geometry.location);
+					myLocation.setPosition(results[0].geometry.location);
+					$.modal.close();
+					$('input[name="new_addr"]').val('');
+				} else {
+					alert(locationErrorMsg);
+				}
+			});			
+		}
+		
+		Foundation.libs.dropdown.close($('#change-location-wrapper'));
+	});
 
 	$('#search-btn').click(function(e){
 						
