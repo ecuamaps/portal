@@ -3,11 +3,72 @@
 class Api extends CI_Controller {
 
 	function __construct(){
-		parent::__construct();		
+		parent::__construct();
+		$this->lang->load('api');		
 	}
 	
 	function search(){
-		die( json_encode(array('status' => 'ok')) );	
+		$rslt_amnt = 2;
+		
+		header('Content-Type: text/html');
+		?>
+		<h4><small><?=str_replace('[X]', $rslt_amnt, lang('search.resultstitle'))?>:</small></h4>
+		<div class="row full-width" id="results-wrapper">
+			<div class="search-results-panel" id="123">
+			  	<input type="hidden" name="123-lat"  value="-0.17286542654272" />
+			  	<input type="hidden" name="123-lng"  value="-78.4804487228393" />
+			  	<input type="hidden" name="123-inmap"  value="0" />
+			  	
+			  	<div class="row">
+			  		<div class="small-1 columns"></div> 
+			  		<div class="small-6 columns"><h6 class="clear-margin">El Rincón del sabor</h6></div>
+			  		<div class="small-4 columns"><h5 class="clear-margin"><small>3.5</small></h5></div>
+			  	</div>
+
+			  	<div class="row">
+			  		<div class="small-12 columns"><h6 class="clear-margin"><small>E845, Quito</small></h6></div>
+			  	</div>
+
+			  	<div class="row">
+			  		<div class="small-12 columns"><h6 class="clear-margin"><small>Tels: 2264124 -2246453</small></h6></div>
+			  	</div>
+
+			  	<div class="row">
+			  		<div class="small-2 columns"><a href="#" class="tiny button">Ver Mas</a></div>
+			  		<div class="small-2 columns"><a href="#" class="tiny button">Insertar en el mapa</a></div>
+			  		<div class="small-2 columns"><a href="#" class="tiny button">Como llegar</a></div>
+			  	</div>
+			  	
+			</div>
+
+		  	<div class="search-results-panel" id="124">
+		  		<input type="hidden" name="124-lat"  value="-0.17273936329235" />
+		  		<input type="hidden" name="124-lng"  value="-78.4803253412246" />
+		  		<input type="hidden" name="124-inmap"  value="0" />
+			  		
+		  		<div class="row">
+		  			<div class="small-1 columns"></div> 
+		  			<div class="small-6 columns"><h6 class="clear-margin">Papeletek</h6></div>
+		  			<div class="small-4 columns"><h5 class="clear-margin"><small>N/A</small></h5></div>
+		  		</div>
+		  		<div class="row">
+		  			<div class="small-12 columns"><h6 class="clear-margin"><small>N3909</small></h6></div>
+		  		</div>
+		  		<div class="row">
+		  			<div class="small-12 columns"><h6 class="clear-margin"><small>Tels: no</small></h6></div>
+		  		</div>
+
+			  	<div class="row">
+			  		<div class="large-4 columns">Ver Mas</div>
+			  		<div class="large-4 columns">Insertar al mapa</div>
+			  		<div class="large-4 columns">Como llegar?</div>
+			  	</div>
+
+		  	</div>		
+		</div>
+		<a class="close-reveal-modal">&#215;</a>
+		<?php
+		die();	
 	}
 	
 	function ajax_get_all_types(){

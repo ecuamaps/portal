@@ -121,3 +121,11 @@ height: 100%;
 .white-bg{
 	background: none repeat scroll 0 0 #FFFFFF !important;
 }
+
+#adv-search-block{
+	padding: 10px 0 10px !important;
+}
+
+.margin-top-10px{
+	margin: 10px auto !important;
+}

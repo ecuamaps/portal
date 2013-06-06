@@ -89,12 +89,13 @@
     },
 
     open : function (target) {
+    
       if (target) {
         var modal = $('#' + target.data('reveal-id'));
       } else {
         var modal = $(this.scope);
       }
-
+      
       if (!modal.hasClass('open')) {
         var open_modal = $('.reveal-modal.open');
 

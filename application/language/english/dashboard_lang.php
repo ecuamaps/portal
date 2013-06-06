@@ -27,7 +27,7 @@ $lang['dashboard.chlocationform.change'] = "Change";
 
 $lang['dashboard.searchform.searchtext'] = "Your search text here!";
 $lang['dashboard.searchform.searchbtn'] = "Search";
-$lang['dashboard.searchform.advsearch'] = "Advanced Search";
+$lang['dashboard.searchform.advsearch'] = "Advanced";
 $lang['dashboard.searchform.hideadvsearch'] = "Hide Advanced Search";
 $lang['dashboard.searchform.radio'] = "Radio Search";
 $lang['dashboard.searchform.noradio'] = "Search for All";

@@ -46,7 +46,7 @@ $user = $this->session->userdata('user');
 	</div>
 	<? endif; ?>
 	
-	<div class="stickyww">
+	<div class="sticky">
 	    <nav class="top-bar">
 	      <ul class="title-area">
 	      
@@ -156,51 +156,17 @@ $user = $this->session->userdata('user');
 		<div class="large-12 columns">
 			<div class="panel callout opacity07 text-color-white padding-10px clear-margin">
 				<div class="row">
-					<div class="small-2 columns"><h3>buskoo.com</h3></div>
-					<div class="small-8 columns">
+					<div class="small-3 columns"><? logo_svg(54, 70); ?></div>
+					<div class="small-5 columns">
 						<input type="text" name="search-text" placeholder="<?=lang('dashboard.searchform.searchtext')?>" class="radius clear-margin" />
-						<h6><small class="text-color-white"><?=lang('dashboard.searchform.nearto')?>: <span id="current-address"></span> <a href="#" data-dropdown="change-location-wrapper" class="text-color-red" id="chlocation"><?=lang('dashboard.chlocationform.change')?></a></small></h6>
-						<a href="javascript:void(0)" id="adv-search">
-							<span id="hiden-advsearch"><?=lang('dashboard.searchform.advsearch')?></span>
-							<span class="hide" id="visible-advsearch"><?=lang('dashboard.searchform.hideadvsearch')?></span>
-						</a>		
+						<h6><small class="text-color-white"><?=lang('dashboard.searchform.nearto')?>: <span id="current-address"></span> <a href="#" data-dropdown="change-location-wrapper" class="text-color-red" id="chlocation"><?=lang('dashboard.chlocationform.change')?></a></small></h6>		
 					</div>
-					<div class="small-2 columns">
+					<div class="small-4 columns">
 						<a href="javascript:void(0)" id="search-btn" class="small button alert"><?icon_magni_glass(12, 13)?></a>
+						<a href="javascript:void(0)" id="adv-search" data-dropdown="adv-search-block"><?=lang('dashboard.searchform.advsearch')?></a>
 					</div>
-					<!--<div class="small-1 columns"></div>-->
-				</div>
-				
-				<div class="row hide" id="adv-search-block">
-					<div class="small-4 columns">
-						<label for="radio" class="text-color-white"><h5><?=lang('dashboard.searchform.radio')?></h5></label>
-						<select id="radio" name="radio" class="medium">
-							<option value="1" selected>1Km</option>
-						    <option value="2">2Km</option>
-						    <option value="3">3Km</option>
-						    <option value="0"><?=lang('dashboard.searchform.noradio')?></option>
-						</select>
-					</div>
-					<div class="small-4 columns">
-						<label for="results-amt" class="text-color-white"><h5><?=lang('dashboard.searchform.maxresults')?></h5></label>
-						<select id="results-amt" name="results-amt" class="medium">
-							<option value="5" selected>5</option>
-						    <option value="10">10</option>
-						    <option value="20">20</option>
-						    <option value="all" selected>All</option>
-						</select>
-					</div>
-					<div class="small-4 columns">
-						<label for="results-amt" class="text-color-white"><h5><?=lang('dashboard.searchform.posttype')?></h5></label>
-						<select id="results-amt" name="results-amt" class="medium">
-							<option value="5" selected>5</option>
-						    <option value="10">10</option>
-						    <option value="20">20</option>
-						    <option value="all" selected>All</option>
-						</select>					
-					</div>										
-				</div>
-					
+					<!-- <div class="small-2 columns"></div> -->
+				</div>					
 			</div>
 		</div>
 	</div>
@@ -209,73 +175,58 @@ $user = $this->session->userdata('user');
 	</div>
 
 
-	<div class="row full-width" id="main-content-wrapper">
-  		<div class="large-3 columns" id="left-panel" style="max-height: inherit; height: 100%; padding: 0 !important">
-  			<div class="panel white-bg" style="max-height: inherit; height: 100%;">
-  				<div class="row" style="border-bottom: 1px solid #D9D9D9">
-				  <div style="float: left;" class="" id="clear-button-wrapper">
-				  	<ul class="button-group">
-  						<li><a href="javascript:void(0)" class="tiny secondary radius button"><?=lang('dashboard.leftpanel.viewall')?></a></li>
-  						<li><a href="javascript:void(0)" class="tiny secondary radius button"><?=lang('dashboard.leftpanel.clearresults')?></a></li>
-					</ul>
-				  </div>
-				  <div style="float: right;">
-				  	<a href="javascript:void(0)" id="close-panel-button" class="small secondary radius button hide-for-small"><? icon_arrow_left(10, 10) ?></a>
-				  	<a href="javascript:void(0)" id="open-panel-button" class="small secondary radius button hide-for-small" style="display: none !important;"><? icon_arrow_right(10, 10) ?></a>
-				  </div>				  
-  				</div>
-
-			  <div class="row full-width" id="results-wrapper" style="display: none !important;">
-
-
-			  	<? /*TODO: OJO poner esto dinamico desde JS luego de las busquedas*/ ?>
-			  	<div class="search-results-panel" id="123">
-			  		<input type="hidden" name="123-lat"  value="-0.17286542654272" />
-			  		<input type="hidden" name="123-lng"  value="-78.4804487228393" />
-			  		<input type="hidden" name="123-inmap"  value="0" />
-			  		
-			  		<div class="row">
-			  			<div class="small-1 columns"></div> 
-			  			<div class="small-6 columns"><h6 class="clear-margin">El Rincón del sabor</h6></div>
-			  			<div class="small-4 columns"><h5 class="clear-margin"><small>3.5</small></h5></div>
-			  		</div>
-			  		<div class="row">
-			  			<div class="small-12 columns"><h6 class="clear-margin"><small>E845, Quito</small></h6></div>
-			  		</div>
-			  		<div class="row">
-			  			<div class="small-12 columns"><h6 class="clear-margin"><small>Tels: 2264124 -2246453</small></h6></div>
-			  		</div>
-			  	</div>
-
-			  	<div class="search-results-panel" id="124">
-			  		<input type="hidden" name="124-lat"  value="-0.17273936329235" />
-			  		<input type="hidden" name="124-lng"  value="-78.4803253412246" />
-			  		<input type="hidden" name="124-inmap"  value="0" />
-			  		
-			  		<div class="row">
-			  			<div class="small-1 columns"></div> 
-			  			<div class="small-6 columns"><h6 class="clear-margin">Papeletek</h6></div>
-			  			<div class="small-4 columns"><h5 class="clear-margin"><small>N/A</small></h5></div>
-			  		</div>
-			  		<div class="row">
-			  			<div class="small-12 columns"><h6 class="clear-margin"><small>N3909</small></h6></div>
-			  		</div>
-			  		<div class="row">
-			  			<div class="small-12 columns"><h6 class="clear-margin"><small>Tels: no</small></h6></div>
-			  		</div>
-			  	</div>
-
-			  
-			  </div>
-  				
-			</div>
-		</div>
-		
-  		<div class="large-9 columns" id="right-panel" style="max-height: inherit; height: 100%; padding: 0 !important">
+	<div class="row full-width" id="main-content-wrapper">		
+  		<div class="large-12 columns" id="right-panel" style="max-height: inherit; height: 100%; padding: 0 !important">
   			<?=$content?>
   		</div>	
   	</div>
 	<!-- End Content -->
+	
+	<!-- Search results -->
+	<div class="reveal-modal" id="search-result-wrapper"></div>
+	<!-- End Search Results-->
+	
+	<!-- Advanced Search Form -->
+	<div class="f-dropdown content" id="adv-search-block" data-dropdown-content>	
+		<div class="row margin-top-10px">
+			<div class="large-12 columns">
+				<label for="radio"><?=lang('dashboard.searchform.radio')?></label>
+				<select id="radio" name="radio" class="medium">
+					<option value="1" selected>1Km</option>
+				    <option value="2">2Km</option>
+				    <option value="3">3Km</option>
+				    <option value="0"><?=lang('dashboard.searchform.noradio')?></option>
+				</select>
+			</div>
+    	</div>
+
+		<div class="row margin-top-10px">
+			<div class="large-12 columns">
+				<label for="results-amt"><?=lang('dashboard.searchform.maxresults')?></label>
+				<select id="results-amt" name="results-amt" class="medium">
+					<option value="5" selected>5</option>
+				    <option value="10">10</option>
+				    <option value="20">20</option>
+				    <option value="all" selected>All</option>
+				</select>
+			</div>
+    	</div>
+			
+		<div class="row margin-top-10px">
+			<div class="large-12 columns">
+				<label for="results-amt"><?=lang('dashboard.searchform.posttype')?></label>
+				<select id="results-amt" name="results-amt" class="medium">
+					<option value="5" selected>5</option>
+				    <option value="10">10</option>
+				    <option value="20">20</option>
+				    <option value="all" selected>All</option>
+				</select>					
+			</div>
+    	</div>
+					
+	</div>
+	
+	<!-- End Advanced Search From-->
 	
 	<!-- Login Form -->
 	<div class="reveal-modal" id="login-form-wrapper">

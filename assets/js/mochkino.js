@@ -96,7 +96,7 @@ function mapInitialize(location) {
 	
 	codeLatLng();
 	
-	if (location) {
+	/*if (location) {
 		if (location.coords.accuracy < 200) {
 			var myLocationAccuracy = new google.maps.Circle({
 				map : map,
@@ -109,7 +109,7 @@ function mapInitialize(location) {
 		} else {
 			alert(accuracyErrorMsg);
 		}
-	}
+	}*/
 
 	google.maps.event.addListener(myLocation, 'dragend', function(e) {
 		changeLocation(e.latLng);
@@ -202,7 +202,7 @@ $(document).ready(function() {
 	$.cookie.json = true;
 	navigator.geolocation.getCurrentPosition(mapInitialize, errorHandler);
 
-	$('#adv-search').click(function(e) {
+	/*$('#adv-search').click(function(e) {
 		e.preventDefault();
 
 		if ($('#adv-search-block').is(':visible')) { // Must be Hide
@@ -214,7 +214,7 @@ $(document).ready(function() {
 			$('#visible-advsearch').show();
 			$('#adv-search-block').slideDown("slow");
 		}
-	});
+	});*/
 
 	$('#view-all-types').click(function(e) {
 		e.preventDefault();
@@ -477,54 +477,34 @@ $(document).ready(function() {
 
 					});
 
-					$('#signup-action')
-							.click(
-									function(e) {
-										e.preventDefault();
+	$('#signup-action').click(function(e) {
+		e.preventDefault();
 
-										var hms1 = $('input[name="hms1"]')
-												.val();
-										var name = $('input[name="user_name"]')
-												.val();
-										var email = $(
-												'input[name="user_email"]')
-												.val();
-										var passwd = $(
-												'input[name="user_passwd"]')
-												.val();
-										var passwd2 = $(
-												'input[name="user_passwd2"]')
-												.val();
-										var recaptcha_challenge_field = $(
-												'input[name="recaptcha_challenge_field"]')
-												.val();
-										var recaptcha_response_field = $(
-												'input[name="recaptcha_response_field"]')
-												.val();
+		var hms1 = $('input[name="hms1"]').val();
+		var name = $('input[name="user_name"]').val();
+		var email = $('input[name="user_email"]').val();
+		var passwd = $('input[name="user_passwd"]').val();
+		var passwd2 = $('input[name="user_passwd2"]').val();
 
-										if (!name || !email || !passwd) {
-											$('#signin-error-msg')
-													.html(
-															err_msg_missing_field_signin);
-											$('#signin-error-wrapper').show();
-											return false;
-										}
+		if (!name || !email || !passwd) {
+			$('#signin-error-msg').html(err_msg_missing_field_signin);
+			$('#signin-error-wrapper').show();
+			return false;
+		}
 
-										if (passwd != passwd2) {
-											$('#signin-error-msg').html(
-													err_msg_mismatch_pass);
-											$('#signin-error-wrapper').show();
-											return false;
-										}
+		if (passwd != passwd2) {
+			$('#signin-error-msg').html(err_msg_mismatch_pass);
+			$('#signin-error-wrapper').show();
+			return false;
+		}
 
-										// Email format validation
-										var emailReg = /^[a-zA-Z0-9._-]+([+][a-zA-Z0-9._-]+){0,1}[@][a-zA-Z0-9._-]+[.][a-zA-Z]{2,6}$/;
-										if (!emailReg.test(email)) {
-											$('#signin-error-msg').html(
-													err_msg_wrong_email_format);
-											$('#signin-error-wrapper').show();
-											return false;
-										}
+		// Email format validation
+		var emailReg = /^[a-zA-Z0-9._-]+([+][a-zA-Z0-9._-]+){0,1}[@][a-zA-Z0-9._-]+[.][a-zA-Z]{2,6}$/;
+		if (!emailReg.test(email)) {
+			$('#signin-error-msg').html(err_msg_wrong_email_format);
+			$('#signin-error-wrapper').show();
+				return false;
+		}
 
 										$
 												.ajax(
@@ -600,23 +580,20 @@ $(document).ready(function() {
 	});
 
 	$('#search-btn').click(function(e){
-						
+				
 		var text = $('input[name="search-text"]').val();
 						
 		$.ajax({
 			type : "POST",
 			url : $('#search-form').attr('action'),
-			dataType : "json",
+			dataType : "html",
 			data : {
 				text : text,
 				hms1 : $('input[name="hms1"]').val()
 			}
 		}).done(function(response) {
-							
-		showSearchResults(response);
-							
-		if($('#left-panel').attr('class') == 'large-1 columns')
-			showHideLeftPanel();
+			showSearchResults(response);
+			$('#search-result-wrapper').foundation('reveal', 'open');
 		});
 						
 	});
@@ -689,7 +666,7 @@ function showSearchResults(response){
 		return false;
 	}
 	
-	$('#results-wrapper').slideDown("slow");
+	$('#search-result-wrapper').html(response);
 }
 
 function showHideLeftPanel(){
