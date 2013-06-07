@@ -11,6 +11,7 @@ $lang['dashboard.addnewlocation'] = "Add New";
 $lang['dashboard.setdefaullocation'] = "Set as Default";
 $lang['dashboard.deletelocation'] = "Delete";
 $lang['dashboard.navmenu'] = "Locations";
+$lang['dashboard.addbuz'] = "Add Enterprise";
 
 $lang['dashboard.navmenu.back'] = "Where is the blue icon?";
 $lang['dashboard.navmenu.move'] = "Center the map here";
