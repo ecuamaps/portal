@@ -582,7 +582,10 @@ $(document).ready(function() {
 	$('#search-btn').click(function(e){
 				
 		var text = $('input[name="search-text"]').val();
-						
+		
+		if(!text)
+			return false;
+		
 		$.ajax({
 			type : "POST",
 			url : $('#search-form').attr('action'),
@@ -639,6 +642,10 @@ $(document).ready(function() {
 	});
 
 });
+
+function search(){
+	
+}
 
 function removeMarker(id){
 	markers[id].setMap(null);

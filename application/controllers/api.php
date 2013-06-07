@@ -8,6 +8,7 @@ class Api extends CI_Controller {
 	}
 	
 	function search(){
+		
 		$rslt_amnt = 2;
 		
 		header('Content-Type: text/html');
