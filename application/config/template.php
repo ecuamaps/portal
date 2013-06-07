@@ -59,10 +59,9 @@ $template['active_template'] = 'dashboard';
 $template['dashboard']['template'] = 'dashboard';
 $template['dashboard']['regions'] = array(
    'title',
-   'content'=> array(
-   		 //'wrapper' => '<div>',
-   		 //'attributes' => array('id' => 'content', 'class' => 'row')
-   ),
+   'map',
+   'menu',
+   'search_form',
 );
 $template['dashboard']['parser'] = 'parser';
 $template['dashboard']['parser_method'] = 'parse';

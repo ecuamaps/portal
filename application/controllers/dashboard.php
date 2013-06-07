@@ -11,6 +11,7 @@ class Dashboard extends CI_Controller {
 		$this->load->model('account_model');
 		//$this->load->library('recaptcha');
 		
+		$this->dasboard_params['user'] = $this->session->userdata('user');
 	}
 	
 	function index(){
@@ -69,7 +70,11 @@ class Dashboard extends CI_Controller {
 		
 		//$this->template->add_js('https://www.google.com/jsapi', 'import', FALSE, FALSE);
 
-		$this->template->write_view('content', 'templates/map', $this->dasboard_params, TRUE);
+		$this->template->write_view('search_form', 'templates/search_form', $this->dasboard_params, TRUE);
+
+		$this->template->write_view('menu', 'templates/menu', $this->dasboard_params, TRUE);
+
+		$this->template->write_view('map', 'templates/map', $this->dasboard_params, TRUE);
 		
 		$this->template->render();
 	}
