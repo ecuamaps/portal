@@ -11,5 +11,7 @@ $lang['activation.wornglink'] = "This link seems to be wrong.";
 
 $lang['activation.successfully'] = "The account has been activated successfully";
 
+$lang['chpwd.successfully'] = "The Password has been changed successfully";
+
 
 ?>

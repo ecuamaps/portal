@@ -10,4 +10,6 @@ $lang['activation.alreadyactivated'] = "La cuenta ya habia sido activada entes."
 $lang['activation.wornglink'] = "El enlace esta da&ntilde;ado.";
 $lang['activation.successfully'] = "La cuenta ha sudo activada exitosamente.";
 
+$lang['chpwd.successfully'] = "La clave ha sido cambiada satisfactoriamente";
+
 ?>

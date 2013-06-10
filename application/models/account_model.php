@@ -136,6 +136,8 @@ class Account_model extends CI_Model {
 		return null;		
 	}
 	
+        
+        
 	function get_user_by_hash($hash){
 		$sql = "SELECT * FROM user WHERE hash='$hash'";
 		$user = $this->db->query($sql)->result();
@@ -149,7 +151,7 @@ class Account_model extends CI_Model {
 		return $this->update_account($account_id, array('status' => 'A'));
 	}
 	
-	function inactiavte_account($account_id){
+	function inactive_account($account_id){
 		return $this->update_account($account_id, array('status' => 'I'));
 	}
 
@@ -166,4 +168,5 @@ class Account_model extends CI_Model {
 		$this->db->where('id', $account_id);
 		return $this->db->update('user');			
 	}
+      
 }
