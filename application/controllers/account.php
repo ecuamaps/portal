@@ -3,6 +3,7 @@
 class Account extends CI_Controller {
 
 	var $reposnse = array();
+	var $user = NULL;
 	
 	function __construct(){
 		parent::__construct();
@@ -11,6 +12,8 @@ class Account extends CI_Controller {
 		$this->lang->load('account');
 		//$this->load->library('recaptcha');
 		$this->load->library('email');
+		
+		$this->user = $this->session->userdata('user');
 	}
 	
 	function signup(){
@@ -95,5 +98,13 @@ class Account extends CI_Controller {
 			redirect('/');			
 		}
 		
+	}
+	
+	function create_enterprise_form(){
+		//TODO: Validate an open sesion
+		if(!$this->user)
+			die('Session Exprired');
+			
+		$this->load->view('account/create_enterprise');
 	}
 }

@@ -148,7 +148,7 @@
               }
 
               modal.html(data);
-              $(modal).foundation('section', 'reflow');
+              //$(modal).foundation('section', 'reflow');
 
               self.hide(open_modal, self.settings.css.close);
               self.show(modal, self.settings.css.open);
