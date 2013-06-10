@@ -36,4 +36,6 @@ $lang['createbiz.accept'] = 'Estoy Deacuerdo';
 $lang['createbiz.error.requiredfields'] = 'El nombre y la ubicación en el mapa son requeridos.';
 $lang['createbiz.error.emailformat'] = 'Formato de email incorrecto.';
 
+$lang['chpwd.successfully'] = "La clave ha sido cambiada satisfactoriamente";
+
 ?>

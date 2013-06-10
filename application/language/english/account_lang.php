@@ -18,6 +18,9 @@ $lang['createbiz.step2.subheader'] = 'Adding extra features for small prices';
 $lang['createbiz.step3'] = "Step 3: Let's publish it!";
 $lang['createbiz.step3.subheader'] = 'Terms and Conditions';
 
+$lang['chpwd.successfully'] = "The Password has been changed successfully";
+
+
 $lang['createbiz.btn.next'] = 'Next';
 $lang['createbiz.btn.prev'] = 'Prev';
 $lang['createbiz.btn.post'] = 'Publish';

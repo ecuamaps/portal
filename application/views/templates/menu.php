@@ -25,6 +25,7 @@
 	          <li class="has-dropdown"><a href="javascript:void(0)"><?=lang('dashboard.myaccount')?></a>
 	          	 <ul class="dropdown">
 	          		<li><a href="<?=base_url($this->lang->lang().'/account/create_enterprise_form')?>" data-reveal-id="add-enterprise-form" data-reveal-ajax="true"><?=lang('dashboard.addbuz')?></a></li>
+                    <li><a href="javascript:void(0)" id="chpwd" data-reveal-id="chpwd-form-wrapper"><?=lang('dashboard.chpwd')?></a></li>
 	          	 	<li class="has-dropdown"><a href="javascript:void(0)"><?=lang('dashboard.mylocations')?></a>
 	          	 		<ul class="dropdown" id="saved-locations">
 	          	 			<li><a href="#" data-reveal-id="add-location-form-wrapper"><?=lang('dashboard.addnewlocation')?></a></li>
@@ -144,6 +145,49 @@
 	<!-- Add Enterprise Form -->
 	<div class="reveal-modal" id="add-enterprise-form"></div>
 	<!-- End Add Enterprise Form -->
-	
+
+	<!-- Change Password Form -->
+	<div class="reveal-modal" id="chpwd-form-wrapper">
+            <?= form_open('account/change_password', array('id' => 'chpwd-form', 'class' => '')) ?>
+            <input type="hidden" name="chpwd_email" value="<?=$user->email?>">
+            <h5><?=lang('dashboard.chpwd')?></h5>
+            <div class="row hide" id="chpwd-error-wrapper">
+                <div data-alert class="alert-box alert">
+                    <span id="chpwd-error-msg"></span>
+                </div>
+            </div>
+            
+            <div class="row">
+		<div class="large-12 columns">
+                   <label><?=lang('dashboard.chpwd.oldpass')?>*</label>
+		   <input type="password" name="chpwd_oldpasswd"/>
+		</div>
+	    </div>
+            <div class="row">
+		<div class="large-12 columns">
+		   <label><?=lang('dashboard.chpwd.newpass')?>*</label>
+                    <input type="password" name="chpwd_newpasswd" />
+		</div>
+            </div>
+            <div class="row">
+		<div class="large-12 columns">
+		   <label><?=lang('dashboard.chpwd.newpass2')?>*</label>
+		   <input type="password" name="chpwd_newpasswd2" />
+		 </div>
+	   </div>
+            <div class="row">
+	        <div class="large-12 columns"><a href="javascript:void(0)" id="chpwd-action" class="small  button"><?=lang('dashboard.chpwd.button')?></a></div>
+    	    </div>
+          </form>
+            <a class="close-reveal-modal">&#215;</a>
+            
+            <script>
+                var chpwd_err_msg_missing_field = "<?=lang('dashboard.signupform.errmsg')?>";
+                var chpwd_error_keys_mistmatch = "<?=lang('dashboard.signupform.errmsg.pass')?>";
+                
+            </script>
+        </div>
+	<!-- End Change Password Form -->
+        
 	<? endif; ?>
 	

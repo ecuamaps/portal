@@ -11,7 +11,17 @@ $lang['dashboard.addnewlocation'] = "Add New";
 $lang['dashboard.setdefaullocation'] = "Set as Default";
 $lang['dashboard.deletelocation'] = "Delete";
 $lang['dashboard.navmenu'] = "Locations";
+<<<<<<< HEAD
 $lang['dashboard.addbuz'] = "Add Your Business";
+=======
+$lang['dashboard.addbuz'] = "Add Enterprise";
+$lang['dashboard.chpwd'] = "Change Password";
+$lang['dashboard.chpwd.button'] = "Change";
+$lang['dashboard.chpwd.oldpass'] = "Old Password";
+$lang['dashboard.chpwd.newpass'] = "New Password";
+$lang['dashboard.chpwd.newpass2'] = "Repite Password";
+
+>>>>>>> T61
 
 $lang['dashboard.navmenu.back'] = "Where is the blue icon?";
 $lang['dashboard.navmenu.move'] = "Center the map here";
