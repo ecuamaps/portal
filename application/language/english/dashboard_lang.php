@@ -32,6 +32,8 @@ $lang['dashboard.chlocationform.newaddr'] = "Enter the new address";
 $lang['dashboard.chlocationform.button'] = "Go!";
 $lang['dashboard.chlocationform.ex'] = "e.g. La Carolina, Quito";
 $lang['dashboard.chlocationform.change'] = "Change";
+$lang['dashboard.chlocationform.gocurrlocation'] = "Go to my current location";
+
 
 $lang['dashboard.searchform.searchtext'] = "Your search text here!";
 $lang['dashboard.searchform.searchbtn'] = "Search";

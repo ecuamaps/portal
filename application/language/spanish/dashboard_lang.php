@@ -33,6 +33,7 @@ $lang['dashboard.chlocationform.newaddr'] = "Digita la nueva direcci&oacute;n";
 $lang['dashboard.chlocationform.button'] = "Ir!";
 $lang['dashboard.chlocationform.ex'] = "Ej: La Carolina, Quito";
 $lang['dashboard.chlocationform.change'] = "Cambiar";
+$lang['dashboard.chlocationform.gocurrlocation'] = "Ir a mi ubicaci&oacute;n actual";
 
 $lang['dashboard.searchform.searchtext'] = "Tu texto a buscar aqui!";
 $lang['dashboard.searchform.searchbtn'] = "Buscar";
@@ -70,7 +71,7 @@ $lang['dashboard.signupform.pass2'] = "Confirmar la Clave";
 $lang['dashboard.signupform.captcha'] = "Confirma que eres humano";
 $lang['dashboard.signupform.button'] = "Registrate!";
 $lang['dashboard.signupform.errmsg'] = "Todos los campos son obligatorias";
-$lang['dashboard.signupform.errmsg.pass'] = "Las claves no concuerdan";
+$lang['dashboard.signupform.errmsg.pass'] = "Las claves no coinciden";
 $lang['dashboard.signupform.errmsg.emailformat'] = "Formato de email incorrecto";
 
 

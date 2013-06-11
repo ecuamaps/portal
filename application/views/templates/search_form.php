@@ -76,6 +76,9 @@
 		<div class="row">
 			<div class="large-12 columns"><a href="javascript:void(0)" id="chlocation-action" class="small button"><?=lang('dashboard.chlocationform.button')?></a></div>
     	</div>
+		<div class="row">
+			<div class="large-12 columns"><a href="javascript:void(0)" id="chlocation-go-current-location"><?=lang('dashboard.chlocationform.gocurrlocation')?></a></div>
+    	</div>
 	</div>	
 	<!-- End Change location Form -->
 

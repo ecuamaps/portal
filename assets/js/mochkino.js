@@ -91,7 +91,7 @@ function mapInitialize(location) {
 		map : map,
 		title : currentPosLbl,
 		icon : 'assets/images/myLocation.png',
-		draggable : true,
+		draggable : true
 	});
 	
     codeLatLng();
@@ -143,12 +143,8 @@ function placeMarker(location) {
 
 function errorHandler(err) {
 
-    mapInitialize(null);
+    return null;
 
-/*
-	 * if(err.code == 1) { alert("Error: Access is denied!"); }else if( err.code ==
-	 * 2) { alert("Error: Position is unavailable!"); }
-	 */
 }
 
 function get_tyes_html_row(data) {
@@ -198,9 +194,25 @@ function set_map_location(elem) {
     elem.attr('current', '1');
 }
 
+function goToMyCurrentLocation(location){
+	myLatlng = currLatlng = new google.maps.LatLng(
+			location.coords.latitude, location.coords.longitude);
+	changeLocation(myLatlng);
+	myLocation.setPosition(myLatlng);
+}
+
 $(document).ready(function() {
     $.cookie.json = true;
-    navigator.geolocation.getCurrentPosition(mapInitialize, errorHandler);
+    $.cookie.expires = 1;
+    
+    mapInitialize(null);
+    
+    $('#chlocation-go-current-location').click(function (e){
+    	e.preventDefault();
+    	Foundation.libs.dropdown.close($('#change-location-wrapper'));
+    	navigator.geolocation.getCurrentPosition(goToMyCurrentLocation, errorHandler);
+    });
+    //navigator.geolocation.getCurrentPosition(mapInitialize, errorHandler);
 
     /*$('#adv-search').click(function(e) {
 		e.preventDefault();
