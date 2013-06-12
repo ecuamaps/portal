@@ -131,8 +131,7 @@ class Account_model extends CI_Model {
 		$sql = "SELECT * FROM user WHERE email='$email'";
 		$user = $this->db->query($sql)->result();
 		if(count($user))
-			return $user[0];
-			
+		   return $user[0];			
 		return null;		
 	}
 	

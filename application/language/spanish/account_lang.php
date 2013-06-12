@@ -12,4 +12,8 @@ $lang['activation.successfully'] = "La cuenta ha sudo activada exitosamente.";
 
 $lang['chpwd.successfully'] = "La clave ha sido cambiada satisfactoriamente";
 
+$lang['chpwd.errorchanging'] = "Error Cambiando la Clave";
+$lang['chpwd.passwordwrong'] = "La Clave no es correcta";
+$lang['chpwd.account_noexist'] = "La Cuenta no existe";
+
 ?>

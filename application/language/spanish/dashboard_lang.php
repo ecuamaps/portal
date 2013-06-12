@@ -21,7 +21,8 @@ $lang['dashboard.chpwd.newpass2'] = "Comfirmar Contrase&ntilde;a";
 $lang['dashboard.chpwdform.errmsg.pass'] = "Las Claves no son Iguales";
 
 
-
+$lang['dashboard.preference'] = "Preferencias";
+$lang['dashboard.preference.button'] = "Cerrar";
 
 $lang['dashboard.navmenu.back'] = "Donde esta el icono azul?";
 $lang['dashboard.navmenu.move'] = "Centrar el mapa aqu&itilde;";

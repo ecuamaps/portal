@@ -12,6 +12,9 @@ $lang['activation.wornglink'] = "This link seems to be wrong.";
 $lang['activation.successfully'] = "The account has been activated successfully";
 
 $lang['chpwd.successfully'] = "The Password has been changed successfully";
+$lang['chpwd.errorchanging'] = "Error Changing the passwrod";
+$lang['chpwd.passwordwrong'] = "Error the password is Wrong";
+$lang['chpwd.account_noexist'] = "The account does not exists";
 
 
 ?>
