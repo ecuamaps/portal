@@ -375,14 +375,10 @@ $(document).ready(function() {
                         return false;
                     }
 
-                    $(
-                        'input[name="location-name"]')
-                    .val('');
-                    $.modal.close();
+                    $('input[name="location-name"]').val('');
+                    $('#add-location-form-wrapper').foundation('reveal', 'close');
 
-                    $(
-                        '#set-default-location, #delete-location')
-                    .show();
+                    $('#set-default-location, #delete-location').show();
 
                     $(".user-locations")
                     .each(
