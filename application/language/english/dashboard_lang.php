@@ -13,6 +13,16 @@ $lang['dashboard.deletelocation'] = "Delete";
 $lang['dashboard.navmenu'] = "Locations";
 $lang['dashboard.addbuz'] = "Add Enterprise";
 
+$lang['dashboard.chpwd'] = "Change Password";
+$lang['dashboard.chpwd.button'] = "Change";
+$lang['dashboard.chpwd.oldpass'] = "Old Password";
+$lang['dashboard.chpwd.newpass'] = "New Password";
+$lang['dashboard.chpwd.newpass2'] = "Repite Password";
+
+$lang['dashboard.preferences'] = "My Preferences";
+
+
+
 $lang['dashboard.navmenu.back'] = "Where is the blue icon?";
 $lang['dashboard.navmenu.move'] = "Center the map here";
 $lang['dashboard.navmenu.location'] = "Go to";
