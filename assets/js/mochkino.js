@@ -576,7 +576,6 @@ $(document).ready(function() {
                 if (status == google.maps.GeocoderStatus.OK) {
                     changeLocation(results[0].geometry.location);
                     myLocation.setPosition(results[0].geometry.location);
-                    $.modal.close();
                     $('input[name="new_addr"]').val('');
                 } else {
                     alert(locationErrorMsg);

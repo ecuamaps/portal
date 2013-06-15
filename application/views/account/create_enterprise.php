@@ -10,6 +10,18 @@
 		</div>
 	</div>
 
+	<div class="row">
+		<div class="large-12 columns">
+	        <label><?=lang('createbiz.type')?>*</label>
+	        <select name="bz-type" required>
+	        	<option></option>
+	        	<? foreach($bz_types as $t):?>
+	        	<option value="<?= $t->id ?>"><?= $t->name ?></option>
+	        	<? endforeach; ?>
+	        </select>		
+		</div>
+	</div>
+    
     <div class="row">
       <div class="large-4 columns">
         <label><?=lang('createbiz.name')?>*</label>
@@ -42,7 +54,7 @@
 
     <div class="row">
       <div class="large-12 columns">
-      	<label><?=lang('createbiz.map')?> <a href="javascript:void(0)" id="show-map" class="tiny button"><?=lang('createbiz.btn.showmap')?></a></label>
+      	<label><?=lang('createbiz.map')?>* <a href="javascript:void(0)" id="show-map" class="tiny button"><?=lang('createbiz.btn.showmap')?></a></label>
       	<input type="hidden" id="bz-lat" name="bz-lat" required/>
       	<input type="hidden" id="bz-lng" name="bz-lng" required/>
 		<div id="map_addbiz" style=""></div> 
@@ -63,51 +75,78 @@
 
   <fieldset id="step2-wrapper">
     <legend><?=lang('createbiz.step2')?></legend>
-	<h6 class="subheader"><?=lang('createbiz.step2.subheader')?></h6> <a href="javascript:void(0)" id="show-products" class="tiny button"><?=lang('createbiz.btn.showproducts')?></a>
+	<h6 class="subheader"><?=lang('createbiz.step2.subheader')?></h6>
 	
-    <div class="row" id="createbz-product-wrapper">
-
-
-		<div class="section-container vertical-tabs" data-section="vertical-tabs">
-
-		  <section>
-		    <p class="title" data-section-title><a href="#">Section 1</a></p>
-		    <div class="content" data-section-content>
-		      <p>Content of section 1.</p>
-		    </div>
-		  </section>
-		  <section>
-		    <p class="title" data-section-title><a href="#">Section 2</a></p>
-		    <div class="content" data-section-content>
-		      <p>Content of section 2.</p>
-		    </div>
-		  </section>
-		  <section>
-		    <p class="title" data-section-title><a href="#">Section 3</a></p>
-		    <div class="content" data-section-content>
-		      <p>Content of section 3.</p>
-		    </div>
-		  </section>
-
+    <div class="row">
+		<div class="small-3 columns">
+	        <label><?=lang('createbiz.billingcicle')?></label>
+	        <select name="billing-cycle" id="billing-cycle">
+	        	<option value="12"><?=lang('createbiz.billingcicle.yearly')?></option>
+	        	<option value="1"><?=lang('createbiz.billingcicle.monthly')?></option>
+	        </select>       
 		</div>
 
+		<div class="small-3 columns">
+	        <label><?=lang('createbiz.product')?></label>
+	        <select name="product" id="product">
+				<? if(is_array($products)): ?>
+					<? foreach($products as $p): ?>
+					<? if($p->billing_cycle == 12): ?>
+						<option value="<?= $p->id ?>"><?= $p->name ?> $<?= $p->price ?></option>
+					<? endif; ?>
+					<? endforeach; ?>
+				<? endif; ?>		        
+	        </select>
+		</div>
 
+		<div class="small-3 columns">
+			<a href="javascript:void(0)" id="add-product" class="tiny button">+</a>	
+		</div>
+		<div class="small-3 columns"></div>
+    </div>
+	
+	<div class="row">
+		<div class="large-12 large-centered columns">
+			<table id="invoice">
+			  <thead>
+			    <tr>
+			      <th><?=lang('createbiz.item')?></th>
+			      <th><?=lang('createbiz.description')?></th>
+			      <th><?=lang('createbiz.price')?></th>
+			      <th></th>
+			    </tr>
+			  </thead>
+			  
+			  <tbody>
+			  </tbody>
+			  
+			</table>
+		</div>
+	</div>
 
+    <div class="row">
+      <div class="small-3 columns"><h6 class="subheader">Sub Total :</h6></div>
+      <div class="small-3 columns"><h6>$<span id="sub-total">0</span></h6></div>
+      <div class="small-6 columns"></div>
+    </div>
+    <div class="row">
+      <div class="small-3 columns"><h6 class="subheader">IVA <?=get_config_val('iva')?>%:</h6></div>
+      <div class="small-3 columns"><h6>$<span id="iva">0</span></h6></div>
+      <div class="small-6 columns"></div>
+    </div>
+    
+    <div class="row">
+      <div class="small-3 columns"><h5 class="subheader">Total:</h5></div>
+      <div class="small-3 columns"><h5>$<span id="total">0</span></h5></div>
+      <div class="small-6 columns"></div>
     </div>
 
     <div class="row">
-      <div class="large-6 columns"><div style="float: right"><h3 class="subheader">Total:</h3></div></div>
-      <div class="large-6 columns"><div style="float: right"><h2>$0</h2></div></div>
-    </div>
-
-    <div class="row">
-      <div class="large-12 columns">
+      <div class="small-12 columns">
       	<a href="javascript:void(0)" id="step2-prev" class="tiny button"><?=lang('createbiz.btn.prev')?></a>
 		<a href="javascript:void(0)" id="step2-next" class="tiny button"><?=lang('createbiz.btn.next')?></a>
       </div>
     </div>
-
-
   </fieldset>
 
   <fieldset id="step3-wrapper">
@@ -126,6 +165,12 @@
     </div>
 
     <div class="row">
+      <div class="large-12 columns">
+      	<p><?=lang('createbiz.postdisclaimer')?></p>
+      </div>
+    </div>
+
+    <div class="row">
       <div class="large-12 columns">&nbsp;</div>
     </div>
 
@@ -133,16 +178,184 @@
       <div class="large-12 columns">
       	<a href="javascript:void(0)" id="step3-prev" class="tiny button"><?=lang('createbiz.btn.prev')?></a>
 		<a href="javascript:void(0)" id="step3-post" class="tiny button success"><?=lang('createbiz.btn.post')?></a>
+		<a href="javascript:void(0)" id="step3-pay" class="tiny button success"><?=lang('createbiz.btn.pay')?></a>
       </div>
     </div>
 
   </fieldset>
+  
+
+  <fieldset id="step4-wrapper">
+    <legend><?=lang('createbiz.step4')?></legend>
+
+	<div class="row hide" id="createbiz-step4-error-wrapper">
+		<div data-alert class="alert-box alert">
+  			<span id="createbiz-step4-error-msg"></span>
+		</div>
+	</div>
+    
+    <h6 class="subheader"><?=lang('createbiz.step4.subheader')?></h6>
+
+    <div class="row">
+      <div class="small-3 columns"><h3 class="subheader">Total:</h3></div>
+      <div class="small-3 columns"><h3>$<span id="total-pay">0</span></h3></div>
+      <div class="small-6 columns"></div>
+    </div>
+
+    <div class="row">
+
+		  <div class="large-4 columns">
+		  	<div class="panel">
+				<h5>Depositos o Transferencias</h5>
+			  	<p>Transfiera directamente desde su cuenta bancaria a la nuestra o haga un depósito directamente en las oficinas de nuestro banco a nuestra cuenta.</p>
+			  	<p><h6><small>El negocio no será activado hasta que nuestro centro de servicio confirme el pago.</small></h6></p>
+			  	<div class="row">
+	  				<div class="small-3 small-centered columns"><input type="radio" name="payment_method" value="bank_transfer_deposit"></div>
+				</div>
+		  	</div>
+		  </div>
+
+		 <!-- <div class="large-3 columns">
+		  	<div class="panel">
+			  	<table border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr><tr><td align="center"><a href="https://www.paypal.com/es/webapps/mpp/paypal-popup" title="Cómo funciona PayPal" onclick="javascript:window.open('https://www.paypal.com/es/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;"><img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_37x23.jpg" border="0" alt="PayPal Logo"></a></td></tr></table>
+			  	<p>Pague con su tarjeta de crédito y publique su negocio de inmediato.</p>
+			  	<div class="row">
+	  				<div class="small-3 small-centered columns"><input type="radio" name="payment_method" value="paypal"></div>
+				</div>
+		  	</div>
+		  </div>
+		-->
+		  <div class="large-4 columns">
+		  	<div class="panel">
+				<h5>*Pago a domicilio</h5>
+			  	<p>El pago será recogido a domicilio por un mensajero certificado</p>
+			  	<p><h6><small>* Tiene un costo adicional de $<?=get_config_val('money_pickup_cost')?> y solo aplica para <?=get_config_val('money_pickup_allowed_places')?>.
+			  	<br/>* Solo aplica para compras superiores a $<?=get_config_val('money_pickup_value_restriction')?></small></h6></p>
+			  	<p><h6><small>El negocio no será activado hasta que nuestro centro de servicio confirme el pago.</small></h6></p>
+			  	<div class="row">
+	  				<div class="small-3 small-centered columns"><input type="radio" name="payment_method" value="money_pickup" disabled></div>
+				</div>
+		  	</div>
+		  </div>    
+
+		  <div class="large-4 columns">
+		  	<div class="panel">
+				<h5>*Envios de dinero</h5>
+			  	<p>Envianos el pago por Western Union</p>
+			  	<p><h6><small>* Tiene un costo adicional de $<?=get_config_val('money_pickup_cost')?> adicional al costo cobrado por Western Union. 
+			  	<br>* Solo aplica para compras superiores a $<?=get_config_val('money_order_value_restriction')?>.</small></h6></p>
+			  	<p><h6><small>El negocio no será activado hasta que nuestro centro de servicio confirme el pago.</small></h6></p>
+			  	<div class="row">
+	  				<div class="small-3 small-centered columns"><input type="radio" name="payment_method" value="money_order" disabled></div>
+				</div>
+		  	</div>
+		  </div>    
+
+    </div>
+	
+	<h3><?=lang('createbiz.warning')?></h3>
+    <div class="row">
+      <div class="large-12 columns">
+		<div data-alert class="alert-box">
+			<?=sprintf(lang('createbiz.payment.confirmation.process'), get_config_val('payment_confirmation_email'))?>
+		</div>      
+      </div>
+    </div>
+	
+	<h6 class="subheader"><?=lang('createbiz.step4.dataconfirmation')?></h6>
+	
+    <div class="row">
+      <div class="large-4 columns">
+        <label><?=lang('createbiz.billname')?></label>
+        <input type="text" name="bz-bill-name" value="<?= $user->name ?>"/>
+      </div>
+      <div class="large-4 columns">
+        <label><?=lang('createbiz.billid')?></label>
+        <input type="text" name="bz-bill-id" value="<?= $user->identification ?>" />
+      </div>
+      <div class="large-4 columns">
+        <label><?=lang('createbiz.billaddr')?></label>
+        <input type="text" name="bz-bill-addr" value="<?= $user->address ?>" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-12 columns">&nbsp;</div>
+    </div>
+    
+    <div class="row">
+      <div class="large-12 columns">
+      	<a href="javascript:void(0)" id="step4-prev" class="tiny button"><?=lang('createbiz.btn.prev')?></a>
+      	<a href="javascript:void(0)" id="step4-pay" class="tiny button"><?=lang('createbiz.btn.pay')?></a>
+      </div>
+    </div>
+
+  </fieldset>
+    
 </form>
+
+  <fieldset id="step5-wrapper">
+    <legend><?=lang('createbiz.step5')?></legend>
+     <h6 class="subheader"><?=lang('createbiz.step5.subheader')?></h6>
+
+    <div class="row" id="email-news">
+      <div class="large-12 columns">
+      	<?= lang('createbiz.emailnews') ?>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-12 columns">&nbsp;</div>
+    </div>
+
+    <div class="row" id="paid-process">
+      <div class="large-12 columns">
+      	<?= get_confirmation_process() ?>
+      </div>
+    </div>
+
+    <div class="row" id="free-process">
+      <div class="large-12 columns">
+      	<?= lang('createbiz.free.confirmation') ?>
+      </div>
+    </div>
+
+  </fieldset>
+	
+	<fieldset id="waiting">
+	<legend><?=lang('createbiz.processing')?></legend>
+	<div class="row full-width">
+	  <div class="small-1 small-centered columns"><?= img('assets/images/loading.gif'); ?></div>
+	</div>
+	</fieldset>
+
 <a class="close-reveal-modal">&#215;</a>
 
 <script>
 var addbz_map;
 var addbz_marker = null;
+var products = [
+	<? if(is_array($products)): ?>
+		<? foreach($products as $p): ?>
+		{
+			id: <?= $p->id ?>, 
+			name: '<?= $p->name ?>', 
+			description: '<?= addslashes($p->description) ?>', 
+			type: '<?= $p->type ?>', 
+			billing_cycle: <?= $p->billing_cycle ?>, 
+			price: <?= $p->price ?>,
+			unit: <?= $p->unit ?>,
+		},
+		<? endforeach; ?>
+	<? endif; ?>
+];
+
+var product_list = new Array();
+var total = 0;
+var sub_total = 0;
+var iva = 0;
+var iva_factor = <?=get_config_val('iva')?> / 100;
+
 function mapInit() {
 	var mapOpt = {
 		zoom : 15,
@@ -173,7 +386,7 @@ function mapInit() {
 			position : event.latLng,
 			map : addbz_map
 		});
-		addbz_map.setCenter(event.latLng);
+		//addbz_map.setCenter(event.latLng);
 		
 		$('#bz-lat').val(event.latLng.lat());
 		$('#bz-lng').val(event.latLng.lng());
@@ -182,12 +395,14 @@ function mapInit() {
 }
 
 $(document).ready(function(){
+	$('#step2-wrapper, #step3-wrapper, #step3-post, #step3-pay ,#step4-wrapper, #step5-wrapper, #step4-pay, #paid-process, #waiting, #free-process').hide();
 	
-	$('#step2-wrapper, #step3-wrapper, #step3-post, #createbz-product-wrapper').hide();
+	setTotal();
 	
 	$('#step1-next').click(function(e){
 		e.preventDefault();		
 		
+		var bz_type = $('select[name="bz-type"]').val();
 		var name = $('input[name="bz-name"]').val();
 		var lat = $('input[name="bz-lat"]').val();
 		var lng = $('input[name="bz-lng"]').val();
@@ -195,7 +410,7 @@ $(document).ready(function(){
 		var emailReg = /^[a-zA-Z0-9._-]+([+][a-zA-Z0-9._-]+){0,1}[@][a-zA-Z0-9._-]+[.][a-zA-Z]{2,6}$/;
 		
 		
-		if(!name || !lat || !lng){
+		if(!name || !lat || !lng || !bz_type){
 			$('#createbiz-error-msg').html('<?=lang('createbiz.error.requiredfields')?>');
 			$('#createbiz-error-wrapper').show();
 			return false;
@@ -225,20 +440,58 @@ $(document).ready(function(){
 
 
 	$('#step3-prev').click(function(e){
-		e.preventDefault();		
+		e.preventDefault();
+		
+		$('#bz-accept').attr('checked', false);
+		$('#step3-post, #step3-pay').hide();
+		
 		$('#step2-wrapper').show();
 		$('#step3-wrapper').hide();
 	});
 	
-	$('#bz-accept').change(function(e){
+	$('#bz-accept').click(function(e){
 		
 		if($(this).is(':checked')){
-			$('#step3-post').show();
+			if(total){
+				$('#step3-pay').show();
+			}else{
+				$('#step3-post').show();
+			}			
 		}else{
-			$('#step3-post').hide();
+			$('#step3-post, #step3-pay').hide();
 		}
 		
 	});
+	
+	$('#step3-pay').click(function(e){
+		e.preventDefault();
+		
+		$('#step3-wrapper').hide();
+		$('#step4-wrapper').show();
+
+		
+		if(total >= <?=get_config_val('money_pickup_value_restriction')?>){
+			$('input[value="money_pickup"]').attr('disabled', false);
+		}else{
+			$('input[value="money_pickup"]').attr('disabled', true);
+		}
+
+		if(total >= <?=get_config_val('money_order_value_restriction')?>){
+			$('input[value="money_order"]').attr('disabled', false);
+		}else{
+			$('input[value="money_order"]').attr('disabled', true);
+		}
+		
+	});
+
+	$('#step4-prev').click(function(e){
+		e.preventDefault();
+		
+		$('#step3-wrapper').show();
+		$('#step4-wrapper').hide();
+					
+	});
+	
 	
 	$('#show-map').click(function(e){
 		$('#map_addbiz').attr('style', 'padding: 0; height: 200px; width: 100%;');
@@ -246,10 +499,192 @@ $(document).ready(function(){
 		$(this).hide();
 	});
 	
-	$('#show-products').click(function(e){
-		e.preventDefault();
-		$('#createbz-product-wrapper').show();
+	$('#billing-cycle').change(function(e){
+		
+		$('#product').html('');
+		
+		var billing_cycle = $(this).val();
+		$.each(products, function(index, item) {
+ 	 		if(billing_cycle == item.billing_cycle){
+ 	 			$('#product').append($('<option>', { 
+        			value: item.id,
+        			text : item.name + ' $' + item.price  
+    			}));
+ 	 		}
+		});
+		
+		$("#invoice > tbody").html("");
+		product_list = new Array();
+		total = 0;
+		setTotal();
 	});
 	
+	$('#add-product').click(function(e){
+		
+		var current = $('#product').val();
+		
+		$.each(products, function(index, item) {
+ 	 		if(current == item.id && !isAddedProduct(item.id)){
+ 	 			$('#invoice > tbody:last').append(getItemRow(item));
+ 	 			product_list.push(item.id);
+ 	 			setTotal(sub_total + item.price);
+ 	 		}
+		});		
+	});
+	
+	$('input[name="payment_method"]').click(function(e){
+		$('#step4-pay').show();
+	});
+	
+	$('#step4-pay').click(function(e){
+		var payment_method = $('input[name="payment_method"]:radio:checked').val();
+		
+		var bz_bill_name = $('input[name="bz-bill-name"]').val();
+		var bz_bill_id = $('input[name="bz-bill-id"]').val();
+		var bz_bill_addr = $('input[name="bz-bill-addr"]').val();
+		
+		if(!bz_bill_name || !bz_bill_id){
+			$('#createbiz-step4-error-msg').html('<?=lang('createbiz.error.billdata.required')?>');
+			$('#createbiz-step4-error-wrapper').show();
+			return false;			
+		}
+		
+		if(payment_method == 'money_pickup' && !bz_bill_addr){
+			$('#createbiz-step4-error-msg').html('<?=lang('createbiz.error.billaddr.required')?>');
+			$('#createbiz-step4-error-wrapper').show();
+			return false;			
+		}
+		
+		$('#step4-wrapper').hide();
+		$('#waiting').show();
+		
+        $.ajax({
+            type : "POST",
+            url : '<?=base_url($this->lang->lang().'/account/purchase')?>',
+            dataType : "json",
+            data : {
+            	user_id: <?=$user->id?>,
+				bz_type_id : $('select[name="bz-type"]').val(),
+				bz_name : $('input[name="bz-name"]').val(),
+				bz_desc : $('input[name="bz-desc"]').val(),
+				bz_addr : $('input[name="bz-addr"]').val(),
+				bz_phones : $('input[name="bz-phones"]').val(),
+				bz_ceo : $('input[name="bz-ceo"]').val(),
+				bz_email : $('input[name="bz-email"]').val(),
+				bz_lat : $('input[name="bz-lat"]').val(),
+				bz_lng : $('input[name="bz-lng"]').val(),
+				bz_bill_name : bz_bill_name,
+				bz_bill_id : bz_bill_id,
+				bz_bill_addr: bz_bill_addr,
+				billing_cycle : $('select[name="billing-cycle"]').val(), 
+				payment_method: payment_method,
+				hms1 : $('input[name="hms1"]').val(),
+				products : product_list,
+				total: total,
+				sub_total : sub_total,
+				iva : iva
+            }
+        }).done(function(response) {
+        	if(response.status == 'ok'){
+        		$('#waiting').hide();
+        		$('#step5-wrapper').show();
+        		if(payment_method == 'bank_transfer_deposit' || payment_method == 'money_order' || payment_method == 'money_pickup'){
+        			$('#paid-process').show();
+        		}
+        	}
+			
+						
+        });
+		
+	});
+	
+	$('#step3-post').click(function(e){
+		e.preventDefault();
+
+		$('#step3-wrapper').hide();
+		$('#waiting').show();
+		
+        $.ajax({
+            type : "POST",
+            url : '<?=base_url($this->lang->lang().'/account/purchase')?>',
+            dataType : "json",
+            data : {
+            	user_id: <?=$user->id?>,
+				bz_type_id : $('select[name="bz-type"]').val(),
+				bz_name : $('input[name="bz-name"]').val(),
+				bz_desc : $('input[name="bz-desc"]').val(),
+				bz_addr : $('input[name="bz-addr"]').val(),
+				bz_phones : $('input[name="bz-phones"]').val(),
+				bz_ceo : $('input[name="bz-ceo"]').val(),
+				bz_email : $('input[name="bz-email"]').val(),
+				bz_lat : $('input[name="bz-lat"]').val(),
+				bz_lng : $('input[name="bz-lng"]').val(),
+				hms1 : $('input[name="hms1"]').val(),
+				is_free: 1
+            }
+        }).done(function(response) {
+        	if(response.status == 'ok'){
+        		$('#waiting').hide();
+        		$('#step5-wrapper').show();
+        		$('#free-process').show();
+				$('#email-news').hide();
+        	}
+        });
+		
+	});
+	
+	
 });
+
+
+function getItemRow(item){
+	return '<tr id="' + item.id + '"><td>' + item.name + '</td><td>' + item.description + '</td><td>$' + item.price + 
+ 	 			'</td><td><a href="javascript:delProduct(' + item.id + ')" id="' + item.id + '" del-product="1" class="tiny button alert clear-margin">-</a></td></tr>';
+}
+
+function delProduct(id){
+	var tmp = new Array();
+	
+	for(x=0; x < product_list.length; x++){
+		if(id != product_list[x])
+			tmp.push(product_list[x]);
+		else{
+			var id = product_list[x];
+		}
+	}
+	
+	var item = getProduct(id);
+	setTotal(sub_total - item.price);
+	product_list = tmp;
+	$('#' + id).remove();
+	
+}
+
+function getProduct(id){
+	for(x=0; x < products.length; x++){
+		if(id == products[x].id)
+			return products[x];
+	}
+	
+}
+
+function isAddedProduct(id){
+	for(x=0; x < product_list.length; x++){
+		if(id == product_list[x])
+			return true;
+	}
+	
+	return false;
+}
+
+function setTotal(t){
+	sub_total = t ? t : 0;
+	var ivaObj = new Number(sub_total * iva_factor);
+	iva = parseFloat(ivaObj.toFixed(2));
+	total = sub_total + iva;
+	
+	$('#sub-total').html(sub_total);
+	$('#iva').html(iva);
+	$('#total, #total-pay').html(total);
+}
 </script>

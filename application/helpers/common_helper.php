@@ -7,6 +7,30 @@ function get_config_val($key) {
 	return $CI->config_model->get_value($key);
 }
 
+function get_confirmation_process(){
+	$param = get_config_val('payment_confirmation_process_'.current_lang());
+	
+	$tags = array(
+		'[PAYMENT_CONFIRMATION_EMAIL]',
+		'[BANK_NAME]',
+		'[BANK_ACC_NUMBER]',
+		'[BANK_ACC_OWNER]',
+		'[MONEY_ORDER_RECIPIENT]',
+		'[MONEY_ORDER_IDENTIFICATION]'
+	);
+	
+	$data = array(
+		get_config_val('payment_confirmation_email'),
+		get_config_val('bank_name'),
+		get_config_val('bank_account_number'),
+		get_config_val('bank_account_name'),
+		get_config_val('money_order_name'),
+    	get_config_val('money_order_identification')
+	);
+	
+	return str_replace($tags, $data, $param);
+}
+
 function ci_config($key) {
 	$CI = & get_instance();
 	return $CI->config->item($key);

@@ -136,6 +136,13 @@ class Account_model extends CI_Model {
 		return null;		
 	}
 	
+	function get_user_by_id($id){
+		$sql = "SELECT * FROM user WHERE id=$id";
+		$user = $this->db->query($sql)->result();
+		if(count($user))
+			return $user[0];
+		return null;		
+	}
         
         
 	function get_user_by_hash($hash){
