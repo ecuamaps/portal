@@ -70,25 +70,29 @@ class Account extends CI_Controller {
 	}
 	
         function change_password(){
+
             //Aca se supone que descargamos las tres claves desde el POST
             $oldpass = $this->input->post('oldpass', TRUE);
             $newpasswd = $this->input->post('newpasswd', TRUE);
             $email = $this->input->post('email', TRUE);
-            //TODO: Sigue haciendolo vos, porahora voy a probar la respuesta al ajax
+                    
             
-            //Validamos en email desde $user->passwd ojo que esta en md5
-            $user = $this->account_model->get_user($email);
-            if(md5($oldpass) != $user->passwd){
-                die(json_encode(array('status' => 'error', 'msg' => 'Error Changing the passwrod')));
-            }
-            
-            
+           //Validamos en email desde $user->passwd ojo que esta en md5
+            $user = $this->account_model->get_user($email);      
+           if(!$user){            
+               die(json_encode(array('status' => 'error', 'msg' => lang('chpwd.account_noexist'))));
+           }
+           
+           if(md5($oldpass) != $user->passwd){            
+               die(json_encode(array('status' => 'error', 'msg' => lang('chpwd.passwordwrong'))));
+           }
+                       
             //Modificar la clave
-            if(!$this->account_model->update_account($user->id, array('passwd' => md5($newpasswd)))){
-                die(json_encode(array('status' => 'error', 'msg' => 'Error Changing the passwrod')));
+           if(!$this->account_model->update_account($user->id, array('passwd' => md5($newpasswd)))){
+                die(json_encode(array('status' => 'error', 'msg' => lang('chpwd.errorchanging'))));
             }
             
-            die(json_encode(array('status' => 'ok', 'msg' => 'Todo bien!!')));
+            die(json_encode(array('status' => 'ok', 'msg' => lang('chpwd.successfully'))));
         }
         
 	function logout(){

@@ -24,6 +24,9 @@ $lang['createbiz.step5.subheader'] = 'Your business has been created successfull
 
 
 $lang['chpwd.successfully'] = "The Password has been changed successfully";
+$lang['chpwd.errorchanging'] = "Error Changing the passwrod";
+$lang['chpwd.passwordwrong'] = "Error the password is Wrong";
+$lang['chpwd.account_noexist'] = "The account does not exists";
 
 
 $lang['createbiz.btn.next'] = 'Next';

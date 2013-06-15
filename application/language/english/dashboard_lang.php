@@ -20,6 +20,10 @@ $lang['dashboard.chpwd.oldpass'] = "Old Password";
 $lang['dashboard.chpwd.newpass'] = "New Password";
 $lang['dashboard.chpwd.newpass2'] = "Re-enter Password";
 
+$lang['dashboard.preference'] = "Preferences";
+$lang['dashboard.preference.button'] = "Close";
+
+
 $lang['dashboard.navmenu.back'] = "Where is the blue icon?";
 $lang['dashboard.navmenu.move'] = "Center the map here";
 $lang['dashboard.navmenu.location'] = "Go to";

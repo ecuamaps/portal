@@ -330,16 +330,15 @@ $(document).ready(function() {
                 'input[name="location-name"]')
             .val();
             if (!name) {
-                $('#add-location-error-msg').html(
-                    err_msg_missing_field);
+                $('#add-location-error-msg').html(err_msg_missing_field);
                 $('#add-location-error-wrapper')
                 .show();
                 return false;
             }
 
             var def = $(
-                'input[name="location-def"]')
-            .is(':checked') ? '1' : '0';
+                'input[name="location-def"]') 
+                .is(':checked') ? '1' : '0';
             var lat = myLatlng.lat();
             var lng = myLatlng.lng();
 
@@ -648,24 +647,22 @@ $(document).ready(function() {
         put_bz_by_type($(this).val());
     });
     
-    //change password
     $('#chpwd-action').click(function(e){
          e.preventDefault();
-         
-         //alert('taran!!!');
-         
+                  
         var hms1     = $('input[name="hms1"]').val();
         var oldpass  = $('input[name="chpwd_oldpasswd"]').val();
         var newpass  = $('input[name="chpwd_newpasswd"]').val();
-        var newpass2 = $('input[name="chpwd_newpasswd2"]').val();
+        var newpasswd = $('input[name="chpwd_newpasswd2"]').val();
+        var email = $('input[name="chpwd_email"]').val();
 
-        if (!oldpass || !newpass || !newpass2) {
+        if (!oldpass || !newpass || !newpasswd) {
             $('#chpwd-error-msg').html(chpwd_err_msg_missing_field);
             $('#chpwd-error-wrapper').show();
             return false;
         }
 
-        if (newpass != newpass2 ) {
+        if (newpass != newpasswd ) {
             $('#chpwd-error-msg').html(chpwd_error_keys_mistmatch);
             $('#chpwd-error-wrapper').show();
             return false;
@@ -677,20 +674,21 @@ $(document).ready(function() {
             dataType : "json",
             data : {
                 hms1     : hms1,
+                email    : email,
                 oldpass  : oldpass,
                 newpass  : newpass,
-                newpass2 : newpass2
+                newpasswd : newpasswd
             }
         }).done(function(response){
-            //Mira asi controlamos el error cuando viene desde PHP
-            //response es el mismo objeto que codificamos en PHP
-            // Aca status y msg son atributos del obejto
             if(response.status == 'error'){
                 $('#chpwd-error-msg').html(response.msg);
                 $('#chpwd-error-wrapper').show();
                 return false;
             }
-         console.log(response);
+
+            $('input[name="chpwd_oldpasswd"], input[name="chpwd_newpasswd"], input[name="chpwd_newpasswd2"]').val('');
+            alert(response.msg);
+            $('#chpwd-form-wrapper').foundation('reveal', 'close');
         });
          
          
