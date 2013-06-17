@@ -190,7 +190,7 @@ class Account extends CI_Controller {
 			$bz_id = $this->business_model->create($bz_data);
 			$invoice_activate_biz = 1;
 			
-			if(isset($is_free)){
+			if($is_free){
 				$user = $this->account_model->get_user_by_id($user_id); 
 				$content = "Verificación de datos y publicación de negocio. biz ID: $bz_id, Usuario: {$user->name}, email: {$user->email}, Biz Name: $bz_name, Tels: {$bz_phones}, Dir: {$bz_address}, latlng: {$bz_lat},{$bz_lng}";
 				$this->tasks_model->create('business', $bz_id, $content);
