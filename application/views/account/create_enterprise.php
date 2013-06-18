@@ -323,10 +323,10 @@
   </fieldset>
 	
 	<fieldset id="waiting">
-	<legend><?=lang('createbiz.processing')?></legend>
-	<div class="row full-width">
-	  <div class="small-1 small-centered columns"><?= img('assets/images/loading.gif'); ?></div>
-	</div>
+		<legend><?=lang('createbiz.processing')?></legend>
+		<div class="row full-width">
+			<div class="small-1 small-centered columns"><?= img('assets/images/loading.gif'); ?></div>
+		</div>
 	</fieldset>
 
 <a class="close-reveal-modal">&#215;</a>

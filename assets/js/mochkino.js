@@ -512,7 +512,10 @@ $(document).ready(function() {
             $('#signin-error-wrapper').show();
             return false;
         }
-
+        
+        $('#waiting').show();
+        $('#signup-form').hide();
+        
         $.ajax({
             type : "POST",
             url : $(
@@ -526,24 +529,18 @@ $(document).ready(function() {
                 email : email,
                 passwd : passwd
             }
-        })
-        .done(
-            function(response) {
-                if (response.status == 'error') {
-                    $(
-                        '#signin-error-msg')
-                    .html(
-                        response.msg);
-                    $(
-                        '#signin-error-wrapper')
-                    .show();
-                    return false;
-                }
-
-                window.location
-                .reload(true);
-
-            });
+        }).done(function(response) {
+        	if (response.status == 'error') {
+        		$('#signin-error-msg').html(response.msg);
+        		$('#signin-error-wrapper').show();
+                $('#waiting').hide();
+                $('#signup-form').show();
+        		return false;
+        	}
+            
+            $('#waiting').hide();
+            $('#succesfull').show();
+        });
 
     });
 

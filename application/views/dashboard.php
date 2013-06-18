@@ -113,25 +113,27 @@
 			
 			<div class="row">
 				<div class="large-12 columns">
-			    	<label></label>
-			        <input type="text" name="user_name" placeholder="<?=lang('dashboard.signupform.name')?>"/>
+			    	<label><?=lang('dashboard.signupform.name')?></label>
+			        <input type="text" name="user_name" placeholder=""/>
 			    </div>
     		</div>
 			
 			<div class="row">
 				<div class="large-12 columns">
-			        <input type="email" name="user_email" placeholder="<?=lang('dashboard.signupform.email')?>"/>
+					<label><?=lang('dashboard.signupform.email')?></label>
+			        <input type="email" name="user_email" placeholder=""/>
 			    </div>
 			</div>
 			<div class="row">
 				<div class="large-12 columns">
-			        <input type="password" name="user_passwd" placeholder="<?=lang('dashboard.signupform.pass')?>"/>
+					<label><?=lang('dashboard.signupform.pass')?></label>
+			        <input type="password" name="user_passwd" placeholder=""/>
 			    </div>
 			</div>
 			<div class="row">
 				<div class="large-12 columns">
-			    	<label></label>
-			        <input type="password" name="user_passwd2" placeholder="<?=lang('dashboard.signupform.pass2')?>"/>
+			    	<label><?=lang('dashboard.signupform.pass2')?></label>
+			        <input type="password" name="user_passwd2" placeholder=""/>
 			    </div>
 			</div>
 
@@ -139,12 +141,24 @@
 				<div class="large-12 columns"><a href="javascript:void(0)" id="signup-action" class="small  button"><?=lang('dashboard.signupform.button')?></a></div>
     		</div>
 		</form>
+
+		<div class="row" id="succesfull">
+			<div class="large-12 columns"><?=sprintf(lang('dashboard.signupform.emailconfirmation'), get_config_val('account_activation_days'))?></div>
+		</div>
+		
+		<div class="row full-width" id="waiting">
+			<div class="small-1 small-centered columns"><?= img('assets/images/loading.gif'); ?></div>
+		</div>
+		
 		<script>
 			var lang = '<?=$this->lang->lang()?>';
 			var err_msg_missing_field_signin = '<?=lang('dashboard.signupform.errmsg')?>';
 			var err_msg_mismatch_pass = '<?=lang('dashboard.signupform.errmsg.pass')?>'
 			var err_msg_wrong_email_format = '<?=lang('dashboard.signupform.errmsg.emailformat')?>';
 			
+			$(document).ready(function(){
+				$('#waiting, #succesfull').hide();
+			});
 		</script>
 		<a class="close-reveal-modal">&#215;</a>
 	</div>

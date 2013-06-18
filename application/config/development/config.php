@@ -14,7 +14,9 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://' . $_SERVER['HTTP_HOST'] . '/';
+$host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'buskoo.com';
+
+$config['base_url']	= 'http://' . $host . '/';
 
 /*
 |--------------------------------------------------------------------------

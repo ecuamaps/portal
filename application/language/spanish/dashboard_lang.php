@@ -75,6 +75,9 @@ $lang['dashboard.signupform.button'] = "Registrate!";
 $lang['dashboard.signupform.errmsg'] = "Todos los campos son obligatorias";
 $lang['dashboard.signupform.errmsg.pass'] = "Las claves no coinciden";
 $lang['dashboard.signupform.errmsg.emailformat'] = "Formato de email incorrecto";
+$lang['dashboard.signupform.emailconfirmation'] = "Te has registrado exitosamente! <br/><br/>Te hemos enviado un email para que confirmes tu identidad, tienes hasta %d d&iacute;as para hacerlo" .
+		" de lo contrario tu registro ser&aacute; borrado.";
+
 
 
 //TODO: Eliminar

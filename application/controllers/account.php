@@ -32,12 +32,11 @@ class Account extends CI_Controller {
 		$date = date('Y-m-d');
      	if($this->account_model->signup($name, $email, $passwd, $date, $hash)){
      		$this->email->send_activation($name, $email, $passwd, $hash);
-     		$this->login($email, $passwd);
+     		//$this->login($email, $passwd);
+     		die(json_encode(array('status' => 'ok', 'msg' => '')));
      	}else{
      		die(json_encode(array('status' => 'error', 'msg' => 'Error Creating User')));
      	}
-     	
-     	
 	}
 	
 	
@@ -55,6 +54,12 @@ class Account extends CI_Controller {
 		if(in_array($user->status, array('I', 'C'))){
 			$this->response['status'] = 'error';
 			$this->response['msg'] = lang('login.error.inactiveac');
+			die(json_encode($this->response));			
+		}
+
+		if($user->status == 'O'){
+			$this->response['status'] = 'error';
+			$this->response['msg'] = lang('login.error.outstanding');
 			die(json_encode($this->response));			
 		}
 		

@@ -2,6 +2,7 @@
 
 $lang['login.error.noauth'] = "El nombre de usuario o la clave no son correctos.";
 $lang['login.error.inactiveac'] = "Cuenta desactivada.";
+$lang['login.error.outstanding'] = "Esta cuenta esta pendiente de confirmaci&acute;n.";
 
 $lang['signup.error.duplicatedmail'] = "Este email ya existe";
 

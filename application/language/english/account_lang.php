@@ -2,6 +2,7 @@
 
 $lang['login.error.noauth'] = "Either the username or password are not correct.";
 $lang['login.error.inactiveac'] = "Inactive account.";
+$lang['login.error.outstanding'] = "This account is pending confirmation.";
 
 $lang['signup.error.duplicatedmail'] = "This email already exist";
 
