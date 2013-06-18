@@ -7,7 +7,7 @@
 					<div class="small-3 columns"><? logo_svg(54, 70); ?></div>
 					<div class="small-5 columns">
 						<input type="text" name="search-text" placeholder="<?=lang('dashboard.searchform.searchtext')?>" class="radius clear-margin" />
-						<h6><small class="text-color-white"><?=lang('dashboard.searchform.nearto')?>: <span id="current-address"></span> <a href="#" data-dropdown="change-location-wrapper" class="text-color-red" id="chlocation"><?=lang('dashboard.chlocationform.change')?></a></small></h6>		
+						<h6><small class="text-color-white"><?=lang('dashboard.searchform.nearto')?>: <span id="current-address"></span> <a href="#" data-dropdown="change-location-wrapper" id="chlocation"><?=lang('dashboard.chlocationform.change')?></a></small></h6>		
 					</div>
 					<div class="small-4 columns">
 						<a href="javascript:void(0)" id="search-btn" class="small button alert"><?icon_magni_glass(12, 13)?></a>
@@ -65,7 +65,7 @@
 	<!-- End Advanced Search From-->
 
 	<!-- Change location Form -->
-	<div class="f-dropdown content" id="change-location-wrapper" data-dropdown-content>	
+	<div class="f-dropdown content medium" id="change-location-wrapper" data-dropdown-content>	
 		<h5><?=lang('dashboard.chlocationform.title')?></h5>
 		<div class="row">
 			<div class="large-12 columns">
