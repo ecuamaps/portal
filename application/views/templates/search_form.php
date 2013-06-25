@@ -4,7 +4,8 @@
 		<div class="large-12 columns">
 			<div class="panel callout opacity07 text-color-white padding-10px clear-margin">
 				<div class="row">
-					<div class="small-3 columns"><? logo_svg(54, 70); ?></div>
+					<div class="small-3 columns hide-for-small show-for-medium-up"><? logo_big_svg(200, 36); ?></div>
+					<div class="small-3 columns show-for-small hide-for-medium-up"><? logo_big_svg(80, 15); ?></div>
 					<div class="small-5 columns">
 						<input type="text" name="search-text" placeholder="<?=lang('dashboard.searchform.searchtext')?>" class="radius clear-margin" />
 						<h6><small class="text-color-white"><?=lang('dashboard.searchform.nearto')?>: <span id="current-address"></span> <a href="#" data-dropdown="change-location-wrapper" id="chlocation"><?=lang('dashboard.chlocationform.change')?></a></small></h6>		
