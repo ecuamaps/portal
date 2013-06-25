@@ -49,9 +49,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'sectorc1_apie';
-$db['default']['password'] = 'Kv9grJut2fG1';
-$db['default']['database'] = 'sectorc1_apie';
+$db['default']['username'] = 'buskko';
+$db['default']['password'] = 'qazxsw21';
+$db['default']['database'] = 'buskko';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
