@@ -25,8 +25,8 @@
 	<div class="f-dropdown content" id="adv-search-block" data-dropdown-content>	
 		<div class="row margin-top-10px">
 			<div class="large-12 columns">
-				<label for="radio"><?=lang('dashboard.searchform.radio')?></label>
-				<select id="radio" name="radio" class="medium">
+				<label for="distance"><?=lang('dashboard.searchform.radio')?></label>
+				<select id="distance" name="distance" class="medium">
 					<option value="1" selected>1Km</option>
 				    <option value="2">2Km</option>
 				    <option value="3">3Km</option>
@@ -37,25 +37,26 @@
 
 		<div class="row margin-top-10px">
 			<div class="large-12 columns">
-				<label for="results-amt"><?=lang('dashboard.searchform.maxresults')?></label>
-				<select id="results-amt" name="results-amt" class="medium">
+				<label for="rows"><?=lang('dashboard.searchform.maxresults')?></label>
+				<select id="rows" name="rows" class="medium">
 					<option value="5" selected>5</option>
 				    <option value="10">10</option>
 				    <option value="20">20</option>
-				    <option value="all">All</option>
+				    <option value="all"><?=lang('dashboard.searchform.all')?></option>
 				</select>
 			</div>
     	</div>
 			
 		<div class="row margin-top-10px">
 			<div class="large-12 columns">
-				<label for="results-amt"><?=lang('dashboard.searchform.posttype')?></label>
-				<select id="results-amt" name="results-amt" class="medium">
-					<option value="1">Negocio</option>
-				    <option value="2">Producto</option>
-				    <option value="3">Evento</option>
-				    <option value="4">Descuento</option>
-				    <option value="all" selected>Todos</option>
+				<label for="post_type"><?=lang('dashboard.searchform.posttype')?></label>
+				<select id="post_type" name="post_type" class="medium">
+				    <option value="all" selected><?=lang('dashboard.searchform.all')?></option>
+				    <? $lng = current_lang(); 
+				    $field = "name_$lng";
+				    foreach($post_types as $pt):?>
+					<option value="<?="post_type_$lng|".$pt->$field?>"><?= $pt->$field; ?></option>
+				    <? endforeach; ?>
 				</select>					
 			</div>
     	</div>

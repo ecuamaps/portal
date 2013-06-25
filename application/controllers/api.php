@@ -4,69 +4,136 @@ class Api extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
-		$this->lang->load('api');		
+		$this->lang->load('api');
+		$this->load->model('business_model');
 	}
 	
 	function search(){
 		
-		$rslt_amnt = 2;
+		//Get the search params
+		$text = $this->input->post('text', TRUE);
+		
+		$distance = $this->input->post('distance', TRUE);
+		$start = $this->input->post('start', TRUE);
+		$start = $start ? $start : 0;
+		$rows = $this->input->post('rows', TRUE);
+		$post_type = $this->input->post('post_type', TRUE);
+		$post_type = ($post_type != 'all') ? $post_type : NULL;
+		$lat = $this->input->post('lat', TRUE);
+		$lng = $this->input->post('lng', TRUE);
+
+		$options = ci_config('solr_options');
+		extract($options);
+		$config['solr_options'] = array (
+    		'hostname' => '127.0.0.1',
+    		'port' => '8080',
+    		'path' => 'solr/core1',
+    		'protocol' => 'http'
+		);
+		
+		$q = search_query($text, $post_type);
+		$query = array(
+			'q' => $q,
+			'sort' => 'score desc,score_avg desc,geodist() asc', 
+			'start' => $start, 
+			'rows' => $rows, 
+			'fl' => '*,score,_dist_:geodist()', 
+			'df' => 'tags',
+			'wt' => 'json', 
+			'indent' => 'true', 
+			'spatial' => 'true', 
+			'pt' => $lat.','.$lng, 
+			'sfield' => 'location', 
+			'd' => $distance, 
+		);
+		
+		$url = $protocol.'://'.$hostname.':'.$port.'/'.$path.'/select?'.http_build_query($query);
+		$json = $this->curl->simple_get($url);
+
+		$results = json_decode($json);
+		//echo '<pre>',print_r($json),'</pre>';
+		$docs = $results->response->docs;
 		
 		header('Content-Type: text/html');
 		?>
-		<h4><small><?=str_replace('[X]', $rslt_amnt, lang('search.resultstitle'))?>:</small></h4>
+		<h4><small><?= sprintf(lang('search.resultstitle'), $results->response->numFound) ?>:</small></h4>
+
+		<div class="pagination-centered">
+		  <ul class="pagination">
+		    <li class="arrow unavailable"><a href="">&laquo;</a></li>
+		    <li class="current"><a href="">1</a></li>
+		    <li><a href="">2</a></li>
+		    <li><a href="">3</a></li>
+		    <li><a href="">4</a></li>
+		    <li><a href="">5</a></li>
+		    <li class="unavailable"><a href="">&hellip;</a></li>
+		    <li class="arrow"><a href="">&raquo;</a></li>
+		  </ul>
+		</div>
+		
 		<div class="row full-width" id="results-wrapper">
-			<div class="search-results-panel" id="123">
-			  	<input type="hidden" name="123-lat"  value="-0.17286542654272" />
-			  	<input type="hidden" name="123-lng"  value="-78.4804487228393" />
-			  	<input type="hidden" name="123-inmap"  value="0" />
-			  	
+			<? foreach($docs as $d): ?>
+			<?
+				$distance = (float) $d->_dist_;
+				$unit = 'Km';
+				if($distance < 1){
+					$distance = $distance * 1000;
+					$unit = 'Mts';
+				}
+				
+				$distance = number_format($distance, 2).$unit;								
+				
+				$score_avg = number_format($d->score_avg, 2);
+			?>
+			
+			<div class="panel" id="<?= $d->id ?>">
+			  	<input type="hidden" name="<?= $d->id ?>-lat"  value="<?= $d->location_0_coordinate ?>" />
+			  	<input type="hidden" name="<?= $d->id ?>-lng"  value="<?= $d->location_1_coordinate ?>" />
+			  	<input type="hidden" name="<?= $d->id ?>-inmap"  value="0" />
+
 			  	<div class="row">
-			  		<div class="small-1 columns"></div> 
-			  		<div class="small-6 columns"><h6 class="clear-margin">El Rincón del sabor</h6></div>
-			  		<div class="small-4 columns"><h5 class="clear-margin"><small>3.5</small></h5></div>
+					<div class="large-9 columns">
+						<div class="row">
+							<div class="large-3 columns"><h5 class="clear-margin"><small><?= $distance ?></small></h5></div>
+							<div class="large-9 columns"><h6 class="clear-margin"><?= ucfirst($d->name) ?></h6><br /><?= ucfirst($d->tags) ?></div>
+						</div>
+						<div class="row">
+							<div class="large-3 columns"><h5 class="clear-margin"><small><?= lang('search.score') ?>: <?= $score_avg ?></small></h5></div>
+							<div class="large-9 columns"><?= ucfirst($d->content) ?></div>						
+						</div>
+					</div>
+					<div class="large-3 columns">
+						<div class="row"><a href="#" class="">Ver Mas</a></div>
+						<div class="row"><a href="#" class="qualify-post">Calificar</a></div>
+						<div class="row"><a href="javascript:set_directions('<?= $d->location_0_coordinate ?>', '<?= $d->location_1_coordinate ?>', <?= $d->_dist_ ?>)" class=""><?= lang('search.howtoget') ?></a></div>
+					</div>
+				</div>
+				
+			  	<div class="row">
+			  		<div class="small-12 columns"><h6 class="clear-margin"><small><?= strtoupper($d->address) ?></small></h6></div>
 			  	</div>
 
 			  	<div class="row">
-			  		<div class="small-12 columns"><h6 class="clear-margin"><small>E845, Quito</small></h6></div>
-			  	</div>
-
-			  	<div class="row">
-			  		<div class="small-12 columns"><h6 class="clear-margin"><small>Tels: 2264124 -2246453</small></h6></div>
-			  	</div>
-
-			  	<div class="row">
-			  		<div class="small-2 columns"><a href="#" class="tiny button">Ver Mas</a></div>
-			  		<div class="small-2 columns"><a href="#" class="tiny button">Insertar en el mapa</a></div>
-			  		<div class="small-2 columns"><a href="#" class="tiny button">Como llegar</a></div>
+			  		<div class="small-12 columns"><h6 class="clear-margin"><small><?= lang('search.phone') ?>: <?= $d->phones ?> </small></h6></div>
 			  	</div>
 			  	
 			</div>
-
-		  	<div class="search-results-panel" id="124">
-		  		<input type="hidden" name="124-lat"  value="-0.17273936329235" />
-		  		<input type="hidden" name="124-lng"  value="-78.4803253412246" />
-		  		<input type="hidden" name="124-inmap"  value="0" />
-			  		
-		  		<div class="row">
-		  			<div class="small-1 columns"></div> 
-		  			<div class="small-6 columns"><h6 class="clear-margin">Papeletek</h6></div>
-		  			<div class="small-4 columns"><h5 class="clear-margin"><small>N/A</small></h5></div>
-		  		</div>
-		  		<div class="row">
-		  			<div class="small-12 columns"><h6 class="clear-margin"><small>N3909</small></h6></div>
-		  		</div>
-		  		<div class="row">
-		  			<div class="small-12 columns"><h6 class="clear-margin"><small>Tels: no</small></h6></div>
-		  		</div>
-
-			  	<div class="row">
-			  		<div class="large-4 columns">Ver Mas</div>
-			  		<div class="large-4 columns">Insertar al mapa</div>
-			  		<div class="large-4 columns">Como llegar?</div>
-			  	</div>
-
-		  	</div>		
+			<? endforeach; ?>
 		</div>
+
+		<div class="pagination-centered">
+		  <ul class="pagination">
+		    <li class="arrow unavailable"><a href="">&laquo;</a></li>
+		    <li class="current"><a href="">1</a></li>
+		    <li><a href="">2</a></li>
+		    <li><a href="">3</a></li>
+		    <li><a href="">4</a></li>
+		    <li><a href="">5</a></li>
+		    <li class="unavailable"><a href="">&hellip;</a></li>
+		    <li class="arrow"><a href="">&raquo;</a></li>
+		  </ul>
+		</div>
+
 		<a class="close-reveal-modal">&#215;</a>
 		<?php
 		die();	
@@ -78,28 +145,7 @@ class Api extends CI_Controller {
 	
 	/* get all primary types (without parent) exucluding the top five*/
 	private function get_all_types(){
-		//TODO: hardoded by now, get from DB and exclude the top five		
-		return array(
-			array('id' => 6, 'name' => 'Mascotas'),
-			array('id' => 7, 'name' => 'Belleza'),
-			array('id' => 8, 'name' => 'Viveres'),
-			array('id' => 9, 'name' => 'Serv. Financieros'),
-			array('id' => 10, 'name' => 'Serv. Públicos'),
-			array('id' => 11, 'name' => 'Internet'),
-			array('id' => 12, 'name' => 'Muebles'),
-			array('id' => 13, 'name' => 'Finca Raíz'),
-			array('id' => 14, 'name' => 'Ropa'),
-			array('id' => 15, 'name' => 'Viajes'),
-			array('id' => 16, 'name' => 'Gimnasio'),
-			array('id' => 17, 'name' => 'C. Comerciales'),
-			array('id' => 18, 'name' => 'Cines'),
-			array('id' => 19, 'name' => 'Teatros'),
-			array('id' => 20, 'name' => 'Diversión'),
-			array('id' => 21, 'name' => 'Música'),
-			array('id' => 22, 'name' => 'Sitios de interes'),
-			array('id' => 23, 'name' => 'Transportes'),
-			array('id' => 23, 'name' => 'Supermercados'),
-		);
+		return $this->business_model->get_types(false);
 	}
 	
 	function add_location(){

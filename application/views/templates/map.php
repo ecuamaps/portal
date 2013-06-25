@@ -11,7 +11,7 @@
 			<div class="row">
 			<?php foreach($bztop5types as $type):?>
 				<div class="small-2 columns">
-					<label class="text-color-white" for="<?="type_".$type['id']?>"><input class="bz-type" type="checkbox" name="<?="type_".$type['id']?>" id="<?="type_".$type['id']?>" value="<?=$type['id']?>"><?=$type['name']?></label>
+					<label class="text-color-white" for="<?="type_".$type->id?>"><input class="bz-type" type="checkbox" name="<?="type_".$type->id?>" id="<?="type_".$type->id?>" value="<?=$type->id?>"><?=$type->name?></label>
 				</div>				
 			<?php endforeach; ?>
 				<div class="small-2 columns">
@@ -39,6 +39,7 @@
 	
 	var geocoder = new google.maps.Geocoder();
 	var infowindow = new google.maps.InfoWindow();
+	var directionsDisplay;
 	
 	var sysDefaultLocation = new google.maps.LatLng('<?= $system_location[0] ?>', '<?= $system_location[1] ?>');
 	<? if(isset($userDefaultLocation)): ?>

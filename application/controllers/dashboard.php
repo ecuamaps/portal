@@ -9,7 +9,8 @@ class Dashboard extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->model('account_model');
-		//$this->load->library('recaptcha');
+		$this->load->model('business_model');
+		$this->load->model('post');
 		
 		$this->dasboard_params['user'] = $this->session->userdata('user');
 	}
@@ -46,10 +47,7 @@ class Dashboard extends CI_Controller {
 		
 		//Get The map zoom
 		$this->dasboard_params['map_zoom'] = get_config_val('map_zoom');
-		
-		//get The captcha code
-		//$this->dasboard_params['recaptcha_html'] = $this->recaptcha->recaptcha_get_html();
-		
+				
 		//get the nav locatinos
 		$str_nav_locations = get_config_val('nav_locations');
 		if($str_nav_locations){
@@ -60,6 +58,9 @@ class Dashboard extends CI_Controller {
 			}
 
 		}
+		
+		//Get the post_types
+		$this->dasboard_params['post_types'] = $this->post->get_posts_types();
 		
 		$this->render();
 	}
@@ -81,14 +82,7 @@ class Dashboard extends CI_Controller {
 	
 	/*Load the top five of the business types*/
 	private function get_top5_bztypes(){
-		//TODO: hardoded by now, get from DB
-		return array(
-			array('id' => 1, 'name' => 'Salud'),
-			array('id' => 2, 'name' => 'Comida'),
-			array('id' => 3, 'name' => 'Hospedajes'),
-			array('id' => 4, 'name' => 'Tecnología'),
-			array('id' => 5, 'name' => 'Autos'),
-		);
+		return $this->business_model->get_top_5_biz_types();
 	}
 	
 

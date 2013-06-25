@@ -369,6 +369,21 @@ $config['proxy_ips'] = '';
 
 $config['app_name'] = 'Search Portal 1.0';
 
+//Solr Config
+$config['solr_options'] = array (
+    		'hostname' => '127.0.0.1',
+    		'port' => '8080',
+    		'path' => 'solr/core1',
+    		'protocol' => 'http'
+		);
+
+$config['solr_options'] = array (
+    		'hostname' => '184.168.68.5',
+    		'port' => '8983',
+    		'path' => 'solr/core1',
+    		'protocol' => 'http'
+		);
+
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

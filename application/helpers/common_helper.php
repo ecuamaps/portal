@@ -424,6 +424,55 @@ function icon_arrow_right($w, $h){
 	
 }
 
+function search_query($text, $post_type){
+	$terms = array();
+	
+	if(!$text)
+		return '*.*';
+		
+	$text = trim($text);
+	//Define if the text is quoted
+	$len = strlen($text);
+	if($text[0] == '"' || $text[$len-1] == '"'){
+		return build_solr_query($text, $post_type);
+	}
+	
+	$terms = explode(' ', $text);
+	
+	return build_solr_query($terms, $post_type);
+}
+
+function build_solr_query($terms, $post_type){
+	
+	if(!is_array($terms)){
+		$q = "(name:$terms OR $terms)";
+	}else{
+		if(count($terms) >= 2){ //More than a word, an expresion
+			$terms[] = '"'.implode(' ', $terms).'"';
+		}
+		
+		array_walk($terms, 'parce_terms');
+		$q = "(" . implode(' OR ', $terms) . ")";
+	}
+	
+	
+	if($post_type){
+		$post_type = explode('|', $post_type);
+		$post_type[1] = strtolower($post_type[1]);
+		$q .= " AND {$post_type[0]}:*{$post_type[1]}*";
+	}
+	
+	return $q;
+}
+
+function parce_terms(&$term, $clave){
+	if(count(explode(' ', $term)) == 1 )
+		$f_term = "*".trim($term)."*";
+	else
+		$f_term = $term;
+	
+	$term = "(name:$f_term OR tags:$f_term)";
+}
 
 function get_domain() {
 	$CI = & get_instance();

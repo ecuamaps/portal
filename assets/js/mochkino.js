@@ -1,45 +1,23 @@
+var directionsService = new google.maps.DirectionsService();
 
-	var styles = [ {
-		"featureType" : "poi.business",
-		"stylers" : [ {
-			"visibility" : "off"
-		} ]
-	}, {
-		"featureType" : "poi.attraction",
-		"stylers" : [ {
-			"visibility" : "off"
-		} ]
-	}, {
-		"featureType" : "poi.government",
-		"stylers" : [ {
-			"visibility" : "off"
-		} ]
-	}, {
-		"featureType" : "poi.medical",
-		"stylers" : [ {
-			"visibility" : "off"
-		} ]
-	}, {
-		"featureType" : "poi.park",
-		"stylers" : [ {
-			"visibility" : "off"
-		} ]
-	}, {
-		"featureType" : "poi.place_of_worship",
-		"stylers" : [ {
-			"visibility" : "off"
-		} ]
-	}, {
-		"featureType" : "poi.school",
-		"stylers" : [ {
-			"visibility" : "off"
-		} ]
-	}, {
-		"featureType" : "poi.sports_complex",
-		"stylers" : [ {
-			"visibility" : "off"
-		} ]
-	} ];
+	var styles = [
+	              {
+	            	    "featureType": "poi",
+	            	    "stylers": [
+	            	      { "visibility": "off" }
+	            	    ]
+	            	  },{
+	            	    "featureType": "transit",
+	            	    "stylers": [
+	            	      { "visibility": "off" }
+	            	    ]
+	            	  },{
+	            	    "featureType": "landscape.man_made",
+	            	    "stylers": [
+	            	      { "visibility": "off" }
+	            	    ]
+	            	  }
+	            	];
 	
 function mapInitialize(location) {
 
@@ -64,7 +42,9 @@ function mapInitialize(location) {
 		'lat' : myLatlng.lat(),
 		'lng' : myLatlng.lng()
 	});
-
+	
+	directionsDisplay = new google.maps.DirectionsRenderer();
+	
 	var mapOptions = {
 		zoom : map_zoom,
 		center : myLatlng,
@@ -114,6 +94,8 @@ function mapInitialize(location) {
     google.maps.event.addListener(myLocation, 'dragend', function(e) {
         changeLocation(e.latLng);
     });
+    
+    directionsDisplay.setMap(map);
 
 /*
 	 * google.maps.event.addListener(map, 'click', function(event) {
@@ -595,6 +577,11 @@ $(document).ready(function() {
             dataType : "html",
             data : {
                 text : text,
+                distance : $('#distance').val(),
+                rows : $('#rows').val(),
+                post_type : $('#post_type').val(),
+        		lat : myLatlng.lat(),
+        		lng : myLatlng.lng(),
                 hms1 : $('input[name="hms1"]').val()
             }
         }).done(function(response) {
@@ -609,7 +596,7 @@ $(document).ready(function() {
         showHideLeftPanel();
     });
 	
-    $('.search-results-panel').click(function(e){
+    /*$('.search-results-panel').click(function(e){
         e.preventDefault();
 
         var post_id = $(this).attr('id');
@@ -634,7 +621,7 @@ $(document).ready(function() {
 		
 
     //console.log(markers);
-    });
+    });*/
 	
     $('#load-into-map').click(function(e){
         e.preventDefault();
@@ -686,11 +673,39 @@ $(document).ready(function() {
             $('input[name="chpwd_oldpasswd"], input[name="chpwd_newpasswd"], input[name="chpwd_newpasswd2"]').val('');
             alert(response.msg);
             $('#chpwd-form-wrapper').foundation('reveal', 'close');
-        });
-         
-         
+        }); 
+    });
+    
+    $('.qualify-post').click(function(e){
+    	console.log('hello');
     });
 });
+
+function set_directions(lat, lng, distance){
+	var destination = new google.maps.LatLng(lat, lng);
+	var travelMode = google.maps.TravelMode.DRIVING;
+	
+	if(distance <= 1)
+		travelMode = google.maps.TravelMode.WALKING;
+		
+	var request = {
+		      origin: myLatlng,
+		      destination: destination,
+		      travelMode: travelMode
+	};
+	
+	directionsService.route(request, function(result, status) {
+		if (status == google.maps.DirectionsStatus.OK) {
+			directionsDisplay.setDirections(result);
+		}else{
+			alert("Sorry, We couldn't get the directions.");
+		}
+	});
+}
+
+function get_bz_by_type(type_id){
+	console.log(type_id);
+}
 
 function search(){
 	

@@ -111,7 +111,7 @@
 			  <thead>
 			    <tr>
 			      <th><?=lang('createbiz.item')?></th>
-			      <th><?=lang('createbiz.description')?></th>
+			      <th class="hide-for-small"><?=lang('createbiz.description')?></th>
 			      <th><?=lang('createbiz.price')?></th>
 			      <th></th>
 			    </tr>
@@ -206,9 +206,9 @@
 
 		  <div class="large-4 columns">
 		  	<div class="panel">
-				<h5>Depositos o Transferencias</h5>
-			  	<p>Transfiera directamente desde su cuenta bancaria a la nuestra o haga un depósito directamente en las oficinas de nuestro banco a nuestra cuenta.</p>
-			  	<p><h6><small>El negocio no será activado hasta que nuestro centro de servicio confirme el pago.</small></h6></p>
+				<h5><?=lang('createbiz.paymethods.bankdeposit')?></h5>
+			  	<p><?=lang('createbiz.paymethods.bankdeposit.desc')?></p>
+			  	<p><h6><small><?=lang('createbiz.paymethods.disclaimer1')?></small></h6></p>
 			  	<div class="row">
 	  				<div class="small-3 small-centered columns"><input type="radio" name="payment_method" value="bank_transfer_deposit"></div>
 				</div>
@@ -227,11 +227,13 @@
 		-->
 		  <div class="large-4 columns">
 		  	<div class="panel">
-				<h5>*Pago a domicilio</h5>
-			  	<p>El pago será recogido a domicilio por un mensajero certificado</p>
-			  	<p><h6><small>* Tiene un costo adicional de $<?=get_config_val('money_pickup_cost')?> y solo aplica para <?=get_config_val('money_pickup_allowed_places')?>.
-			  	<br/>* Solo aplica para compras superiores a $<?=get_config_val('money_pickup_value_restriction')?></small></h6></p>
-			  	<p><h6><small>El negocio no será activado hasta que nuestro centro de servicio confirme el pago.</small></h6></p>
+				<h5>*<?=lang('createbiz.paymethods.moneypickup')?></h5>
+			  	<p><?=lang('createbiz.paymethods.moneypickup.desc')?></p>
+			  	<p><?= sprintf(lang('createbiz.paymethods.moneypickup.disclaimer'), 
+			  			get_config_val('money_pickup_cost'), 
+			  			get_config_val('money_pickup_allowed_places'), 
+			  			get_config_val('money_pickup_value_restriction')) ?> </p>
+			  	<p><h6><small><?=lang('createbiz.paymethods.disclaimer1')?></small></h6></p>
 			  	<div class="row">
 	  				<div class="small-3 small-centered columns"><input type="radio" name="payment_method" value="money_pickup" disabled></div>
 				</div>
@@ -240,11 +242,12 @@
 
 		  <div class="large-4 columns">
 		  	<div class="panel">
-				<h5>*Envios de dinero</h5>
-			  	<p>Envianos el pago por Western Union</p>
-			  	<p><h6><small>* Tiene un costo adicional de $<?=get_config_val('money_pickup_cost')?> adicional al costo cobrado por Western Union. 
-			  	<br>* Solo aplica para compras superiores a $<?=get_config_val('money_order_value_restriction')?>.</small></h6></p>
-			  	<p><h6><small>El negocio no será activado hasta que nuestro centro de servicio confirme el pago.</small></h6></p>
+				<h5>*<?=lang('createbiz.paymethods.moneyorder')?></h5>
+			  	<p><?=lang('createbiz.paymethods.moneyorder.desc')?></p>
+			  	<p><?= sprintf(lang('createbiz.paymethods.moneyorder.disclaimer'), 
+			  			get_config_val('money_pickup_cost'), 
+			  			get_config_val('money_order_value_restriction')) ?></p>
+			  	<p><h6><small><?=lang('createbiz.paymethods.disclaimer1')?></small></h6></p>
 			  	<div class="row">
 	  				<div class="small-3 small-centered columns"><input type="radio" name="payment_method" value="money_order" disabled></div>
 				</div>
@@ -638,7 +641,7 @@ $(document).ready(function(){
 
 
 function getItemRow(item){
-	return '<tr id="' + item.id + '"><td>' + item.name + '</td><td>' + item.description + '</td><td>$' + item.price + 
+	return '<tr id="' + item.id + '"><td>' + item.name + '</td><td class="hide-for-small">' + item.description + '</td><td>$' + item.price + 
  	 			'</td><td><a href="javascript:delProduct(' + item.id + ')" id="' + item.id + '" del-product="1" class="tiny button alert clear-margin">-</a></td></tr>';
 }
 

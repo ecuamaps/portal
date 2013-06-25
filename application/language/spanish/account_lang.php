@@ -75,8 +75,20 @@ $lang['createbiz.error.emailformat'] = 'Formato de email incorrecto.';
 $lang['createbiz.error.billdata.required'] = 'El nombre y la identficaci&acute;n son requeridas.';
 $lang['createbiz.error.billaddr.required'] = 'La direcci&oacute;n es requerida para Pagos a domicilio.';
 
-$lang['chpwd.successfully'] = "La clave ha sido cambiada satisfactoriamente";
+$lang['createbiz.paymethods.bankdeposit'] = 'Depositos o Transferencias';
+$lang['createbiz.paymethods.disclaimer1'] = 'El negocio no será activado hasta que nuestro centro de servicio confirme el pago.';
+$lang['createbiz.paymethods.bankdeposit.desc'] = 'Transfiera directamente desde su cuenta bancaria a la nuestra o haga un depósito directamente en las oficinas de nuestro banco a nuestra cuenta.';
 
+$lang['createbiz.paymethods.moneypickup'] = 'Pagos a domicilio';
+$lang['createbiz.paymethods.moneypickup.desc'] = 'El pago será recogido a domicilio por un mensajero certificado';
+$lang['createbiz.paymethods.moneypickup.disclaimer'] = '<h6><small>* Tiene un costo adicional de $%s y solo aplica para %s.<br/>* Solo aplica para compras superiores a $%s</small></h6>';
+
+$lang['createbiz.paymethods.moneyorder'] = 'Giros de dinero';
+$lang['createbiz.paymethods.moneyorder.desc'] = 'Envianos el pago por Western Union';
+$lang['createbiz.paymethods.moneyorder.disclaimer'] = '<h6><small>* Tiene un costo adicional de $%s adicional al costo cobrado por Western Union. <br>* Solo aplica para compras superiores a $%s.</small></h6>';
+
+			  	
+$lang['chpwd.successfully'] = "La clave ha sido cambiada satisfactoriamente";
 $lang['chpwd.errorchanging'] = "Error Cambiando la Clave";
 $lang['chpwd.passwordwrong'] = "La Clave no es correcta";
 $lang['chpwd.account_noexist'] = "La Cuenta no existe";

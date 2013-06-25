@@ -9,8 +9,20 @@ class Business_model extends CI_Model {
 		parent::__construct();
 	}
 	
-	function get_types(){
-		$sql = "SELECT * FROM biz_type ORDER BY name";
+	function get_types($get_all = true){
+		
+		$exclude_top5 = '';
+		if(!$get_all){
+			$top5 = $this->get_top_5_biz_types();
+			foreach($top5 as $t){
+				$tp[] = $t->id;
+			}
+			$exclude_top5 = " WHERE id NOT IN (".implode(',', $tp).") ";
+		}
+			
+		$sql = "SELECT * FROM biz_type $exclude_top5 ORDER BY name";
+			
+			
 		$types = $this->db->query($sql)->result();
 
 		if(count($types))
@@ -73,4 +85,19 @@ class Business_model extends CI_Model {
 		
 		return $bz_id;
 	}
+	
+	function get_top_5_biz_types(){
+		$sql = "SELECT * FROM biz_type ORDER BY hits LIMIT 5";
+		$types = $this->db->query($sql)->result();
+
+		if(count($types))
+			return $types;
+		
+		return null;			
+	}
+	
+	function update_search_engine(){
+		
+	}
+	
 }

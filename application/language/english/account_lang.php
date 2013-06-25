@@ -79,4 +79,17 @@ $lang['createbiz.error.requiredfields'] = 'The business type, the name and the m
 $lang['createbiz.error.emailformat'] = 'Wrong email format.';
 $lang['createbiz.error.billdata.required'] = 'The name and the ID are required.';
 $lang['createbiz.error.billaddr.required'] = 'The address is required for money pickup.';
+
+$lang['createbiz.paymethods.bankdeposit'] = 'Bank deposits or transferences';
+$lang['createbiz.paymethods.disclaimer1'] = 'The business will not be activated until our service center confirms your payment.';
+$lang['createbiz.paymethods.bankdeposit.desc'] = 'Transfer directly from your account to our account or do a deposit to our account in the bank office.';
+
+$lang['createbiz.paymethods.moneypickup'] = 'Payment home';
+$lang['createbiz.paymethods.moneypickup.desc'] = 'A certified messenger will pick up the payment.';
+$lang['createbiz.paymethods.moneypickup.disclaimer'] = '<h6><small>* Has a extra cost of $%s and only applies to %s.<br/>* Only applies for purchases greater than $%s</small></h6>';
+
+$lang['createbiz.paymethods.moneyorder'] = 'Money order';
+$lang['createbiz.paymethods.moneyorder.desc'] = 'Send the payment with Western Union';
+$lang['createbiz.paymethods.moneyorder.disclaimer'] = '<h6><small>* Has a extra cost of $%s plus the Western Union prices. <br>* Only applies for purchases greater than $%s.</small></h6>';
+
 ?>
