@@ -24,12 +24,6 @@ class Api extends CI_Controller {
 
 		$options = ci_config('solr_options');
 		extract($options);
-		$config['solr_options'] = array (
-    		'hostname' => '127.0.0.1',
-    		'port' => '8080',
-    		'path' => 'solr/core1',
-    		'protocol' => 'http'
-		);
 		
 		$q = search_query($text, $post_type);
 		$query = array(
