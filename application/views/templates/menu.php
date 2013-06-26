@@ -26,7 +26,7 @@
 	          	 <ul class="dropdown">
 	          		<li><a href="es/api/search" data-reveal-id="add-enterprise-form" data-reveal-ajax="true"><?=lang('dashboard.addbuz')?></a></li>
                                 <li><a href="javascript:void(0)" id="chpwd" data-reveal-id="chpwd-form-wrapper"><?=lang('dashboard.chpwd')?></a></li>
-                                <li><a href="javascript:void(0)" id="preferences" data-reveal-id="preferences-form-wrapper"><?=lang('dashboard.preferences')?></a></li>
+                                <li><a href="javascript:void(0)" id="mypreferences" data-reveal-id="preferences-form-wrapper"><?=lang('dashboard.add-preferences')?></a></li>
                                 
                                 
 	          	 	<li class="has-dropdown"><a href="javascript:void(0)"><?=lang('dashboard.mylocations')?></a>
@@ -192,32 +192,21 @@
         </div>
 	<!-- End Change Password Form -->
         
-        <!-- ******************* -->
+      
         
-        <!-- Add Preferences Form -->
+        <!-- Add My Preferences Form -->
        
 	<div class="reveal-modal" id="preferences-form-wrapper">
-        <?= form_open('', array('id' => 'preferences-form', 'class' => '')) ?>
-            <input type="hidden" name="chpwd_email" value="<?=$user->email?>">
-            <h5><?=lang('dashboard.preferences')?></h5>
-	
-        <div class="row">
-		
-                <div class="large-12 columns">
-                   <label for="checkbox1">
-                    <input type="checkbox" id="checkbox1" style="display: none;">
-                      <span class="large-12 columns"></span> ALGO
-                   </label>
-		</div>    
-	   </div>
-            
-        
+        	
+          <li><a href="<?=base_url($this->lang->lang().'/account/my_preferences_form')?>" data-reveal-id="add-mypreferences-form" data-reveal-ajax="true"></a></li>
+          <h5><?=lang('dashboard.add-preferences')?></h5>
+          
+          
         
         </form>
         <a class="close-reveal-modal">&#215;</a>
-       
-        </div
-        <!-- End Preferences Form -->
+       </div>
+      <!-- End Preferences Form -->
         
         
 	<? endif; ?>

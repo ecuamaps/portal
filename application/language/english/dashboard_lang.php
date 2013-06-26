@@ -19,7 +19,7 @@ $lang['dashboard.chpwd.oldpass'] = "Old Password";
 $lang['dashboard.chpwd.newpass'] = "New Password";
 $lang['dashboard.chpwd.newpass2'] = "Repite Password";
 
-$lang['dashboard.preferences'] = "My Preferences";
+$lang['dashboard.add-preferences'] = "My Preferences";
 
 
 
