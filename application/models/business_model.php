@@ -83,6 +83,9 @@ class Business_model extends CI_Model {
 			return false;
 		}
 		
+		//Syncronize in solr
+		$this->syncronize($bz_id);
+		
 		return $bz_id;
 	}
 	
@@ -96,8 +99,74 @@ class Business_model extends CI_Model {
 		return null;			
 	}
 	
-	function update_search_engine(){
+	/*Sync the biz to solr*/
+	function syncronize($id){
+		//Get the post
+		$post = $this->db->get_where('post', array('id' => $id))->result();
+		if(!count($post))
+			return false;
 		
+		$post = $post[0];
+		
+		//Get the metas
+		$metas_obj = $this->db->get_where('postmeta', array('post_id' => $id))->result();
+		if(!count($metas_obj))
+			return false;
+		
+		foreach($metas_obj as $m){
+			$metas[$m->meta_key] = $m->meta_value;
+		}
+		
+		//Set the text fields
+		$phones = isset($metas['phones']) ? ' '.$metas['phones'] : '';
+		$address = isset($metas['address']) ? ' '.$metas['address'] : '';
+		$CEO = isset($metas['CEO_name']) ? ' '.$metas['CEO_name'] : '';
+		$email = isset($metas['CEO_email']) ? ' '.$metas['CEO_email'] : '';
+
+		//Get the post type name
+		$post_type = $this->db->get_where('post_type', array('id' => $post->post_type_id))->result();
+		
+		//Solr data
+		$data = array(
+			'id' => $id,
+			'name' => $post->name,
+			'tags' => $post->tags,
+			'content' => $post->content,
+			'post_type_es' => $post_type[0]->name_es,
+			'post_type_en' => $post_type[0]->name_en,
+			'location' => "{$metas['lat']},{$metas['lng']}",
+			'phones' => $phones,
+			'address' => $address,
+			'ceo' => $CEO,
+			'email' => $email,
+			'score_avg' => $post->score_avg
+		);
+
+		$json_data = json_encode($data);
+
+		$options = ci_config('solr_options');
+		extract($options);
+		
+		//Solr actualization
+		$options = array (
+    		'hostname' => $hostname,
+    		'port' => $port,
+    		'path' => $path
+		);
+ 
+		$client = new SolrClient($options);
+		$doc = new SolrInputDocument();
+		foreach($data as $i => $d)
+			$doc->addField($i, trim(strtolower($d)));
+		
+		$updateResponse = $client->addDocument($doc, FALSE);
+		$client->commit();
+		return true;	
+	}
+	
+	function get_biz_types($id){
+		$sql = "SELECT bt.* FROM post_biz_types pbt, biz_type bt WHERE pbt.post_id=$id AND pbt.biz_type_id=bt.id ORDER BY name";
+		return $this->db->query($sql)->result();
 	}
 	
 }

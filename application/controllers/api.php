@@ -78,6 +78,19 @@ class Api extends CI_Controller {
 				$distance = number_format($distance, 2).$unit;								
 				
 				$score_avg = number_format($d->score_avg, 2);
+				
+				//Load the types
+				$types = $this->business_model->get_biz_types($d->id);
+				$main_type = isset($types[0]) ? $types[0] : NULL;
+				
+				foreach($types as $t){
+					$tmp[] = $t->name;
+				}
+				
+				$str_types = implode(', ', $tmp);
+				$tmp = array();
+				
+				//var_dump($types);
 			?>
 			
 			<div class="panel" id="<?= $d->id ?>">
@@ -89,11 +102,18 @@ class Api extends CI_Controller {
 					<div class="large-9 columns">
 						<div class="row">
 							<div class="large-3 columns"><h5 class="clear-margin"><small><?= $distance ?></small></h5></div>
-							<div class="large-9 columns"><h6 class="clear-margin"><?= ucfirst($d->name) ?></h6><br /><?= ucfirst($d->tags) ?></div>
+							<div class="large-9 columns">
+								<h6 class="clear-margin"><?= ucfirst($d->name) ?></h6>
+								<h6 class="clear-margin"><small><?= $str_types ?></small></h6>
+							</div>
 						</div>
 						<div class="row">
 							<div class="large-3 columns"><h5 class="clear-margin"><small><?= lang('search.score') ?>: <?= $score_avg ?></small></h5></div>
-							<div class="large-9 columns"><?= ucfirst($d->content) ?></div>						
+							<div class="large-9 columns">
+								<h6 class="clear-margin"><small><?= ucfirst($d->content) ?></small></h6>
+								<h6 class="clear-margin"><small><?= ucfirst($d->address) ?></small></h6>
+								<h6 class="clear-margin"><small><?= lang('search.phone') ?>: <?= $d->phones ?></small></h6>
+							</div>						
 						</div>
 					</div>
 					<div class="large-3 columns">
@@ -101,16 +121,7 @@ class Api extends CI_Controller {
 						<div class="row"><a href="#" class="qualify-post">Calificar</a></div>
 						<div class="row"><a href="javascript:set_directions('<?= $d->location_0_coordinate ?>', '<?= $d->location_1_coordinate ?>', <?= $d->_dist_ ?>)" class=""><?= lang('search.howtoget') ?></a></div>
 					</div>
-				</div>
-				
-			  	<div class="row">
-			  		<div class="small-12 columns"><h6 class="clear-margin"><small><?= strtoupper($d->address) ?></small></h6></div>
-			  	</div>
-
-			  	<div class="row">
-			  		<div class="small-12 columns"><h6 class="clear-margin"><small><?= lang('search.phone') ?>: <?= $d->phones ?> </small></h6></div>
-			  	</div>
-			  	
+				</div>			  	
 			</div>
 			<? endforeach; ?>
 		</div>
@@ -202,5 +213,9 @@ class Api extends CI_Controller {
 		$result = array('status' => 'error', 'msg' => 'Something went wrong');
 		die(json_encode($result));
 		
+	}
+	
+	function test($id){
+		$this->business_model->syncronize($id);
 	}
 }
