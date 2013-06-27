@@ -587,6 +587,9 @@ $(document).ready(function() {
         }).done(function(response) {
             showSearchResults(response);
             $('#search-result-wrapper').foundation('reveal', 'open');
+            $('#search-result-wrapper').on('opened', function () {
+            	  $(this).foundation('section', 'reflow');
+            });
         });
 						
     });
@@ -676,9 +679,56 @@ $(document).ready(function() {
         }); 
     });
     
-    $('.qualify-post').click(function(e){
-    	console.log('hello');
+    
+    $('#rateform-cancel-action').click(function(e){
+
+    	$('#post_id').val('');
+		$('#qf-post-name').html('');
+		$('textarea[name="review"]').val('');
+		$('#qualification option[value="1"]').attr('selected', true);
+
+    	$('#add-qualification-wrapper').foundation('reveal', 'close');
+    	$('#search-result-wrapper').foundation('reveal', 'open');
     });
+    
+    $('#rateform-action').click(function(e){
+    	var hms1     = $('input[name="hms1"]').val();
+    	var q = $('select[name="qualification"]').val();
+    	var review = $('textarea[name="review"]').val();
+    	var user_agent = $('input[name="user_agent"]').val();
+    	var user_ip = $('input[name="user_ip"]').val();
+    	var post_id = $('input[name="post_id"]').val();
+    	var user_id = $('input[name="user_id"]').val();
+
+        $.ajax({
+            type : "POST",
+            url : $('#qualification-form').attr('action'),        
+            dataType : "json",
+            data : {
+                hms1 : hms1,
+                post_id: post_id,
+                q : q,
+                review : review,
+                user_agent : user_agent,
+                user_ip : user_ip,
+                user_id: user_id
+            }
+        }).done(function(response){
+            if(response.status == 'error'){
+                alert(response.msg);
+                return false;
+            }
+
+        	$('#post_id').val('');
+    		$('#qf-post-name').html('');
+    		$('textarea[name="review"]').val('');
+    		$('#qualification option[value="1"]').attr('selected', true);
+            alert(response.msg);
+        	$('#add-qualification-wrapper').foundation('reveal', 'close');
+        	$('#search-result-wrapper').foundation('reveal', 'open');
+        });    	
+    });
+    
 });
 
 function set_directions(lat, lng, distance){

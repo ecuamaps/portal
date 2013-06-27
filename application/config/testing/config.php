@@ -365,7 +365,7 @@ $config['proxy_ips'] = '';
 |
 */
 
-$config['app_name'] = 'Buskoo.com';
+$config['app_name'] = 'Buskoo.com Sandbox site';
 
 //Solr Config
 $config['solr_options'] = array (
@@ -374,5 +374,14 @@ $config['solr_options'] = array (
     		'path' => 'solr/core1',
     		'protocol' => 'http'
 		);
+		
+//Post type id vs model, helpful to know which post type must be processed with whic model
+$config['post_type_vs_model'] = array(
+	1 => 'business_model',
+	2 => 'products_model',
+	3 => 'adv',
+	4 => 'event',
+	5 => 'sight',
+);		
 /* End of file config.php */
 /* Location: ./application/config/config.php */

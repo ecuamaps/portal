@@ -78,18 +78,12 @@ $lang['dashboard.signupform.errmsg.emailformat'] = "Formato de email incorrecto"
 $lang['dashboard.signupform.emailconfirmation'] = "Te has registrado exitosamente! <br/><br/>Te hemos enviado un email para que confirmes tu identidad, tienes hasta %d d&iacute;as para hacerlo" .
 		" de lo contrario tu registro ser&aacute; borrado.";
 
+$lang['dashboard.qualificationform.title'] = "Califica y Reseña";
+$lang['dashboard.qualificationform.rate'] = "Calificaci&oacute;n";
+$lang['dashboard.qualificationform.resena'] = "Reseña";
+$lang['dashboard.qualificationform.button'] = "Enviar";
+$lang['dashboard.qualificationform.cancel'] = "Cancelar";
+$lang['dashboard.qualificationform.close'] = "Cerrar";
+$lang['dashboard.qualificationform.userlogin'] = "Calificar solo esta disponible para usuarios registrados, si ya eres miembro solo autenticate si no registrate, es gratis!";
 
 
-//TODO: Eliminar
-$lang['dashboard.pagetitle'] = "Inicio";
-$lang['dashboard.logout'] = "Salir";
-$lang['dashboard.reservations'] = "Reservas";
-$lang['dashboard.checkin'] = "Registro";
-$lang['dashboard.checkout'] = "Salida";
-$lang['dashboard.rooms'] = "Habitaciones";
-$lang['dashboard.backdashboard'] = "Regresar al tablero";
-$lang['dashboard.tickets'] = "Consumos";
-$lang['dashboard.hello'] = "Hola";
-$lang['dashboard.setup'] = "Configuración";
-$lang['dashboard.months_names'] = '"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio","Julio", "Augosto", "Septiembre", "Octubre", "Noviembre", "Dicimebre"';
-$lang['dashboard.weekdays_names'] = '"Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado"';

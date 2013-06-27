@@ -102,4 +102,12 @@ $lang['dashboard.available_rooms'] = 'Available Rooms';
 $lang['dashboard.occupied_rooms'] = 'Occupied Rooms';
 $lang['dashboard.Load_factor'] = 'Load Factor';
 
+$lang['dashboard.qualificationform.title'] = "Rate and Review";
+$lang['dashboard.qualificationform.rate'] = "Score";
+$lang['dashboard.qualificationform.resena'] = "Review";
+$lang['dashboard.qualificationform.button'] = "Send";
+$lang['dashboard.qualificationform.cancel'] = "Cancel";
+$lang['dashboard.qualificationform.close'] = "Close";
+$lang['dashboard.qualificationform.userlogin'] = "Qualify is only available for registered users, if you are already a member just sign in otherwise sign up , it's free!";
+
 

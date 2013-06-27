@@ -48,100 +48,7 @@ class Api extends CI_Controller {
 		//echo '<pre>',print_r($json),'</pre>';
 		$docs = $results->response->docs;
 		
-		header('Content-Type: text/html');
-		?>
-		<h4><small><?= sprintf(lang('search.resultstitle'), $results->response->numFound) ?>:</small></h4>
-
-		<div class="pagination-centered">
-		  <ul class="pagination">
-		    <li class="arrow unavailable"><a href="">&laquo;</a></li>
-		    <li class="current"><a href="">1</a></li>
-		    <li><a href="">2</a></li>
-		    <li><a href="">3</a></li>
-		    <li><a href="">4</a></li>
-		    <li><a href="">5</a></li>
-		    <li class="unavailable"><a href="">&hellip;</a></li>
-		    <li class="arrow"><a href="">&raquo;</a></li>
-		  </ul>
-		</div>
-		
-		<div class="row full-width" id="results-wrapper">
-			<? foreach($docs as $d): ?>
-			<?
-				$distance = (float) $d->_dist_;
-				$unit = 'Km';
-				if($distance < 1){
-					$distance = $distance * 1000;
-					$unit = 'Mts';
-				}
-				
-				$distance = number_format($distance, 2).$unit;								
-				
-				$score_avg = number_format($d->score_avg, 2);
-				
-				//Load the types
-				$types = $this->business_model->get_biz_types($d->id);
-				$main_type = isset($types[0]) ? $types[0] : NULL;
-				
-				foreach($types as $t){
-					$tmp[] = $t->name;
-				}
-				
-				$str_types = implode(', ', $tmp);
-				$tmp = array();
-				
-				//var_dump($types);
-			?>
-			
-			<div class="panel" id="<?= $d->id ?>">
-			  	<input type="hidden" name="<?= $d->id ?>-lat"  value="<?= $d->location_0_coordinate ?>" />
-			  	<input type="hidden" name="<?= $d->id ?>-lng"  value="<?= $d->location_1_coordinate ?>" />
-			  	<input type="hidden" name="<?= $d->id ?>-inmap"  value="0" />
-
-			  	<div class="row">
-					<div class="large-9 columns">
-						<div class="row">
-							<div class="large-3 columns"><h5 class="clear-margin"><small><?= $distance ?></small></h5></div>
-							<div class="large-9 columns">
-								<h6 class="clear-margin"><?= ucfirst($d->name) ?></h6>
-								<h6 class="clear-margin"><small><?= $str_types ?></small></h6>
-							</div>
-						</div>
-						<div class="row">
-							<div class="large-3 columns"><h5 class="clear-margin"><small><?= lang('search.score') ?>: <?= $score_avg ?></small></h5></div>
-							<div class="large-9 columns">
-								<h6 class="clear-margin"><small><?= ucfirst($d->content) ?></small></h6>
-								<h6 class="clear-margin"><small><?= ucfirst($d->address) ?></small></h6>
-								<h6 class="clear-margin"><small><?= lang('search.phone') ?>: <?= $d->phones ?></small></h6>
-							</div>						
-						</div>
-					</div>
-					<div class="large-3 columns">
-						<div class="row"><a href="#" class="">Ver Mas</a></div>
-						<div class="row"><a href="#" class="qualify-post">Calificar</a></div>
-						<div class="row"><a href="javascript:set_directions('<?= $d->location_0_coordinate ?>', '<?= $d->location_1_coordinate ?>', <?= $d->_dist_ ?>)" class=""><?= lang('search.howtoget') ?></a></div>
-					</div>
-				</div>			  	
-			</div>
-			<? endforeach; ?>
-		</div>
-
-		<div class="pagination-centered">
-		  <ul class="pagination">
-		    <li class="arrow unavailable"><a href="">&laquo;</a></li>
-		    <li class="current"><a href="">1</a></li>
-		    <li><a href="">2</a></li>
-		    <li><a href="">3</a></li>
-		    <li><a href="">4</a></li>
-		    <li><a href="">5</a></li>
-		    <li class="unavailable"><a href="">&hellip;</a></li>
-		    <li class="arrow"><a href="">&raquo;</a></li>
-		  </ul>
-		</div>
-
-		<a class="close-reveal-modal">&#215;</a>
-		<?php
-		die();	
+		$this->load->view('api/search', array('results' => $results, 'docs' => $docs));		
 	}
 	
 	function ajax_get_all_types(){
@@ -215,7 +122,30 @@ class Api extends CI_Controller {
 		
 	}
 	
-	function test($id){
+	function qualification(){
+		$this->load->model('post');
+		
+		$post_id = $this->input->post('post_id', TRUE);
+		
+		$data = array(
+			'author_id' => $this->input->post('user_id', TRUE),
+			'post_id' => $this->input->post('post_id', TRUE),
+			'author_ip' => $this->input->post('user_ip', TRUE),
+			'author_agent' => $this->input->post('user_agent', TRUE),
+			'score' => $this->input->post('q', TRUE),
+			'content' => $this->input->post('review', TRUE),
+		);
+		
+		$resutl = $this->post->add_qualification($post_id, $data);
+		if(in_array($resutl, array('earlierqualify', 'dberror'))){
+			$result = array('status' => 'error', 'msg' => lang($resutl));
+			die(json_encode($result));			
+		}
+		
+		die(json_encode(array('status' => 'ok', 'msg' => lang($resutl))));
+	}
+	
+	function test_syncronize($id){
 		$this->business_model->syncronize($id);
 	}
 }

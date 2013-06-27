@@ -84,4 +84,54 @@
 	</div>	
 	<!-- End Change location Form -->
 
-	
+	<!-- Add Qualification Form -->
+	<div class="reveal-modal small" id="add-qualification-wrapper">	
+		<? if($user): ?>
+		<?= form_open('api/qualification', array('id' => 'qualification-form', 'class' => '')) ?>
+		<input type="hidden" name="post_id" id="post_id" value="" />
+		<input type="hidden" name="user_agent" id="user_agent" value="<?=user_agent()?>" />
+		<input type="hidden" name="user_ip" id="user_ip" value="<?=user_ip_address()?>" />
+		<input type="hidden" name="user_id" id="user_id" value="<?=$user->id?>" />
+		<h5><?=lang('dashboard.qualificationform.title')?></h5>
+		<div class="row">
+			<div class="large-12 columns"><h6><span id="qf-post-name"></span></h6></div>
+    	</div>	
+		<div class="row">
+			<div class="large-12 columns">
+				<label for="qualification"><?=lang('dashboard.qualificationform.rate')?>*</label>
+				<select id="qualification" name="qualification" class="medium">
+				    <option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				</select>					
+			</div>
+    	</div>	
+		<div class="row">
+			<div class="large-12 columns">
+				<label for="review"><?=lang('dashboard.qualificationform.resena')?></label>
+				<textarea name="review"></textarea>					
+			</div>
+    	</div>	
+		<div class="row">
+			<div class="large-12 columns">
+				<a href="javascript:void(0)" id="rateform-action" class="small button"><?=lang('dashboard.qualificationform.button')?></a>
+				<a href="javascript:void(0)" id="rateform-cancel-action" class="small button"><?=lang('dashboard.qualificationform.cancel')?></a>			
+			</div>
+    	</div>
+		</form>
+		<? else: ?>
+		<div class="row">
+			<div class="large-12 columns">
+				<div data-alert class="alert-box alert">
+					<?=lang('dashboard.qualificationform.userlogin')?>
+				</div>			
+			</div>
+    	</div>	
+			<div class="large-12 columns">
+				<a href="javascript:void(0)" id="rateform-cancel-action" class="small button"><?=lang('dashboard.qualificationform.close')?></a>			
+			</div>
+		<? endif; ?>
+	</div>	
+	<!-- End Change location Form -->

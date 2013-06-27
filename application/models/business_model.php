@@ -141,26 +141,8 @@ class Business_model extends CI_Model {
 			'email' => $email,
 			'score_avg' => $post->score_avg
 		);
-
-		$json_data = json_encode($data);
-
-		$options = ci_config('solr_options');
-		extract($options);
 		
-		//Solr actualization
-		$options = array (
-    		'hostname' => $hostname,
-    		'port' => $port,
-    		'path' => $path
-		);
- 
-		$client = new SolrClient($options);
-		$doc = new SolrInputDocument();
-		foreach($data as $i => $d)
-			$doc->addField($i, trim(strtolower($d)));
-		
-		$updateResponse = $client->addDocument($doc, FALSE);
-		$client->commit();
+		solr_syncronize($data);
 		return true;	
 	}
 	

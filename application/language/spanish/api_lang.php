@@ -4,5 +4,12 @@ $lang['search.resultstitle'] = "Hemos encontrado %d resultado(s)";
 $lang['search.score'] = "Puntaje";
 $lang['search.howtoget'] = "C&oacute;mo llegar?";
 $lang['search.phone'] = "Tel(s)";
+$lang['search.review'] = "Rese&ntilde;a/Califica";
+$lang['search.more'] = "Ver Mas";
+$lang['search.map'] = "Ver Mapa";
 
+$lang['qualify.earlierqualify'] = "Tu ya has calificado esta publicaci&oacute;n antes.";
+$lang['qualify.sucess.outstanding'] = "Recibimos tu rese&ntilde;a pero esta pendiente de aprovaci&oacute;n, gracias.";
+$lang['qualify.sucessfully'] = "Tu rese&ntilde;a ha sido recibida, gracias.";
+$lang['qualify.dberror'] = "Lo sentimos, no pudimos recibir tu rese&ntilde;a,por favor intenta mas tarde.";
 ?>

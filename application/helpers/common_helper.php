@@ -617,8 +617,11 @@ function search_query($text, $post_type){
 	if($text[0] == '"' || $text[$len-1] == '"'){
 		return build_solr_query($text, $post_type);
 	}
-	
+
 	$terms = explode(' ', $text);
+		
+	if(count($terms) == 1)
+		return build_solr_query("*$text*", $post_type);
 	
 	return build_solr_query($terms, $post_type);
 }
@@ -626,13 +629,13 @@ function search_query($text, $post_type){
 function build_solr_query($terms, $post_type){
 	
 	if(!is_array($terms)){
-		$q = "(name:$terms OR $terms)";
+		$q = "(name:$terms OR tags:$terms OR phones:$terms OR address:$terms OR ceo:$terms OR email:$terms)";
 	}else{
 		if(count($terms) >= 2){ //More than a word, an expresion
 			$terms[] = '"'.implode(' ', $terms).'"';
 		}
-		
-		array_walk($terms, 'parce_terms');
+		$not_allowed_terms = ci_config('not_alloed_words_search');
+		$terms = parce_terms($terms, $not_allowed_terms);
 		$q = "(" . implode(' OR ', $terms) . ")";
 	}
 	
@@ -646,13 +649,62 @@ function build_solr_query($terms, $post_type){
 	return $q;
 }
 
-function parce_terms(&$term, $clave){
-	if(count(explode(' ', $term)) == 1 )
-		$f_term = "*".trim($term)."*";
-	else
-		$f_term = $term;
+function parce_terms($terms, $not_allowed_terms){
+	$result = array();
+	foreach($terms as $term){
+		if(!in_array($term, $not_allowed_terms)){
+			if(count(explode(' ', $term)) == 1 )
+				$f_term = "*".trim($term)."*";
+			else
+				$f_term = $term;
+			
+			$result[] = "(name:$f_term OR tags:$f_term OR phones:$f_term OR address:$f_term OR ceo:$f_term OR email:$f_term)";			
+		}
+	}
+	return $result;
+}
+
+function user_agent(){
+	$CI = & get_instance();
+	$CI->load->library('user_agent');
+	if ($CI->agent->is_browser()){
+	    $agent = $CI->agent->browser().' '.$CI->agent->version();
+	}elseif ($CI->agent->is_robot()){
+	    $agent = $CI->agent->robot();
+	}elseif ($CI->agent->is_mobile()){
+	    $agent = $CI->agent->mobile();
+	}else{
+	    $agent = 'Unidentified';
+	}
 	
-	$term = "(name:$f_term OR tags:$f_term)";
+	return $agent.' '.$CI->agent->platform(); // Platform info (Windows, Linux, Mac, etc.)
+}
+
+function user_ip_address(){
+	$CI = & get_instance();
+	return $CI->input->ip_address();
+}
+
+function solr_syncronize($data){
+
+	$options = ci_config('solr_options');
+	extract($options);
+		
+	//Solr actualization
+	$options = array (
+   		'hostname' => $hostname,
+   		'port' => $port,
+   		'path' => $path
+	);
+ 
+	$client = new SolrClient($options);
+	$doc = new SolrInputDocument();
+	foreach($data as $i => $d)
+		$doc->addField($i, trim(strtolower($d)));
+	
+	$updateResponse = $client->addDocument($doc, FALSE);
+	//$client->commit();
+	return true;
 }
 
 function get_domain() {
@@ -676,3 +728,4 @@ function check_feature($feature) {
 
 	return in_array($feature, $user_config['features']);
 }
+
