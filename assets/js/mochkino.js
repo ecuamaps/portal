@@ -591,6 +591,7 @@ $(document).ready(function() {
             	  $(this).foundation('section', 'reflow');
             });
         });
+		$('#back-results-btn').show();
 						
     });
 					
@@ -727,6 +728,11 @@ $(document).ready(function() {
         	$('#add-qualification-wrapper').foundation('reveal', 'close');
         	$('#search-result-wrapper').foundation('reveal', 'open');
         });    	
+    });
+    
+    $('#back-results-btn').hide();
+    $('#back-results-btn').click(function(e){
+    	$('#search-result-wrapper').foundation('reveal', 'open');
     });
     
 });

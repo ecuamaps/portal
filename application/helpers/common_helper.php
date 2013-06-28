@@ -605,6 +605,31 @@ function icon_arrow_right($w, $h){
 	
 }
 
+function no_logo_icon($w, $h){
+	?>
+		<svg 
+		     version="1.1" 
+		     xmlns="http://www.w3.org/2000/svg" 
+		     xmlns:xlink="http://www.w3.org/1999/xlink" 
+		     width="<?=$w?>px" height="<?=$h?>px"
+		     viewBox="0 0 100 100" preserveAspectRatio="none"> 
+		   <g> 
+<image width="100" height="100" xlink:href="data:image/png;base64, 
+iVBORw0KGgoAAAANSUhEUgAAAGQAAABkBAMAAACCzIhnAAAAG1BMVEXY1tkAAACioKKHhYe9u71R
+UFE2NTZsa2wbGhtJUeuGAAABQElEQVRYhe2RT0+DMBiHf9Ju4+i7P3RHyMzicYQZrywuniFx95Hp
+vehhHsfJr21LQWfV+AF8nwM8DTwtLQDDMAzDMMx/YpFDrgFxXPdDw+2Lvd0dnz/8nHIPoRA0RLod
+rszlmkgB90Tz3r8mE5tsJliqPpG0CiotmwcEnXvJ3CZVDDR5lwzHQDgdtFM495JaCyXNF6Bedcnm
+BIwmFyf72LmXLKdCBTNjSdElVoJZUogsy517ydVMKNEm+y5J7WtRWoTmSJx7SVwvfllFblP94ypx
+eFDSzpPqfi9mOaHsNdHO/URECk1rXRJeAoOxPadEO/cTNAp1gWDe/5eR+ZDkJKLcJM6/JYnCMMrK
+dq7yabdDdbihGPVbVurO/cT+tFcyk9ohEeWjhh7NFiqKYjj/ke35QLa53H46wzAMwzDMX7wDVG86
+i8YgWHgAAAAASUVORK5CYII=
+"/> 
+			</g> 
+		</svg>	
+<?php
+	
+}
+
 function search_query($text, $post_type){
 	$terms = array();
 	

@@ -42,37 +42,38 @@
 				
 				$scores[$d->id] = '{id: '.$d->id.', name: "'.ucfirst($d->name).'", score_avg: '.$score_avg.'}';
 			?>
-			<h4 class="subheader"><?= ucfirst($d->name) ?></h4>
+			<h4 class="subheader clear-margin"><?= ucfirst($d->name) ?></h4>
+			<h6 class="clear-margin font-weight-normal line-height-08"><small><?= $str_types ?></small></h6>
+			<h5 class="clear-margin font-weight-normal line-height-08 margin-bottom-5px"><small><?= lang('search.distance') ?>: <?= $distance ?>, <?= lang('search.score') ?>: <?= $score_avg ?></small></h5>
 			<div class="section-container auto" data-section>
 				<section>
-    				<p class="title" data-section-title><a href="#panel1">Basic</a></p>
+    				<p class="title" data-section-title><a href="#panel1"><?= lang('search.start') ?></a></p>
     				<div class="content" data-section-content>
-					  	<input type="hidden" name="<?= $d->id ?>-lat"  value="<?= $d->location_0_coordinate ?>" />
-					  	<input type="hidden" name="<?= $d->id ?>-lng"  value="<?= $d->location_1_coordinate ?>" />
-					  	<input type="hidden" name="<?= $d->id ?>-inmap"  value="0" />
+						<div class="row">
+							<div class="large-4 columns">
+								<nav class="breadcrumbs">
+								  <a href="javascript:void(0)" post-id="<?= $d->id ?>" class="qualify-post"><?= lang('search.review') ?></a>
+								  <a href="javascript:void(0)" lat="<?= $d->location_0_coordinate ?>" lng="<?= $d->location_1_coordinate ?>" dist="<?= $d->_dist_ ?>" class="set-directions"><?= lang('search.howtoget') ?></a>
+								</nav>
+							</div>
+						</div>
+						<div class="row">&nbsp;</div>	  	
 					  	<div class="row">
 							<div class="large-9 columns">
 								<div class="row">
-									<div class="large-3 columns"><h5 class="clear-margin"><small><?= $distance ?></small></h5></div>
-									<div class="large-9 columns">
-										<h6 class="clear-margin"><?= ucfirst($d->name) ?></h6>
-										<h6 class="clear-margin"><small><?= $str_types ?></small></h6>
+									<div class="large-2 columns"><?no_logo_icon(80, 80)?></div>
+									<div class="large-10 columns">
+										<h6 class="clear-margin font-weight-normal"><small><?= ucfirst($d->content) ?></small></h6>
+										<h6 class="clear-margin font-weight-normal"><small><?= ucfirst($d->address) ?></small></h6>
+										<h6 class="clear-margin font-weight-normal"><small><?= lang('search.phone') ?>: <?= $d->phones ?></small></h6>									
 									</div>
-								</div>
-								<div class="row">
-									<div class="large-3 columns"><h5 class="clear-margin"><small><?= lang('search.score') ?>: <?= $score_avg ?></small></h5></div>
-									<div class="large-9 columns">
-										<h6 class="clear-margin"><small><?= ucfirst($d->content) ?></small></h6>
-										<h6 class="clear-margin"><small><?= ucfirst($d->address) ?></small></h6>
-										<h6 class="clear-margin"><small><?= lang('search.phone') ?>: <?= $d->phones ?></small></h6>
-									</div>						
 								</div>
 							</div>
 							<div class="large-3 columns">
-								<div class="row"><a href="javascript:void(0)" post-id="<?= $d->id ?>" class="qualify-post"><?= lang('search.review') ?></a></div>
-								<div class="row"><a href="javascript:set_directions('<?= $d->location_0_coordinate ?>', '<?= $d->location_1_coordinate ?>', <?= $d->_dist_ ?>)" class=""><?= lang('search.howtoget') ?></a></div>
+								<div class="row"></div>
+								<div class="row"></div>
 							</div>
-						</div>			  	
+						</div>
     				</div>
   				</section>
   				
@@ -103,15 +104,16 @@
 		</div>
 
 		<a class="close-reveal-modal">&#215;</a>
-		
+
+		<script>		
 		<? if($results->response->numFound): ?>
-		<script>
 			var posts = {}; 
 			<? foreach($scores as $id => $s): ?>
 			posts[<?=$id?>] = <?=$s?>;<?="\n"?>
 			<? endforeach; ?>
 
 			$('.qualify-post').click(function(e){
+				e.preventDefault();
 				var post_id = $(this).attr('post-id');
 				var post = posts[post_id];
     			
@@ -121,6 +123,17 @@
     			$('#search-result-wrapper').foundation('reveal', 'close');    			
     			$('#add-qualification-wrapper').foundation('reveal', 'open');
     		});
-			
+
+		<? endif; ?>
+		
+			$('.set-directions').click(function(e){
+				e.preventDefault();
+				var lat = $(this).attr('lat');
+				var lng = $(this).attr('lng');
+				var d = $(this).attr('dist');
+				console.log(lat);
+				set_directions(lat, lng, d);
+				$('#add-qualification-wrapper').foundation('reveal', 'close');
+			})
 		</script>
-		<? endif; ?>		
+		

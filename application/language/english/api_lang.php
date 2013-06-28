@@ -5,8 +5,9 @@ $lang['search.score'] = "Score";
 $lang['search.howtoget'] = "How to get?";
 $lang['search.phone'] = "Phone(s)";
 $lang['search.review'] = "Review/Score";
-$lang['search.more'] = "Extras";
-$lang['search.map'] = "View Maps";
+$lang['search.more'] = "At glance";
+$lang['search.start'] = "Start";
+$lang['search.distance'] = "Distance apox.";
 
 $lang['qualify.earlierqualify'] = "You has qualified this post before.";
 $lang['qualify.sucess.outstanding'] = "We got your review but it is pending to approbation, thanks.";

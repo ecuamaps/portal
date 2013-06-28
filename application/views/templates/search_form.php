@@ -12,6 +12,7 @@
 					</div>
 					<div class="small-4 columns">
 						<a href="javascript:void(0)" id="search-btn" class="small button alert"><?icon_magni_glass(12, 13)?></a>
+						<a href="javascript:void(0)" id="back-results-btn" class="small button success">Volver a los resultados</a>
 						<a href="javascript:void(0)" id="adv-search" data-dropdown="adv-search-block"><?=lang('dashboard.searchform.advsearch')?></a>
 					</div>
 					<!-- <div class="small-2 columns"></div> -->
