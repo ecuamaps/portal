@@ -5,8 +5,8 @@ $lang['search.score'] = "Score";
 $lang['search.howtoget'] = "How to get?";
 $lang['search.phone'] = "Phone(s)";
 $lang['search.review'] = "Review/Score";
-$lang['search.more'] = "At glance";
-$lang['search.start'] = "Start";
+$lang['search.more'] = "Browse";
+$lang['search.start'] = "Summary";
 $lang['search.distance'] = "Distance apox.";
 
 $lang['qualify.earlierqualify'] = "You has qualified this post before.";

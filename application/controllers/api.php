@@ -48,7 +48,17 @@ class Api extends CI_Controller {
 		//echo '<pre>',print_r($json),'</pre>';
 		$docs = $results->response->docs;
 		
-		$this->load->view('api/search', array('results' => $results, 'docs' => $docs));		
+		$this->load->helper('pagination');
+		
+		$params = array(
+		    'results' => $results,
+		    'docs' => $docs,
+ 		    'start' => $start,
+		    'rows' => $rows,
+		    'numFound' => $results->response->numFound
+		);
+				
+		$this->load->view('api/search', $params);		
 	}
 	
 	function ajax_get_all_types(){

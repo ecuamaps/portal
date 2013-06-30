@@ -1,5 +1,6 @@
 <div class="row full-width">
 	<?= form_open('api/search', array('id' => 'search-form', 'class' => 'clear-margin')) ?>
+	<input type="hidden" name="search-start" id="search-start" value="0"/>
 	<div class="row full-width">
 		<div class="large-12 columns">
 			<div class="panel callout opacity07 text-color-white padding-10px clear-margin">

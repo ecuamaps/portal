@@ -1,22 +1,11 @@
 		<? header('Content-Type: text/html'); ?>  
   
 		<h4><small><?= sprintf(lang('search.resultstitle'), $results->response->numFound) ?>:</small></h4>
-
-		<div class="pagination-centered">
-		  <ul class="pagination">
-		    <li class="arrow unavailable"><a href="">&laquo;</a></li>
-		    <li class="current"><a href="">1</a></li>
-		    <li><a href="">2</a></li>
-		    <li><a href="">3</a></li>
-		    <li><a href="">4</a></li>
-		    <li><a href="">5</a></li>
-		    <li class="unavailable"><a href="">&hellip;</a></li>
-		    <li class="arrow"><a href="">&raquo;</a></li>
-		  </ul>
-		</div>
+		
+		<?= pagination($start, $rows, $numFound) ?>
 		
 		<div class="row full-width" id="results-wrapper">
-			<? foreach($docs as $d): ?>
+			<? foreach($docs as $index => $d): ?>
 			<?
 				$distance = (float) $d->_dist_;
 				$unit = 'Km';
@@ -42,7 +31,7 @@
 				
 				$scores[$d->id] = '{id: '.$d->id.', name: "'.ucfirst($d->name).'", score_avg: '.$score_avg.'}';
 			?>
-			<h4 class="subheader clear-margin"><?= ucfirst($d->name) ?></h4>
+			<h4 class="subheader clear-margin"><?= ($start + $index + 1).'. '.ucfirst($d->name) ?></h4>
 			<h6 class="clear-margin font-weight-normal line-height-08"><small><?= $str_types ?></small></h6>
 			<h5 class="clear-margin font-weight-normal line-height-08 margin-bottom-5px"><small><?= lang('search.distance') ?>: <?= $distance ?>, <?= lang('search.score') ?>: <?= $score_avg ?></small></h5>
 			<div class="section-container auto" data-section>
@@ -89,20 +78,9 @@
 			
 			<? endforeach; ?>
 		</div>
-
-		<div class="pagination-centered">
-		  <ul class="pagination">
-		    <li class="arrow unavailable"><a href="">&laquo;</a></li>
-		    <li class="current"><a href="">1</a></li>
-		    <li><a href="">2</a></li>
-		    <li><a href="">3</a></li>
-		    <li><a href="">4</a></li>
-		    <li><a href="">5</a></li>
-		    <li class="unavailable"><a href="">&hellip;</a></li>
-		    <li class="arrow"><a href="">&raquo;</a></li>
-		  </ul>
-		</div>
-
+		
+		<?= pagination($start, $rows, $numFound) ?>
+		
 		<a class="close-reveal-modal">&#215;</a>
 
 		<script>		
@@ -123,7 +101,15 @@
     			$('#search-result-wrapper').foundation('reveal', 'close');    			
     			$('#add-qualification-wrapper').foundation('reveal', 'open');
     		});
-
+			
+			$('.goto-page').click(function (e){
+				e.preventDefault();
+				
+				var start = parseInt($(this).attr('start'));
+				
+				$('input[name="search-start"]').val(start);
+				search(false);
+			})
 		<? endif; ?>
 		
 			$('.set-directions').click(function(e){

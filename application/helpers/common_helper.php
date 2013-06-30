@@ -6,7 +6,7 @@ function get_config_val($key) {
 	$CI = & get_instance();
 	return $CI->config_model->get_value($key);
 }
-
+ 
 function get_confirmation_process(){
 	$param = get_config_val('payment_confirmation_process_'.current_lang());
 	

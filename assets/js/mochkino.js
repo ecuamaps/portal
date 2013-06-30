@@ -571,28 +571,8 @@ $(document).ready(function() {
         if(!text)
             return false;
 		
-        $.ajax({
-            type : "POST",
-            url : $('#search-form').attr('action'),
-            dataType : "html",
-            data : {
-                text : text,
-                distance : $('#distance').val(),
-                rows : $('#rows').val(),
-                post_type : $('#post_type').val(),
-        		lat : myLatlng.lat(),
-        		lng : myLatlng.lng(),
-                hms1 : $('input[name="hms1"]').val()
-            }
-        }).done(function(response) {
-            showSearchResults(response);
-            $('#search-result-wrapper').foundation('reveal', 'open');
-            $('#search-result-wrapper').on('opened', function () {
-            	  $(this).foundation('section', 'reflow');
-            });
-        });
-		$('#back-results-btn').show();
-						
+        $('input[name="search-start"]').val('0');
+        search(true);
     });
 					
     $('#close-panel-button, #open-panel-button').click(function(e){
@@ -763,8 +743,36 @@ function get_bz_by_type(type_id){
 	console.log(type_id);
 }
 
-function search(){
+function search(openModal){
 	
+	$.ajax({
+        type : "POST",
+        url : $('#search-form').attr('action'),
+        dataType : "html",
+        data : {
+            text : $('input[name="search-text"]').val(),
+            distance : $('#distance').val(),
+            rows : $('#rows').val(),
+            start: $('input[name="search-start"]').val(),
+            post_type : $('#post_type').val(),
+    		lat : myLatlng.lat(),
+    		lng : myLatlng.lng(),
+            hms1 : $('input[name="hms1"]').val()
+        }
+    }).done(function(response) {
+        showSearchResults(response);
+        if(openModal){
+            $('#search-result-wrapper').foundation('reveal', 'open');
+            $('#search-result-wrapper').on('opened', function () {
+            	  $(this).foundation('section', 'reflow');
+            });        	
+        }else{
+        	$('#search-result-wrapper').foundation('section', 'reflow');
+        }
+        
+    });
+    
+	$('#back-results-btn').show();	
 }
 
 function removeMarker(id){

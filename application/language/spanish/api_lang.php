@@ -6,7 +6,7 @@ $lang['search.howtoget'] = "C&oacute;mo llegar?";
 $lang['search.phone'] = "Tel(s)";
 $lang['search.review'] = "Rese&ntilde;a/Califica";
 $lang['search.more'] = "Ver Mas";
-$lang['search.start'] = "Inicio";
+$lang['search.start'] = "Resumen";
 $lang['search.distance'] = "Distancia apox.";
 
 $lang['qualify.earlierqualify'] = "Tu ya has calificado esta publicaci&oacute;n antes.";

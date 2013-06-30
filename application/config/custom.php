@@ -20,3 +20,5 @@ $config['not_alloed_words_search'] = array(
 	'at',
 	'and'
 );
+
+$config['max_amt_pages'] = 5;
