@@ -432,14 +432,16 @@ $(document).ready(function() {
 
     $('#delete-location').click(function(e) {
         e.preventDefault();
+	
 
         var name = '';
         $(".user-locations").each(function(index) {
             if ($(this).attr('current') == '1')
-                name = $(this).attr('name');
+                name = $(this).attr('name');                
         });
-          if(!confirm('Realmente desea Eliminarlo ?'))
-        if (!name)
+        if(!confirm(location_delete)) 
+          return false;
+        if (!name)          
             return false;
 
         $.ajax({
