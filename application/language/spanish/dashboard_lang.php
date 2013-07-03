@@ -12,6 +12,7 @@ $lang['dashboard.setdefaullocation'] = "Marcar Como Principal";
 $lang['dashboard.deletelocation'] = "Eliminar";
 $lang['dashboard.navmenu'] = "Navegar";
 $lang['dashboard.addbuz'] = "Crear Negocio";
+$lang['dashboard.mybizs'] = "Mis Negocios";
 
 $lang['dashboard.chpwd'] = "Cambiar Contrase&ntilde;a";
 $lang['dashboard.chpwd.button'] = "Cambiar";

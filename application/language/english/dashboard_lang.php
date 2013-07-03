@@ -11,8 +11,9 @@ $lang['dashboard.addnewlocation'] = "Add New";
 $lang['dashboard.setdefaullocation'] = "Set as Default";
 $lang['dashboard.deletelocation'] = "Delete";
 $lang['dashboard.navmenu'] = "Locations";
-
 $lang['dashboard.addbuz'] = "Add Your Business";
+$lang['dashboard.mybizs'] = "My Businesses";
+
 
 $lang['dashboard.chpwd'] = "Change Password";
 $lang['dashboard.chpwd.button'] = "Change";

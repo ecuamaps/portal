@@ -174,5 +174,13 @@ class Account_model extends CI_Model {
 		$this->db->where('id', $account_id);
 		return $this->db->update('user');			
 	}
+	
+	function get_businesses($account_id){
+		$this->db->order_by('name', 'desc');
+		$biz = $this->db->get_where('post', array('user_id' => $account_id, 'post_type_id' => 1))->result();
+		if(!count($biz))
+			return null;
+		return $biz;
+	}
       
 }

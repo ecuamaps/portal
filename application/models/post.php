@@ -14,9 +14,29 @@ class Post extends CI_Model {
 	
 	function get_by_id($post_id){
 		$post = $this->db->get_where('post', array('id' => $post_id))->result();
-		if(count($post))
-			return $post[0];
+		if(count($post)){
+			$post = $post[0];
+			$post = $this->get_metas($post_id, $post);
+			return $post;
+		}
+			
 		return null;
+	}
+	
+	function get_metas($post_id, $post=null){
+		$result = $this->db->get_where('postmeta', array('post_id' => $post_id))->result();
+		if(!count($result))
+			return null;
+			
+		if(!$post)
+			$post =  new stdClass();
+			
+		foreach($result as $row){
+			$attr = $row->meta_key;
+			$post->$attr = $row->meta_value;
+		}
+		
+		return $post;
 	}
 	
 	function add_qualification($post_id, $data){

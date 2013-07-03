@@ -176,4 +176,22 @@ class Api extends CI_Controller {
 	function test_syncronize($id){
 		$this->business_model->syncronize($id);
 	}
+	
+	function open_business_panel(){
+		$this->load->model('business_model');
+		$this->lang->load('biz_panel');
+		$this->lang->load('account');
+		
+		$post_id = $this->input->get('post_id');
+		
+		//Load the biz basic
+		$biz = $this->business_model->get_by_id($post_id);
+		
+		$params = array(
+			'biz' => $biz,
+			'user' => $this->session->userdata('user')
+		);
+
+		$this->load->view('api/biz_panel', $params);	
+	}
 }

@@ -24,8 +24,12 @@
   <script src="<?=base_url()?>assets/js/mochkino.js"></script>
   <script src="<?=base_url()?>assets/js/jquery.cookie.js"></script>
   
+  <script>
+  	var lang = '<?=$this->lang->lang()?>';
+  </script>
+  
   <?=$_scripts?>
-
+  
 </head>
 <body>
 
@@ -148,7 +152,6 @@
 		</div>
 		
 		<script>
-			var lang = '<?=$this->lang->lang()?>';
 			var err_msg_missing_field_signin = '<?=lang('dashboard.signupform.errmsg')?>';
 			var err_msg_mismatch_pass = '<?=lang('dashboard.signupform.errmsg.pass')?>'
 			var err_msg_wrong_email_format = '<?=lang('dashboard.signupform.errmsg.emailformat')?>';

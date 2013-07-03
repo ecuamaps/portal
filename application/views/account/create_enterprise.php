@@ -9,57 +9,8 @@
   			<span id="createbiz-error-msg"></span>
 		</div>
 	</div>
-
-	<div class="row">
-		<div class="large-12 columns">
-	        <label><?=lang('createbiz.type')?>*</label>
-	        <select name="bz-type" required>
-	        	<option></option>
-	        	<? foreach($bz_types as $t):?>
-	        	<option value="<?= $t->id ?>"><?= $t->name ?></option>
-	        	<? endforeach; ?>
-	        </select>		
-		</div>
-	</div>
     
-    <div class="row">
-      <div class="large-4 columns">
-        <label><?=lang('createbiz.name')?>*</label>
-        <input type="text" name="bz-name" required/>
-      </div>
-      <div class="large-4 columns">
-        <label><?=lang('createbiz.desc')?></label>
-        <input type="text" name="bz-desc" placeholder="<?=lang('createbiz.desc.placeholder')?>" />
-      </div>
-      <div class="large-4 columns">
-        <label><?=lang('createbiz.address')?></label>
-        <input type="text" name="bz-addr" />        
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="large-4 columns">
-        <label><?=lang('createbiz.phones')?></label>
-        <input type="text" name="bz-phones" />
-      </div>
-      <div class="large-4 columns">
-        <label><?=lang('createbiz.CEO')?></label>
-        <input type="text" name="bz-ceo" />
-      </div>
-      <div class="large-4 columns">
-        <label><?=lang('createbiz.email')?></label>
-        <input type="email" name="bz-email" />        
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="large-12 columns">
-      	<label><?=lang('createbiz.map')?>* <a href="javascript:void(0)" id="show-map" class="tiny button"><?=lang('createbiz.btn.showmap')?></a></label>
-      	<input type="hidden" id="bz-lat" name="bz-lat" required/>
-      	<input type="hidden" id="bz-lng" name="bz-lng" required/>
-		<div id="map_addbiz" style=""></div> 
-      </div>
-    </div>
+	<? show_biz_form() ?>
 
     <div class="row">
       <div class="large-12 columns">&nbsp;</div>
@@ -359,43 +310,6 @@ var sub_total = 0;
 var iva = 0;
 var iva_factor = <?=get_config_val('iva')?> / 100;
 
-function mapInit() {
-	var mapOpt = {
-		zoom : 15,
-		center : myLatlng,
-		mapTypeId : google.maps.MapTypeId.ROADMAP,
-		mapTypeControl : false,
-		mapTypeControlOptions : {
-			position : google.maps.ControlPosition.RIGHT_CENTER
-		},
-		panControl : false,
-		scrollwheel : true,
-		navigationControl : true,
-		streetViewControl : false,
-		zoomControlOptions : {
-			style : google.maps.ZoomControlStyle.SMALL,
-			position : google.maps.ControlPosition.RIGHT_CENTER
-		},
-		styles : styles
-	};
- 	
- 	addbz_map = new google.maps.Map(document.getElementById('map_addbiz'), mapOpt);
-
-	google.maps.event.addListener(addbz_map, 'click', function(event) {
-		if(addbz_marker)
-			addbz_marker.setMap(null);
-			
-		addbz_marker = new google.maps.Marker({
-			position : event.latLng,
-			map : addbz_map
-		});
-		//addbz_map.setCenter(event.latLng);
-		
-		$('#bz-lat').val(event.latLng.lat());
-		$('#bz-lng').val(event.latLng.lng());
-
-	});
-}
 
 $(document).ready(function(){
 	$('#step2-wrapper, #step3-wrapper, #step3-post, #step3-pay ,#step4-wrapper, #step5-wrapper, #step4-pay, #paid-process, #waiting, #free-process').hide();
@@ -494,14 +408,7 @@ $(document).ready(function(){
 		$('#step4-wrapper').hide();
 					
 	});
-	
-	
-	$('#show-map').click(function(e){
-		$('#map_addbiz').attr('style', 'padding: 0; height: 200px; width: 100%;');
-		mapInit();
-		$(this).hide();
-	});
-	
+		
 	$('#billing-cycle').change(function(e){
 		
 		$('#product').html('');

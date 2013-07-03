@@ -732,6 +732,91 @@ function solr_syncronize($data){
 	return true;
 }
 
+
+function show_biz_form($post = null){
+	$CI = & get_instance();
+	$CI->lang->load('account');
+	$CI->load->model('business_model');
+	
+	$bz_types = $CI->business_model->get_types();
+	$biz_type->id = null;
+	if(is_object($post)){
+		$biz_type = $CI->business_model->get_biz_types($post->id);
+		$biz_type = $biz_type[0];
+	}
+	?>
+	<pre><? /*print_r($post)*/ ?></pre>
+	
+	<input type="hidden" name="bz-id" id="bz-id" <?=isset($post->id) ? 'value="'.$post->id.'"' : ''?> />
+	
+	<div class="row">
+		<div class="large-12 columns">
+	        <label><?=lang('createbiz.type')?>*</label>
+	        <select name="bz-type" required>
+	        	<option></option>
+	        	<? foreach($bz_types as $t):?>
+	        	<option value="<?= $t->id ?>" <?= ($biz_type->id == $t->id ) ? 'selected' : '' ?>><?= $t->name ?></option>
+	        	<? endforeach; ?>
+	        </select>		
+		</div>
+	</div>
+	
+    <div class="row">
+      <div class="large-4 columns">
+        <label><?=lang('createbiz.name')?>*</label>
+        <input type="text" name="bz-name" <?=isset($post->name) ? 'value="'.$post->name.'"' : ''?> required/>
+      </div>
+      <div class="large-4 columns">
+        <label><?=lang('createbiz.desc')?></label>
+        <input type="text" name="bz-desc" <?=isset($post->content) ? 'value="'.$post->content.'"' : ''?>" placeholder="<?=lang('createbiz.desc.placeholder')?>" />
+      </div>
+      <div class="large-4 columns">
+        <label><?=lang('createbiz.address')?></label>
+        <input type="text" name="bz-addr" <?=isset($post->address) ? 'value="'.$post->address.'"' : ''?>/>        
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-4 columns">
+        <label><?=lang('createbiz.phones')?></label>
+        <input type="text" name="bz-phones" <?=isset($post->phones) ? 'value="'.$post->phones.'"' : ''?> />
+      </div>
+      <div class="large-4 columns">
+        <label><?=lang('createbiz.CEO')?></label>
+        <input type="text" name="bz-ceo" <?=isset($post->CEO_name) ? 'value="'.$post->CEO_name.'"' : ''?> />
+      </div>
+      <div class="large-4 columns">
+        <label><?=lang('createbiz.email')?></label>
+        <input type="email" name="bz-email" <?=isset($post->CEO_email) ? 'value="'.$post->CEO_email.'"' : ''?> />        
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-12 columns">
+      	<label><?=lang('createbiz.map')?>* <a href="javascript:void(0)" id="<?=($post) ? 'show-map-upd' : 'show-map'?>" class="tiny button"><?=lang('createbiz.btn.showmap')?></a></label>
+      	<input type="hidden" id="bz-lat" name="bz-lat" <?=isset($post->lat) ? 'value="'.$post->lat.'"' : ''?> required/>
+      	<input type="hidden" id="bz-lng" name="bz-lng" <?=isset($post->lng) ? 'value="'.$post->lng.'"' : ''?> required/>
+		<div id="<?=($post) ? 'map_addbiz-upd' : 'map_addbiz'?>" style=""></div> 
+      </div>
+    </div>
+
+	<script>
+		$(document).ready(function(){
+			
+			$('#<?=($post) ? 'show-map-upd' : 'show-map'?>').click(function(e){
+				var lat = $('#bz-lat').val();
+				var lng = $('#bz-lng').val();
+
+				$('#<?=($post) ? 'map_addbiz-upd' : 'map_addbiz'?>').attr('style', 'padding: 0; height: 200px; width: 100%;');
+				bzCreationMapInit('<?=($post) ? 'map_addbiz-upd' : 'map_addbiz'?>', lat, lng);
+				$(this).hide();
+			});
+			
+		});
+	</script>    	
+	<?php
+}
+
 function get_domain() {
 	$CI = & get_instance();
 	$bar_url_pieces = explode('.', $CI->config->item('base_url'));

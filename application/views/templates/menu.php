@@ -29,7 +29,7 @@
 
 	          	 	<li class="has-dropdown"><a href="javascript:void(0)"><?=lang('dashboard.mylocations')?></a>
 	          	 		<ul class="dropdown" id="saved-locations">
-	          	 			<li><a href="#" data-reveal-id="add-location-form-wrapper"><?=lang('dashboard.addnewlocation')?></a></li>
+	          	 			<li><a href="javascript:void(0)" data-reveal-id="add-location-form-wrapper"><?=lang('dashboard.addnewlocation')?></a></li>
 	          	 			<li><a href="<?=base_url($this->lang->lang().'/api/set_default_location')?>" <?= !isset($user_locations) ? 'style="display:none"' : ''?> id="set-default-location"><?=lang('dashboard.setdefaullocation')?></a></li>
 	          	 			<li><a href="<?=base_url($this->lang->lang().'/api/delete_location')?>" <?= !isset($user_locations) ? 'style="display:none"' : ''?> id="delete-location"><?=lang('dashboard.deletelocation')?></a></li>
 	          	 		<? if(isset($user_locations)): ?>
@@ -41,10 +41,20 @@
 	          	 		<? endif; ?>
 	          	 		</ul>
 	          	 	</li>
-	          	 	
-	          
               	 </ul> 
-	          </li>			  	
+	          </li>
+	          
+	          <? if(isset($businesses)): ?>
+	          <li class="divider"></li>
+	          <li class="has-dropdown"><a href="javascript:void(0)"><?=lang('dashboard.mybizs')?></a>
+	          	<ul class="dropdown">
+	          		<? foreach($businesses as $b): ?>
+	          		<li><a href="javascript:void(0)" id="<?=$b->id?>" class="mybiz-link"><?=$b->name?></a></li>
+	          		<? endforeach; ?>
+	          	</ul>
+	          <li>
+	          <? endif; ?>
+	          
 			  <? endif; ?>
 			  
 			  <? if(!$user): ?>
@@ -145,6 +155,10 @@
 	
 	<!-- Add Enterprise Form -->
 	<div class="reveal-modal" id="add-enterprise-form"></div>
+	<!-- End Add Enterprise Form -->
+
+	<!-- Add Enterprise Form -->
+	<div class="reveal-modal" id="biz-control-panel"></div>
 	<!-- End Add Enterprise Form -->
 
 	<!-- Change Password Form -->

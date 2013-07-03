@@ -244,4 +244,37 @@ class Account extends CI_Controller {
 		die(json_encode(array('status' => 'ok', 'invoice_id' => $invoice_id, 'biz_id' => $bz_id)));
 	}
 	
+	function update_business(){
+		$this->load->model('business_model');
+		$this->lang->load('biz_panel');
+		
+		$user_id = $this->input->post('user_id', TRUE);
+		$bz_id = $this->input->post('bz_id', TRUE);
+		$bz_type_id = $this->input->post('bz_type_id', TRUE);
+		$type =  $this->business_model->get_type_by_id($bz_type_id);
+		$is_free = $this->input->post('is_free', TRUE);
+		$bz_name = $this->input->post('bz_name', TRUE);
+		$bz_phones = $this->input->post('bz_phones', TRUE);
+		$bz_address = $this->input->post('bz_addr', TRUE);
+		$bz_lat = $this->input->post('bz_lat', TRUE);
+		$bz_lng = $this->input->post('bz_lng', TRUE);
+
+		$bz_data = array(
+			'user_id' => $user_id,
+			'bz_type_id' => $bz_type_id,
+			'bz_type_name' => $type->name,
+			'name' => $bz_name,
+			'description' => $this->input->post('bz_desc', TRUE),
+			'address' => $bz_address,
+			'phones' => $bz_phones,
+			'CEO_name' => $this->input->post('bz_ceo', TRUE),
+			'CEO_email' => $this->input->post('bz_email', TRUE),
+			'lat' => $bz_lat,
+			'lng' => $bz_lng,
+		);
+		
+		$result = $this->business_model->update($bz_id, $bz_data);
+		die(json_encode(array('status' => 'ok', 'msg' => lang('bizpanel.successfull'))));
+	}
+	
 }

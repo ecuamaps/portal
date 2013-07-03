@@ -216,7 +216,7 @@ $(document).ready(function() {
         if ($("#extra-types").text().length == 0) { // Only once
             $.ajax({
                 type : "POST",
-                url : "en/api/ajax_get_all_types",
+                url : lang + "/api/ajax_get_all_types",
                 dataType : "json",
                 cache : true,
                 data : {
@@ -715,6 +715,18 @@ $(document).ready(function() {
     	$('#search-result-wrapper').foundation('reveal', 'open');
     });
     
+    $('.mybiz-link').click(function (e){
+    	e.preventDefault();
+    	
+    	$('#biz-control-panel').foundation('reveal', 'open', {
+    	    url: lang + '/api/open_business_panel',
+    	    data: {post_id: $(this).attr('id')}
+    	});
+    	
+    	$('#biz-control-panel').on('opened', function () {
+      	  $(this).foundation('section', 'reflow');
+      });
+    })
 });
 
 function change_sort(orderby){
@@ -863,6 +875,58 @@ function cookie(name, val) {
     }
 }
 
+
+function bzCreationMapInit(map_wrapper_id, lat, lng) {
+	
+	var map_center = myLatlng;
+	if(lat && lng){
+		map_center = new google.maps.LatLng(lat, lng);
+	}
+		
+	var mapOpt = {
+		zoom : map.getZoom(),
+		center : map_center,
+		mapTypeId : google.maps.MapTypeId.ROADMAP,
+		mapTypeControl : false,
+		mapTypeControlOptions : {
+			position : google.maps.ControlPosition.RIGHT_CENTER
+		},
+		panControl : false,
+		scrollwheel : true,
+		navigationControl : true,
+		streetViewControl : false,
+		zoomControlOptions : {
+			style : google.maps.ZoomControlStyle.SMALL,
+			position : google.maps.ControlPosition.RIGHT_CENTER
+		},
+		styles : styles
+	};
+ 	
+	
+ 	addbz_map = new google.maps.Map(document.getElementById(map_wrapper_id), mapOpt);
+
+	addbz_marker = new google.maps.Marker({
+		position : map_center,
+		map : addbz_map
+	});
+
+	google.maps.event.addListener(addbz_map, 'click', function(event) {
+		if(addbz_marker)
+			addbz_marker.setMap(null);
+			
+		addbz_marker = new google.maps.Marker({
+			position : event.latLng,
+			map : addbz_map
+		});
+		//addbz_map.setCenter(event.latLng);
+		
+		$('#bz-lat').val(event.latLng.lat());
+		$('#bz-lng').val(event.latLng.lng());
+
+	});
+}
+
 function put_bz_by_type(type_id) {
     console.log(type_id);
 }
+

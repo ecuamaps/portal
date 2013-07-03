@@ -89,6 +89,56 @@ class Business_model extends CI_Model {
 		return $bz_id;
 	}
 	
+	function update($bz_id, $data){
+		$bz = array(
+			'post_type_id' => $this->post_type,
+			'user_id' => $data['user_id'],
+			'name' => $data['name'],
+			'content' => $data['description'],
+			'last_update' => date('Y-m-d')
+		);
+		
+		if(!$this->db->update('post', $bz, "id = $bz_id")){
+			return false;
+		}
+		
+		//update metafields
+		$metas = array(
+			'address' => $data['address'],
+			'lat' => $data['lat'],
+			'lng' => $data['lng'],
+			'phones' => $data['phones'],
+			'CEO_name' => $data['CEO_name'],
+			'CEO_email' => $data['CEO_email'],
+		);
+
+		foreach($metas as $index => $value){
+			$meta = $this->db->get_where('postmeta', array('post_id' => $bz_id, 'meta_key' => $index))->result();
+			if(count($meta)){
+				$meta = $meta[0];
+				$this->db->update('postmeta', array('meta_value' => $value), array('id' => $meta->id));
+			}else{
+				$this->db->insert('postmeta', array('post_id' => $bz_id, 'meta_key' => $index, 'meta_value' => $value));
+			}
+		}
+		
+		//Create the bz_type relationship
+		$bz_type_rel = array(
+			'post_id' => $bz_id,
+			'biz_type_id' => $data['bz_type_id']
+		);
+		
+		$this->db->delete('post_biz_types', array('post_id' => $bz_id)); 
+		
+		if(!$this->db->insert('post_biz_types', $bz_type_rel)){
+			return false;
+		}
+		
+		//Syncronize in solr
+		$this->syncronize($bz_id);
+		
+		return true;
+	}
 	function get_top_5_biz_types(){
 		$sql = "SELECT * FROM biz_type ORDER BY hits LIMIT 5";
 		$types = $this->db->query($sql)->result();
@@ -151,4 +201,9 @@ class Business_model extends CI_Model {
 		return $this->db->query($sql)->result();
 	}
 	
+	function get_by_id($id){
+		$CI = & get_instance();
+		$CI->load->model('post');
+		return $CI->post->get_by_id($id);
+	}
 }

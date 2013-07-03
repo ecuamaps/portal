@@ -37,6 +37,7 @@ $lang['createbiz.btn.showmap'] = 'Show Map';
 $lang['createbiz.btn.showproducts'] = 'Show Products';
 $lang['createbiz.btn.pay'] = 'Pay';
 $lang['createbiz.btn.close'] = 'Close';
+$lang['createbiz.btn.save'] = 'Save';
 
 $lang['createbiz.type'] = 'Choose the main business type';
 $lang['createbiz.name'] = 'Name';
