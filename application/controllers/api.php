@@ -14,6 +14,7 @@ class Api extends CI_Controller {
 		$text = $this->input->post('text', TRUE);
 		
 		$distance = $this->input->post('distance', TRUE);
+		$distance = 3; //TODO: Determine how this affect the solr searches
 		$start = $this->input->post('start', TRUE);
 		$start = $start ? $start : 0;
 		$rows = $this->input->post('rows', TRUE);
@@ -21,14 +22,30 @@ class Api extends CI_Controller {
 		$post_type = ($post_type != 'all') ? $post_type : NULL;
 		$lat = $this->input->post('lat', TRUE);
 		$lng = $this->input->post('lng', TRUE);
+		$sort_field = $this->input->post('sort', TRUE);
 
 		$options = ci_config('solr_options');
 		extract($options);
 		
+		//Setup the sort
+		switch($sort_field){
+			case 'score':
+				$sort = 'score desc,score_avg desc,geodist() asc';
+				break;
+			case 'score_avg':
+				$sort = 'score_avg desc, score desc,geodist() asc';
+				break;
+			case 'geodist':
+				$sort = 'geodist() asc, score desc,score_avg desc';
+				break;
+			default:
+				$sort = 'score desc,score_avg desc,geodist() asc';
+		}
+		
 		$q = search_query($text, $post_type);
 		$query = array(
 			'q' => $q,
-			'sort' => 'score desc,score_avg desc,geodist() asc', 
+			'sort' => $sort, 
 			'start' => $start, 
 			'rows' => $rows, 
 			'fl' => '*,score,_dist_:geodist()', 
@@ -55,7 +72,8 @@ class Api extends CI_Controller {
 		    'docs' => $docs,
  		    'start' => $start,
 		    'rows' => $rows,
-		    'numFound' => $results->response->numFound
+		    'numFound' => $results->response->numFound,
+		    'sort' => $sort_field
 		);
 				
 		$this->load->view('api/search', $params);		

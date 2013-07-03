@@ -717,6 +717,13 @@ $(document).ready(function() {
     
 });
 
+function change_sort(orderby){
+	//$('#sort option').attr('selected', false);
+	//$('#sort option[value="' + orderby + '"]').attr('selected', true);
+	$('input[name="search-start"]').val(0);
+	search(false, orderby);
+}
+
 function set_directions(lat, lng, distance){
 	var destination = new google.maps.LatLng(lat, lng);
 	var travelMode = google.maps.TravelMode.DRIVING;
@@ -743,8 +750,9 @@ function get_bz_by_type(type_id){
 	console.log(type_id);
 }
 
-function search(openModal){
+function search(openModal, orderby){
 	
+	orderby = orderby ? orderby : $('#sort').val();
 	$.ajax({
         type : "POST",
         url : $('#search-form').attr('action'),
@@ -754,6 +762,7 @@ function search(openModal){
             distance : $('#distance').val(),
             rows : $('#rows').val(),
             start: $('input[name="search-start"]').val(),
+            sort: orderby,
             post_type : $('#post_type').val(),
     		lat : myLatlng.lat(),
     		lng : myLatlng.lng(),

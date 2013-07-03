@@ -1,4 +1,4 @@
-	<div class="sticky">
+	
 	    <nav class="top-bar">
 	      <ul class="title-area">
 	      
@@ -103,7 +103,7 @@
 	        </ul>
 	      </section>
 	    </nav>
-	</div>
+
 
 	<? if($user): ?>
 	<!-- Add Location Form -->

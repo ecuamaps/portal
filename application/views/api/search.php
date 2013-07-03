@@ -2,6 +2,19 @@
   
 		<h4><small><?= sprintf(lang('search.resultstitle'), $results->response->numFound) ?>:</small></h4>
 		
+		<? if($results->response->numFound): ?>
+		<div class="row full-width">
+			<div class="large-5 columns">
+			<dl class="sub-nav" id="sort-wrapper">
+			  <dt><?=lang('dashboard.searchform.sortby')?>:</dt>
+			  <dd id="score-dd"><a href="javascript:void(0)" class="sort-onresults-option" id="score"><?=lang('dashboard.searchform.sortby.score')?></a></dd>
+			  <dd id="score_avg-dd"><a href="javascript:void(0)" class="sort-onresults-option" id="score_avg"><?=lang('dashboard.searchform.sortby.scoreavg')?></a></dd>
+			  <dd id="geodist-dd"><a href="javascript:void(0)" class="sort-onresults-option" id="geodist"><?=lang('dashboard.searchform.sortby.distance')?></a></dd>
+			</dl>			
+			</div>
+    	</div>
+		<? endif; ?>
+		
 		<?= pagination($start, $rows, $numFound) ?>
 		
 		<div class="row full-width" id="results-wrapper">
@@ -110,6 +123,32 @@
 				$('input[name="search-start"]').val(start);
 				search(false);
 			})
+			
+			$('.sort-onresults-option').click(function(e){
+				var value = $(this).attr('id');
+				var active = value + '-dd';
+				
+				$('#sort-wrapper dd').each(function(index, elem){
+					$(elem).removeClass('active');
+				});
+				
+				$('#' + active).addClass('active');
+				
+				change_sort(value);		
+			});
+			
+			highlightcurrentsort();
+			
+			function highlightcurrentsort(){
+				$('#sort-wrapper dd').each(function(index, elem){
+					$(elem).removeClass('active');
+				});
+				
+				var active = '<?=$sort?>';
+				active = active + '-dd';
+				$('#' + active).addClass('active');	
+			}
+			
 		<? endif; ?>
 		
 			$('.set-directions').click(function(e){

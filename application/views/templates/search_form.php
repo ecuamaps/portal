@@ -26,7 +26,7 @@
 
 	<!-- Advanced Search Form -->
 	<div class="f-dropdown content" id="adv-search-block" data-dropdown-content>	
-		<div class="row margin-top-10px">
+<!--		<div class="row margin-top-10px">
 			<div class="large-12 columns">
 				<label for="distance"><?=lang('dashboard.searchform.radio')?></label>
 				<select id="distance" name="distance" class="medium">
@@ -36,6 +36,17 @@
 				    <option value="0"><?=lang('dashboard.searchform.noradio')?></option>
 				</select>
 			</div>
+    	</div> -->
+
+		<div class="row margin-top-10px">
+			<div class="large-12 columns"><div id="search-orderby-wrapper">
+				<label for="sort"><?=lang('dashboard.searchform.sortby')?></label>
+				<select id="sort" name="sort" class="medium">
+					<option value="score"><?=lang('dashboard.searchform.sortby.score')?></option>
+					<option value="score_avg"><?=lang('dashboard.searchform.sortby.scoreavg')?></option>
+					<option value="geodist"><?=lang('dashboard.searchform.sortby.distance')?></option>
+				</select>
+			</div></div>
     	</div>
 
 		<div class="row margin-top-10px">

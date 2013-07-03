@@ -55,6 +55,11 @@ $lang['dashboard.searchform.accuracyerror'] = 'Maybe we could not get your curre
 $lang['dashboard.searchform.posttype'] = 'Post Type';
 $lang['dashboard.searchform.nearto'] = 'Search near to';
 $lang['dashboard.searchform.locationerror'] = "We couldn't found this address, please try set it manually";
+$lang['dashboard.searchform.sortby'] = "Sort by";
+$lang['dashboard.searchform.sortby.score'] = "Relevance";
+$lang['dashboard.searchform.sortby.scoreavg'] = "Score";
+$lang['dashboard.searchform.sortby.distance'] = "Distance";
+
 
 
 $lang['dashboard.loginform.title'] = "User Login";

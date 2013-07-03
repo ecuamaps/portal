@@ -52,6 +52,10 @@ $lang['dashboard.searchform.accuracyerror'] = 'No hemos podido saber exactamente
 $lang['dashboard.searchform.posttype'] = 'Tipo de Publicaci&oacute;n';
 $lang['dashboard.searchform.nearto'] = 'Buscar cerca a';
 $lang['dashboard.searchform.locationerror'] = "No pudimos encontrar esta dirección, por favor, intente configurarlo manualmente";
+$lang['dashboard.searchform.sortby'] = "Ordenar por";
+$lang['dashboard.searchform.sortby.score'] = "Relevancia";
+$lang['dashboard.searchform.sortby.scoreavg'] = "Puntuaci&oacute;n";
+$lang['dashboard.searchform.sortby.distance'] = "Distancia";
 
 $lang['dashboard.loginform.title'] = "Ingreso de usuario";
 $lang['dashboard.loginform.username'] = "Email";
