@@ -438,7 +438,7 @@ $(document).ready(function() {
             if ($(this).attr('current') == '1')
                 name = $(this).attr('name');
         });
-
+          if(!confirm('Realmente desea Eliminarlo ?'))
         if (!name)
             return false;
 
