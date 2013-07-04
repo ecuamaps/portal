@@ -124,7 +124,7 @@ function placeMarker(location) {
 }
 
 function errorHandler(err) {
-
+		alert(location.failed);
     return null;
 
 }

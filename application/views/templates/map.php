@@ -50,6 +50,11 @@
 	var map_zoom = <?= $map_zoom ?>;
 	
 	var currentPosLbl = '<?=lang('dashboard.searchform.currlocation')?>';
-	var accuracyErrorMsg = '<?=lang('dashboard.searchform.accuracyerror')?>';
+	var accuracyErrorMsg = '<?=lang('dashboard.searchform.accuracyerror')?>';	
 	var locationErrorMsg = "<?=lang('dashboard.searchform.locationerror')?>";
+	
 </script>
+
+<script>var location.failed = "<?=lang('dashboard.location.failed')?>";</script>
+
+
