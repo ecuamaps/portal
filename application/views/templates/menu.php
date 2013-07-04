@@ -30,7 +30,7 @@
 	          	 	<li class="has-dropdown"><a href="javascript:void(0)"><?=lang('dashboard.mylocations')?></a>
 	          	 		<ul class="dropdown" id="saved-locations">
 	          	 			<li><a href="#" data-reveal-id="add-location-form-wrapper"><?=lang('dashboard.addnewlocation')?></a></li>
-	          	 			<li><a href="<?=base_url($this->lang->lang().'/api/set_default_location')?>" <?= !isset($user_locations) ? 'style="display:none"' : ''?> id="set-default-location"><?=lang('dashboard.setdefaullocation')?></a></li>
+	          	 			
 	          	 			<li><a href="<?=base_url($this->lang->lang().'/api/delete_location')?>" <?= !isset($user_locations) ? 'style="display:none"' : ''?> id="delete-location"><?=lang('dashboard.deletelocation')?></a></li>
 	          	 		<? if(isset($user_locations)): ?>
 	          	 			<li class="divider"></li>
@@ -125,13 +125,7 @@
 			    </div>
     		</div>
 
-			<div class="row">
-				<div class="large-12 columns">
-			    	<label>
-			    		<input type="checkbox" name="location-def" value="1" />&nbsp;<?=lang('dashboard.locationform.def')?>
-			    	</label>
-			    </div>
-    		</div>
+			
 			<div class="row">
 				<div class="large-12 columns"><a href="javascript:void(0)" id="add-location-action" class="button"><?=lang('dashboard.locationform.button')?></a></div>
     		</div>
