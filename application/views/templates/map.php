@@ -52,9 +52,10 @@
 	var currentPosLbl = '<?=lang('dashboard.searchform.currlocation')?>';
 	var accuracyErrorMsg = '<?=lang('dashboard.searchform.accuracyerror')?>';	
 	var locationErrorMsg = "<?=lang('dashboard.searchform.locationerror')?>";
+	var location_failed = "<?=lang('dashboard.location.failed')?>";
 	
 </script>
 
-<script>var location.failed = "<?=lang('dashboard.location.failed')?>";</script>
+
 
 
