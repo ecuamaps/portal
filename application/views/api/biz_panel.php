@@ -3,7 +3,7 @@
 <div class="section-container auto" data-section>
   <section>
     <p class="title" data-section-title><a href="#panel1"><?=lang('bizpanel.tab1')?></a></p>
-    <div class="content" data-section-content>
+    <div class="content" data-slug="section1">
 		<div class="row hide" id="updatebiz-error-wrapper">
 			<div data-alert class="alert-box alert">
 	  			<span id="updatebiz-error-msg"></span>
@@ -28,12 +28,12 @@
     	
     </div>
   </section>
+  
   <section>
     <p class="title" data-section-title><a href="#panel2" id="bizpanel-tab2"><?=lang('bizpanel.tab2')?></a></p>
-    <div class="content" data-section-content>
-      <p>Content of section 2.</p>
-    </div>
+    <div class="content" data-slug="section2" id="bizpanel-tab2-wrapper"></div>
   </section>
+
 </div>
 
 <a class="close-reveal-modal">&#215;</a>
@@ -41,9 +41,24 @@
 <script>
 	
 	$(document).ready(function(){
-			
+		
 		$('#bizpanel-tab2').click(function(e){
-			console.log('hello');
+			if(!$('#bizpanel-tab2-wrapper').html()){
+				$.ajax({
+		            type : "POST",
+		            url : '<?=current_lang()?>/account/get_biz_products',
+		            dataType : "html",
+		            data : {
+		            	user_id: <?=$user->id?>,
+		            	bz_id : $('input[name="bz-id"]').val(),
+		            	hms1 : $('input[name="hms1"]').val()
+		            }
+		        }).done(function(response) {
+		        	$('#bizpanel-tab2-wrapper').html(response);
+		        	//$('#bizpanel-tab2-wrapper').foundation('section', 'reflow');
+		        	$(document).foundation('section','reflow');
+		        });				
+			}
 		});
 		
 		$('#bizpanel-update').click(function(e){

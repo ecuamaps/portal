@@ -91,7 +91,7 @@
 			
 			<? endforeach; ?>
 		</div>
-		
+		<input type="text" name="serach-results-orderby" />
 		<?= pagination($start, $rows, $numFound) ?>
 		
 		<a class="close-reveal-modal">&#215;</a>
@@ -102,7 +102,9 @@
 			<? foreach($scores as $id => $s): ?>
 			posts[<?=$id?>] = <?=$s?>;<?="\n"?>
 			<? endforeach; ?>
-
+			
+			var orderby = '<?=$sort?>';
+			
 			$('.qualify-post').click(function(e){
 				e.preventDefault();
 				var post_id = $(this).attr('post-id');
@@ -121,7 +123,8 @@
 				var start = parseInt($(this).attr('start'));
 				
 				$('input[name="search-start"]').val(start);
-				search(false);
+
+				search(false, orderby);
 			})
 			
 			$('.sort-onresults-option').click(function(e){

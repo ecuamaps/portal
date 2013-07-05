@@ -206,4 +206,17 @@ class Business_model extends CI_Model {
 		$CI->load->model('post');
 		return $CI->post->get_by_id($id);
 	}
+	
+	function get_active_products($post_id){
+		$sql = "SELECT " .
+					"b.*," .
+					"p.id as product_id," .
+					"p.name," .
+					"p.description," .
+					"p.helper_file," .
+					"p.unit " .
+				"FROM bz_products b, product p WHERE b.post_id = $post_id AND b.product_id = p.id AND b.active = 1 ORDER BY p.name";
+		return $this->db->query($sql)->result();
+		
+	}
 }

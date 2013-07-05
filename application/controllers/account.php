@@ -277,4 +277,19 @@ class Account extends CI_Controller {
 		die(json_encode(array('status' => 'ok', 'msg' => lang('bizpanel.successfull'))));
 	}
 	
+	function get_biz_products(){
+		$this->load->model('business_model');
+		$this->lang->load('biz_panel');
+
+		$post_id = $this->input->post('bz_id');
+		
+		//Get the biz products
+		$products = $this->business_model->get_active_products($post_id);
+		$params = array(
+			'post_id' => $post_id,
+			'products' => $products
+		);
+		$this->load->view('account/biz_products', $params);
+	}
+	
 }
