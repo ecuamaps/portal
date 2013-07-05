@@ -432,14 +432,17 @@ $(document).ready(function() {
 
     $('#delete-location').click(function(e) {
         e.preventDefault();
+	
+        if(!confirm(location_delete)) 
+            return false;
 
         var name = '';
         $(".user-locations").each(function(index) {
             if ($(this).attr('current') == '1')
-                name = $(this).attr('name');
-        });
-
-        if (!name)
+                name = $(this).attr('name');                
+        });        
+        
+        if (!name)          
             return false;
 
         $.ajax({
