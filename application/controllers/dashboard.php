@@ -17,6 +17,11 @@ class Dashboard extends CI_Controller {
 	
 	function index(){
 		
+		//Validate Browsers 
+		
+		$this->dasboard_params['browser_error'] = 'Debe Actualizar su navegador';
+		
+		
 		//Get the top five of business types
 		$this->dasboard_params['bztop5types'] = $this->get_top5_bztypes();
 		
@@ -39,9 +44,6 @@ class Dashboard extends CI_Controller {
 				}
 			}
 			
-			//Load the user businesses
-			if($biz = $this->account_model->get_businesses($user->id))
-				$this->dasboard_params['businesses'] = $biz;
 		} 
 
 		//Get the system dafault location
