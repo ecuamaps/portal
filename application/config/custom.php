@@ -9,3 +9,8 @@ $config['features'] = array(
 	'setup',
 	'reports',
 );
+
+$config['browsers_black_list'] = array(
+	'brw1', 
+	'brw2'
+);
