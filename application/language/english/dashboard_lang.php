@@ -83,7 +83,7 @@ $lang['dashboard.signupform.emailconfirmation'] = "Successful registration!  We 
 		" otherwise your registration will be deleted.";
 
 
-$lang['dashboard.location.failed'] = "We failed to detect your location";		
+$lang['dashboard.location.failed'] = "We couldn't get your current location";		
 	
 
 
