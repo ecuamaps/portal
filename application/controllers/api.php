@@ -75,7 +75,9 @@ class Api extends CI_Controller {
 		    'numFound' => $results->response->numFound,
 		    'sort' => $sort_field
 		);
-				
+		
+		$this->load->helper('products/logo');
+		
 		$this->load->view('api/search', $params);		
 	}
 	

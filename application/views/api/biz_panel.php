@@ -1,5 +1,8 @@
-<h4><?=$biz->name?></h4>
+<h4><?=$biz->name?> (<?=lang('bizpanel.setup.score').': '.$biz->score_avg?>)</h4>
 
+<? if($biz->state == 'I'): ?>
+<h1><?=lang('bizpanel.setup.pendingconfirmation')?></h1>
+<? else: ?>
 <div class="section-container auto" data-section>
   <section>
     <p class="title" data-section-title><a href="#panel1"><?=lang('bizpanel.tab1')?></a></p>
@@ -28,11 +31,23 @@
     	
     </div>
   </section>
+
+  <section>
+    <p class="title" data-section-title><a href="#panel3" id="bizpanel-tab3"><?=lang('bizpanel.tab3')?></a></p>
+    <div class="content" data-slug="section3" id="bizpanel-tab3-wrapper"></div>
+  </section>
   
   <section>
     <p class="title" data-section-title><a href="#panel2" id="bizpanel-tab2"><?=lang('bizpanel.tab2')?></a></p>
     <div class="content" data-slug="section2" id="bizpanel-tab2-wrapper"></div>
   </section>
+
+	<!--
+  <section>
+    <p class="title" data-section-title><a href="#panel4" id="bizpanel-tab4"><?=lang('bizpanel.tab4')?></a></p>
+    <div class="content" data-slug="section4" id="bizpanel-tab4-wrapper"></div>
+  </section>
+-->
 
 </div>
 
@@ -41,6 +56,23 @@
 <script>
 	
 	$(document).ready(function(){
+		
+		$('#bizpanel-tab3').click(function(e){
+			//if(!$('#bizpanel-tab3-wrapper').html()){
+				$.ajax({
+		            type : "POST",
+		            url : '<?=current_lang()?>/account/get_biz_products_list',
+		            dataType : "html",
+		            data : {
+		            	user_id: <?=$user->id?>,
+		            	bz_id : $('input[name="bz-id"]').val(),
+		            	hms1 : $('input[name="hms1"]').val()
+		            }
+		        }).done(function(response) {
+		        	$('#bizpanel-tab3-wrapper').html(response);
+		        });					
+			//}
+		})
 		
 		$('#bizpanel-tab2').click(function(e){
 			if(!$('#bizpanel-tab2-wrapper').html()){
@@ -110,4 +142,5 @@
 		});
 			
 	});
-	</script>  
+	</script> 
+<? endif; ?>	

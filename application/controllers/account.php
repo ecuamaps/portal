@@ -291,5 +291,42 @@ class Account extends CI_Controller {
 		);
 		$this->load->view('account/biz_products', $params);
 	}
+
+	function get_biz_products_list(){
+		$this->load->model('business_model');
+		$this->lang->load('biz_panel');
+
+		$post_id = $this->input->post('bz_id');
+		
+		//Get the biz products
+		$products = $this->business_model->get_active_products($post_id);
+		
+		//get the billig cycle
+		$billing_cycle = $this->business_model->get_billing_cycle($post_id);
+		
+		//Get the last billing date
+		$last_billing_date = $this->business_model->get_last_billing_date($post_id);
+		
+		//Get the available product list
+		$available_products = $this->business_model->get_available_products($post_id);
+		
+		//Apply the prorate
+		foreach($available_products as $i => $ap){
+			$available_products[$i]->price = prorate_value($available_products[$i]->price, $last_billing_date, $billing_cycle);
+		}
+		
+		//Get the next billing date
+		$next_billing_date = $this->business_model->get_next_billing_date($post_id);
+		
+		$params = array(
+			'post_id' => $post_id,
+			'products' => $products,
+			'available_products' => $available_products,
+			'next_billing_date' => $next_billing_date,
+			'billing_cycle' => $billing_cycle,
+			'last_billing_date' => $last_billing_date
+		);
+		$this->load->view('account/biz_products_list', $params);
+	}
 	
 }

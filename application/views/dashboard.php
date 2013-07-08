@@ -23,6 +23,7 @@
   
   <script src="<?=base_url()?>assets/js/mochkino.js"></script>
   <script src="<?=base_url()?>assets/js/jquery.cookie.js"></script>
+  <script src="<?=base_url()?>assets/js/ajaxfileupload.js"></script>
   
   <script>
   	var lang = '<?=$this->lang->lang()?>';

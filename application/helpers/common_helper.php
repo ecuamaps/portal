@@ -817,6 +817,29 @@ function show_biz_form($post = null){
 	<?php
 }
 
+function prorate_value($value, $last_billing_date, $billing_cycle){
+	
+	if(!$last_billing_date)
+		return $value;
+		
+	$date = new DateTime($last_billing_date);
+	$date->add(new DateInterval('P'.$billing_cycle.'M'));
+	
+	//Define the remaining days
+	$now = time();
+    $your_date = strtotime($date->format('Y-m-d'));
+    $datediff = $your_date - $now;
+    $remaning_days = floor($datediff/(60*60*24));
+    
+    //Define day costs
+    $day_price = $value / 365;
+    
+    //Define the prorated value
+    $prorated_value = $day_price * $remaning_days;
+    return (float) number_format($prorated_value, 2);
+     
+}
+
 function get_domain() {
 	$CI = & get_instance();
 	$bar_url_pieces = explode('.', $CI->config->item('base_url'));

@@ -387,5 +387,9 @@ $config['post_type_vs_model'] = array(
 	5 => 'sight',
 );
 
+//Media server
+$config['media_server_upload_url'] = 'http://hosting.dev/main/upload';
+$config['media_server_show_url'] = 'http://hosting.dev/main/show';
+
 /* End of file config.php */
 /* Location: ./application/config/config.php */

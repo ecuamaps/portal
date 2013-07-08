@@ -217,6 +217,46 @@ class Business_model extends CI_Model {
 					"p.unit " .
 				"FROM bz_products b, product p WHERE b.post_id = $post_id AND b.product_id = p.id AND b.active = 1 ORDER BY p.name";
 		return $this->db->query($sql)->result();
+	}
+	
+	function get_available_products($post_id){
+		$billing_cycle = $this->get_billing_cycle($post_id);
+		$billing_cycle = $billing_cycle ? "billing_cycle=$billing_cycle AND " : '';
 		
+		$sql = "SELECT * " .
+				"FROM product " .
+				"WHERE $billing_cycle " .
+				"id NOT IN (SELECT b.product_id FROM bz_products b, product p WHERE b.post_id=$post_id AND b.product_id=p.id AND p.allow_duplicated=0) ORDER BY name";
+		return $this->db->query($sql)->result();
+	}
+	
+	function get_billing_cycle($post_id){
+		$bz_products = $this->db->get_where('bz_products', array('post_id' => $post_id, 'active' => 1))->result();
+		if(!count($bz_products))
+			return null;
+		
+		return (int) $bz_products[0]->billing_cycle;
+	}
+	
+	function get_last_billing_date($post_id){
+		
+		$sql = "SELECT * FROM invoice WHERE post_id=$post_id AND state = 'paid' ORDER BY date DESC";
+		$result = $this->db->query($sql)->result();
+
+		if(!count($result))
+			return null;
+		
+		return $result[0]->date;
+	}
+	
+	function get_next_billing_date($post_id){
+		$billing_cycle = $this->get_billing_cycle($post_id);
+		$last_billing_date = $this->get_last_billing_date($post_id);
+		if(!$last_billing_date)
+			return false;
+		
+		$date = new DateTime($last_billing_date);
+		$date->add(new DateInterval('P'.$billing_cycle.'M'));
+		return $date->format('Y-m-d');
 	}
 }

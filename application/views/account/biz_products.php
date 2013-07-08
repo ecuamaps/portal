@@ -4,9 +4,8 @@
 
 <div class="section-container auto" data-section="auto">
   <? foreach($products as $index => $p): ?>
-  <? $panel_id =  $index + 1; ?>
   <section>
-    <p class="title" data-section-title><a href="#panel<?=$panel_id?>" id="link-product-setup-<?= $p->id ?>"  ><?= $p->name ?></a></p>
+    <p class="title" data-section-title><a href="javascript:void(0)" id="link-product-setup-<?= $p->id ?>"  ><?= $p->name ?></a></p>
     <div class="content" data-section-content id="<?= $p->id ?>"></div>
   </section>
   <script>
@@ -28,7 +27,8 @@
             url : '<?=current_lang()?>/products/' + controller,
             dataType : "html",
             data : {
-            	post_id : post_id
+            	post_id : post_id,
+            	post_product_id: wrapper_id
             }
         }).done(function(response) {
 			$('#' + wrapper_id).html(response);	

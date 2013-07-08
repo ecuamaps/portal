@@ -3,7 +3,7 @@
 	<div id="map_canvas" class="row full-width"></div> 
 	
 <?/*hide-for-small*/?>
-<div class="row full-width footer hide-for-small">
+<div class="row full-width footer hide">
 	<div class="small-12 large-centered columns">
 		<?= form_open() ?>
 		
