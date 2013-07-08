@@ -3,7 +3,7 @@
 	<div id="map_canvas" class="row full-width"></div> 
 	
 <?/*hide-for-small*/?>
-<div class="row full-width footer hide-for-small">
+<div class="row full-width footer hide">
 	<div class="small-12 large-centered columns">
 		<?= form_open() ?>
 		
@@ -50,6 +50,12 @@
 	var map_zoom = <?= $map_zoom ?>;
 	
 	var currentPosLbl = '<?=lang('dashboard.searchform.currlocation')?>';
-	var accuracyErrorMsg = '<?=lang('dashboard.searchform.accuracyerror')?>';
+	var accuracyErrorMsg = '<?=lang('dashboard.searchform.accuracyerror')?>';	
 	var locationErrorMsg = "<?=lang('dashboard.searchform.locationerror')?>";
+	var location_failed = "<?=lang('dashboard.location.failed')?>";
+	
 </script>
+
+
+
+

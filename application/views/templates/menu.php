@@ -199,6 +199,7 @@
             <script>
                 var chpwd_err_msg_missing_field = "<?=lang('dashboard.signupform.errmsg')?>";
                 var chpwd_error_keys_mistmatch = "<?=lang('dashboard.signupform.errmsg.pass')?>";
+                var location_delete = "<?=lang('dashboard.location.delete')?>";
                 
             </script>
         </div>

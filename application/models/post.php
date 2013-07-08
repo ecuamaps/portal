@@ -103,7 +103,6 @@ class Post extends CI_Model {
 		$CI = & get_instance();
 		$CI->load->model($model);
 		$CI->$model->syncronize($post_id);
-			
 	}
 	
 }
