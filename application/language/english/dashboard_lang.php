@@ -91,6 +91,10 @@ $lang['dashboard.signupform.emailconfirmation'] = "Successful registration!  We 
 $lang['dashboard.location.delete'] = "Are you sure to delete this location ?";		
 
 
+$lang['dashboard.location.failed'] = "We couldn't get your current location";		
+	
+
+
 //TODO: Eliminar
 $lang['dashboard.pagetitle'] = "Dashboard";
 $lang['dashboard.logout'] = "Logout";

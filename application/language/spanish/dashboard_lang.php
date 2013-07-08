@@ -93,4 +93,6 @@ $lang['dashboard.qualificationform.cancel'] = "Cancelar";
 $lang['dashboard.qualificationform.close'] = "Cerrar";
 $lang['dashboard.qualificationform.userlogin'] = "Calificar solo esta disponible para usuarios registrados, si ya eres miembro solo autenticate si no registrate, es gratis!";
 
+$lang['dashboard.location.failed'] = "No fue posible detectar su ubicacion";
+
 
