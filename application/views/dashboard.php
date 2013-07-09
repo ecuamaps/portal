@@ -35,12 +35,7 @@
 
   <!-- body content/ here -->
   
-  <? if(isset($browser_error))
-  	{
-  		alert();
-  	}
-  
-  ?>
+ 
 	
 	<!-- Errors/messages here --> 
 	<? if($flash_msg = $this->session->flashdata('flash_msg')): ?>

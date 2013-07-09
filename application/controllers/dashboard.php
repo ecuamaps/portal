@@ -12,15 +12,14 @@ class Dashboard extends CI_Controller {
 		$this->load->model('business_model');
 		$this->load->model('post');
 		
+		$this->load->library('user_agent');
+		
 		$this->dasboard_params['user'] = $this->session->userdata('user');
 	}
 	
 	function index(){
 		
-		//Validate Browsers 
-		
-		$this->dasboard_params['browser_error'] = 'Debe Actualizar su navegador';
-		
+	
 		
 		//Get the top five of business types
 		$this->dasboard_params['bztop5types'] = $this->get_top5_bztypes();

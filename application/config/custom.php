@@ -21,4 +21,3 @@ $config['not_alloed_words_search'] = array(
 	'and'
 );
 
-$config['max_amt_pages'] = 5;
