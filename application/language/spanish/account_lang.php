@@ -30,6 +30,7 @@ $lang['createbiz.btn.showmap'] = 'Ver el mapa';
 $lang['createbiz.btn.showproducts'] = 'Ver Productos';
 $lang['createbiz.btn.pay'] = 'Pagar';
 $lang['createbiz.btn.close'] = 'Cerrar';
+$lang['createbiz.btn.cancel'] = 'Cancelar';
 
 $lang['createbiz.type'] = 'Selecciona el tipo de negocio';
 $lang['createbiz.name'] = 'Nombre';

@@ -747,12 +747,14 @@ function show_biz_form($post = null){
 	?>
 	<pre><? /*print_r($post)*/ ?></pre>
 	
-	<input type="hidden" name="bz-id" id="bz-id" <?=isset($post->id) ? 'value="'.$post->id.'"' : ''?> />
+	<? if(isset($post->id)): ?>
+	<input type="hidden" name="bz-id" id="bz-id" value="<?= $post->id ?>" />
+	<? endif; ?>
 	
 	<div class="row">
 		<div class="large-12 columns">
 	        <label><?=lang('createbiz.type')?>*</label>
-	        <select name="bz-type" required>
+	        <select name="bz-type" id="bz-type" required>
 	        	<option></option>
 	        	<? foreach($bz_types as $t):?>
 	        	<option value="<?= $t->id ?>" <?= ($biz_type->id == $t->id ) ? 'selected' : '' ?>><?= $t->name ?></option>
@@ -793,7 +795,7 @@ function show_biz_form($post = null){
 
     <div class="row">
       <div class="large-12 columns">
-      	<label><?=lang('createbiz.map')?>* <a href="javascript:void(0)" id="<?=($post) ? 'show-map-upd' : 'show-map'?>" class="tiny button"><?=lang('createbiz.btn.showmap')?></a></label>
+      	<label><?=lang('createbiz.map')?> <a href="javascript:void(0)" id="<?=($post) ? 'show-map-upd' : 'show-map'?>" class="tiny button"><?=lang('createbiz.btn.showmap')?></a></label>
       	<input type="hidden" id="bz-lat" name="bz-lat" <?=isset($post->lat) ? 'value="'.$post->lat.'"' : ''?> required/>
       	<input type="hidden" id="bz-lng" name="bz-lng" <?=isset($post->lng) ? 'value="'.$post->lng.'"' : ''?> required/>
 		<div id="<?=($post) ? 'map_addbiz-upd' : 'map_addbiz'?>" style=""></div> 
@@ -803,15 +805,26 @@ function show_biz_form($post = null){
 	<script>
 		$(document).ready(function(){
 			
+			
+			var lat = '<?=isset($post->lat) ? $post->lat : ''?>';
+			var lng = '<?=isset($post->lng) ? $post->lng : ''?>';
+			
+			if(!lat){
+				lat = myLatlng.lat();
+				$('#bz-lat').val(lat);
+			}
+				
+			if(!lng){
+				lng = myLatlng.lng();
+				$('#bz-lng').val(lng);
+			}
+			
 			$('#<?=($post) ? 'show-map-upd' : 'show-map'?>').click(function(e){
-				var lat = $('#bz-lat').val();
-				var lng = $('#bz-lng').val();
-
 				$('#<?=($post) ? 'map_addbiz-upd' : 'map_addbiz'?>').attr('style', 'padding: 0; height: 200px; width: 100%;');
 				bzCreationMapInit('<?=($post) ? 'map_addbiz-upd' : 'map_addbiz'?>', lat, lng);
 				$(this).hide();
 			});
-			
+				
 		});
 	</script>    	
 	<?php
@@ -819,9 +832,9 @@ function show_biz_form($post = null){
 
 function prorate_value($value, $last_billing_date, $billing_cycle){
 	
-	if(!$last_billing_date)
+	if(!$last_billing_date && !$billing_cycle)
 		return $value;
-		
+	
 	$date = new DateTime($last_billing_date);
 	$date->add(new DateInterval('P'.$billing_cycle.'M'));
 	

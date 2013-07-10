@@ -1,7 +1,9 @@
 <? header('Content-Type: text/html'); ?>
 
 <? if(count($products)): ?>
-    
+<?= form_open('api', array('id' => 'bz-products-list-form', 'class' => '')) ?>
+</form>
+ 
 <div class="row">
   <div class="small-12 small-centered columns">
  
@@ -18,7 +20,13 @@
 	    <tr>
 	      <td><?= $p->name ?></td>
 	      <td><?= $p->description ?></td>
-	      <td><a href="#" class="small button alert"><?=lang('bizpanel.products.disable')?></a></li></td>
+	      <td>
+	      	<? if($p->active == 1): ?>
+	      	<a href="javascript:void(0)" class="small button alert disable-product" bz-product-id="<?=$p->id?>"><?=lang('bizpanel.products.disable')?></a>
+	      	<? else: ?>
+	      	<a href="javascript:void(0)" class="small button enable-product" bz-product-id="<?=$p->id?>"><?=lang('bizpanel.products.enable')?></a>
+	      	<? endif; ?>
+	      </td>
 	    </tr>
 	  <? endforeach; ?>  
 	  </tbody>
@@ -34,20 +42,86 @@
 </div>
 
 <div class="row">
-      <div class="large-4 columns">
-        <select name="available-products" id="available-products">
-        	<? foreach($available_products as $av): ?>
-        	<option value="<?= $av->id.'|'.$av->price ?>"><?=$av->name?>&nbsp;$<?=$av->price?></option>
-        	<? endforeach; ?>
-        </select>
-      </div>
-      <div class="large-4 columns">
-        <a href="#" class="small button">+</a>
-      </div>
-      <div class="large-4 columns">&nbsp;</div>
+	<div class="large-12 columns">
+		<a href="javascript:void(0)" class="small button" id="bizpanel-products-addmoreprod"><?=lang('bizpanel.products.addmoreprod')?></a>
+	</div>
 </div>
 
+<script>
+	$(document).ready(function(){
+		$('a.small.button.alert.disable-product').click(function(e){
+			e.preventDefault();
+			
+			if(!confirm('<?=lang('bizpanel.products.inactivateconfirm')?>'))
+				return false;
+				
+			$.ajax({
+				type : "POST",
+				url : '<?=current_lang()?>/api/disable_product',
+		            dataType : "json",
+		            data : {
+		            	user_id: <?=$user->id?>,
+		            	bz_product_id : $(this).attr('bz-product-id'),
+		            	hms1 : $('input[name="hms1"]').val()
+		            }
+		    }).done(function(response) {
+		        if(response.status == 'ok'){
+		        	$(this).removeClass("small button alert disable-product").addClass("small button enable-product");
+		        }
+			});			
+		});	
+		
+		$('a.small.button.enable-product').click(function (e){
+			e.preventDefault();
+
+			if(!confirm('<?=lang('bizpanel.products.activateconfirm')?>'))
+				return false;
+		});	
+		
+		$('#bizpanel-products-addmoreprod').click(function (e){
+			
+			$.ajax({
+	            type : "GET",
+	            url : '<?=base_url($this->lang->lang().'/account/create_enterprise_form')?>',
+	            dataType : "html",
+	            data : {
+	            	user_id: <?=$user->id?>,
+	            	bz_id : $('input[name="bz-id"]').val()
+	            }
+	        }).done(function(response) {
+	        	$('#biz-control-panel').html(response);
+	        });						
+		});
+	})
+</script>
+
+
+<? elseif(count($not_active_products)): ?>
+	<h3><?=lang('bizpanel.setup.pendingproducts')?></h3>
 <? else: ?>
 	<h3><?=lang('bizpanel.setup.noproducts')?></h3>
-	<a href="javascript:void(0)" class="small button"><?=lang('bizpanel.setup.addproducts')?></a>
+	<a href="javascript:void(0)" class="small button" id="setup-add-products"><?=lang('bizpanel.setup.addproducts')?></a>
+	<script>
+		$(document).ready(function(){
+			
+			$('a.small.button.alert').click(function(e){
+				console.log($(this));
+			});
+			
+			$('#setup-add-products').click(function(e){
+				$.ajax({
+		            type : "GET",
+		            url : '<?=base_url($this->lang->lang().'/account/create_enterprise_form')?>',
+		            dataType : "html",
+		            data : {
+		            	user_id: <?=$user->id?>,
+		            	bz_id : $('input[name="bz-id"]').val()
+		            }
+		        }).done(function(response) {
+		        	$('#biz-control-panel').html(response);
+		        });
+			})			
+		})
+		
+	</script>
 <? endif; ?>

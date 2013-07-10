@@ -37,7 +37,30 @@
 	}
   </script>
 
+<? elseif(count($not_active_products)): ?>
+	<h3><?=lang('bizpanel.setup.pendingproducts')?></h3>
 <? else: ?>
 	<h3><?=lang('bizpanel.setup.noproducts')?></h3>
-	<a href="javascript:void(0)" class="small button"><?=lang('bizpanel.setup.addproducts')?></a>
+	<a href="javascript:void(0)" class="small button" id="setup-add-products"><?=lang('bizpanel.setup.addproducts')?></a>
+	<script>
+		$(document).ready(function(){
+			
+			$('#setup-add-products').click(function(e){
+				
+				$.ajax({
+		            type : "GET",
+		            url : '<?=base_url($this->lang->lang().'/account/create_enterprise_form')?>',
+		            dataType : "html",
+		            data : {
+		            	user_id: <?=$user->id?>,
+		            	bz_id : $('input[name="bz-id"]').val()
+		            }
+		        }).done(function(response) {
+		        	$('#biz-control-panel').html(response);
+		        });	
+		        
+			})
+		})
+		
+	</script>
 <? endif; ?>

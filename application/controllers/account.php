@@ -136,18 +136,60 @@ class Account extends CI_Controller {
 		$this->load->model('products_model');
 		$this->load->model('business_model');
 
+		$params['biz'] = NULL;
+		$params['post_id'] = NULL;
+		if($post_id = $this->input->get('bz_id')){
+			$params['post_id'] = $post_id;
+			$params['biz'] = $this->business_model->get_by_id($post_id);			
+
+			//Get the biz active products
+			$products = $this->business_model->get_products($post_id);
+			//Get the biz inactivated products by the user
+			$inactivated_by_user_products = $this->business_model->get_products($post_id, 0, 1);
+			$products = array_merge($products, $inactivated_by_user_products);
+			
+			if(count($products)){
+				//get the billig cycle
+				$billing_cycle = $this->business_model->get_billing_cycle($post_id);
+				
+				//Get the last billing date
+				$last_billing_date = $this->business_model->get_last_billing_date($post_id);
+				
+				//Get the available product list
+				$available_products = $this->business_model->get_available_products($post_id);
+				
+				//Apply the prorate
+				foreach($available_products as $i => $ap){
+					$available_products[$i]->price = prorate_value($available_products[$i]->price, $last_billing_date, $billing_cycle);
+				}
+				
+				if($billing_cycle)
+					$params['billing_cycle'] = $billing_cycle;
+				
+				$params['products'] = 	$available_products;
+				
+				$params['not_in_billing_cycle'] = TRUE;
+						
+			}else{
+				$params['products'] = $this->products_model->get_products();
+			}
+		}else{
+			$params['products'] = $this->products_model->get_products();
+		}
+		
+		
 		//TODO: Validate an open sesion
 		if(!$this->user)
 			die('Session Exprired');
 		
 		$params['user'] = $this->user;
 		
-		//Load the billing cycles
+		//Load the billing cyclesuser
 		$billing = get_config_val('billing_cycles');
 		$params['billing_cycles'] = ($billing) ? explode(',', $billing) : NULL;
 		
 		//Load the products
-		$params['products'] = $this->products_model->get_products();
+		//$params['products'] = $this->products_model->get_products();
 		
 		//Load the bz types
 		$params['bz_types'] = $this->business_model->get_types();
@@ -164,9 +206,11 @@ class Account extends CI_Controller {
 		$bz_id = $this->input->post('bz_id', TRUE); 
 		$user_id = $this->input->post('user_id', TRUE);
 		$invoice_activate_biz = 0;
+//		$is_billing_cycle = 0;		
 		$items = $this->input->post('products', TRUE);
 		$payment_method = $this->input->post('payment_method', TRUE);
 		$billing_name = $this->input->post('bz_bill_name', TRUE);
+		$is_billing_cycle = $this->input->post('in_billing_cycle', TRUE);
 		
 		//Create the business
 		if(!$bz_id){
@@ -194,12 +238,14 @@ class Account extends CI_Controller {
 			); 
 			$bz_id = $this->business_model->create($bz_data);
 			$invoice_activate_biz = 1;
-			
+			//$is_billing_cycle = 1;
 			if($is_free){
 				$user = $this->account_model->get_user_by_id($user_id); 
 				$content = "Verificación de datos y publicación de negocio. biz ID: $bz_id, Usuario: {$user->name}, email: {$user->email}, Biz Name: $bz_name, Tels: {$bz_phones}, Dir: {$bz_address}, latlng: {$bz_lat},{$bz_lng}";
 				$this->tasks_model->create('business', $bz_id, $content);
 				die(json_encode(array('status' => 'ok', 'biz_id' => $bz_id)));
+			}else{
+				$this->business_model->syncronize($bz_id);
 			}
 			
 		}
@@ -221,6 +267,7 @@ class Account extends CI_Controller {
 			'billing_name' => $billing_name,
 			'billing_identification' =>  $this->input->post('bz_bill_id', TRUE),
 			'billing_address' => $this->input->post('bz_bill_addr', TRUE),
+			'is_billing_cycle' => $is_billing_cycle
 		);
 		
 		//Add the items
@@ -284,11 +331,15 @@ class Account extends CI_Controller {
 		$post_id = $this->input->post('bz_id');
 		
 		//Get the biz products
-		$products = $this->business_model->get_active_products($post_id);
+		$products = $this->business_model->get_products($post_id);
+		$not_active_products = $this->business_model->get_products($post_id, 0);
+		
 		$params = array(
 			'post_id' => $post_id,
-			'products' => $products
+			'products' => $products,
+			'not_active_products' => $not_active_products
 		);
+		
 		$this->load->view('account/biz_products', $params);
 	}
 
@@ -298,8 +349,13 @@ class Account extends CI_Controller {
 
 		$post_id = $this->input->post('bz_id');
 		
-		//Get the biz products
-		$products = $this->business_model->get_active_products($post_id);
+		//Get the biz active products
+		$products = $this->business_model->get_products($post_id);
+		//Get the biz inactivated products by the user
+		$inactivated_by_user_products = $this->business_model->get_products($post_id, 0, 1);
+		$products = array_merge($products, $inactivated_by_user_products);
+		//Get all non active products
+		$not_active_products = $this->business_model->get_products($post_id, 0, 0);
 		
 		//get the billig cycle
 		$billing_cycle = $this->business_model->get_billing_cycle($post_id);
@@ -322,9 +378,11 @@ class Account extends CI_Controller {
 			'post_id' => $post_id,
 			'products' => $products,
 			'available_products' => $available_products,
+			'not_active_products' => $not_active_products,
 			'next_billing_date' => $next_billing_date,
 			'billing_cycle' => $billing_cycle,
-			'last_billing_date' => $last_billing_date
+			'last_billing_date' => $last_billing_date,
+			'user' => $this->user
 		);
 		$this->load->view('account/biz_products_list', $params);
 	}

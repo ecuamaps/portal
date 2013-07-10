@@ -10,7 +10,7 @@
 		</div>
 	</div>
     
-	<? show_biz_form() ?>
+	<? show_biz_form($biz) ?>
 
     <div class="row">
       <div class="large-12 columns">&nbsp;</div>
@@ -24,22 +24,37 @@
 		
   </fieldset>
 
+  <!-- STEP 2 -->	
   <fieldset id="step2-wrapper">
-    <legend><?=lang('createbiz.step2')?></legend>
+    <legend><?= lang('createbiz.step2') ?></legend>
 	<h6 class="subheader"><?=lang('createbiz.step2.subheader')?></h6>
 	
     <div class="row">
 		<div class="small-3 columns">
 	        <label><?=lang('createbiz.billingcicle')?></label>
+	        <? if(isset($billing_cycle)): ?>
+	        	<?= ($billing_cycle == 12) ? lang('createbiz.billingcicle.yearly') : lang('createbiz.billingcicle.monthly') ?>
+	        	<input type="hidden" name="billing-cycle" id="billing-cycle" value="<?=$billing_cycle?>"/>
+	        <? else: ?>
 	        <select name="billing-cycle" id="billing-cycle">
 	        	<option value="12"><?=lang('createbiz.billingcicle.yearly')?></option>
 	        	<option value="1"><?=lang('createbiz.billingcicle.monthly')?></option>
 	        </select>       
+	        <? endif; ?>
 		</div>
 
 		<div class="small-3 columns">
 	        <label><?=lang('createbiz.product')?></label>
-	        <select name="product" id="product">
+	        <? if($post_id): ?>
+	        <select name="product-list" id="product-list">
+				<? if(is_array($products)): ?>
+					<? foreach($products as $p): ?>
+						<option value="<?= $p->id ?>"><?= $p->name ?> $<?= $p->price ?></option>
+					<? endforeach; ?>
+				<? endif; ?>		        
+	        </select>
+	        <? else: ?>
+	        <select name="product" id="product-list">
 				<? if(is_array($products)): ?>
 					<? foreach($products as $p): ?>
 					<? if($p->billing_cycle == 12): ?>
@@ -48,9 +63,11 @@
 					<? endforeach; ?>
 				<? endif; ?>		        
 	        </select>
+	        <? endif; ?>
 		</div>
 
 		<div class="small-3 columns">
+			 <label>&nbsp;</label>
 			<a href="javascript:void(0)" id="add-product" class="tiny button">+</a>	
 		</div>
 		<div class="small-3 columns"></div>
@@ -94,8 +111,13 @@
 
     <div class="row">
       <div class="small-12 columns">
+      	<? if(!$post_id): ?>
       	<a href="javascript:void(0)" id="step2-prev" class="tiny button"><?=lang('createbiz.btn.prev')?></a>
+      	<? endif; ?>
 		<a href="javascript:void(0)" id="step2-next" class="tiny button"><?=lang('createbiz.btn.next')?></a>
+		<? if($post_id): ?>
+		<a href="javascript:void(0)" id="step2-cancel" class="tiny button"><?=lang('createbiz.btn.cancel')?></a>
+      	<? endif; ?>
       </div>
     </div>
   </fieldset>
@@ -274,6 +296,14 @@
       </div>
     </div>
 
+	<? if($post_id): ?>
+	    <div class="row">
+	      <div class="large-12 columns">
+	      	<a href="javascript:void(0)" id="step5-ok" class="tiny button"><?=lang('createbiz.btn.close')?></a>
+	      </div>
+	    </div>
+	<? endif; ?>
+	
   </fieldset>
 	
 	<fieldset id="waiting">
@@ -310,9 +340,16 @@ var sub_total = 0;
 var iva = 0;
 var iva_factor = <?=get_config_val('iva')?> / 100;
 
+var in_billing_cycle = <?= isset($not_in_billing_cycle) ? 0 : 1 ?>; 
+
 
 $(document).ready(function(){
+	
+	<? if($post_id): ?>
+	$('#step1-wrapper, #step3-wrapper, #step3-post, #step3-pay ,#step4-wrapper, #step5-wrapper, #step4-pay, #paid-process, #waiting, #free-process').hide();
+	<? else: ?>
 	$('#step2-wrapper, #step3-wrapper, #step3-post, #step3-pay ,#step4-wrapper, #step5-wrapper, #step4-pay, #paid-process, #waiting, #free-process').hide();
+	<? endif; ?>
 	
 	setTotal();
 	
@@ -350,11 +387,30 @@ $(document).ready(function(){
 	});
 
 	$('#step2-next').click(function(e){
-		e.preventDefault();		
+		e.preventDefault();
+		
+		<? if($post_id): ?>
+		if(!total)
+			return false;
+		<? endif; ?>
+				
 		$('#step2-wrapper').hide();
 		$('#step3-wrapper').show();
 	});
-
+	
+	<? if($post_id): ?>
+	$('#step2-cancel, #step5-ok').click(function(e){
+		$.ajax({
+			type : "GET",
+		    url : '<?=base_url($this->lang->lang().'/api/open_business_panel')?>',
+		    dataType : "html",
+		    data : {post_id: <?=$post_id?>}
+		}).done(function(response) {
+			$('#biz-control-panel').html(response);
+			$(document).foundation('section','reflow');
+		});			
+	});
+	<? endif; ?>
 
 	$('#step3-prev').click(function(e){
 		e.preventDefault();
@@ -411,12 +467,12 @@ $(document).ready(function(){
 		
 	$('#billing-cycle').change(function(e){
 		
-		$('#product').html('');
+		$('#product-list').html('');
 		
 		var billing_cycle = $(this).val();
 		$.each(products, function(index, item) {
  	 		if(billing_cycle == item.billing_cycle){
- 	 			$('#product').append($('<option>', { 
+ 	 			$('#product-list').append($('<option>', { 
         			value: item.id,
         			text : item.name + ' $' + item.price  
     			}));
@@ -430,10 +486,10 @@ $(document).ready(function(){
 	});
 	
 	$('#add-product').click(function(e){
-		
-		var current = $('#product').val();
-		
+		var current = $('#product-list').val();
+
 		$.each(products, function(index, item) {
+			console.log(item);
  	 		if(current == item.id && !isAddedProduct(item.id)){
  	 			$('#invoice > tbody:last').append(getItemRow(item));
  	 			product_list.push(item.id);
@@ -441,6 +497,8 @@ $(document).ready(function(){
  	 		}
 		});		
 	});
+	
+	
 	
 	$('input[name="payment_method"]').click(function(e){
 		$('#step4-pay').show();
@@ -474,6 +532,7 @@ $(document).ready(function(){
             dataType : "json",
             data : {
             	user_id: <?=$user->id?>,
+            	bz_id : $('input[name="bz-id"]').val(),
 				bz_type_id : $('select[name="bz-type"]').val(),
 				bz_name : $('input[name="bz-name"]').val(),
 				bz_desc : $('input[name="bz-desc"]').val(),
@@ -492,7 +551,8 @@ $(document).ready(function(){
 				products : product_list,
 				total: total,
 				sub_total : sub_total,
-				iva : iva
+				iva : iva,
+				in_billing_cycle : in_billing_cycle
             }
         }).done(function(response) {
         	if(response.status == 'ok'){
@@ -589,12 +649,16 @@ function isAddedProduct(id){
 
 function setTotal(t){
 	sub_total = t ? t : 0;
+	sTotal = new Number(sub_total);
+	sub_total = parseFloat(sTotal.toFixed(2));
+	
 	var ivaObj = new Number(sub_total * iva_factor);
 	iva = parseFloat(ivaObj.toFixed(2));
+	
 	total = sub_total + iva;
 	
 	$('#sub-total').html(sub_total);
 	$('#iva').html(iva);
-	$('#total, #total-pay').html(total);
+	$('#total, #total-pay').html(total.toFixed(2));
 }
 </script>

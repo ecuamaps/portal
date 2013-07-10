@@ -196,4 +196,29 @@ class Api extends CI_Controller {
 
 		$this->load->view('api/biz_panel', $params);	
 	}
+	
+	function disable_product(){
+		$this->load->model('business_model');
+		
+		$bz_product_id = $this->input->post('bz_product_id', TRUE);
+		
+		if($this->business_model->disable_product($bz_product_id)){
+			die(json_encode(array('status' => 'ok')));
+		}
+		
+		die(json_encode(array('status' => 'error')));
+	}
+	
+	function enable_product(){
+		$this->load->model('business_model');
+		
+		$bz_product_id = $this->input->post('bz_product_id', TRUE);
+		
+		if($this->business_model->enable_product($bz_product_id)){
+			die(json_encode(array('status' => 'ok')));
+		}
+		
+		die(json_encode(array('status' => 'error')));
+		
+	}
 }

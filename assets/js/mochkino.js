@@ -9,7 +9,7 @@ var directionsService = new google.maps.DirectionsService();
 	            	  },{
 	            	    "featureType": "transit",
 	            	    "stylers": [
-	            	      { "visibility": "off" }
+	            	      { "visibility": "on" }
 	            	    ]
 	            	  },{
 	            	    "featureType": "landscape.man_made",
@@ -885,7 +885,7 @@ function bzCreationMapInit(map_wrapper_id, lat, lng) {
 	if(lat && lng){
 		map_center = new google.maps.LatLng(lat, lng);
 	}
-		
+	
 	var mapOpt = {
 		zoom : map.getZoom(),
 		center : map_center,
@@ -912,7 +912,7 @@ function bzCreationMapInit(map_wrapper_id, lat, lng) {
 		position : map_center,
 		map : addbz_map
 	});
-
+	
 	google.maps.event.addListener(addbz_map, 'click', function(event) {
 		if(addbz_marker)
 			addbz_marker.setMap(null);
@@ -921,7 +921,6 @@ function bzCreationMapInit(map_wrapper_id, lat, lng) {
 			position : event.latLng,
 			map : addbz_map
 		});
-		//addbz_map.setCenter(event.latLng);
 		
 		$('#bz-lat').val(event.latLng.lat());
 		$('#bz-lng').val(event.latLng.lng());

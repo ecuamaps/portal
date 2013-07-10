@@ -100,7 +100,7 @@
         var open_modal = $('.reveal-modal.open'),
             settings = $.extend({}, self.settings, self.data_options(open_modal));
         if ( event.which === 27  && settings.closeOnEsc) { // 27 is the keycode for the Escape key
-          open_modal.foundation('reveal', 'close');
+        	open_modal.foundation('reveal', 'close');
         }
       });
 

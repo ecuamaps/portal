@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="<?=base_url()?>assets/foundation/css/normalize.css" />
   <link rel="stylesheet" href="<?=base_url()?>assets/foundation/css/app.css" />
   <link rel="stylesheet" href="<?=base_url()?>assets/foundation/css/foundation.min.css" />
-  <link rel="stylesheet" href="<?=base_url()?>assets/webicons-master/fc-webicons.css">
   
   <?=$_styles?>
 

@@ -40,7 +40,7 @@ class Business_model extends CI_Model {
 		return null;		
 	}
 	
-	function create($data){
+	function create($data, $is_paid=false){
 		
 		//Create the post
 		$bz = array(
@@ -84,7 +84,7 @@ class Business_model extends CI_Model {
 		}
 		
 		//Syncronize in solr
-		$this->syncronize($bz_id);
+		//$this->syncronize($bz_id);
 		
 		return $bz_id;
 	}
@@ -207,7 +207,11 @@ class Business_model extends CI_Model {
 		return $CI->post->get_by_id($id);
 	}
 	
-	function get_active_products($post_id){
+	function get_products($post_id, $active = 1, $inactivated_by_user = NULL){
+		
+		if($inactivated_by_user !== NULL)
+			$inactivated_by_user = " AND inactivated_by_user = $inactivated_by_user";
+			
 		$sql = "SELECT " .
 					"b.*," .
 					"p.id as product_id," .
@@ -215,7 +219,8 @@ class Business_model extends CI_Model {
 					"p.description," .
 					"p.helper_file," .
 					"p.unit " .
-				"FROM bz_products b, product p WHERE b.post_id = $post_id AND b.product_id = p.id AND b.active = 1 ORDER BY p.name";
+				"FROM bz_products b, product p WHERE b.post_id = $post_id AND b.product_id = p.id AND b.active = $active $inactivated_by_user ORDER BY p.name";
+				
 		return $this->db->query($sql)->result();
 	}
 	
@@ -231,16 +236,23 @@ class Business_model extends CI_Model {
 	}
 	
 	function get_billing_cycle($post_id){
+		
 		$bz_products = $this->db->get_where('bz_products', array('post_id' => $post_id, 'active' => 1))->result();
+		
+		if(!count($bz_products)){
+			$bz_products = $this->db->get_where('bz_products', array('post_id' => $post_id, 'active' => 0, 'inactivated_by_user' => 1))->result();
+		}
+		
 		if(!count($bz_products))
-			return null;
+			return NULL;
 		
 		return (int) $bz_products[0]->billing_cycle;
+	
 	}
 	
 	function get_last_billing_date($post_id){
 		
-		$sql = "SELECT * FROM invoice WHERE post_id=$post_id AND state = 'paid' ORDER BY date DESC";
+		$sql = "SELECT * FROM invoice WHERE post_id=$post_id AND state = 'paid' AND is_billing_cycle = 1 ORDER BY date DESC";
 		$result = $this->db->query($sql)->result();
 
 		if(!count($result))
@@ -259,4 +271,30 @@ class Business_model extends CI_Model {
 		$date->add(new DateInterval('P'.$billing_cycle.'M'));
 		return $date->format('Y-m-d');
 	}
+	
+	function disable_product($bz_products_id){
+		$bz = array(
+			'active' => 0,
+			'inactivated_by_user' => 1
+		);
+		
+		if(!$this->db->update('bz_products', $bz, "id = $bz_products_id")){
+			return false;
+		}		
+		return true;	
+	}
+
+	function enable_product($bz_products_id){
+		$bz = array(
+			'active' => 1,
+			'inactivated_by_user' => 0
+		);
+		
+		if(!$this->db->update('bz_products', $bz, "id = $bz_products_id")){
+			return false;
+		}
+		
+		return true;	
+	}
+	
 }

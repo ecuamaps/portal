@@ -2,6 +2,7 @@
 
 <? if($biz->state == 'I'): ?>
 <h1><?=lang('bizpanel.setup.pendingconfirmation')?></h1>
+<a class="close-reveal-modal">&#215;</a>
 <? else: ?>
 <div class="section-container auto" data-section>
   <section>
@@ -58,7 +59,7 @@
 	$(document).ready(function(){
 		
 		$('#bizpanel-tab3').click(function(e){
-			//if(!$('#bizpanel-tab3-wrapper').html()){
+			if(!$('#bizpanel-tab3-wrapper').html()){
 				$.ajax({
 		            type : "POST",
 		            url : '<?=current_lang()?>/account/get_biz_products_list',
@@ -71,11 +72,11 @@
 		        }).done(function(response) {
 		        	$('#bizpanel-tab3-wrapper').html(response);
 		        });					
-			//}
+			}
 		})
 		
 		$('#bizpanel-tab2').click(function(e){
-			if(!$('#bizpanel-tab2-wrapper').html()){
+			//if(!$('#bizpanel-tab2-wrapper').html()){
 				$.ajax({
 		            type : "POST",
 		            url : '<?=current_lang()?>/account/get_biz_products',
@@ -90,7 +91,7 @@
 		        	//$('#bizpanel-tab2-wrapper').foundation('section', 'reflow');
 		        	$(document).foundation('section','reflow');
 		        });				
-			}
+			//}
 		});
 		
 		$('#bizpanel-update').click(function(e){
