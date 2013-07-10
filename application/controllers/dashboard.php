@@ -20,7 +20,7 @@ class Dashboard extends CI_Controller {
 		
 		//Validate Browsers 
 		$current_browser = $this->agent->browser().' '.$this->agent->version();
-		var_dump($current_browser);
+		
 		$nab = ci_config('not_allowed_browsers');
 		if(in_array($current_browser, $nab)){
 			$this->dasboard_params['browser_error'] = TRUE;
