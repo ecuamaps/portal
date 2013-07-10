@@ -81,7 +81,11 @@ $lang['dashboard.signupform.errmsg.pass'] = "the passwords mismatch";
 $lang['dashboard.signupform.errmsg.emailformat'] = "Wrong email format";
 $lang['dashboard.signupform.emailconfirmation'] = "Successful registration!  We have sent you an email to confirm your identity, you have up to %d days to do it" .
 		" otherwise your registration will be deleted.";
-
+$lang['dashboard.wrong.browser'] = 'For better experience use: \n' .
+		' - Internet Explorer 9 or higher\n' .
+		' - Firefox 15 or higher\n' .
+		' - Crhome 21 or higher \n' .
+		' - Opera 12 or higher';
 
 //TODO: Eliminar
 $lang['dashboard.pagetitle'] = "Dashboard";

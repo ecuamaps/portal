@@ -10,7 +10,9 @@ $config['features'] = array(
 	'reports',
 );
 
-$config['browsers_black_list'] = array(
-	'brw1', 
-	'brw2'
+//Not allowed browsers
+$config['not_allowed_browsers'] = array(	
+	'Internet Explorer 7.0',
+	'Internet Explorer 8.0',
+	'Mozilla 15.0'
 );

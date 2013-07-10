@@ -33,6 +33,12 @@
 <body>
 
   <!-- body content/ here -->
+	<? if(isset($browser_error)){ ?>
+  	<script>
+  		alert('<?=lang('dashboard.wrong.browser')?>');
+  	</script>
+  <? } ?>
+  
 	
 	<!-- Errors/messages here --> 
 	<? if($flash_msg = $this->session->flashdata('flash_msg')): ?>

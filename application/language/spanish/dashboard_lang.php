@@ -78,7 +78,11 @@ $lang['dashboard.signupform.errmsg.emailformat'] = "Formato de email incorrecto"
 $lang['dashboard.signupform.emailconfirmation'] = "Te has registrado exitosamente! <br/><br/>Te hemos enviado un email para que confirmes tu identidad, tienes hasta %d d&iacute;as para hacerlo" .
 		" de lo contrario tu registro ser&aacute; borrado.";
 
-
+$lang['dashboard.wrong.browser'] = 'Su Navegador esta desactualizado, Para mejorar tu experiencia utiliza: \n' .
+		' - Internet Explorer 9 o Superior \n' .
+		' - Firefox 15 o Superior \n' .
+		' - Google Chrome 21 o Superior \n' .
+		' - Opera 12 o Superior \n';
 
 //TODO: Eliminar
 $lang['dashboard.pagetitle'] = "Inicio";
