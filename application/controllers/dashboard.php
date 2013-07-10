@@ -11,11 +11,20 @@ class Dashboard extends CI_Controller {
 		$this->load->model('account_model');
 		$this->load->model('business_model');
 		$this->load->model('post');
+		$this->load->library('user_agent');
 		
 		$this->dasboard_params['user'] = $this->session->userdata('user');
 	}
 	
 	function index(){
+		
+		//Validate Browsers 
+		$current_browser = $this->agent->browser().' '.$this->agent->version();
+		
+		$nab = ci_config('not_allowed_browsers');
+		if(in_array($current_browser, $nab)){
+			$this->dasboard_params['browser_error'] = TRUE;
+		}
 		
 		//Get the top five of business types
 		$this->dasboard_params['bztop5types'] = $this->get_top5_bztypes();

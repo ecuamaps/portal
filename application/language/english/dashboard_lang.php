@@ -94,32 +94,10 @@ $lang['dashboard.location.delete'] = "Are you sure to delete this location ?";
 $lang['dashboard.location.failed'] = "We couldn't get your current location";		
 	
 
-
-//TODO: Eliminar
-$lang['dashboard.pagetitle'] = "Dashboard";
-$lang['dashboard.logout'] = "Logout";
-$lang['dashboard.reservations'] = "Reservations";
-$lang['dashboard.checkin'] = "Check In";
-$lang['dashboard.checkout'] = "Check Out";
-$lang['dashboard.rooms'] = "Rooms";
-$lang['dashboard.backdashboard'] = "Back to the Dashboard";
-$lang['dashboard.tickets'] = "Tickets";
-$lang['dashboard.hello'] = "Hello";
-$lang['dashboard.setup'] = "Setup";
-$lang['dashboard.months_names'] = '"January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"';
-$lang['dashboard.weekdays_names'] = '"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"';
-
-//Reports
-$lang['dashboard.available_rooms'] = 'Available Rooms';
-$lang['dashboard.occupied_rooms'] = 'Occupied Rooms';
-$lang['dashboard.Load_factor'] = 'Load Factor';
-
-$lang['dashboard.qualificationform.title'] = "Rate and Review";
-$lang['dashboard.qualificationform.rate'] = "Score";
-$lang['dashboard.qualificationform.resena'] = "Review";
-$lang['dashboard.qualificationform.button'] = "Send";
-$lang['dashboard.qualificationform.cancel'] = "Cancel";
-$lang['dashboard.qualificationform.close'] = "Close";
-$lang['dashboard.qualificationform.userlogin'] = "Qualify is only available for registered users, if you are already a member just sign in otherwise sign up , it's free!";
+$lang['dashboard.wrong.browser'] = 'For better experience use: \n' .
+		' - Internet Explorer 9 or higher\n' .
+		' - Firefox 15 or higher\n' .
+		' - Crhome 21 or higher \n' .
+		' - Opera 12 or higher';
 
 
