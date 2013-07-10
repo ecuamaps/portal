@@ -80,18 +80,25 @@
 	      <section class="top-bar-section">
 	        <ul class="right">
 	          
+	        <? foreach($follow_us_links as $f): ?>
+		    	<? 
+		    		$name = ucfirst(str_replace('follow_us_', '', $f->keyname));
+		    		$icon = get_config_val("{$name}_icon");
+		    	?>
+		        <li><a href="<?= $f->value; ?>" <?= ($icon) ? 'style="line-height: 0 !important; padding: 10px 5px 0 0;"' : ''?> target="_blank"><?= ($icon) ? $icon : $name; ?></a></li>	
+		    <? endforeach; ?>
+		          	 	
+		          	 			     
 	          <li class="divider"></li>
-	          <li class="has-dropdown"><a href="javascript:void(0)" id="followus" ><?=lang('dashboard.followus')?></a>
-	          	 <ul class="dropdown">
-	          	 	<? foreach($follow_us_links as $f): ?>
-	          	 		<? $name = ucfirst(str_replace('follow_us_', '', $f->keyname)) ?>
-	          	 		<li><a href="<?= $f->value; ?>" target="_blank"><?= $name; ?></a></li>	
-	          	 	<? endforeach; ?>
-              	 </ul>
+	          <li class="has-dropdown"><a href="javascript:void(0)" id="about"><?=lang('dashboard.about')?></a>
+	         	 <ul class="dropdown">	         	 	
+	         	 	<li><a href="http://www.buskoo.com">Historia</a></li>
+	         	 	<li><a href="mailto:ventas@buskoo.com">Ventas</a></li>
+	         	 	<li><a href="mailto:webmaster@buskoo.com">Soporte</a></li>
+	         	 </ul>
 	          </li>
 	          
-	          <li class="divider"></li>
-	          <li><a href="javascript:void(0)" id="about"><?=lang('dashboard.about')?></a></li>
+	          
 			
        	<?
        		if($this->lang->lang() == 'en'){
@@ -103,7 +110,9 @@
        		}
        	?>			
 	          <li class="divider"></li>
-	          <li><a href="<?=base_url($other_lang)?>" id="about"><?=$other_lang_txt?></a></li>
+	          <li><a href="<?=base_url($other_lang)?>" id="about"><?=$other_lang_txt?></a>
+	          
+	          </li>
 			
 			<? if($user): ?>
 	          <li class="divider"></li>
