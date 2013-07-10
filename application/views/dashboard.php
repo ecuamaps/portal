@@ -21,15 +21,12 @@
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;region=EC"></script>
   
   <script src="<?=base_url()?>assets/js/mochkino.js"></script>
+  <script src="<?=base_url()?>assets/js/jquery_modal/jquery.modal.js"></script>
   <script src="<?=base_url()?>assets/js/jquery.cookie.js"></script>
   <script src="<?=base_url()?>assets/js/ajaxfileupload.js"></script>
   
-  <script>
-  	var lang = '<?=$this->lang->lang()?>';
-  </script>
-  
   <?=$_scripts?>
-  
+
 </head>
 <body>
 
@@ -39,8 +36,7 @@
   		alert('<?=lang('dashboard.wrong.browser')?>');
   	</script>
   <? } ?>
-  
-	
+  	
 	<!-- Errors/messages here --> 
 	<? if($flash_msg = $this->session->flashdata('flash_msg')): ?>
 	<div data-alert class="alert-box <?= ($flash_msg['status'] == 'error') ? 'alert' : 'success'?>">
@@ -76,7 +72,7 @@
 	
 	<? if(!$user): ?>
 	<!-- Login Form -->
-	<div class="reveal-modal small" id="login-form-wrapper">
+	<div class="reveal-modal" id="login-form-wrapper">
 		<?= form_open('account/login', array('id' => 'login-form', 'class' => '')) ?>
 			<h4><?=lang('dashboard.loginform.title')?></h4>
 			<div class="row hide" id="login-error-wrapper">
@@ -109,7 +105,7 @@
 		
 	<? if(!$user): ?>
 	<!-- Sign Up Form -->
-	<div class="reveal-modal small" id="signup-form-wrapper">
+	<div class="reveal-modal" id="signup-form-wrapper">
 		<?= form_open('account/signup', array('id' => 'signup-form', 'class' => '')) ?>
 			<h5><?=lang('dashboard.signupform.title')?></h5>
 			<div class="row hide" id="signin-error-wrapper">
@@ -158,6 +154,7 @@
 		</div>
 		
 		<script>
+			var lang = '<?=$this->lang->lang()?>';
 			var err_msg_missing_field_signin = '<?=lang('dashboard.signupform.errmsg')?>';
 			var err_msg_mismatch_pass = '<?=lang('dashboard.signupform.errmsg.pass')?>'
 			var err_msg_wrong_email_format = '<?=lang('dashboard.signupform.errmsg.emailformat')?>';

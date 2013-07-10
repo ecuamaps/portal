@@ -13,6 +13,8 @@ class Dashboard extends CI_Controller {
 		$this->load->model('post');
 		$this->load->library('user_agent');
 		
+		$this->load->library('user_agent');
+		
 		$this->dasboard_params['user'] = $this->session->userdata('user');
 	}
 	
@@ -48,9 +50,6 @@ class Dashboard extends CI_Controller {
 				}
 			}
 			
-			//Load the user businesses
-			if($biz = $this->account_model->get_businesses($user->id))
-				$this->dasboard_params['businesses'] = $biz;
 		} 
 
 		//Get the system dafault location

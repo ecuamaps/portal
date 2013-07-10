@@ -9,7 +9,7 @@ $lang['signup.error.duplicatedmail'] = "Este email ya existe";
 $lang['activation.error'] = "La cuenta ha sido suspendida, ponte en contacto con nosotros para ayudarte.";
 $lang['activation.alreadyactivated'] = "La cuenta ya habia sido activada entes.";
 $lang['activation.wornglink'] = "El enlace esta da&ntilde;ado.";
-$lang['activation.successfully'] = "La cuenta ha sudo activada exitosamente.";
+$lang['activation.successfully'] = "La cuenta ha sido activada exitosamente.";
 
 $lang['createbiz.title'] = 'Agrega tu negocio, es gratis!';
 $lang['createbiz.step1'] = 'Paso 1: Datos del negocio';
