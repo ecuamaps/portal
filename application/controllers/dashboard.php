@@ -49,6 +49,10 @@ class Dashboard extends CI_Controller {
 					}
 				}
 			}
+		   
+		   	//Load the user businesses
+		   	if($biz = $this->account_model->get_businesses($user->id))
+		   		$this->dasboard_params['businesses'] = $biz;
 			
 		} 
 

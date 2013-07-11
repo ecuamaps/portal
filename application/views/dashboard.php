@@ -21,9 +21,12 @@
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;region=EC"></script>
   
   <script src="<?=base_url()?>assets/js/mochkino.js"></script>
-  <script src="<?=base_url()?>assets/js/jquery_modal/jquery.modal.js"></script>
   <script src="<?=base_url()?>assets/js/jquery.cookie.js"></script>
   <script src="<?=base_url()?>assets/js/ajaxfileupload.js"></script>
+
+  <script>
+        var lang = '<?=$this->lang->lang()?>';
+  </script>
   
   <?=$_scripts?>
 
@@ -72,7 +75,7 @@
 	
 	<? if(!$user): ?>
 	<!-- Login Form -->
-	<div class="reveal-modal" id="login-form-wrapper">
+	<div class="reveal-modal small" id="login-form-wrapper">
 		<?= form_open('account/login', array('id' => 'login-form', 'class' => '')) ?>
 			<h4><?=lang('dashboard.loginform.title')?></h4>
 			<div class="row hide" id="login-error-wrapper">
@@ -105,7 +108,7 @@
 		
 	<? if(!$user): ?>
 	<!-- Sign Up Form -->
-	<div class="reveal-modal" id="signup-form-wrapper">
+	<div class="reveal-modal small" id="signup-form-wrapper">
 		<?= form_open('account/signup', array('id' => 'signup-form', 'class' => '')) ?>
 			<h5><?=lang('dashboard.signupform.title')?></h5>
 			<div class="row hide" id="signin-error-wrapper">

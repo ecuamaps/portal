@@ -100,4 +100,5 @@ $lang['dashboard.wrong.browser'] = 'For better experience use: \n' .
 		' - Crhome 21 or higher \n' .
 		' - Opera 12 or higher';
 
+$lang['dashboard.navmenu.target.tooltip'] = "Go to my current location";
 

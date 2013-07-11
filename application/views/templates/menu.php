@@ -24,7 +24,6 @@
 	          <li class="divider"></li>
 	          <li class="has-dropdown"><a href="javascript:void(0)"><?=lang('dashboard.myaccount')?></a>
 	          	 <ul class="dropdown">
-	          		<li><a href="<?=base_url($this->lang->lang().'/account/create_enterprise_form')?>" data-reveal-id="add-enterprise-form" data-reveal-ajax="true"><?=lang('dashboard.addbuz')?></a></li>
                     <li><a href="javascript:void(0)" id="chpwd" data-reveal-id="chpwd-form-wrapper"><?=lang('dashboard.chpwd')?></a></li>
 
 	          	 	<li class="has-dropdown"><a href="javascript:void(0)"><?=lang('dashboard.mylocations')?></a>
@@ -43,35 +42,35 @@
               	 </ul> 
 	          </li>
 	          
-	          <? if(isset($businesses)): ?>
+	         
 	          <li class="divider"></li>
 	          <li class="has-dropdown"><a href="javascript:void(0)"><?=lang('dashboard.mybizs')?></a>
 	          	<ul class="dropdown">
-	          		<? foreach($businesses as $b): ?>
-	          		<li><a href="javascript:void(0)" id="<?=$b->id?>" class="mybiz-link"><?=$b->name?></a></li>
-	          		<? endforeach; ?>
+	          		<li><a href="<?=base_url($this->lang->lang().'/account/create_enterprise_form')?>" data-reveal-id="add-enterprise-form" data-reveal-ajax="true"><?=lang('dashboard.addbuz')?></a></li>
+	          		<? if(isset($businesses)): ?>
+		          		<? foreach($businesses as $b): ?>
+		          		<li><a href="javascript:void(0)" id="<?=$b->id?>" class="mybiz-link"><?=$b->name?></a></li>
+		          		<? endforeach; ?>
+	          		<? endif; ?>
 	          	</ul>
 	          <li>
-	          <? endif; ?>
 	          
 			  <? endif; ?>
 			  
 			  <? if(!$user): ?>
 	          <li class="divider"></li>
-	          <li><a href="#" data-reveal-id="signup-form-wrapper"><?=lang('dashboard.signup')?></a></li>
+	          <li><a href="javascript:void(0)" data-reveal-id="signup-form-wrapper"><?=lang('dashboard.signup')?></a></li>
 	          <? endif; ?>
-	        	
-	          <li class="has-dropdown"><a href="javascript:void(0)"><?=lang('dashboard.navmenu')?></a>
+	        
+	           <li class="divider"></li>
+	           <li><a href="javascript:void(0)" id="goto-my-current-location" style="line-height: 0 !important; padding: 10px 5px 6px 0;" data-tooltip class="has-tip" title="<?=lang('dashboard.navmenu.target.tooltip')?>"><? center_map_here_logo()?></a></li>
+	           
+	          <!--<li class="has-dropdown"><a href="javascript:void(0)"><?=lang('dashboard.navmenu')?></a>
 	          	<ul class="dropdown">
 	          		<li><a href="javascript:void(0)" id="nav-menu-back"><?=lang('dashboard.navmenu.back')?></a></li>
 	          		<li><a href="javascript:void(0)" id="nav-menu-move"><?=lang('dashboard.navmenu.move')?></a></li>
-	          		<? if(isset($nav_locations)): ?>
-	          			<? foreach($nav_locations  as $nav): ?>
-	          				<li><a href="javascript:void(0)" class="nav-location" lat="<?=$nav['lat']?>" lng="<?=$nav['lng']?>"><?=lang('dashboard.navmenu.location').' '.$nav['name']?></a></li>
-	          			<? endforeach; ?>
-	          		<? endif; ?>
 	          	</ul>
-	          </li>
+	          </li>-->
 	        </ul>
 	      </section>
 		 
@@ -84,7 +83,7 @@
 		    		$name = ucfirst(str_replace('follow_us_', '', $f->keyname));
 		    		$icon = get_config_val("{$name}_icon");
 		    	?>
-		        <li><a href="<?= $f->value; ?>" <?= ($icon) ? 'style="line-height: 0 !important; padding: 10px 5px 0 0;"' : ''?> target="_blank"><?= ($icon) ? $icon : $name; ?></a></li>	
+		        <li><a href="<?= $f->value; ?>" <?= ($icon) ? 'style="line-height: 0 !important; padding: 10px 5px 6px 0;"' : ''?> target="_blank"><?= ($icon) ? $icon : $name; ?></a></li>	
 		    <? endforeach; ?>
 		          	 	
 		          	 			     
@@ -125,7 +124,7 @@
 
 	<? if($user): ?>
 	<!-- Add Location Form -->
-	<div class="reveal-modal" id="add-location-form-wrapper">
+	<div class="reveal-modal small" id="add-location-form-wrapper">
 		<?= form_open('api/add_location', array('id' => 'add-location-form', 'class' => '')) ?>
 			<h4><?=lang('dashboard.locationform.title')?></h4>
 			<p><?=lang('dashboard.locationform.help')?></p>
@@ -164,7 +163,7 @@
 	<!-- End Add Enterprise Form -->
 
 	<!-- Change Password Form -->
-	<div class="reveal-modal" id="chpwd-form-wrapper">
+	<div class="reveal-modal small" id="chpwd-form-wrapper">
             <?= form_open('account/change_password', array('id' => 'chpwd-form', 'class' => '')) ?>
             <input type="hidden" name="chpwd_email" value="<?=$user->email?>">
             <h5><?=lang('dashboard.chpwd')?></h5>
@@ -206,9 +205,6 @@
             </script>
         </div>
 	<!-- End Change Password Form -->
-        
-        
-        
-        
+
 	<? endif; ?>
 	

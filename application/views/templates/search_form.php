@@ -94,6 +94,15 @@
 		<div class="row">
 			<div class="large-12 columns"><a href="javascript:void(0)" id="chlocation-go-current-location"><?=lang('dashboard.chlocationform.gocurrlocation')?></a></div>
     	</div>
+
+		<? if(isset($nav_locations)): ?>
+	    	<? foreach($nav_locations  as $nav): ?>
+	    		<div class="row">
+					<div class="large-12 columns"><a href="javascript:void(0)" class="nav-location" lat="<?=$nav['lat']?>" lng="<?=$nav['lng']?>"><?=lang('dashboard.navmenu.location').' '.$nav['name']?></a></div>
+    			</div>
+	        <? endforeach; ?>
+	   <? endif; ?>
+	          		    	
 	</div>	
 	<!-- End Change location Form -->
 

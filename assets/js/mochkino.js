@@ -189,7 +189,7 @@ $(document).ready(function() {
     
     mapInitialize(null);
     
-    $('#chlocation-go-current-location').click(function (e){
+    $('#chlocation-go-current-location, #goto-my-current-location').click(function (e){
     	e.preventDefault();
     	Foundation.libs.dropdown.close($('#change-location-wrapper'));
     	navigator.geolocation.getCurrentPosition(goToMyCurrentLocation, errorHandler);
@@ -546,6 +546,8 @@ $(document).ready(function() {
         changeLocation(new google.maps.LatLng(lat, lng));
         myLocation.setPosition(myLatlng);
         map.setCenter(myLatlng);
+        
+        Foundation.libs.dropdown.close($('#change-location-wrapper'));
     });
 
     $('#chlocation-action').click(function(e){

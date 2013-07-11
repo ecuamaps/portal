@@ -101,3 +101,4 @@ $lang['dashboard.wrong.browser'] = 'Su Navegador esta desactualizado, Para mejor
 		' - Google Chrome 21 o Superior \n' .
 		' - Opera 12 o Superior \n';
 
+$lang['dashboard.navmenu.target.tooltip'] = "Ir a mi ubicaci&oacute;n actual";
