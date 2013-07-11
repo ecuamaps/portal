@@ -91,11 +91,13 @@
 		          	 			     
 	          <li class="divider"></li>
 	          <li class="has-dropdown"><a href="javascript:void(0)" id="about"><?=lang('dashboard.about')?></a>
-	         	 <ul class="dropdown">	         	 	
+	         	<!-- <ul class="dropdown">	         	 	
 	         	 	<li><a href="http://www.buskoo.com">Historia</a></li>
 	         	 	<li><a href="mailto:ventas@buskoo.com">Ventas</a></li>
 	         	 	<li><a href="mailto:webmaster@buskoo.com">Soporte</a></li>
+	         	 
 	         	 </ul>
+	         	-->
 	          </li>
 	          
 	          

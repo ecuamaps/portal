@@ -3,7 +3,7 @@
 $lang['dashboard.login'] = "Iniciar Sesi&oacute;n";
 $lang['dashboard.signup'] = "Registrate gratis!";
 $lang['dashboard.followus'] = "Siguenos!";
-$lang['dashboard.about'] = "Quienes Somos";
+$lang['dashboard.about'] = "Qu&eacote; es Buskoo ?";
 $lang['dashboard.logout'] = "Salir";
 $lang['dashboard.myaccount'] = "Mi Cuenta";
 $lang['dashboard.mylocations'] = "Mis Ubicaciones";
