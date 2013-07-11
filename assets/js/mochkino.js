@@ -731,7 +731,16 @@ $(document).ready(function() {
     	$('#biz-control-panel').on('opened', function () {
       	  $(this).foundation('section', 'reflow');
       });
-    })
+    });
+    
+    $('input[name="search-text"]').focus();
+    
+    $('input[name="search-text"]').keypress(function(e) {
+        if(e.which == 13) {
+        	e.preventDefault();
+        	$('#search-btn').trigger('click');
+        }
+    });
 });
 
 function change_sort(orderby){
@@ -798,7 +807,7 @@ function search(openModal, orderby){
         
     });
     
-	$('#back-results-btn').show();	
+	$('#back-results-btn').show();
 }
 
 function removeMarker(id){

@@ -19,7 +19,7 @@
 		<div class="row full-width" id="results-wrapper">
 			<? $index = $start + 1?>
 			<? foreach($docs as $i => $d): ?>
-			<? $this->view('api/templates/'.$d->post_type_en, array('d' => $d, 'index' => $index)); ?>	
+			<? $this->view('api/templates/'.str_replace(' ', '_', $d->post_type_en), array('d' => $d, 'index' => $index)); ?>	
 			<? $score_avg = number_format($d->score_avg, 2);
 				$scores[$d->id] = '{id: '.$d->id.', name: "'.ucfirst($d->name).'", score_avg: '.$score_avg.'}'; 
 				$index ++;
