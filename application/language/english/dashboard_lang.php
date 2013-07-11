@@ -60,8 +60,7 @@ $lang['dashboard.searchform.sortby'] = "Sort by";
 $lang['dashboard.searchform.sortby.score'] = "Relevance";
 $lang['dashboard.searchform.sortby.scoreavg'] = "Score";
 $lang['dashboard.searchform.sortby.distance'] = "Distance";
-
-
+$lang['dashboard.searchform.reopensearchresults'] = "Back to the results";
 
 $lang['dashboard.loginform.title'] = "User Login";
 $lang['dashboard.loginform.username'] = "Email";
@@ -100,5 +99,6 @@ $lang['dashboard.wrong.browser'] = 'For better experience use: \n' .
 		' - Crhome 21 or higher \n' .
 		' - Opera 12 or higher';
 
-$lang['dashboard.navmenu.target.tooltip'] = "Go to my current location";
-
+$lang['dashboard.navmenu.tooltip.target'] = "Go to my current location";
+$lang['dashboard.navmenu.tooltip.whereami'] = "Find the blue little man";
+$lang['dashboard.navmenu.tooltip.placemehere'] = "Place me at the map center";

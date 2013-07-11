@@ -23,7 +23,7 @@
 
 ?>
 
-			<h4 class="subheader clear-margin"><?= $index.'. '.ucfirst($d->name) ?></h4>
+			<h4 class="subheader clear-margin"><?= $index.'. '.ucwords($d->name) ?></h4>
 			<h6 class="clear-margin font-weight-normal line-height-08"><small><?= $str_types ?></small></h6>
 			<h5 class="clear-margin font-weight-normal line-height-08 margin-bottom-5px"><small><?= lang('search.distance') ?>: <?= $distance ?>, <?= lang('search.score') ?>: <?= $score_avg ?></small></h5>
 			<div class="section-container auto" data-section>

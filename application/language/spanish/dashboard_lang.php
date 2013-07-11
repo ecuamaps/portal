@@ -57,6 +57,7 @@ $lang['dashboard.searchform.sortby'] = "Ordenar por";
 $lang['dashboard.searchform.sortby.score'] = "Relevancia";
 $lang['dashboard.searchform.sortby.scoreavg'] = "Puntuaci&oacute;n";
 $lang['dashboard.searchform.sortby.distance'] = "Distancia";
+$lang['dashboard.searchform.reopensearchresults'] = "Volver a los resultados";
 
 $lang['dashboard.loginform.title'] = "Ingreso de usuario";
 $lang['dashboard.loginform.username'] = "Email";
@@ -101,4 +102,8 @@ $lang['dashboard.wrong.browser'] = 'Su Navegador esta desactualizado, Para mejor
 		' - Google Chrome 21 o Superior \n' .
 		' - Opera 12 o Superior \n';
 
-$lang['dashboard.navmenu.target.tooltip'] = "Ir a mi ubicaci&oacute;n actual";
+$lang['dashboard.navmenu.tooltip.target'] = "Ir a mi ubicaci&oacute;n actual";
+$lang['dashboard.navmenu.tooltip.whereami'] = "Buscar el hombrecito azul";
+$lang['dashboard.navmenu.tooltip.placemehere'] = "Colocarme en el centro del mapa";
+
+
