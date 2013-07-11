@@ -2,8 +2,8 @@
 
 $lang['dashboard.login'] = "Sign In";
 $lang['dashboard.signup'] = "Sign up for free!";
-$lang['dashboard.followus'] = "What is Buskoo ?";
-$lang['dashboard.about'] = "About Us";
+$lang['dashboard.followus'] = "Follow Us !";
+$lang['dashboard.about'] = "What is Buskoo ?";
 $lang['dashboard.logout'] = "Logout";
 $lang['dashboard.myaccount'] = "My Account";
 $lang['dashboard.mylocations'] = "My Locations";

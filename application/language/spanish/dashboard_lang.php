@@ -3,7 +3,7 @@
 $lang['dashboard.login'] = "Iniciar Sesi&oacute;n";
 $lang['dashboard.signup'] = "Registrate gratis!";
 $lang['dashboard.followus'] = "Siguenos!";
-$lang['dashboard.about'] = "Qu&eacote; es Buskoo ?";
+$lang['dashboard.about'] = "Qu&eacute; es Buskoo ?";
 $lang['dashboard.logout'] = "Salir";
 $lang['dashboard.myaccount'] = "Mi Cuenta";
 $lang['dashboard.mylocations'] = "Mis Ubicaciones";
@@ -25,7 +25,7 @@ $lang['dashboard.preference'] = "Preferencias";
 $lang['dashboard.preference.button'] = "Cerrar";
 
 $lang['dashboard.navmenu.back'] = "Donde esta el icono azul?";
-$lang['dashboard.navmenu.move'] = "Centrar el mapa aqu&itilde;";
+$lang['dashboard.navmenu.move'] = "Centrar el mapa aqu&iacute;";
 $lang['dashboard.navmenu.location'] = "Ir a";
 
 $lang['dashboard.leftpanel.clearresults'] = "Limpiar";
@@ -38,7 +38,7 @@ $lang['dashboard.chlocationform.ex'] = "Ej: La Carolina, Quito";
 $lang['dashboard.chlocationform.change'] = "Cambiar";
 $lang['dashboard.chlocationform.gocurrlocation'] = "Ir a mi ubicaci&oacute;n actual";
 
-$lang['dashboard.searchform.searchtext'] = "Tu texto a buscar aqui!";
+$lang['dashboard.searchform.searchtext'] = "Tu texto a buscar aqu&iacute;!";
 $lang['dashboard.searchform.searchbtn'] = "Buscar";
 $lang['dashboard.searchform.advsearch'] = "Avanzada";
 $lang['dashboard.searchform.hideadvsearch'] = "Ocultar";
