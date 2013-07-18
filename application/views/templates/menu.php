@@ -1,5 +1,5 @@
 	
-	    <nav class="top-bar">
+	    <nav class="top-bar hide-for-small">
 	      <ul class="title-area">
 	      
 
@@ -63,9 +63,9 @@
 	          <? endif; ?>
 	        
 	           <li class="divider"></li>
-	           <li><a href="javascript:void(0)" id="goto-my-current-location" style="line-height: 0 !important; padding: 10px 5px 6px 5px;" data-tooltip class="has-tip" title="<?=lang('dashboard.navmenu.tooltip.target')?>"><? got_to_my_current_location_logo()?></a></li>
-	           <li><a href="javascript:void(0)" id="nav-menu-back" style="line-height: 0 !important; padding: 10px 5px 6px 5px;" data-tooltip class="has-tip" title="<?=lang('dashboard.navmenu.tooltip.whereami')?>"><? where_am_i_logo() ?></a></li>
-	           <li><a href="javascript:void(0)" id="nav-menu-move" style="line-height: 0 !important; padding: 10px 5px 6px 5px;" data-tooltip class="has-tip" title="<?=lang('dashboard.navmenu.tooltip.placemehere')?>"><? place_me_here_logo() ?></a></li>
+	           <li><a href="javascript:void(0)" id="goto-my-current-location" style="line-height: 0 !important; padding: 10px 5px 6px 5px;" data-tooltip data-options="disable-for-touch:true" class="has-tip" title="<?=lang('dashboard.navmenu.tooltip.target')?>"><? got_to_my_current_location_logo()?></a></li>
+	           <li><a href="javascript:void(0)" id="nav-menu-back" style="line-height: 0 !important; padding: 10px 5px 6px 5px;" data-tooltip class="has-tip" data-options="disable-for-touch:true" title="<?=lang('dashboard.navmenu.tooltip.whereami')?>"><? where_am_i_logo() ?></a></li>
+	           <li><a href="javascript:void(0)" id="nav-menu-move" style="line-height: 0 !important; padding: 10px 5px 6px 5px;" data-tooltip class="has-tip" data-options="disable-for-touch:true" title="<?=lang('dashboard.navmenu.tooltip.placemehere')?>"><? place_me_here_logo() ?></a></li>
 	           
 	          <!--<li class="has-dropdown"><a href="javascript:void(0)"><?=lang('dashboard.navmenu')?></a>
 	          	<ul class="dropdown">

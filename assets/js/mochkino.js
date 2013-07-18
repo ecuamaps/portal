@@ -1,6 +1,6 @@
 var directionsService = new google.maps.DirectionsService();
 
-	var styles = [
+var styles = [
 	              {
 	            	    "featureType": "poi",
 	            	    "stylers": [

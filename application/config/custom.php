@@ -31,3 +31,6 @@ $config['not_allowed_browsers'] = array(
 	'Internet Explorer 8.0',
 	'Mozilla 15.0'
 );
+
+//App ID
+$config['media_server_app_id'] = 'fc998d105f8724b12423c6ff9e87ca1b';

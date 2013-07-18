@@ -21,7 +21,7 @@ class Media extends CI_Model {
 		return $media;
 	}
 	
-	function insert($user_id, $post_id, $hash, $type = 'pic', $desc = null){
+	function insert($user_id, $post_id, $hash, $type = 'pic', $desc = null, $custom_id = NULL){
 		$data = array(
 			'user_id' => $user_id,
 			'post_id' => $post_id,
@@ -30,6 +30,7 @@ class Media extends CI_Model {
 			'description' => $desc,
 			'upload_date' => date('Y-m-d H:i:s'),
 			'last_modification' => date('Y-m-d H:i:s'),
+			'custom_id' => $custom_id
 		);
 		
 		if(!$this->db->insert('media', $data))

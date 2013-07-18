@@ -10,7 +10,7 @@
   <link rel="shortcut icon" href="<?=base_url()?>assets/images/favicon.ico" type="image/x-icon">
 
   <link rel="stylesheet" href="<?=base_url()?>assets/foundation/css/normalize.css" />
-  <link rel="stylesheet" href="<?=base_url()?>assets/foundation/css/app.css" />
+  <link rel="stylesheet" href="<?=base_url()?>assets/css/app.css" />
   <link rel="stylesheet" href="<?=base_url()?>assets/foundation/css/foundation.min.css" />
   
   <?=$_styles?>
@@ -58,7 +58,6 @@
 	<!-- Search Bar -->
 	<?= $search_form ?>
 	<!-- End Search Bar -->		
-
 
 	<div class="row full-width" id="main-content-wrapper">		
   		<div class="large-12 columns" id="right-panel" style="max-height: inherit; height: 100%; padding: 0 !important">

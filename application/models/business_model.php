@@ -175,20 +175,27 @@ class Business_model extends CI_Model {
 
 		//Get the post type name
 		$post_type = $this->db->get_where('post_type', array('id' => $post->post_type_id))->result();
+
+		//get biz type
+		$sql = "SELECT b.* FROM post_biz_types p, biz_type b WHERE p.post_id=$id AND p.biz_type_id = b.id";
+		$biz_type = $this->db->query($sql)->result();
+		$biz_type = $biz_type[0]; 
+		
+		$tags = trim(trim(strtolower($biz_type->name)).' '.trim(strtolower($biz_type->tag)).' '.trim(strtolower($post->tags)));
 		
 		//Solr data
 		$data = array(
 			'id' => $id,
 			'name' => $post->name,
-			'tags' => $post->tags,
+			'tags' => $tags,
 			'content' => $post->content,
 			'post_type_es' => $post_type[0]->name_es,
 			'post_type_en' => $post_type[0]->name_en,
 			'location' => "{$metas['lat']},{$metas['lng']}",
 			'phones' => $phones,
 			'address' => $address,
-			'ceo' => $CEO,
-			'email' => $email,
+			//'ceo' => $CEO,
+			//'email' => $email,
 			'score_avg' => $post->score_avg
 		);
 		

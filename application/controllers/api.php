@@ -221,4 +221,30 @@ class Api extends CI_Controller {
 		die(json_encode(array('status' => 'error')));
 		
 	}
+	
+	function show_products(){
+		
+		$post_id = $this->input->get('post_id');
+		
+		//Get the products bought
+		$products = $this->business_model->get_products($post_id);
+		
+		if(!count($products)){
+			die();
+		}
+		
+		$executed = array('logo'); //Excluded the logo
+		foreach($products as $p){
+			if(!in_array($p->helper_file, $executed)){
+				$executed[] = $p->helper_file;
+				$this->load->helper('products/' . $p->helper_file);
+				$func_name = $p->helper_file."_show";
+				$view = $func_name($post_id);
+				if($view)
+					$params['views'][] = $view;
+			}
+		}
+		
+		$this->load->view('api/show_products', $params);
+	}
 }

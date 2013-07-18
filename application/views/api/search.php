@@ -88,6 +88,27 @@
 				$('#' + active).addClass('active');	
 			}
 			
+			$('.enterprise-panel2').click(function(e){
+				e.preventDefault();
+				
+				var post_id = $(this).attr('id');	
+				
+				if(!$('#section-content-' + post_id).html()){
+						
+					$.ajax({
+			            type : "GET",
+			            url : lang + '/api/show_products',
+			            dataType : "HTML",
+			            data : {
+			                post_id : post_id
+			            }
+			        }).done(function(response) {
+			            $('#section-content-' + post_id).html(response);
+			        });
+			        			
+				}
+				
+			})
 		<? endif; ?>
 		
 			$('.set-directions').click(function(e){

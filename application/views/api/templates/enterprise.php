@@ -14,6 +14,7 @@
 	$types = $this->business_model->get_biz_types($d->id);
 	$main_type = isset($types[0]) ? $types[0] : NULL;
 	
+	$tmp = array();
 	foreach($types as $t){
 		$tmp[] = $t->name;
 	}
@@ -59,10 +60,8 @@
   				</section>
   				
   				 <section>
-				    <p class="title" data-section-title><a href="#panel2"><?= lang('search.more') ?></a></p>
-				    <div class="content" data-section-content>
-				      <p>Extra info: photos, videos, links, prices, etc</p>
-				    </div>
+				    <p class="title" data-section-title><a href="#panel2" class="enterprise-panel2" id="<?=$d->id?>"><?= lang('search.more') ?></a></p>
+				    <div class="content" data-section-content id="section-content-<?=$d->id?>"></div>
  				</section>
 
 			</div>

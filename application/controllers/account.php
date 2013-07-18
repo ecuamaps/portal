@@ -245,9 +245,11 @@ class Account extends CI_Controller {
 				$this->tasks_model->create('business', $bz_id, $content);
 				die(json_encode(array('status' => 'ok', 'biz_id' => $bz_id)));
 			}else{
-				$this->business_model->syncronize($bz_id);
+				//$this->business_model->syncronize($bz_id);
 			}
 			
+			//TODO: Remover esto para que no sincronice si no es de pago.
+			$this->business_model->syncronize($bz_id);
 		}
 		
 		//Create the invoice

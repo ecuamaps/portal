@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Logo extends CI_Controller {
+class Pictures extends CI_Controller {
 	
 	var $params = array();
 	
@@ -8,32 +8,42 @@ class Logo extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->model('post');
+		$this->load->model('business_model');
 		$this->load->model('media');
-		$this->lang->load('products/logo');
-	}
-	
-	function deactivate(){
-		//TODO
+		$this->load->model('products_model');
+		$this->lang->load('products/picture');
 	}
 	
 	function index(){
 		$post_id = $this->input->get('post_id');
 		$post_product_id = $this->input->get('post_product_id');
 		
+		//bz_product_id
+		$this->params['bz_product_id'] = $post_product_id ? $post_product_id : NULL;
+		
 		//Load the current post
 		$this->params['post'] = $this->post->get_by_id($post_id);
 		
-		//Load the current active logo
-		if($logo = $this->media->select(array('post_id' => $post_id, 'type' => 'logo', 'state' => 1))){
-			$logo = $logo[0];
-			$this->params['logo_url'] = ci_config('media_server_show_url').'/'.$logo->hash;
-			$this->params['logo_id'] = $logo->id;			
+		//Load the product specs
+		$prodcts = $this->business_model->get_products($post_id);
+		$product = null;
+		foreach($prodcts  as $p){
+			if($post_product_id == $p->id){
+				$product = $p;
+				break;
+			}
 		}
-			
+		$this->params['product'] = $product;
 		
+		//Load the pictures
+		$this->params['pics'] = array();
+		if($pics = $this->media->select(array('post_id' => $post_id, 'type' => 'pic', 'state' => 1, 'custom_id' => $post_product_id))){
+			$this->params['pics'] = $pics;		
+		}
+
 		$this->params['user'] = $this->session->userdata('user');
 		
-		$this->load->view('products/logo/index', $this->params);
+		$this->load->view('products/pictures/index', $this->params);
 	}
 	
 	function upload(){
@@ -41,18 +51,19 @@ class Logo extends CI_Controller {
 		$post_id = $this->input->post('post_id', TRUE); 
 		$user_id = $this->input->post('user_id', TRUE);
 		$media_id = $this->input->post('media_id', TRUE);
-	   	$file_element_name = 'logo';
-	 
+		$bz_product_id = $this->input->post('bz_product_id', TRUE);
+		$file_element_name = 'picture';
+
 	    $this->load->library('upload');
 	 
 	   	if (!$this->upload->do_upload($file_element_name)){
 	        $msg = $this->upload->display_errors('', '');
 	        die(json_encode(array('status' => 'error', 'msg' => $msg)));
 	    }    
-	   
-	    $data = $this->upload->data();
-	    	    
-		$post = array('app_id' => ci_config('media_server_app_id'),'file_contents'=>'@'.$data['full_path']);	 
+
+		$data = $this->upload->data();
+
+		$post = array('app_id' => ci_config('media_server_app_id'), 'file_contents'=>'@'.$data['full_path']);	 
 
 	    //Need an update
 	    if($media_id){
@@ -74,13 +85,13 @@ class Logo extends CI_Controller {
 		   	@unlink($data['full_path']);
 			die(json_encode(array('status' => 'error', 'msg' => $response->msg)));		
 		}
-	    
+
 	    if($media_id){
-	    	$this->media->update($media_id, $response->file, 'Logo');
+	    	$this->media->update($media_id, $response->file, 'Picture');
 	    	$id = $media_id;
 	    }else{
 		    //Save the response in media
-		    $id = $this->media->insert($user_id, $post_id, $response->file, 'logo', 'Logo');	    	
+		    $id = $this->media->insert($user_id, $post_id, $response->file, 'pic', 'Picture', $bz_product_id);	    	
 	    }
 	     
 	   	@unlink($_FILES[$file_element_name]);
@@ -88,6 +99,6 @@ class Logo extends CI_Controller {
 	   	
 	   	$url = ci_config('media_server_show_url').'/'.$response->file;
 	   
-	   	die( json_encode(array('status' => 'success', 'msg' => lang('logo.upload.success'), 'media_id' => $id, 'url' => $url)));
+	   	die( json_encode(array('status' => 'ok', 'msg' => lang('picture.upload.success'), 'media_id' => $id, 'url' => $url)));
 	}
-}
+}	
