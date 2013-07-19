@@ -365,7 +365,7 @@ $config['proxy_ips'] = '';
 |
 */
 
-$config['app_name'] = 'Buskoo.com Sandbox site';
+$config['app_name'] = 'Buskoo.com Sandbox';
 
 //Solr Config
 $config['solr_options'] = array (
@@ -385,8 +385,8 @@ $config['post_type_vs_model'] = array(
 );
 
 //Media server
-$config['media_server_upload_url'] = 'http://hosting.dev/main/upload';
-$config['media_server_show_url'] = 'http://hosting.dev/main/show';
+$config['media_server_upload_url'] = 'http://buskko.net/main/upload';
+$config['media_server_show_url'] = 'http://buskko.net/main/show';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
