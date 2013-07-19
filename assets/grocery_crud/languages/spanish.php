@@ -11,13 +11,13 @@
 	$lang['list_zero_entries']		= 'Mostrando 0 a 0 de 0 registros';
 	$lang['list_search']			= 'Buscar';    
 	$lang['list_search_all']		= 'Buscar todos';
-	$lang['list_clear_filtering']   = 'Limpiar filtrados';
+	$lang['list_clear_filtering']   = 'Limpiar filtro';
 	$lang['list_delete']			= 'Borrar';
 	$lang['list_edit']				= 'Editar';  
-	$lang['list_paging_first']		= 'Primero';
-	$lang['list_paging_previous']	= 'Anterior';
-	$lang['list_paging_next']		= 'Siguiente';
-	$lang['list_paging_last']		= 'Ultimo';
+	$lang['list_paging_first']		= '<<';
+	$lang['list_paging_previous']	= '<';
+	$lang['list_paging_next']		= '>';
+	$lang['list_paging_last']		= '>>';
 	$lang['list_loading']			= 'Cargando...';          
 
 	$lang['form_edit']				= 'Editar';
@@ -71,6 +71,6 @@
 	$lang['error_min_file_size'] 		= "No puede subir un archivo vacio.";
 
 	/* Added in version 1.3.1 */
-	$lang['list_export'] 	= "Export";
-	$lang['list_print'] 	= "Print";
-	$lang['minimize_maximize'] = 'Minimize/Maximize';
+	$lang['list_export'] 	= "Exportar";
+	$lang['list_print'] 	= "Imprimir";
+	$lang['minimize_maximize'] = 'Minimizar/Maximizar';

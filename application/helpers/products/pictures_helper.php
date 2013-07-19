@@ -19,8 +19,10 @@ function pictures_show($post_id){
 	$html[] = '</div>';
 	
 	$html[] = '<script>' .
-			'Galleria.loadTheme("'.base_url().'assets/galleria/themes/classic/galleria.classic.min.js");' .
-			'Galleria.run("#galleria");' .
+			'$(document).ready(function(){' .
+				'Galleria.loadTheme("'.base_url().'assets/galleria/themes/classic/galleria.classic.min.js");' .
+				'Galleria.run("#galleria");}' .
+			');' .
 			'</script>';
 	return implode("\n", $html);	
 }
