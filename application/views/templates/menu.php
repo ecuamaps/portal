@@ -1,5 +1,5 @@
 	
-	    <nav class="top-bar hide-for-small">
+	    <nav class="top-bar">
 	      <ul class="title-area">
 	      
 
