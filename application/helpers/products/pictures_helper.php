@@ -8,10 +8,7 @@ function pictures_show($post_id){
 	if(!count($pics))
 		return NULL;
 	
-	$html[] = '<script src="'.base_url().'assets/galleria/galleria-1.2.9.min.js"></script>';
-	$html[] = '<style>#galleria{height:320px}</style>';
-	
-	$html[] = '<div id="galleria">';
+	$html[] = '<div id="galleria-'.$post_id.'" style="height:320px">';
 	foreach($pics as $p){
 		$url = ci_config('media_server_show_url').'/'.$p->hash;
 		$html[] = '<a href="'.$url.'"><img src="'.$url.'"></a>';
@@ -20,8 +17,7 @@ function pictures_show($post_id){
 	
 	$html[] = '<script>' .
 			'$(document).ready(function(){' .
-				'Galleria.loadTheme("'.base_url().'assets/galleria/themes/classic/galleria.classic.min.js");' .
-				'Galleria.run("#galleria");}' .
+				'Galleria.run("#galleria-'.$post_id.'");}' .
 			');' .
 			'</script>';
 	return implode("\n", $html);	

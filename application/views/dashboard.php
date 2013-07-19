@@ -24,6 +24,8 @@
   <script src="<?=base_url()?>assets/js/jquery.cookie.js"></script>
   <script src="<?=base_url()?>assets/js/ajaxfileupload.js"></script>
 
+  <script src="<?=base_url()?>assets/galleria/galleria-1.2.9.min.js"></script>
+
   <script>
         var lang = '<?=$this->lang->lang()?>';
   </script>
@@ -197,7 +199,7 @@
   <script>
   
   $(document).ready(function(){
-  	  	
+  	  	Galleria.loadTheme("<?=base_url()?>assets/galleria/themes/classic/galleria.classic.min.js");
   });
   </script>
 </body>
