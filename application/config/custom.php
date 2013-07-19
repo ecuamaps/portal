@@ -23,8 +23,6 @@ $config['not_alloed_words_search'] = array(
 
 $config['max_amt_pages'] = 5;
 
-$config['logo_product_id'] = 8;
-
 //Not allowed browsers
 $config['not_allowed_browsers'] = array(	
 	'Internet Explorer 7.0',

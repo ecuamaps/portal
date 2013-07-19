@@ -388,5 +388,8 @@ $config['post_type_vs_model'] = array(
 $config['media_server_upload_url'] = 'http://buskko.net/main/upload';
 $config['media_server_show_url'] = 'http://buskko.net/main/show';
 
+
+$config['logo_product_id'] = array(7, 8);
+
 /* End of file config.php */
 /* Location: ./application/config/config.php */

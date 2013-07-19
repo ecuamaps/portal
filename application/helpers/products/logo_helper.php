@@ -7,13 +7,11 @@ function show_logo($post_id){
 	
 	//if the product is active
 	$logo_prod_id = ci_config('logo_product_id');
-	$prod = $CI->db->get_where('bz_products', array('post_id' => $post_id, 'active' => 1, 'product_id' => $logo_prod_id))->result();
+	$prod = $CI->db->get_where('bz_products', "active = 1 AND product_id IN (".implode(',', $logo_prod_id).")")->result();
 	if(!count($prod)){
 		no_logo_icon(80, 80);
 		return false;
 	}
-	
-	
 	
 	if($logo = $CI->media->select(array('post_id' => $post_id, 'type' => 'logo', 'state' => 1))){
 		$logo = $logo[0];
