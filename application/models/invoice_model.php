@@ -30,7 +30,7 @@ class invoice_model extends CI_Model {
 			'purchase' => date('Y-m-d'),
 			'billing_cycle' => $product->billing_cycle,
 			'last_billing' => date('Y-m-d'),
-			'implemetation_data' => serialize(array('unit' => $product->unit)),
+			'implementation_data' => serialize(array('unit' => $product->unit)),
 		);
 		
 		$this->db->insert('bz_products', $data);
