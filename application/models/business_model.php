@@ -304,4 +304,8 @@ class Business_model extends CI_Model {
 		return true;	
 	}
 	
+	function update_bz_product($bz_product_id, $data){
+		return $this->db->update('bz_products', $data, "id = $bz_product_id");
+	}
+	
 }

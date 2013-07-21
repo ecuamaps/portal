@@ -358,10 +358,10 @@ $(document).ready(function(){
 		
 		var bz_type = $('select[name="bz-type"]').val();
 		var name = $('input[name="bz-name"]').val();
+		var phone = $('input[name="bz-phones"]').val();
 		var lat = $('input[name="bz-lat"]').val();
 		var lng = $('input[name="bz-lng"]').val();
-		var email = $('input[name="bz-email"]').val();
-		var emailReg = /^[a-zA-Z0-9._-]+([+][a-zA-Z0-9._-]+){0,1}[@][a-zA-Z0-9._-]+[.][a-zA-Z]{2,6}$/;
+		var phoneReg = /<?=pattern('phone')?>/;
 		
 		
 		if(!name || !lat || !lng || !bz_type){
@@ -370,8 +370,8 @@ $(document).ready(function(){
 			return false;
 		}
 		
-		if (email && !emailReg.test(email)) {
-			$('#createbiz-error-msg').html('<?=lang('createbiz.error.emailformat')?>');
+		if (phone && !phoneReg.test(phone)) {
+			$('#createbiz-error-msg').html('<?=lang('createbiz.error.phoneformat')?>');
 			$('#createbiz-error-wrapper').show();
 				return false;
 		}			
@@ -489,7 +489,7 @@ $(document).ready(function(){
 		var current = $('#product-list').val();
 
 		$.each(products, function(index, item) {
-			console.log(item);
+			//console.log(item);
  	 		if(current == item.id && !isAddedProduct(item.id)){
  	 			$('#invoice > tbody:last').append(getItemRow(item));
  	 			product_list.push(item.id);
@@ -535,11 +535,11 @@ $(document).ready(function(){
             	bz_id : $('input[name="bz-id"]').val(),
 				bz_type_id : $('select[name="bz-type"]').val(),
 				bz_name : $('input[name="bz-name"]').val(),
-				bz_desc : $('input[name="bz-desc"]').val(),
-				bz_addr : $('input[name="bz-addr"]').val(),
+				bz_desc : '',
+				bz_addr : '',
 				bz_phones : $('input[name="bz-phones"]').val(),
-				bz_ceo : $('input[name="bz-ceo"]').val(),
-				bz_email : $('input[name="bz-email"]').val(),
+				bz_ceo : '',
+				bz_email : '',
 				bz_lat : $('input[name="bz-lat"]').val(),
 				bz_lng : $('input[name="bz-lng"]').val(),
 				bz_bill_name : bz_bill_name,

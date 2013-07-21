@@ -9,7 +9,7 @@ class Phones extends CI_Controller {
 		
 		$this->load->model('post');
 		$this->load->model('business_model');
-		$this->lang->load('products/logo');
+		$this->lang->load('products/phones');
 	}
 	
 	
@@ -31,13 +31,16 @@ class Phones extends CI_Controller {
 		}
 		$this->params['product'] = $product;
 		
-		$implementation_data = unserialize($product->implementation_data);
+		$i_data = unserialize($product->implementation_data);
 		
-		var_dump($implementation_data);
+		$this->params['unit'] = $i_data['unit'];
+		
+		$this->params['phones'] = isset($i_data['phones']) ? $i_data['phones'] : array(); 
 		
 		$this->params['user'] = $this->session->userdata('user');
+		$this->params['bz_product_id'] = $post_product_id;
 		
-		//$this->load->view('products/phones/index', $this->params);
+		$this->load->view('products/phones/index', $this->params);
 	}
 	
 	function save(){
@@ -45,8 +48,24 @@ class Phones extends CI_Controller {
 		$post_id = $this->input->post('post_id', TRUE); 
 		$user_id = $this->input->post('user_id', TRUE);
 		$bz_product_id = $this->input->post('bz_product_id', TRUE);
+		$phones = $this->input->post('phones', TRUE);
 		
-	   
-	   	die( json_encode(array('status' => 'success', 'msg' => lang('logo.upload.success'), 'media_id' => $id, 'url' => $url)));
+		$prodcts = $this->business_model->get_products($post_id);
+		$product = null;
+		foreach($prodcts  as $p){
+			if($bz_product_id == $p->id){
+				$product = $p;
+				break;
+			}
+		}
+		
+		$i_data = unserialize($product->implementation_data);
+		$i_data['phones'] = $phones;
+		
+		$serialized = serialize($i_data);
+		
+		$this->business_model->update_bz_product($bz_product_id, array('implementation_data' => $serialized));
+		
+ 	   	die( json_encode(array('status' => 'success')));
 	}
 }

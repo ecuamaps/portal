@@ -939,7 +939,12 @@ function bzCreationMapInit(map_wrapper_id, lat, lng) {
 	});
 }
 
-function put_bz_by_type(type_id) {
-    console.log(type_id);
+function keysForPhones(e) {
+	var val = e.which;
+	//console.log(e.which);
+	if(val == 45 || val == 8 || val == 0 || (val >= 48 && val <= 57))
+		return true;
+		
+	e.preventDefault();
 }
 

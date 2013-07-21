@@ -1864,25 +1864,27 @@ function show_biz_form($post = null){
 	</div>
 	
     <div class="row">
-      <div class="large-4 columns">
+      <div class="large-6 columns">
         <label><?=lang('createbiz.name')?>*</label>
-        <input type="text" name="bz-name" <?=isset($post->name) ? 'value="'.$post->name.'"' : ''?> required/>
+        <input type="text" name="bz-name" <?=isset($post->name) ? 'value="'.$post->name.'"' : ''?> pattern="<?=pattern('bz-name')?>" required/>
       </div>
-      <div class="large-4 columns">
+
+      <div class="large-6 columns">
+        <label><?=lang('createbiz.phones')?></label>
+        <input type="tel" pattern="<?=pattern('phone')?>" maxlength="16" id="bz-phones" name="bz-phones" <?=isset($post->phones) ? 'value="'.$post->phones.'"' : ''?> />
+      </div>
+
+      <!--<div class="large-4 columns">
         <label><?=lang('createbiz.desc')?></label>
         <input type="text" name="bz-desc" <?=isset($post->content) ? 'value="'.$post->content.'"' : ''?>" placeholder="<?=lang('createbiz.desc.placeholder')?>" />
       </div>
       <div class="large-4 columns">
         <label><?=lang('createbiz.address')?></label>
         <input type="text" name="bz-addr" <?=isset($post->address) ? 'value="'.$post->address.'"' : ''?>/>        
-      </div>
+      </div>-->
     </div>
 
-    <div class="row">
-      <div class="large-4 columns">
-        <label><?=lang('createbiz.phones')?></label>
-        <input type="text" name="bz-phones" <?=isset($post->phones) ? 'value="'.$post->phones.'"' : ''?> />
-      </div>
+    <!--<div class="row">
       <div class="large-4 columns">
         <label><?=lang('createbiz.CEO')?></label>
         <input type="text" name="bz-ceo" <?=isset($post->CEO_name) ? 'value="'.$post->CEO_name.'"' : ''?> />
@@ -1891,7 +1893,7 @@ function show_biz_form($post = null){
         <label><?=lang('createbiz.email')?></label>
         <input type="email" name="bz-email" <?=isset($post->CEO_email) ? 'value="'.$post->CEO_email.'"' : ''?> />        
       </div>
-    </div>
+    </div>-->
 
     <div class="row">
       <div class="large-12 columns">
@@ -1924,7 +1926,11 @@ function show_biz_form($post = null){
 				bzCreationMapInit('<?=($post) ? 'map_addbiz-upd' : 'map_addbiz'?>', lat, lng);
 				$(this).hide();
 			});
-				
+
+			$('#bz-phones').keypress(function(event) {
+				keysForPhones(event);
+			});
+					
 		});
 	</script>    	
 	<?php
@@ -1951,6 +1957,25 @@ function prorate_value($value, $last_billing_date, $billing_cycle){
     $prorated_value = $day_price * $remaning_days;
     return (float) number_format($prorated_value, 2);
      
+}
+
+function pattern($key){
+	$key = strtolower($key);
+	
+	switch($key){
+		case 'phone':
+		case 'phones':
+			$pattern = '^([0-9]{1,3}-[0-9]{1,3}-[0-9]{1,9})$';
+			break;
+		case 'email':
+		case 'mail':
+			$pattern = '^[a-zA-Z0-9._-]+([+][a-zA-Z0-9._-]+){0,1}[@][a-zA-Z0-9._-]+[.][a-zA-Z]{2,6}$';
+			break;
+		default:
+			$pattern = '';
+	}
+	
+	return $pattern;
 }
 
 function get_domain() {

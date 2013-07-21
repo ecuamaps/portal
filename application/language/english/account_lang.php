@@ -45,7 +45,7 @@ $lang['createbiz.name'] = 'Name';
 $lang['createbiz.desc'] = 'Description';
 $lang['createbiz.desc.placeholder'] = 'Not higher than 100 characters';
 $lang['createbiz.address'] = 'Address';
-$lang['createbiz.phones'] = 'Phones';
+$lang['createbiz.phones'] = 'A Phone';
 $lang['createbiz.CEO'] = 'Manager';
 $lang['createbiz.email'] = 'Email';
 $lang['createbiz.map'] = 'Place it on the map';
@@ -78,7 +78,7 @@ $lang['createbiz.free.confirmation'] = 'Thank you for trusting us, now we will c
 		'This process can take up 5 business days.';
 
 $lang['createbiz.error.requiredfields'] = 'The business type, the name and the map location are required.';
-$lang['createbiz.error.emailformat'] = 'Wrong email format.';
+$lang['createbiz.error.phoneformat'] = 'Wrong phone format.';
 $lang['createbiz.error.billdata.required'] = 'The name and the ID are required.';
 $lang['createbiz.error.billaddr.required'] = 'The address is required for money pickup.';
 

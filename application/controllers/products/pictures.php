@@ -35,6 +35,10 @@ class Pictures extends CI_Controller {
 		}
 		$this->params['product'] = $product;
 		
+		$i_data = unserialize($product->implementation_data);
+		
+		$this->params['unit'] = $i_data['unit'];
+		
 		//Load the pictures
 		$this->params['pics'] = array();
 		if($pics = $this->media->select(array('post_id' => $post_id, 'type' => 'pic', 'state' => 1, 'custom_id' => $post_product_id))){

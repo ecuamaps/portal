@@ -1,4 +1,4 @@
-<? for($x=0; $x<$product->unit; $x++):?>
+<? for($x=0; $x<$unit; $x++):?>
 	<?
 		$media = isset($pics[$x]) ? $pics[$x] : NULL;
 	?>

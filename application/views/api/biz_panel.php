@@ -98,10 +98,10 @@
 			var url = $('#addbiz-form-upd').attr('action');
 			var bz_type = $('select[name="bz-type"]').val();
 			var name = $('input[name="bz-name"]').val();
+			var phone = $('#bz-phones').val();
 			var lat = $('input[name="bz-lat"]').val();
 			var lng = $('input[name="bz-lng"]').val();
-			var email = $('input[name="bz-email"]').val();
-			var emailReg = /^[a-zA-Z0-9._-]+([+][a-zA-Z0-9._-]+){0,1}[@][a-zA-Z0-9._-]+[.][a-zA-Z]{2,6}$/;
+			var phoneReg = /<?=pattern('phone')?>/;
 			
 			
 			if(!name || !lat || !lng || !bz_type){
@@ -110,8 +110,9 @@
 				return false;
 			}
 			
-			if (email && !emailReg.test(email)) {
-				$('#updatebiz-error-msg').html('<?=lang('createbiz.error.emailformat')?>');
+			//console.log(phone);
+			if (phone && !phoneReg.test(phone)) {
+				$('#updatebiz-error-msg').html('<?=lang('createbiz.error.phoneformat')?>');
 				$('#updatebiz-error-wrapper').show();
 					return false;
 			}
@@ -125,11 +126,11 @@
 	            	bz_id : $('input[name="bz-id"]').val(),
 					bz_type_id : $('select[name="bz-type"]').val(),
 					bz_name : $('input[name="bz-name"]').val(),
-					bz_desc : $('input[name="bz-desc"]').val(),
-					bz_addr : $('input[name="bz-addr"]').val(),
+					bz_desc : '',
+					bz_addr : '',
 					bz_phones : $('input[name="bz-phones"]').val(),
-					bz_ceo : $('input[name="bz-ceo"]').val(),
-					bz_email : $('input[name="bz-email"]').val(),
+					bz_ceo : '',
+					bz_email : '',
 					bz_lat : $('input[name="bz-lat"]').val(),
 					bz_lng : $('input[name="bz-lng"]').val(),
 					hms1 : $('input[name="hms1"]').val()

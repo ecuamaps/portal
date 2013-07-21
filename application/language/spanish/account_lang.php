@@ -37,7 +37,7 @@ $lang['createbiz.name'] = 'Nombre';
 $lang['createbiz.desc'] = 'Descripci&oacute;n';
 $lang['createbiz.desc.placeholder'] = 'No mayor a 100 letras';
 $lang['createbiz.address'] = 'Direcci&oacute;n';
-$lang['createbiz.phones'] = 'Tel&eacute;fonos';
+$lang['createbiz.phones'] = 'Un Tel&eacute;fono';
 $lang['createbiz.CEO'] = 'Gerente';
 $lang['createbiz.email'] = 'Email';
 $lang['createbiz.map'] = 'Ub&iacute;calo en el mapa';
@@ -70,7 +70,7 @@ $lang['createbiz.free.confirmation'] = 'Gracias por confiar en nosotros, lo que 
 		'Este proceso puede tomar hasta 5 d&iacute;as h&aacute;biles';
 
 
-$lang['createbiz.error.emailformat'] = 'Formato de email incorrecto.';
+$lang['createbiz.error.phoneformat'] = 'Formato de tel&eacute;fono incorrecto.';
 $lang['createbiz.error.requiredfields'] = 'El tipo de negocio, el nombre y la ubicaci&oacute;n en el mapa son requeridos.';
 $lang['createbiz.error.emailformat'] = 'Formato de email incorrecto.';
 $lang['createbiz.error.billdata.required'] = 'El nombre y la identficaci&acute;n son requeridas.';
