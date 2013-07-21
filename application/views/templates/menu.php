@@ -160,9 +160,9 @@
 	<div class="reveal-modal" id="add-enterprise-form"></div>
 	<!-- End Add Enterprise Form -->
 
-	<!-- Add Enterprise Form -->
+	<!-- Biz control panel Form -->
 	<div class="reveal-modal" id="biz-control-panel"></div>
-	<!-- End Add Enterprise Form -->
+	<!-- End Biz control panel Form -->
 
 	<!-- Change Password Form -->
 	<div class="reveal-modal small" id="chpwd-form-wrapper">

@@ -56,7 +56,13 @@
 
 <script>
 	
+	$('#add-enterprise-form').html('');
+	
 	$(document).ready(function(){
+
+		$('#bz-phones').keypress(function(event) {
+			keysForPhones(event);
+		});
 		
 		$('#bizpanel-tab3').click(function(e){
 			if(!$('#bizpanel-tab3-wrapper').html()){

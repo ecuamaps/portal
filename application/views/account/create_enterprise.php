@@ -342,8 +342,13 @@ var iva_factor = <?=get_config_val('iva')?> / 100;
 
 var in_billing_cycle = <?= isset($not_in_billing_cycle) ? 0 : 1 ?>; 
 
+$('#biz-control-panel').html('');
 
 $(document).ready(function(){
+	
+	$('#bz-phones').keypress(function(event) {
+		keysForPhones(event);
+	});
 	
 	<? if($post_id): ?>
 	$('#step1-wrapper, #step3-wrapper, #step3-post, #step3-pay ,#step4-wrapper, #step5-wrapper, #step4-pay, #paid-process, #waiting, #free-process').hide();

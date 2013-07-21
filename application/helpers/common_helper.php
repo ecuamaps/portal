@@ -1844,6 +1844,8 @@ function show_biz_form($post = null){
 		$biz_type = $CI->business_model->get_biz_types($post->id);
 		$biz_type = $biz_type[0];
 	}
+	
+	$uniq = uniqid();
 	?>
 	<pre><? /*print_r($post)*/ ?></pre>
 	
@@ -1872,6 +1874,7 @@ function show_biz_form($post = null){
       <div class="large-6 columns">
         <label><?=lang('createbiz.phones')?></label>
         <input type="tel" pattern="<?=pattern('phone')?>" maxlength="16" id="bz-phones" name="bz-phones" <?=isset($post->phones) ? 'value="'.$post->phones.'"' : ''?> />
+        <small><?=lang('createbiz.phoneformat')?></small>
       </div>
 
       <!--<div class="large-4 columns">
@@ -1925,10 +1928,6 @@ function show_biz_form($post = null){
 				$('#<?=($post) ? 'map_addbiz-upd' : 'map_addbiz'?>').attr('style', 'padding: 0; height: 200px; width: 100%;');
 				bzCreationMapInit('<?=($post) ? 'map_addbiz-upd' : 'map_addbiz'?>', lat, lng);
 				$(this).hide();
-			});
-
-			$('#bz-phones').keypress(function(event) {
-				keysForPhones(event);
 			});
 					
 		});

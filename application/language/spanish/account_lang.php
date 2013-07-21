@@ -88,6 +88,7 @@ $lang['createbiz.paymethods.moneyorder'] = 'Giros de dinero';
 $lang['createbiz.paymethods.moneyorder.desc'] = 'Envianos el pago por Western Union';
 $lang['createbiz.paymethods.moneyorder.disclaimer'] = '<h6><small>* Tiene un costo adicional de $%s adicional al costo cobrado por Western Union. <br>* Solo aplica para compras superiores a $%s.</small></h6>';
 
+$lang['createbiz.phoneformat'] = 'Para fijos: 593-0X-XXXXXXX, Para celulares: 593-0X-XXXXXXXXX';
 			  	
 $lang['chpwd.successfully'] = "La clave ha sido cambiada satisfactoriamente";
 $lang['chpwd.errorchanging'] = "Error Cambiando la Clave";

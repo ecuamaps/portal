@@ -94,4 +94,6 @@ $lang['createbiz.paymethods.moneyorder'] = 'Money order';
 $lang['createbiz.paymethods.moneyorder.desc'] = 'Send the payment with Western Union';
 $lang['createbiz.paymethods.moneyorder.disclaimer'] = '<h6><small>* Has a extra cost of $%s plus the Western Union prices. <br>* Only applies for purchases greater than $%s.</small></h6>';
 
+$lang['createbiz.phoneformat'] = 'For land lines: 593-0X-XXXXXXX, For Cell Phones: 593-0X-XXXXXXXXX';
+
 ?>

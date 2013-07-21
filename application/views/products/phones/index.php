@@ -3,7 +3,7 @@
  <fieldset>
     <legend><?=lang('phones.title')?></legend>
     	<div class="row">
-    		<div class="large-12 columns"><?=lang('phones.maskland')?>: 593-0X-XXXXXXX, <?=lang('phones.maskcell')?>: 593-0X-XXXXXXXXX</div>
+    		<div class="large-12 columns"><small><?=lang('phones.maskland')?>: 593-0X-XXXXXXX, <?=lang('phones.maskcell')?>: 593-0X-XXXXXXXXX</small></div>
     	</div>
     	<div class="row">
     		<div class="large-12 columns">&nbsp;</div>
