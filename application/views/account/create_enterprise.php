@@ -342,7 +342,9 @@ var iva_factor = <?=get_config_val('iva')?> / 100;
 
 var in_billing_cycle = <?= isset($not_in_billing_cycle) ? 0 : 1 ?>; 
 
+<? if(!$biz): ?>
 $('#biz-control-panel').html('');
+<? endif; ?>
 
 $(document).ready(function(){
 	
