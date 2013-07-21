@@ -390,6 +390,7 @@ $config['media_server_show_url'] = 'http://buskko.net/main/show';
 
 
 $config['logo_product_id'] = array(7, 8);
+$config['phones_product_id'] = array(1, 2);
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
