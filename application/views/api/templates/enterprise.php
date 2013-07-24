@@ -45,7 +45,7 @@
 								<div class="row">
 									<div class="large-2 columns"><? show_logo($d->id) ?></div>
 									<div class="large-10 columns">
-										<h6 class="clear-margin font-weight-normal"><small><?= ucfirst($d->content) ?></small></h6>
+										<h6 class="clear-margin font-weight-normal"><small><?= show_extrainfo($d->id) ?></small></h6>
 										<h6 class="clear-margin font-weight-normal"><small><?= ucfirst($d->address) ?></small></h6>
 										<h6 class="clear-margin font-weight-normal"><small><?= lang('search.phone') ?>: <?= $d->phones ?></small></h6>									
 									</div>

@@ -948,3 +948,19 @@ function keysForPhones(e) {
 	e.preventDefault();
 }
 
+function count_chars(elem, output, max){
+	var text = elem.val()
+	var remaining = max - text.length
+	
+	output.html(remaining)
+}
+
+function trunkEmails ( text ){
+	var emailRegex = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi;
+	return text.replace(emailRegex, '');
+}
+
+function trunkUrls(text){
+	var urlRegex = /(((ftp|https?):\/\/)[\-\w@:%_\+.~#?,&\/\/=]+)|((mailto:)?[_.\w-]+@([\w][\w\-]+\.)+[a-zA-Z]{2,3})/gi;
+	return text.replace(urlRegex, '');
+}

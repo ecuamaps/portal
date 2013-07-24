@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Phones extends CI_Controller {
+class Extrainfo extends CI_Controller {
 	
 	var $params = array();
 	
@@ -9,11 +9,11 @@ class Phones extends CI_Controller {
 		
 		$this->load->model('post');
 		$this->load->model('business_model');
-		$this->lang->load('products/phones');
+		$this->lang->load('products/extrainfo');
 	}
 	
-	
 	function index(){
+		
 		$post_id = $this->input->get('post_id');
 		$post_product_id = $this->input->get('post_product_id');
 		
@@ -30,26 +30,24 @@ class Phones extends CI_Controller {
 			}
 		}
 		$this->params['product'] = $product;
-		
+
 		$i_data = unserialize($product->implementation_data);
-		
-		$this->params['unit'] = $i_data['unit'];
-		
-		$this->params['phones'] = isset($i_data['phones']) ? $i_data['phones'] : array(); 
+				
+		$this->params['extrainfo'] = isset($i_data['extrainfo']) ? $i_data['extrainfo'] : ''; 
 		
 		$this->params['user'] = $this->session->userdata('user');
 		$this->params['bz_product_id'] = $post_product_id;
 		
-		$this->load->view('products/phones/index', $this->params);
+		$this->load->view('products/extrainfo/index', $this->params);
+		
 	}
 	
 	function save(){
-
 		$post_id = $this->input->post('post_id', TRUE); 
 		$user_id = $this->input->post('user_id', TRUE);
 		$bz_product_id = $this->input->post('bz_product_id', TRUE);
-		$phones = $this->input->post('phones', TRUE);
-		
+		$extrainfo = $this->input->post('extrainfo', TRUE);
+
 		$prodcts = $this->business_model->get_products($post_id);
 		$product = null;
 		foreach($prodcts  as $p){
@@ -60,12 +58,12 @@ class Phones extends CI_Controller {
 		}
 		
 		$i_data = unserialize($product->implementation_data);
-		$i_data['phones'] = $phones;
+		$i_data['extrainfo'] = $extrainfo;
 		
 		$serialized = serialize($i_data);
 		
 		$this->business_model->update_bz_product($bz_product_id, array('implementation_data' => $serialized));
 		
- 	   	die( json_encode(array('status' => 'success', 'msg' => lang('phones.success'))));
+		die( json_encode(array('status' => 'success', 'msg' => lang('extrainfo.success'))));
 	}
 }

@@ -393,6 +393,7 @@ $config['media_server_show_url'] = 'http://hosting.dev/main/show';
 
 $config['logo_product_id'] = array(7, 8);
 $config['phones_product_id'] = array(1, 2);
+$config['extrainfo_product_id'] = array(3, 4);
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

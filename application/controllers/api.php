@@ -77,6 +77,7 @@ class Api extends CI_Controller {
 		);
 		
 		$this->load->helper('products/logo');
+		$this->load->helper('products/extrainfo');
 		
 		$this->load->view('api/search', $params);		
 	}
@@ -226,14 +227,14 @@ class Api extends CI_Controller {
 		
 		$post_id = $this->input->get('post_id');
 		
-		//Get the products bought
+		//Get the bought products 
 		$products = $this->business_model->get_products($post_id);
 		
 		if(!count($products)){
 			die();
 		}
 		
-		$executed = array('logo'); //Excluded the logo
+		$executed = array('logo', 'extrainfo'); //Excluded the logo
 		foreach($products as $p){
 			if(!in_array($p->helper_file, $executed)){
 				$executed[] = $p->helper_file;

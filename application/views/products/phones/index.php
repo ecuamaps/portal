@@ -61,8 +61,7 @@
 		            hms1 : $('input[name="hms1"]').val()
 		        }
 		    }).done(function(response) {
-		        
-		        
+		        alert(response.msg);
 		    });
 		    
 		});
