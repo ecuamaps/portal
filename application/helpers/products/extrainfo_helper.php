@@ -21,8 +21,6 @@ function show_extrainfo($post_id){
 		}
 	}
 	
-	
-	
 	if(!count($extrainfo))
 		return '';
 		

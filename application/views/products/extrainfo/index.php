@@ -10,7 +10,7 @@
     	</div>
 		<div class="row">
 	      <div class="large-4 columns">
-	        <textarea name="extrainfo-<?=$bz_product_id?>" id="extrainfo-<?=$bz_product_id?>"><?=$extrainfo?></textarea>
+	        <textarea maxlength="<?=$max_chars?>" name="extrainfo-<?=$bz_product_id?>" id="extrainfo-<?=$bz_product_id?>"><?=$extrainfo?></textarea>
 	        <small id="chcount-<?=$bz_product_id?>"></small>
 	      </div>
 	    </div>
@@ -20,12 +20,14 @@
 </form>
 
 <script>
+	var max_chars = <?=$max_chars?>;
+	
 	$(document).ready(function(){
 		
-		count_chars($('#extrainfo-<?=$bz_product_id?>'), $('#chcount-<?=$bz_product_id?>'), 100);
+		count_chars($('#extrainfo-<?=$bz_product_id?>'), $('#chcount-<?=$bz_product_id?>'), max_chars);
 				
 		$('#extrainfo-<?=$bz_product_id?>').keyup(function(event) {
-			count_chars($(this), $('#chcount-<?=$bz_product_id?>'), 100);
+			count_chars($(this), $('#chcount-<?=$bz_product_id?>'), max_chars);
 		});
 		
 		$('#save-phones-<?=$bz_product_id?>').click(function(e){
@@ -34,7 +36,9 @@
 			var text = $('#extrainfo-<?=$bz_product_id?>').val();
 			text = trunkEmails(text);
 			text = trunkUrls(text);
+			text = trunkMoreThan5NumbersTogether(text);
 			$('#extrainfo-<?=$bz_product_id?>').val(text);
+			count_chars($('#extrainfo-<?=$bz_product_id?>'), $('#chcount-<?=$bz_product_id?>'), max_chars);
 			
 			$.ajax({
 		        type : "POST",

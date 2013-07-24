@@ -961,6 +961,11 @@ function trunkEmails ( text ){
 }
 
 function trunkUrls(text){
-	var urlRegex = /(((ftp|https?):\/\/)[\-\w@:%_\+.~#?,&\/\/=]+)|((mailto:)?[_.\w-]+@([\w][\w\-]+\.)+[a-zA-Z]{2,3})/gi;
+	var urlRegex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
 	return text.replace(urlRegex, '');
+}
+
+function trunkMoreThan5NumbersTogether(text){
+	var urlRegex = /[0-9]{6}/;
+	return text.replace(urlRegex, '');	
 }

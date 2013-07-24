@@ -32,3 +32,6 @@ $config['not_allowed_browsers'] = array(
 
 //App ID
 $config['media_server_app_id'] = 'fc998d105f8724b12423c6ff9e87ca1b';
+
+//Max allowed characters in extrainfo
+$config['extrainfo.max_characters'] = 100;

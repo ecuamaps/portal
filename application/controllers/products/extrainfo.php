@@ -3,6 +3,7 @@
 class Extrainfo extends CI_Controller {
 	
 	var $params = array();
+	var $max_chars;
 	
 	function __construct(){
 		parent::__construct();
@@ -10,6 +11,8 @@ class Extrainfo extends CI_Controller {
 		$this->load->model('post');
 		$this->load->model('business_model');
 		$this->lang->load('products/extrainfo');
+		
+		$this->max_chars = ci_config('extrainfo.max_characters');
 	}
 	
 	function index(){
@@ -37,6 +40,7 @@ class Extrainfo extends CI_Controller {
 		
 		$this->params['user'] = $this->session->userdata('user');
 		$this->params['bz_product_id'] = $post_product_id;
+		$this->params['max_chars'] = $this->max_chars;
 		
 		$this->load->view('products/extrainfo/index', $this->params);
 		
@@ -47,7 +51,12 @@ class Extrainfo extends CI_Controller {
 		$user_id = $this->input->post('user_id', TRUE);
 		$bz_product_id = $this->input->post('bz_product_id', TRUE);
 		$extrainfo = $this->input->post('extrainfo', TRUE);
-
+		
+		//Truncate string
+		if(strlen($extrainfo) > $this->max_chars){
+			$extrainfo = substr(0, $this->max_chars);
+		}
+		
 		$prodcts = $this->business_model->get_products($post_id);
 		$product = null;
 		foreach($prodcts  as $p){
