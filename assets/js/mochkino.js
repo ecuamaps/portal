@@ -733,7 +733,7 @@ $(document).ready(function() {
       });
     });
     
-    $('input[name="search-text"]').focus();
+    //$('input[name="search-text"]').focus();
     
     $('input[name="search-text"]').keypress(function(e) {
         if(e.which == 13) {
