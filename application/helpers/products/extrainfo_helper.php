@@ -5,12 +5,10 @@ function show_extrainfo($post_id){
 	$CI = & get_instance();
 	$CI->load->model('business_model');
 	
-	//if the product is active
 	$extrainfo_prod_id = ci_config('extrainfo_product_id');
 
 	//Load the product specs
 	$prodcts = $CI->business_model->get_products($post_id);
-	$product = null;
 	
 	$extrainfo = array();
 	foreach($prodcts  as $p){

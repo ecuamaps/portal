@@ -78,6 +78,7 @@ class Api extends CI_Controller {
 		
 		$this->load->helper('products/logo');
 		$this->load->helper('products/extrainfo');
+		$this->load->helper('products/phones');
 		
 		$this->load->view('api/search', $params);		
 	}
@@ -234,7 +235,7 @@ class Api extends CI_Controller {
 			die();
 		}
 		
-		$executed = array('logo', 'extrainfo'); //Excluded the logo
+		$executed = array('logo', 'extrainfo', 'phones'); //Excluded the logo
 		foreach($products as $p){
 			if(!in_array($p->helper_file, $executed)){
 				$executed[] = $p->helper_file;

@@ -17,8 +17,5 @@ function phones_show($post_id){
 		$phones = array_merge($phones, $i_data['phones']);
 	}
 	
-	$html[] = '<h5 class="subheader">'.lang('phones.title').'</h5>';
-	$html[] = implode(' ', $phones);
-	
-	return implode("\n", $html);	
+	return implode(", ", $phones);	
 }

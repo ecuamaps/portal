@@ -16,7 +16,7 @@
 	    </div>
 	
  </fieldset>	
- <a href="#" class="small button" id="save-phones-<?=$bz_product_id?>"><?=lang('extrainfo.save')?></a>
+ <a href="#" class="small button" id="save-extrainfo-<?=$bz_product_id?>"><?=lang('extrainfo.save')?></a>
 </form>
 
 <script>
@@ -30,13 +30,14 @@
 			count_chars($(this), $('#chcount-<?=$bz_product_id?>'), max_chars);
 		});
 		
-		$('#save-phones-<?=$bz_product_id?>').click(function(e){
+		$('#save-extrainfo-<?=$bz_product_id?>').click(function(e){
 			e.preventDefault();
 			
 			var text = $('#extrainfo-<?=$bz_product_id?>').val();
 			text = trunkEmails(text);
 			text = trunkUrls(text);
 			text = trunkMoreThan5NumbersTogether(text);
+			
 			$('#extrainfo-<?=$bz_product_id?>').val(text);
 			count_chars($('#extrainfo-<?=$bz_product_id?>'), $('#chcount-<?=$bz_product_id?>'), max_chars);
 			
