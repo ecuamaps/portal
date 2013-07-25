@@ -235,7 +235,7 @@ class Api extends CI_Controller {
 			die();
 		}
 		
-		$executed = array('logo', 'extrainfo', 'phones'); //Excluded the logo
+		$executed = array('logo', 'extrainfo', 'phones', 'ytvideo'); //Excluded the logo and others
 		foreach($products as $p){
 			if(!in_array($p->helper_file, $executed)){
 				$executed[] = $p->helper_file;
