@@ -1735,6 +1735,9 @@ function search_query($text, $post_type){
 	
 	if(!$text)
 		return '*.*';
+	
+	if(strlen($text) == 1)
+		return '';
 		
 	$text = strtolower(trim($text));
 	//Define if the text is quoted

@@ -9,7 +9,7 @@ function phones_show($post_id){
 	
 	//if the product is active
 	$phones_product_id = ci_config('phones_product_id');
-	$prod = $CI->db->get_where('bz_products', "active = 1 AND product_id IN (".implode(',', $phones_product_id).")")->result();
+	$prod = $CI->db->get_where('bz_products', "post_id = $post_id AND active = 1 AND product_id IN (".implode(',', $phones_product_id).")")->result();
 	
 	$phones = array();
 	foreach($prod as $p){

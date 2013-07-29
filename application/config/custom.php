@@ -18,7 +18,17 @@ $config['not_alloed_words_search'] = array(
 	'para',
 	'en',
 	'at',
-	'and'
+	'and',
+	'don',
+	'ch',
+	'mi',
+	'se',
+	'cia',
+	'tu',
+	'con',
+	'su',
+	'no',
+	'lo',
 );
 
 $config['max_amt_pages'] = 5;
