@@ -183,6 +183,11 @@ class Business_model extends CI_Model {
 		
 		$tags = trim(trim(strtolower($biz_type->name)).' '.trim(strtolower($biz_type->tag)).' '.trim(strtolower($post->tags)));
 		
+		//Get the bought business tags
+		$this->load->helper('products/tags');
+		$custom_tags = get_tags($id);
+		$tags .= ' '.$custom_tags;
+		
 		//Solr data
 		$data = array(
 			'id' => $id,
@@ -287,7 +292,12 @@ class Business_model extends CI_Model {
 		
 		if(!$this->db->update('bz_products', $bz, "id = $bz_products_id")){
 			return false;
-		}		
+		}
+		
+		//Update the Solr
+		$bz_product = $this->db->get_where('bz_products', array('id' => $bz_products_id))->result();
+		$this->syncronize($bz_product[0]->post_id);
+		
 		return true;	
 	}
 
@@ -301,6 +311,9 @@ class Business_model extends CI_Model {
 			return false;
 		}
 		
+		//Update the Solr
+		$bz_product = $this->db->get_where('bz_products', array('id' => $bz_products_id))->result();
+		$this->syncronize($bz_product[0]->post_id);
 		return true;	
 	}
 	

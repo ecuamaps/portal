@@ -79,6 +79,10 @@
 	
 	<!-- End Advanced Search From-->
 
+	<!-- Search results -->
+	<div class="reveal-modal expand" id="search-result-wrapper"></div>
+	<!-- End Search Results-->
+
 	<!-- Change location Form -->
 	<div class="f-dropdown content medium" id="change-location-wrapper" data-dropdown-content>	
 		<h5><?=lang('dashboard.chlocationform.title')?></h5>

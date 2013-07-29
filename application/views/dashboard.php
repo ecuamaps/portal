@@ -67,11 +67,6 @@
   		</div>	
   	</div>
 	<!-- End Content -->
-
-	
-	<!-- Search results -->
-	<div class="reveal-modal" id="search-result-wrapper"></div>
-	<!-- End Search Results-->
 	
 	
 	<? if(!$user): ?>

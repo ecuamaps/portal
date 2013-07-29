@@ -22,9 +22,11 @@
 	      <td><?= $p->description ?></td>
 	      <td>
 	      	<? if($p->active == 1): ?>
-	      	<a href="javascript:void(0)" class="small button alert disable-product" bz-product-id="<?=$p->id?>"><?=lang('bizpanel.products.disable')?></a>
+	      	<a href="javascript:void(0)" class="small button alert disable-product" bz-product-id="<?=$p->id?>" id="disable-btn-<?=$p->id?>"><?=lang('bizpanel.products.disable')?></a>
+	      	<a href="javascript:void(0)" class="small button enable-product" bz-product-id="<?=$p->id?>" id="enable-btn-<?=$p->id?>" style="display:none;"><?=lang('bizpanel.products.enable')?></a>
 	      	<? else: ?>
-	      	<a href="javascript:void(0)" class="small button enable-product" bz-product-id="<?=$p->id?>"><?=lang('bizpanel.products.enable')?></a>
+	      	<a href="javascript:void(0)" class="small button alert disable-product" bz-product-id="<?=$p->id?>" id="disable-btn-<?=$p->id?>" style="display:none;"><?=lang('bizpanel.products.disable')?></a>
+	      	<a href="javascript:void(0)" class="small button enable-product" bz-product-id="<?=$p->id?>" id="enable-btn-<?=$p->id?>"><?=lang('bizpanel.products.enable')?></a>
 	      	<? endif; ?>
 	      </td>
 	    </tr>
@@ -54,7 +56,9 @@
 			
 			if(!confirm('<?=lang('bizpanel.products.inactivateconfirm')?>'))
 				return false;
-				
+			
+			var bz_product_id = $(this).attr('bz-product-id');
+			
 			$.ajax({
 				type : "POST",
 				url : '<?=current_lang()?>/api/disable_product',
@@ -66,7 +70,9 @@
 		            }
 		    }).done(function(response) {
 		        if(response.status == 'ok'){
-		        	$(this).removeClass("small button alert disable-product").addClass("small button enable-product");
+		        	
+		        	$('#disable-btn-' + bz_product_id).hide();
+		        	$('#enable-btn-' + bz_product_id).show();
 		        }
 			});			
 		});	
@@ -76,6 +82,25 @@
 
 			if(!confirm('<?=lang('bizpanel.products.activateconfirm')?>'))
 				return false;
+			
+			var bz_product_id = $(this).attr('bz-product-id');
+			
+			$.ajax({
+				type : "POST",
+				url : '<?=current_lang()?>/api/enable_product',
+		            dataType : "json",
+		            data : {
+		            	user_id: <?=$user->id?>,
+		            	bz_product_id : $(this).attr('bz-product-id'),
+		            	hms1 : $('input[name="hms1"]').val()
+		            }
+		    }).done(function(response) {
+		        if(response.status == 'ok'){
+		        	$('#disable-btn-' + bz_product_id).show();
+		        	$('#enable-btn-' + bz_product_id).hide();
+		        }
+			});			
+
 		});	
 		
 		$('#bizpanel-products-addmoreprod').click(function (e){

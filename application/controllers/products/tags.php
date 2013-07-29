@@ -1,19 +1,17 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Extrainfo extends CI_Controller {
+class Tags extends CI_Controller {
 	
 	var $params = array();
-	var $max_chars;
 	
 	function __construct(){
 		parent::__construct();
 		
 		$this->load->model('post');
 		$this->load->model('business_model');
-		$this->lang->load('products/extrainfo');
+		$this->lang->load('products/tags');
 		
-		$this->max_chars = ci_config('extrainfo.max_characters');
-	}
+	} 
 	
 	function index(){
 		
@@ -36,13 +34,14 @@ class Extrainfo extends CI_Controller {
 
 		$i_data = unserialize($product->implementation_data);
 				
-		$this->params['extrainfo'] = isset($i_data['extrainfo']) ? $i_data['extrainfo'] : ''; 
+		$this->params['tags'] = isset($i_data['tags']) ? $i_data['tags'] : ''; 
+		$this->params['unit'] = $i_data['unit'];
+		$this->params['max_chars'] = $i_data['unit'] * 20 + $i_data['unit'];
 		
 		$this->params['user'] = $this->session->userdata('user');
 		$this->params['bz_product_id'] = $post_product_id;
-		$this->params['max_chars'] = $this->max_chars;
 		
-		$this->load->view('products/extrainfo/index', $this->params);
+		$this->load->view('products/tags/index', $this->params);
 		
 	}
 	
@@ -50,13 +49,8 @@ class Extrainfo extends CI_Controller {
 		$post_id = $this->input->post('post_id', TRUE); 
 		$user_id = $this->input->post('user_id', TRUE);
 		$bz_product_id = $this->input->post('bz_product_id', TRUE);
-		$extrainfo = $this->input->post('extrainfo', TRUE);
-		
-		//Truncate string
-		if(strlen($extrainfo) > $this->max_chars){
-			$extrainfo = substr($extrainfo, 0, $this->max_chars);
-		}
-		
+		$tags = $this->input->post('tags', TRUE);
+				
 		$prodcts = $this->business_model->get_products($post_id);
 		$product = null;
 		foreach($prodcts  as $p){
@@ -67,12 +61,22 @@ class Extrainfo extends CI_Controller {
 		}
 		
 		$i_data = unserialize($product->implementation_data);
-		$i_data['extrainfo'] = $extrainfo;
+		
+		$max_chars = $i_data['unit'] * 20 + $i_data['unit'];
+		
+		//Truncate string
+		if(strlen($tags) > $max_chars){
+			$tags = substr($tags, 0, $this->max_chars);
+		}
+
+		$i_data['tags'] = preg_replace('/(?:\s\s+|\n|\t)/', ' ', trim(strtolower($tags)));
 		
 		$serialized = serialize($i_data);
 		
 		$this->business_model->update_bz_product($bz_product_id, array('implementation_data' => $serialized));
 		
-		die( json_encode(array('status' => 'success', 'msg' => lang('extrainfo.success'))));
+		$this->business_model->syncronize($post_id);
+		
+		die( json_encode(array('status' => 'success', 'msg' => lang('tags.success'))));
 	}
 }

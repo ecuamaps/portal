@@ -969,3 +969,19 @@ function trunkMoreThan5NumbersTogether(text){
 	var urlRegex = /[0-9]{6}/;
 	return text.replace(urlRegex, '');	
 }
+
+function trunkMoreThan1BlankSpace(text){
+	var Regex = /(?:\s\s+|\n|\t)/;
+	return text.replace(Regex, ' ');	
+}
+
+
+function word_count(field) {
+
+    var number = 0;
+    var matches = field.val().match(/\b/g);
+    if(matches) {
+        number = matches.length/2;
+    }
+    return number;
+}

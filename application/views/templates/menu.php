@@ -157,11 +157,11 @@
 	<!-- End Add Location Form-->
 	
 	<!-- Add Enterprise Form -->
-	<div class="reveal-modal" id="add-enterprise-form"></div>
+	<div class="reveal-modal expand" id="add-enterprise-form"></div>
 	<!-- End Add Enterprise Form -->
 
 	<!-- Biz control panel Form -->
-	<div class="reveal-modal" id="biz-control-panel"></div>
+	<div class="reveal-modal expand" id="biz-control-panel"></div>
 	<!-- End Biz control panel Form -->
 
 	<!-- Change Password Form -->
