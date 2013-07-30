@@ -1732,11 +1732,13 @@ IDxRXvGc8Fd4WM/S635O8M8dzx2rcfz/isaF/gqJWukAAAAASUVORK5CYII=
 
 function search_query($text, $post_type){
 	$terms = array();
-	
+
 	if(!$text)
 		return '*.*';
+
+	$text = clean_search_query($text);
 	
-	if(strlen($text) == 1)
+	if(strlen($text) <= 2)
 		return '';
 		
 	$text = strtolower(trim($text));
@@ -1752,6 +1754,20 @@ function search_query($text, $post_type){
 		return build_solr_query("*$text*", $post_type);
 	
 	return build_solr_query($terms, $post_type);
+}
+
+function clean_search_query($text){
+	
+	//Remove the not allowed characters
+	$not_allowed_chars = array('*');
+	$text = str_replace($not_allowed_chars, '', $text);
+	
+	//Clean the accented vowels
+	$accented_vowels = array('á','é','í','ó','ú','Á','É','Í','Ó','Ú'); 
+	$vowels = array('a','e','i','o','u','A','E','I','O','U');
+	$text = str_replace($accented_vowels, $vowels, $text);
+	
+	return $text;
 }
 
 function build_solr_query($terms, $post_type){
