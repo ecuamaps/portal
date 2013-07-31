@@ -1,6 +1,6 @@
 jQuery.fn.reset = function () {
 	$(this).each (function() { this.reset(); });
-}
+} 
 
 var directionsService = new google.maps.DirectionsService();
 
