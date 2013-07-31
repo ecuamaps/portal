@@ -1,3 +1,7 @@
+jQuery.fn.reset = function () {
+	$(this).each (function() { this.reset(); });
+}
+
 var directionsService = new google.maps.DirectionsService();
 
 var styles = [
@@ -741,6 +745,15 @@ $(document).ready(function() {
         	$('#search-btn').trigger('click');
         }
     });
+
+	$('#login-close-modal').click(function (e){
+		$('#login-form').reset();
+	});
+
+	$('#singup-close-modal').click(function (e){
+		$('#signup-form').reset();
+	});
+
 });
 
 function change_sort(orderby){
