@@ -24,25 +24,39 @@ function pictures_show($post_id){
 	ob_start();
 	
 	?>
-	<div id="galleria-<?=$post_id?>" style="height:320px">
-	<? foreach($pics as $p): ?>
-		<? $url = ci_config('media_server_show_url').'/'.$p->hash; ?>
-		<a href="<?=$url?>"><img src="<?=$url?>"></a>
-	<? endforeach; ?>
-	<? if(count($ytvideos)): ?>
-		<? foreach($ytvideos as $v): ?>
-		<a href="<?=$v?>"><span class="video"></span></a>
-		<?endforeach;?>
-	<? endif; ?>
-	</div>
+	<div id="galleria-<?=$post_id?>" style="height:320px"></div>
 	
 	<script>
-							
-		Galleria.ready(function(options) {
+						
+				
+		var data = [
+	<? foreach($pics as $p): ?>
+		<? 
+			$url = ci_config('media_server_show_url').'/'.$p->hash;
+			$thumb_url = ci_config('media_server_thumb_url').'/'.$p->hash; 
+		?>
+				    {
+				        image: '<?=$url?>',
+				        thumb: '<?=$thumb_url?>'
+				    },
+	<? endforeach; ?>
 
-		});
+	<? if(count($ytvideos)): ?>
+		<? foreach($ytvideos as $v): ?>
+				    {
+				        video: '<?=$v?>'
+				    },
+		<?endforeach;?>
+	<? endif; ?>
+				  ];
+
+		/*Galleria.ready(function(options) {
+
+		});*/
 		
-		Galleria.run("#galleria-<?=$post_id?>", {});
+		Galleria.run("#galleria-<?=$post_id?>", {
+			dataSource: data
+		});
 
 	</script>
 	

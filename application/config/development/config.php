@@ -390,6 +390,7 @@ $config['post_type_vs_model'] = array(
 //Media server
 $config['media_server_upload_url'] = 'http://hosting.dev/main/upload';
 $config['media_server_show_url'] = 'http://hosting.dev/main/show';
+$config['media_server_thumb_url'] = 'http://hosting.dev/main/thumbnail';
 
 $config['logo_product_id'] = array(7, 8);
 $config['phones_product_id'] = array(1, 2);

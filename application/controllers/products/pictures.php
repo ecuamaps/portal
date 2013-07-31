@@ -51,7 +51,7 @@ class Pictures extends CI_Controller {
 	}
 	
 	function upload(){
-
+		
 		$post_id = $this->input->post('post_id', TRUE); 
 		$user_id = $this->input->post('user_id', TRUE);
 		$media_id = $this->input->post('media_id', TRUE);
@@ -59,14 +59,28 @@ class Pictures extends CI_Controller {
 		$file_element_name = 'picture';
 
 	    $this->load->library('upload');
-	 
+	    	 
 	   	if (!$this->upload->do_upload($file_element_name)){
 	        $msg = $this->upload->display_errors('', '');
 	        die(json_encode(array('status' => 'error', 'msg' => $msg)));
 	    }    
 
 		$data = $this->upload->data();
-
+		
+		//Resize the image
+		$config['image_library'] = 'gd2';
+		$config['maintain_ratio'] = TRUE;
+		$config['width']	 = 600;
+		$config['height']	= 600;	    
+		$config['quality']	= '70%';
+		//$config['create_thumb'] = TRUE; 
+		$config['source_image'] = $data['full_path'];
+		
+		$this->load->library('image_lib', $config); 		
+		if(!$this->image_lib->resize()){
+			die(json_encode(array('status' => 'error', 'msg' => $this->image_lib->display_errors())));
+		}
+		
 		$post = array('app_id' => ci_config('media_server_app_id'), 'file_contents'=>'@'.$data['full_path']);	 
 
 	    //Need an update
