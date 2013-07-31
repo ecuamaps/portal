@@ -97,7 +97,8 @@
 				<div class="large-12 columns"><a href="javascript:void(0)" id="login-action" class="button"><?=lang('dashboard.loginform.button')?></a></div>
     		</div>
 		</form>
-		<a class="close-reveal-modal">&#215;</a>
+		<a class="close-reveal-modal" id="login-close-modal">&#215;</a>
+		
 	</div>
 	<!-- End Login Form-->
 	<? endif; ?>
@@ -162,7 +163,7 @@
 				$('#waiting, #succesfull').hide();
 			});
 		</script>
-		<a class="close-reveal-modal">&#215;</a>
+		<a class="close-reveal-modal" id="singup-close-modal">&#215;</a>
 	</div>
 	<!-- End SignIn Form -->
 	<? endif; ?>
