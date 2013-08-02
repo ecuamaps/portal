@@ -37,7 +37,7 @@ function show_promos($post_id){
 		    		<small><?=lang('promo.followmenews')?></small>
 			    	<a href="#" class="large button expand alert radius"><?= lang('promo.followme') ?></a>
 		    	</div>
-	    	</div>-->
+	    	</div>--> 
 	    	
 	    	<? foreach($promos as $p): ?>
 	    	<?php
