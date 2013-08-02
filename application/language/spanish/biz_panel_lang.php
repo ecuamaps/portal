@@ -21,4 +21,4 @@ $lang['bizpanel.products.enable'] = 'Habilitar';
 $lang['bizpanel.products.availableprod'] = 'Puede agregar mejoras a su negocio y pagar sólo el valor prorrateado hasta su pr&oacute;xima facturaci&oacute;n.';
 $lang['bizpanel.products.inactivateconfirm'] = 'Esta seguro de inactivar este producto?\nSi a la fecha de corte el producto esta inactivo será eliminado junto sus datos y no será incluido en la facturación.';
 $lang['bizpanel.products.activateconfirm'] = 'Esta seguro de activar este producto?\nSi a la fecha de corte el producto esta activo será incluido en la facturación.';
-$lang['bizpanel.products.addmoreprod'] = 'Obtener Mar';
+$lang['bizpanel.products.addmoreprod'] = 'Obtener Mas';

@@ -321,4 +321,7 @@ class Business_model extends CI_Model {
 		return $this->db->update('bz_products', $data, "id = $bz_product_id");
 	}
 	
+	function update_last_date($post_id){
+		return $this->db->update('post', array('last_update' => date('Y-m-d')), "id = $post_id");
+	}
 }

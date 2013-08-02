@@ -8,6 +8,7 @@ $lang['search.review'] = "Review/Score";
 $lang['search.more'] = "Browse";
 $lang['search.start'] = "Summary";
 $lang['search.distance'] = "Distance apox.";
+$lang['search.lastupdate'] = "Last update";
 
 $lang['qualify.earlierqualify'] = "You has qualified this post before.";
 $lang['qualify.sucess.outstanding'] = "We got your review but it is pending to approbation, thanks.";

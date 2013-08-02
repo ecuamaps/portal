@@ -394,6 +394,7 @@ $config['phones_product_id'] = array(5, 6);
 $config['extrainfo_product_id'] = array(7, 8);
 $config['ytvideo_product_id'] = array(9, 10);
 $config['tags_product_id'] = array(11, 12);
+$config['promo_product_id'] = array(13, 14);
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

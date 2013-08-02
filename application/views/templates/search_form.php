@@ -26,17 +26,19 @@
 
 	<!-- Advanced Search Form -->
 	<div class="f-dropdown content" id="adv-search-block" data-dropdown-content>	
-<!--		<div class="row margin-top-10px">
+		<div class="row margin-top-10px">
 			<div class="large-12 columns">
 				<label for="distance"><?=lang('dashboard.searchform.radio')?></label>
 				<select id="distance" name="distance" class="medium">
 					<option value="1" selected>1Km</option>
 				    <option value="2">2Km</option>
 				    <option value="3">3Km</option>
-				    <option value="0"><?=lang('dashboard.searchform.noradio')?></option>
+				    <option value="5">5Km</option>
+				    <option value="10">10Km</option>
+				    <option value="15">15Km</option>
 				</select>
 			</div>
-    	</div> -->
+    	</div>
 
 		<div class="row margin-top-10px">
 			<div class="large-12 columns"><div id="search-orderby-wrapper">

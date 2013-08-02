@@ -23,6 +23,7 @@
   <script src="<?=base_url()?>assets/js/mochkino.js"></script>
   <script src="<?=base_url()?>assets/js/jquery.cookie.js"></script>
   <script src="<?=base_url()?>assets/js/ajaxfileupload.js"></script>
+  <script src="<?=base_url()?>assets/js/jquery.maskedinput.min.js"></script>
 
   <script src="<?=base_url()?>assets/galleria/galleria-1.2.9.min.js"></script>
 

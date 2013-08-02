@@ -988,7 +988,6 @@ function trunkMoreThan1BlankSpace(text){
 	return text.replace(Regex, ' ');	
 }
 
-
 function word_count(field) {
 
     var number = 0;
@@ -997,4 +996,22 @@ function word_count(field) {
         number = matches.length/2;
     }
     return number;
+}
+
+
+function isValidDate(txtDate){
+	
+	var dateParts = txtDate.split('/');
+
+	if(dateParts.length != 3) {
+	    return false;
+	}
+
+	var testDate = new Date(dateParts[2] + '/' + dateParts[1] + '/' + dateParts[0]);
+
+	if(isNaN(testDate.getDate())) {
+	    return false;
+	}
+	
+	return true;
 }

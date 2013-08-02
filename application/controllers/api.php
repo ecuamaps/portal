@@ -14,7 +14,7 @@ class Api extends CI_Controller {
 		$text = $this->input->post('text', TRUE);
 		
 		$distance = $this->input->post('distance', TRUE);
-		$distance = 3; //TODO: Determine how this affect the solr searches
+		//$distance = 3; //TODO: Determine how this affect the solr searches
 		$start = $this->input->post('start', TRUE);
 		$start = $start ? $start : 0;
 		$rows = $this->input->post('rows', TRUE);
@@ -45,9 +45,10 @@ class Api extends CI_Controller {
 		$q = search_query($text, $post_type);
 		$query = array(
 			'q' => $q,
+			'fq' => '{!geofilt}',
 			'sort' => $sort, 
 			'start' => $start, 
-			'rows' => $rows, 
+			'rows' => $rows,
 			'fl' => '*,score,_dist_:geodist()', 
 			'df' => 'tags',
 			'wt' => 'json', 
@@ -79,6 +80,7 @@ class Api extends CI_Controller {
 		$this->load->helper('products/logo');
 		$this->load->helper('products/extrainfo');
 		$this->load->helper('products/phones');
+		$this->load->helper('products/promo');
 		
 		$this->load->view('api/search', $params);		
 	}
@@ -235,7 +237,7 @@ class Api extends CI_Controller {
 			die();
 		}
 		
-		$executed = array('logo', 'extrainfo', 'phones', 'ytvideo', 'tags'); //Excluded the logo and others
+		$executed = array('logo', 'extrainfo', 'phones', 'ytvideo', 'tags', 'promo'); //Excluded the logo and others
 		foreach($products as $p){
 			if(!in_array($p->helper_file, $executed)){
 				$executed[] = $p->helper_file;

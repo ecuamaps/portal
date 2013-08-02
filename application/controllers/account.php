@@ -245,11 +245,11 @@ class Account extends CI_Controller {
 				$this->tasks_model->create('business', $bz_id, $content);
 				die(json_encode(array('status' => 'ok', 'biz_id' => $bz_id)));
 			}else{
-				//$this->business_model->syncronize($bz_id);
+				$this->business_model->syncronize($bz_id);
 			}
 			
 			//TODO: Remover esto para que no sincronice si no es de pago.
-			$this->business_model->syncronize($bz_id);
+			//$this->business_model->syncronize($bz_id);
 		}
 		
 		//Create the invoice
@@ -289,6 +289,9 @@ class Account extends CI_Controller {
 			$content = "Recoger pago. Valor: \$$total, Cliente: $billing_name, email: {$user->email}, Dir: {$invoice->billing_address}, Tels: {$user->phone}, Cel: {$user->cellphone}";
 			$this->tasks_model->create('invoice', $invoice_id, $content);
 		}
+		
+		//Update the last date
+		$this->business_model->update_last_date($bz_id);
 		
 		die(json_encode(array('status' => 'ok', 'invoice_id' => $invoice_id, 'biz_id' => $bz_id)));
 	}
