@@ -1948,7 +1948,9 @@ function show_biz_form($post = null){
 				bzCreationMapInit('<?=($post) ? 'map_addbiz-upd' : 'map_addbiz'?>', lat, lng);
 				$(this).hide();
 			});
-					
+			
+			$("#bz-phones").mask("999-99-9999999?99");
+				
 		});
 	</script>    	
 	<?php

@@ -378,7 +378,7 @@ $config['solr_options'] = array (
 		);
 
 
-//Post type id vs model, helpful to know which post type must be processed with whic model
+//Post type id vs model, helpful to know which post type must be processed with which model
 $config['post_type_vs_model'] = array(
 	1 => 'business_model',
 	2 => 'products_model',
