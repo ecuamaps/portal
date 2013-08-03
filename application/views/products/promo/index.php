@@ -24,7 +24,7 @@
 
 		<div class="row">
 	      <div class="large-4 columns">
-	        <textarea maxlength="<?=ci_config('promo.desc.max_characters')?>" placeholder="<?=lang('promo.desc')?>" name="promo-desc-<?=$bz_product_id?>" id="promo-desc-<?=$bz_product_id?>"><?= isset($promo['desc']) ? $promo['desc'] : '' ?></textarea>
+	        <textarea maxlength="<?=ci_config('promo.desc.max_characters')?>" placeholder="<?=lang('promo.desc')?>" name="promo-desc-<?=$bz_product_id?>" id="promo-desc-<?=$bz_product_id?>"><?=user_agent() ?>  <?= isset($promo['desc']) ? $promo['desc'] : '' ?></textarea>
 	        <small><span id="chcount-<?=$bz_product_id?>"></span> <?=lang('promo.remainingchars')?></small>
 	      </div>
 	    </div>
@@ -44,7 +44,9 @@
 			count_chars($(this), $('#chcount-<?=$bz_product_id?>'), max_chars);
 		});
 		
+		<? if($this->agent->is_browser('Firefox')): ?>
 		$("#promo-date-<?=$bz_product_id?>").mask("99/99/9999");
+		<? endif; ?>
 		
 		$('#save-promo-<?=$bz_product_id?>').click(function(e){
 			e.preventDefault();

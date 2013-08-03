@@ -39,6 +39,8 @@ class Promo extends CI_Controller {
 		$this->params['user'] = $this->session->userdata('user');
 		$this->params['bz_product_id'] = $post_product_id;
 		
+		$this->load->library('user_agent');
+		
 		$this->load->view('products/promo/index', $this->params);
 		
 	}
