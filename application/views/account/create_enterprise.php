@@ -371,7 +371,7 @@ $(document).ready(function(){
 		var phoneReg = /<?=pattern('phone')?>/;
 		
 		
-		if(!name || !lat || !lng || !bz_type){
+		if(!name || !lat || !lng || !bz_type || !phone){
 			$('#createbiz-error-msg').html('<?=lang('createbiz.error.requiredfields')?>');
 			$('#createbiz-error-wrapper').show();
 			return false;

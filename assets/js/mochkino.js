@@ -1000,14 +1000,14 @@ function word_count(field) {
 
 
 function isValidDate(txtDate){
-	
-	var dateParts = txtDate.split('/');
+
+	var dateParts = txtDate.split('-');
 
 	if(dateParts.length != 3) {
 	    return false;
 	}
 
-	var testDate = new Date(dateParts[2] + '/' + dateParts[1] + '/' + dateParts[0]);
+	var testDate = new Date(dateParts[0] + '/' + dateParts[1] + '/' + dateParts[2]);
 
 	if(isNaN(testDate.getDate())) {
 	    return false;

@@ -17,7 +17,7 @@
 
 		<div class="row">
 	      <div class="large-4 columns">
-	      	 <label for="promo-date-<?=$bz_product_id?>"><?=lang('promo.date')?></label> <small>dd-mm-aaaa</small>
+	      	 <label for="promo-date-<?=$bz_product_id?>"><?=lang('promo.date')?></label> <small>aaaa-mm-dd</small>
 	        <input type="date" maxlength="10" name="promo-date-<?=$bz_product_id?>" id="promo-date-<?=$bz_product_id?>" value="<?= isset($promo['date']) ? $promo['date'] : ''?>"/>
 	      </div>
 	    </div>
@@ -45,7 +45,7 @@
 		});
 		
 		<? if($this->agent->is_browser('Firefox')): ?>
-		$("#promo-date-<?=$bz_product_id?>").mask("99/99/9999");
+		$("#promo-date-<?=$bz_product_id?>").mask("9999-99-99");
 		<? endif; ?>
 		
 		$('#save-promo-<?=$bz_product_id?>').click(function(e){
@@ -64,7 +64,7 @@
 				alert('<?=lang('promo.requireddesc')?>');
 				return false;
 			}
-				
+			
 			if(date && !isValidDate(date)){
 				alert('<?=lang('promo.notvaliddate')?>');
 				return false;

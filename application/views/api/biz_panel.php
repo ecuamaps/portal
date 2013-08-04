@@ -110,14 +110,13 @@
 			var phoneReg = /<?=pattern('phone')?>/;
 			
 			
-			if(!name || !lat || !lng || !bz_type){
+			if(!name || !lat || !lng || !bz_type || !phone){
 				$('#updatebiz-error-msg').html('<?=lang('createbiz.error.requiredfields')?>');
 				$('#updatebiz-error-wrapper').show();
 				return false;
 			}
 			
-			//console.log(phone);
-			if (phone && !phoneReg.test(phone)) {
+			if (!phoneReg.test(phone)) {
 				$('#updatebiz-error-msg').html('<?=lang('createbiz.error.phoneformat')?>');
 				$('#updatebiz-error-wrapper').show();
 					return false;

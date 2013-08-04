@@ -71,7 +71,7 @@ $lang['createbiz.free.confirmation'] = 'Gracias por confiar en nosotros, lo que 
 
 
 $lang['createbiz.error.phoneformat'] = 'Formato de tel&eacute;fono incorrecto.';
-$lang['createbiz.error.requiredfields'] = 'El tipo de negocio, el nombre y la ubicaci&oacute;n en el mapa son requeridos.';
+$lang['createbiz.error.requiredfields'] = 'El tipo de negocio, el nombre y el teléfono son obligatorios.';
 $lang['createbiz.error.emailformat'] = 'Formato de email incorrecto.';
 $lang['createbiz.error.billdata.required'] = 'El nombre y la identficaci&acute;n son requeridas.';
 $lang['createbiz.error.billaddr.required'] = 'La direcci&oacute;n es requerida para Pagos a domicilio.';

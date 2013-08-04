@@ -53,8 +53,8 @@ class Promo extends CI_Controller {
 		$date = $this->input->post('date', TRUE);
 		
 		if($date){
-			$date_parts = explode('/', $date);
-			if(!checkdate ( $date_parts[1] , $date_parts[0] , $date_parts[2] )){
+			$date_parts = explode('-', $date);
+			if(!checkdate ( $date_parts[1] , $date_parts[2] , $date_parts[0] )){
 				die( json_encode(array('status' => 'error', 'msg' => lang('promo.notvaliddate'))));
 			}
 		}

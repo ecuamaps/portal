@@ -77,7 +77,7 @@ $lang['createbiz.processing'] = 'Processing......';
 $lang['createbiz.free.confirmation'] = 'Thank you for trusting us, now we will check the information provided and we will publish your business.<br/><br/>' .
 		'This process can take up 5 business days.';
 
-$lang['createbiz.error.requiredfields'] = 'The business type, the name and the map location are required.';
+$lang['createbiz.error.requiredfields'] = 'The business type, the name and the phone number are required.';
 $lang['createbiz.error.phoneformat'] = 'Wrong phone format.';
 $lang['createbiz.error.billdata.required'] = 'The name and the ID are required.';
 $lang['createbiz.error.billaddr.required'] = 'The address is required for money pickup.';
