@@ -17,7 +17,7 @@
 
 		<div class="row">
 	      <div class="large-4 columns">
-	      	 <label for="promo-date-<?=$bz_product_id?>"><?=lang('promo.date')?></label> <small>aaaa-mm-dd</small>
+	      	 <label for="promo-date-<?=$bz_product_id?>"><?=lang('promo.date')?></label> <small>dd-mm-aaaa</small>
 	        <input type="date" maxlength="10" name="promo-date-<?=$bz_product_id?>" id="promo-date-<?=$bz_product_id?>" value="<?= isset($promo['date']) ? $promo['date'] : ''?>"/>
 	      </div>
 	    </div>
