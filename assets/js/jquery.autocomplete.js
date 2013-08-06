@@ -7,7 +7,7 @@
  
         this.element.hide();
         this._createAutocomplete();
-        this._createShowAllButton();
+        //this._createShowAllButton(); 
       },
  
       _createAutocomplete: function() {
@@ -18,7 +18,7 @@
           .appendTo( this.wrapper )
           .val( value )
           .attr( "title", "" )
-          .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+          .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left ui-corner-right" )
           .autocomplete({
             delay: 0,
             minLength: 0,
