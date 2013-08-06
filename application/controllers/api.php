@@ -14,7 +14,9 @@ class Api extends CI_Controller {
 		$text = $this->input->post('text', TRUE);
 		
 		$distance = $this->input->post('distance', TRUE);
-		//$distance = 3; //TODO: Determine how this affect the solr searches
+		if(is_quoted($text))
+			$distance = 15;
+			
 		$start = $this->input->post('start', TRUE);
 		$start = $start ? $start : 0;
 		$rows = $this->input->post('rows', TRUE);
@@ -25,6 +27,8 @@ class Api extends CI_Controller {
 		$sort_field = $this->input->post('sort', TRUE);
 
 		$options = ci_config('solr_options');
+		$max_results = ci_config('max_solr_results');
+		
 		extract($options);
 		
 		//Setup the sort
@@ -66,9 +70,14 @@ class Api extends CI_Controller {
 		//echo '<pre>',print_r($json),'</pre>';
 		$docs = $results->response->docs;
 		
+		if($results->response->numFound > $max_results)
+			$results->response->numFound = $max_results;
+		
 		$this->load->helper('pagination');
 		
 		$params = array(
+			'text' => $text,
+			'distance' => $distance,
 		    'results' => $results,
 		    'docs' => $docs,
  		    'start' => $start,
@@ -197,7 +206,9 @@ class Api extends CI_Controller {
 			'biz' => $biz,
 			'user' => $this->session->userdata('user')
 		);
-
+		
+		$this->business_model->update_last_date($post_id);
+		
 		$this->load->view('api/biz_panel', $params);	
 	}
 	

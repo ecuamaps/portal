@@ -1730,6 +1730,15 @@ IDxRXvGc8Fd4WM/S635O8M8dzx2rcfz/isaF/gqJWukAAAAASUVORK5CYII=
 <?php	
 }
 
+function is_quoted($text){
+	$len = strlen($text);
+	if($text[0] == '"' && $text[$len-1] == '"'){
+		return true;
+	}
+	
+	return false;
+}
+
 function search_query($text, $post_type){
 	$terms = array();
 
@@ -1743,8 +1752,7 @@ function search_query($text, $post_type){
 		
 	$text = strtolower(trim($text));
 	//Define if the text is quoted
-	$len = strlen($text);
-	if($text[0] == '"' || $text[$len-1] == '"'){
+	if(is_quoted($text)){
 		return build_solr_query($text, $post_type);
 	}
 
@@ -1759,7 +1767,7 @@ function search_query($text, $post_type){
 function clean_search_query($text){
 	
 	//Remove the not allowed characters
-	$not_allowed_chars = array('*');
+	$not_allowed_chars = array('*', '"', "'");
 	$text = str_replace($not_allowed_chars, '', $text);
 	
 	//Clean the accented vowels
@@ -1866,7 +1874,6 @@ function show_biz_form($post = null){
 	
 	$uniq = uniqid();
 	?>
-	<pre><? /*print_r($post)*/ ?></pre>
 	
 	<? if(isset($post->id)): ?>
 	<input type="hidden" name="bz-id" id="bz-id" value="<?= $post->id ?>" />
@@ -1950,7 +1957,8 @@ function show_biz_form($post = null){
 			});
 			
 			$("#bz-phones").mask("999-99-9999999?99");
-				
+			
+			$( "#bz-type" ).combobox();
 		});
 	</script>    	
 	<?php

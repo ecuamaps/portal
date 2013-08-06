@@ -1,6 +1,7 @@
 <?php
 
-$lang['search.resultstitle'] = "We have found %d result(s)";
+$lang['search.resultstitle'] = 'We have found %d result(s) for the search of "%s" in an area of %d km, ' .
+		'try the advanced search to get more accurate results.';
 $lang['search.score'] = "Score";
 $lang['search.howtoget'] = "How to get?";
 $lang['search.phone'] = "Phone(s)";

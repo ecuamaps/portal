@@ -49,3 +49,6 @@ $config['extrainfo.max_characters'] = 100;
 //Max for promo name
 $config['promo.name.max_characters'] = 100;
 $config['promo.desc.max_characters'] = 400;
+
+//Max solr documents results
+$config['max_solr_results'] = 200;

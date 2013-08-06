@@ -63,7 +63,7 @@
 			</div>
     	</div>
 			
-		<div class="row margin-top-10px">
+		<!--<div class="row margin-top-10px">
 			<div class="large-12 columns">
 				<label for="post_type"><?=lang('dashboard.searchform.posttype')?></label>
 				<select id="post_type" name="post_type" class="medium">
@@ -75,7 +75,7 @@
 				    <? endforeach; ?>
 				</select>					
 			</div>
-    	</div>
+    	</div>-->
 					
 	</div>
 	

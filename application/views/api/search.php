@@ -1,6 +1,6 @@
 		<? header('Content-Type: text/html'); ?>  
   
-		<h4><small><?= sprintf(lang('search.resultstitle'), $results->response->numFound) ?>:</small></h4>
+		<p><?= sprintf(lang('search.resultstitle'), $results->response->numFound, $text, $distance) ?></p>
 		
 		<? if($results->response->numFound): ?>
 		<div class="row full-width">

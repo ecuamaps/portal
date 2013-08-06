@@ -11,16 +11,20 @@
 
   <link rel="stylesheet" href="<?=base_url()?>assets/foundation/css/normalize.css" />
   <link rel="stylesheet" href="<?=base_url()?>assets/css/app.css" />
+  <link rel="stylesheet" href="<?=base_url()?>assets/css/autocomplete.css" />
   <link rel="stylesheet" href="<?=base_url()?>assets/foundation/css/foundation.min.css" />
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
   
   <?=$_styles?>
 
   <script src="<?=base_url()?>assets/js/jquery-1.9.1.min.js"></script>
   <script src="<?=base_url()?>assets/foundation/js/vendor/custom.modernizr.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;region=EC"></script>
   
   <script src="<?=base_url()?>assets/js/mochkino.js"></script>
+  <script src="<?=base_url()?>assets/js/jquery.autocomplete.js"></script>
   <script src="<?=base_url()?>assets/js/jquery.cookie.js"></script>
   <script src="<?=base_url()?>assets/js/ajaxfileupload.js"></script>
   <script src="<?=base_url()?>assets/js/jquery.maskedinput.min.js"></script>

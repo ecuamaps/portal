@@ -29,19 +29,21 @@
 			<h4 class="subheader clear-margin"><?= $index.'. '.ucwords($d->name) ?></h4>
 			<h6 class="clear-margin font-weight-normal line-height-08"><small><?= $str_types ?></small></h6>
 			<h5 class="clear-margin font-weight-normal line-height-08 margin-bottom-5px"><small><?= lang('search.distance') ?>: <?= $distance ?>, <?= lang('search.score') ?>: <?= $score_avg ?>, ID: <?= $d->id ?>, <?= lang('search.lastupdate').': '.$post->last_update ?></small></h5>
+
+			<div class="row">
+				<div class="large-4 columns">
+					<nav class="breadcrumbs">
+						<a href="javascript:void(0)" post-id="<?= $d->id ?>" class="qualify-post"><?= lang('search.review') ?></a>
+						<a href="javascript:void(0)" lat="<?= $d->location_0_coordinate ?>" lng="<?= $d->location_1_coordinate ?>" dist="<?= $d->_dist_ ?>" class="set-directions"><?= lang('search.howtoget') ?></a>
+					</nav>
+				</div>
+			</div>
+			<div class="row">&nbsp;</div>	  	
+
 			<div class="section-container auto" data-section>
 				<section>
     				<p class="title" data-section-title><a href="#panel1"><?= lang('search.start') ?></a></p>
     				<div class="content" data-section-content>
-						<div class="row">
-							<div class="large-4 columns">
-								<nav class="breadcrumbs">
-								  <a href="javascript:void(0)" post-id="<?= $d->id ?>" class="qualify-post"><?= lang('search.review') ?></a>
-								  <a href="javascript:void(0)" lat="<?= $d->location_0_coordinate ?>" lng="<?= $d->location_1_coordinate ?>" dist="<?= $d->_dist_ ?>" class="set-directions"><?= lang('search.howtoget') ?></a>
-								</nav>
-							</div>
-						</div>
-						<div class="row">&nbsp;</div>	  	
 					  	<div class="row">
 							<div class="large-9 columns">
 								<div class="row">

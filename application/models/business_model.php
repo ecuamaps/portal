@@ -51,7 +51,7 @@ class Business_model extends CI_Model {
 			'creation' => date('Y-m-d'),
 			'last_update' => date('Y-m-d'),
 			'tags' => $data['bz_type_name'],
-			'state' => 'I'
+			'state' => 'P'
 		);
 		
 		if(!$this->db->insert('post', $bz)){

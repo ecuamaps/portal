@@ -241,15 +241,13 @@ class Account extends CI_Controller {
 			//$is_billing_cycle = 1;
 			if($is_free){
 				$user = $this->account_model->get_user_by_id($user_id); 
-				$content = "Verificación de datos y publicación de negocio. biz ID: $bz_id, Usuario: {$user->name}, email: {$user->email}, Biz Name: $bz_name, Tels: {$bz_phones}, Dir: {$bz_address}, latlng: {$bz_lat},{$bz_lng}";
+				$content = "Verificación de datos y publicación de negocio. ID: $bz_id, Usuario: {$user->name}, email: {$user->email}, Biz Name: $bz_name, Tels: {$bz_phones}, Dir: {$bz_address}, latlng: {$bz_lat},{$bz_lng}";
 				$this->tasks_model->create('business', $bz_id, $content);
 				die(json_encode(array('status' => 'ok', 'biz_id' => $bz_id)));
 			}else{
 				$this->business_model->syncronize($bz_id);
 			}
 			
-			//TODO: Remover esto para que no sincronice si no es de pago.
-			//$this->business_model->syncronize($bz_id);
 		}
 		
 		//Create the invoice
