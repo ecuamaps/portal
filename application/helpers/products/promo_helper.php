@@ -43,8 +43,8 @@ function show_promos($post_id){
 	    	<?php
 	    		$show = true;
 	    		if($p['date']){
-	    			$date_parts = explode('/', $p['date']);
-	    			$date = new DateTime("{$date_parts[2]}-{$date_parts[1]}-{$date_parts[0]}");
+	    			$date_parts = explode('-', $p['date']);
+	    			$date = new DateTime("{$date_parts[2]}-{$date_parts[1]}-{$date_parts[0]} 11:59:59");
 	    			$date = $date->getTimestamp();
 	    			$show = ($now > $date) ? false : true;
 	    		}

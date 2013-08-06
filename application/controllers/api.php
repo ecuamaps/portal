@@ -238,6 +238,7 @@ class Api extends CI_Controller {
 		}
 		
 		$executed = array('logo', 'extrainfo', 'phones', 'ytvideo', 'tags', 'promo'); //Excluded the logo and others
+		$params = array();
 		foreach($products as $p){
 			if(!in_array($p->helper_file, $executed)){
 				$executed[] = $p->helper_file;
