@@ -42,13 +42,14 @@ $route['default_controller'] = "dashboard";
 $route['404_override'] = '';
 
 // example: '/en/about' -> use controller 'about'
-$route['^es/(.+)$'] = "$1";
-$route['^en/(.+)$'] = "$1";
+//$route['^es/(.+)$'] = "$1";
+//$route['^en/(.+)$'] = "$1";
+$route['^(en|es)/(.+)$'] = "$2";
  
 // '/en' and '/es' -> use default controller
-$route['^es$'] = $route['default_controller'];
-$route['^en$'] = $route['default_controller'];
-
+//$route['^es$'] = $route['default_controller'];
+//$route['^en$'] = $route['default_controller'];
+$route['^(en|es)$'] = $route['default_controller'];
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

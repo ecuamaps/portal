@@ -51,7 +51,7 @@ $lang['dashboard.searchform.hide'] = "Ocultar";
 $lang['dashboard.searchform.currlocation'] = 'Tu ubicación actual.\nArrastrar y soltar cambiarla';
 $lang['dashboard.searchform.accuracyerror'] = 'No hemos podido saber exactamente donde estas, cambia tu ubicación manualmente o trata con otro navegador.';
 $lang['dashboard.searchform.posttype'] = 'Tipo de Publicaci&oacute;n';
-$lang['dashboard.searchform.nearto'] = 'Buscar cerca a';
+$lang['dashboard.searchform.nearto'] = 'Estas cerca a';
 $lang['dashboard.searchform.locationerror'] = "No pudimos encontrar esta dirección, por favor, intente configurarlo manualmente";
 $lang['dashboard.searchform.sortby'] = "Ordenar por";
 $lang['dashboard.searchform.sortby.score'] = "Relevancia";
@@ -61,8 +61,13 @@ $lang['dashboard.searchform.reopensearchresults'] = "Volver a los resultados";
 
 $lang['dashboard.loginform.title'] = "Ingreso de usuario";
 $lang['dashboard.loginform.username'] = "Email";
-$lang['dashboard.loginform.password'] = "Clave";
+$lang['dashboard.loginform.password'] = "contraseña";
 $lang['dashboard.loginform.button'] = "Ingresar";
+$lang['dashboard.loginform.forgotpassword'] = "Olvidó su contraseña?";
+
+$lang['dashboard.recoverypass.title'] = "Recuperar contraseña";
+$lang['dashboard.recoverypass.email'] = "Correo electrónico";
+$lang['dashboard.recoverypass.send'] = "Enviar";
 
 $lang['dashboard.locationform.title'] = "Adicionar Ubicaci&oacute;n";
 $lang['dashboard.locationform.help'] = "Adicionaras la ubicaci&oacute;n actual en el mapa.";

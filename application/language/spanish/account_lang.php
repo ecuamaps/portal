@@ -4,6 +4,10 @@ $lang['login.error.noauth'] = "El nombre de usuario o la clave no son correctos.
 $lang['login.error.inactiveac'] = "Cuenta desactivada.";
 $lang['login.error.outstanding'] = "Esta cuenta esta pendiente de confirmaci&oacute;n.";
 
+$lang['pwdrecover.error.nouser'] = "No hay un usuario relacionado a este email.";
+$lang['pwdrecover.error.send'] = "No ha sido posible enviar el correo.";
+$lang['pwdrecover.success'] = "Una nueva contraseña ha sido enviada su correo eletrónico.";
+
 $lang['signup.error.duplicatedmail'] = "Este email ya existe";
 
 $lang['activation.error'] = "La cuenta ha sido suspendida, ponte en contacto con nosotros para ayudarte.";
@@ -56,6 +60,7 @@ $lang['createbiz.postdisclaimer'] = 'Si no compraste alguno de nuestros producto
 $lang['createbiz.billname'] = 'Nombre*';
 $lang['createbiz.billid'] = 'Identificaci&oacute;n*';
 $lang['createbiz.billaddr'] = 'Direcci&oacute;n (Para pagos a domicilio)';
+$lang['createbiz.selerid'] = 'Vendedor (Exclusivo para agentes)';
 $lang['createbiz.payment.confirmation.process'] = 'Para depositos, transferencias y env&iacute;os de dinero el usuario debe confirma el pago v&iacute;a email.' .
 		'<br/>Enviar un email a %s con la siguiente informaci&oacute;n:' .
 		'<br/>Numero de factura, email del cliente, fecha del pago.' .

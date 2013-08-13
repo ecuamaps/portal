@@ -20,7 +20,7 @@
   <script src="<?=base_url()?>assets/js/jquery-1.9.1.min.js"></script>
   <script src="<?=base_url()?>assets/foundation/js/vendor/custom.modernizr.js"></script>
   <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-
+  <script src="<?=base_url()?>assets/js/jquery.fittext.js"></script>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;region=EC"></script>
   
   <script src="<?=base_url()?>assets/js/mochkino.js"></script>
@@ -101,7 +101,25 @@
 			<div class="row">
 				<div class="large-12 columns"><a href="javascript:void(0)" id="login-action" class="button"><?=lang('dashboard.loginform.button')?></a></div>
     		</div>
+			<div class="row">
+				<div class="large-12 columns"><a href="javascript:void(0)" id="forgot-password"><?=lang('dashboard.loginform.forgotpassword')?></a></div>
+    		</div>
 		</form>
+		
+		<?= form_open('account/recovery_passwd', array('id' => 'recoverypass-form', 'class' => '')) ?>
+			<h4><?=lang('dashboard.recoverypass.title')?></h4>
+			<div class="row">
+				<div class="large-12 columns">
+			    	<label><?=lang('dashboard.recoverypass.email')?></label>
+			        <input type="text" name="recovery-email"/>
+			    </div>
+    		</div>
+			<div class="row">
+				<div class="large-12 columns"><a href="javascript:void(0)" id="recoverypass-action" class="button"><?=lang('dashboard.recoverypass.send')?></a></div>
+    		</div>
+			
+		</form>
+		
 		<a class="close-reveal-modal" id="login-close-modal">&#215;</a>
 		
 	</div>
@@ -192,6 +210,8 @@
   <script src="<?=base_url()?>assets/foundation/js/foundation/foundation.topbar.js"></script>
  
   <script>
+  $("#bsk-logo").fitText(1.2);
+  	
   $(function(){
     $(document).foundation();    
   })

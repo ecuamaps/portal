@@ -2,6 +2,7 @@ jQuery.fn.reset = function () {
 	$(this).each (function() { this.reset(); });
 } 
 
+var isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0));
 var directionsService = new google.maps.DirectionsService();
 
 var styles = [
@@ -737,9 +738,11 @@ $(document).ready(function() {
       });
     });
     
-    //$('input[name="search-text"]').focus();
+    if(!isTouch){
+    	$('input[name="search-text"]').focus();
+    }
     
-    $('input[name="search-text"]').keypress(function(e) {
+    $('input[name="search-text"]').keydown(function(e) {
         if(e.which == 13) {
         	e.preventDefault();
         	$('#search-btn').trigger('click');
@@ -748,12 +751,54 @@ $(document).ready(function() {
 
 	$('#login-close-modal').click(function (e){
 		$('#login-form').reset();
+		$('#recoverypass-form').reset();
+		
+		$('#login-form').show();
+		$('#recoverypass-form').hide();
 	});
 
 	$('#singup-close-modal').click(function (e){
 		$('#signup-form').reset();
 	});
 
+	$('#recoverypass-form').hide();
+	
+	$('#forgot-password').click(function(e){
+		e.preventDefault();
+		
+		$('#login-form').hide();
+		$('#recoverypass-form').show();
+	});
+	
+	$('#recoverypass-action').click(function(e){
+		e.preventDefault();
+		
+    	var hms1     = $('input[name="hms1"]').val();
+    	var email = $('input[name="recovery-email"]').val();
+    	
+    	if(!email)
+    		return false;
+    	
+        $.ajax({
+            type : "POST",
+            url : $('#recoverypass-form').attr('action'),        
+            dataType : "json",
+            data : {
+                hms1 : hms1,
+                email: email
+            }
+        }).done(function(response){
+            if(response.state == 'error'){
+                alert(response.msg);
+                return false;
+            }
+    		$('#login-form').show();
+    		$('#recoverypass-form').hide();
+    		$('#recoverypass-form').reset();
+            alert(response.msg);
+        });
+    	
+	});
 });
 
 function change_sort(orderby){

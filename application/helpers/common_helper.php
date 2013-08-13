@@ -1766,6 +1766,8 @@ function search_query($text, $post_type){
 
 function clean_search_query($text){
 	
+	$is_quoted = is_quoted($text);
+	
 	//Remove the not allowed characters
 	$not_allowed_chars = array('*', '"', "'");
 	$text = str_replace($not_allowed_chars, '', $text);
@@ -1774,6 +1776,8 @@ function clean_search_query($text){
 	$accented_vowels = array('á','é','í','ó','ú','Á','É','Í','Ó','Ú'); 
 	$vowels = array('a','e','i','o','u','A','E','I','O','U');
 	$text = str_replace($accented_vowels, $vowels, $text);
+	
+	$text = ($is_quoted) ? '"'.$text.'"' : $text;
 	
 	return $text;
 }
@@ -1899,7 +1903,7 @@ function show_biz_form($post = null){
 
       <div class="large-6 columns">
         <label><?=lang('createbiz.phones')?></label>
-        <input type="tel" pattern="<?=pattern('phone')?>" maxlength="16" id="bz-phones" name="bz-phones" <?=isset($post->phones) ? 'value="'.$post->phones.'"' : ''?> />
+        <input type="tel" pattern="<?=pattern('phone')?>" maxlength="16" id="bz-phones" name="bz-phones" <?=isset($post->phones) ? 'value="'.$post->phones.'"' : 'value="593-0"'?> />
         <small><?=lang('createbiz.phoneformat')?></small>
       </div>
 

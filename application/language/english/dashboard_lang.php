@@ -54,7 +54,7 @@ $lang['dashboard.searchform.hide'] = "Hide";
 $lang['dashboard.searchform.currlocation'] = 'Your current position.\nDrag and drop to change it.';
 $lang['dashboard.searchform.accuracyerror'] = 'Maybe we could not get your current location, you can change it manually or try another browser.';
 $lang['dashboard.searchform.posttype'] = 'Post Type';
-$lang['dashboard.searchform.nearto'] = 'Search near to';
+$lang['dashboard.searchform.nearto'] = 'You are near to';
 $lang['dashboard.searchform.locationerror'] = "We couldn't found this address, please try set it manually";
 $lang['dashboard.searchform.sortby'] = "Sort by";
 $lang['dashboard.searchform.sortby.score'] = "Relevance";
@@ -66,6 +66,11 @@ $lang['dashboard.loginform.title'] = "User Login";
 $lang['dashboard.loginform.username'] = "Email";
 $lang['dashboard.loginform.password'] = "Password";
 $lang['dashboard.loginform.button'] = "Login";
+$lang['dashboard.loginform.forgotpassword'] = "Forgot you password?";
+
+$lang['dashboard.recoverypass.title'] = "Password recovery";
+$lang['dashboard.recoverypass.email'] = "Email";
+$lang['dashboard.recoverypass.send'] = "Send";
 
 $lang['dashboard.locationform.title'] = "Add Location";
 $lang['dashboard.locationform.help'] = "You'll add the current location at the map.";

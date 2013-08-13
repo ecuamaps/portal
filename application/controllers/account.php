@@ -211,6 +211,8 @@ class Account extends CI_Controller {
 		$payment_method = $this->input->post('payment_method', TRUE);
 		$billing_name = $this->input->post('bz_bill_name', TRUE);
 		$is_billing_cycle = $this->input->post('in_billing_cycle', TRUE);
+		$seller_id = $this->input->post('bz_seller_id', TRUE);
+		
 		
 		//Create the business
 		if(!$bz_id){
@@ -267,7 +269,8 @@ class Account extends CI_Controller {
 			'billing_name' => $billing_name,
 			'billing_identification' =>  $this->input->post('bz_bill_id', TRUE),
 			'billing_address' => $this->input->post('bz_bill_addr', TRUE),
-			'is_billing_cycle' => $is_billing_cycle
+			'is_billing_cycle' => $is_billing_cycle,
+			'seller_id' => $seller_id
 		);
 		
 		//Add the items
@@ -390,4 +393,23 @@ class Account extends CI_Controller {
 		$this->load->view('account/biz_products_list', $params);
 	}
 	
+	function recovery_passwd(){
+		$email = $this->input->post('email', TRUE);
+		
+		$user = $this->account_model->get_user($email);
+		
+		if(!$user)
+			die(json_encode(array('state' => 'error', 'msg' => lang('pwdrecover.error.nouser'))));
+		
+		//Reset the passwrod
+		$new_pwd = $this->account_model->reset_password($user->id);
+		
+		//Send the email
+		$r = $this->email->send_pwdrecovery($email, $new_pwd, $user->name);
+		
+		if(!$r)
+			die(json_encode(array('state' => 'error', 'msg' => lang('pwdrecover.error.send'))));
+		
+		die(json_encode(array('state' => 'ok', 'msg' => lang('pwdrecover.success'))));
+	}
 }

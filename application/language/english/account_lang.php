@@ -4,6 +4,10 @@ $lang['login.error.noauth'] = "Either the username or password are not correct."
 $lang['login.error.inactiveac'] = "Inactive account.";
 $lang['login.error.outstanding'] = "This account is pending confirmation.";
 
+$lang['pwdrecover.error.nouser'] = "There is not any user related to this email.";
+$lang['pwdrecover.error.send'] = "The mail was not sent.";
+$lang['pwdrecover.success'] = "A password has been sent to your email.";
+
 $lang['signup.error.duplicatedmail'] = "This email already exist";
 
 $lang['activation.error'] = "The account has been suspended, please contact us.";
@@ -64,6 +68,7 @@ $lang['createbiz.postdisclaimer'] = 'If you did not buy any of our products your
 $lang['createbiz.billname'] = 'Name*';
 $lang['createbiz.billid'] = 'Id*';
 $lang['createbiz.billaddr'] = 'Address (For money pickup)';
+$lang['createbiz.selerid'] = 'Seler (Only for agents)';
 $lang['createbiz.payment.confirmation.process'] = 'For deposits, transfers and money transfers the user must confirm payment via email.' .
 		'<br/>Email to s% with the following information:' .
 		'<br/>Invoice number, customer email, payment date.' .

@@ -183,5 +183,13 @@ class Account_model extends CI_Model {
 			return null;
 		return $biz;
 	}
+	
+	function reset_password($account_id){
+		$new_pass = uniqid();
+		
+		$this->update_account($account_id, array('passwd' => md5($new_pass)));
+		
+		return $new_pass;
+	}
       
 }

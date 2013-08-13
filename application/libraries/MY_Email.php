@@ -144,6 +144,36 @@ class MY_Email extends CI_Email {
     	
     }
     
+    function send_pwdrecovery($email, $new_pwd, $name){
+
+    	$lang = current_lang();
+    	$bz_name = get_config_val('business_name');
+    	$slogan = get_config_val("business_slogan_$lang");
+    	$this->subject = get_config_val("pwdrecovery_subject_$lang").' '.$bz_name;
+    	$msg = get_config_val("pwdrecovery_email_$lang");
+    	$this->to = $email;
+    	
+    	$tags = array(
+    		'[USER_NAME]',
+    		'[PWD]',
+    		'[BIZ_NAME]',
+    		'[SERVER]',
+    		'[SLOGAN]'
+    	);
+		
+		$data = array(
+			$name,
+			$new_pwd,
+			$bz_name,
+			$_SERVER['HTTP_HOST'],
+			$slogan
+		);
+		
+		$this->message = str_replace($tags, $data, $msg);
+		
+		return $this->send_email();
+    }
+    
     function send_email(){
 
 		$this->from($this->from_email, $this->from_name);
@@ -153,7 +183,7 @@ class MY_Email extends CI_Email {
 		$this->message($this->message);	
 		
 		$r = $this->send();    
-		//echo $this->print_debugger();
+		$this->print_debugger();
 		return $r;	
     }
 }

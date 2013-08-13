@@ -45,7 +45,7 @@
 
 		<div class="small-3 columns">
 	        <label><?=lang('createbiz.product')?></label>
-	        <? if($post_id): ?>
+	        <? if($post_id && isset($billing_cycle)): ?>
 	        <select name="product-list" id="product-list">
 				<? if(is_array($products)): ?>
 					<? foreach($products as $p): ?>
@@ -241,18 +241,23 @@
 	<h6 class="subheader"><?=lang('createbiz.step4.dataconfirmation')?></h6>
 	
     <div class="row">
-      <div class="large-4 columns">
+      <div class="large-3 columns">
         <label><?=lang('createbiz.billname')?></label>
         <input type="text" name="bz-bill-name" value="<?= $user->name ?>"/>
       </div>
-      <div class="large-4 columns">
+      <div class="large-3 columns">
         <label><?=lang('createbiz.billid')?></label>
         <input type="text" name="bz-bill-id" value="<?= $user->identification ?>" />
       </div>
-      <div class="large-4 columns">
+      <div class="large-3 columns">
         <label><?=lang('createbiz.billaddr')?></label>
         <input type="text" name="bz-bill-addr" value="<?= $user->address ?>" />
       </div>
+      <div class="large-3 columns">
+        <label><?=lang('createbiz.selerid')?></label>
+        <input type="text" name="bz-seller-id" value="" />
+      </div>
+     
     </div>
 
     <div class="row">
@@ -523,7 +528,7 @@ $(document).ready(function(){
 			$('#createbiz-step4-error-wrapper').show();
 			return false;			
 		}
-		
+				
 		if(payment_method == 'money_pickup' && !bz_bill_addr){
 			$('#createbiz-step4-error-msg').html('<?=lang('createbiz.error.billaddr.required')?>');
 			$('#createbiz-step4-error-wrapper').show();
@@ -559,7 +564,8 @@ $(document).ready(function(){
 				total: total,
 				sub_total : sub_total,
 				iva : iva,
-				in_billing_cycle : in_billing_cycle
+				in_billing_cycle : in_billing_cycle,
+				bz_seller_id : $('input[name="bz-seller-id"]').val()
             }
         }).done(function(response) {
         	if(response.status == 'ok'){
