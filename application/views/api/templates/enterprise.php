@@ -34,7 +34,7 @@
 				<div class="large-4 columns">
 					<nav class="breadcrumbs">
 						<a href="javascript:void(0)" post-id="<?= $d->id ?>" class="qualify-post"><?= lang('search.review') ?></a>
-						<a href="javascript:void(0)" lat="<?= $d->location_0_coordinate ?>" lng="<?= $d->location_1_coordinate ?>" dist="<?= $d->_dist_ ?>" class="set-directions"><?= lang('search.howtoget') ?></a>
+						<a href="javascript:void(0)" post-id="<?= $d->id ?>" bz-name="<?=$d->name?>" lat="<?= $d->location_0_coordinate ?>" lng="<?= $d->location_1_coordinate ?>" dist="<?= $d->_dist_ ?>" class="set-directions"><?= lang('search.howtoget') ?></a>
 					</nav>
 				</div>
 			</div>

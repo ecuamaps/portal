@@ -18,7 +18,9 @@ $lang['activation.successfully'] = "La cuenta ha sido activada exitosamente.";
 $lang['createbiz.title'] = 'Agrega tu negocio, es gratis!';
 $lang['createbiz.step1'] = 'Paso 1: Datos del negocio';
 $lang['createbiz.step2'] = 'Paso 2: Mejora tu negocio';
-$lang['createbiz.step2.subheader'] = 'Agregando funciones extra con precios peque&ntilde;itos';
+$lang['createbiz.step2.subheader'] = 'Agregando funciones extra con buenos precios';
+$lang['createbiz.step2.prorateprice'] = 'Estos precios tienen aplicado el descuento de prorrateo, su próxima fecha de facturación es %s';
+
 $lang['createbiz.step3'] = 'Paso 3: Vamos a publicarlo!';
 $lang['createbiz.step3.subheader'] = 'Terminos y Condiciones';
 $lang['createbiz.step4'] = 'Vamoa a pagar';

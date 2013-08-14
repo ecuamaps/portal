@@ -48,7 +48,7 @@ function mapInitialize(location) {
 		'lng' : myLatlng.lng()
 	});
 	
-	directionsDisplay = new google.maps.DirectionsRenderer();
+	directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
 	
 	var mapOptions = {
 		zoom : map_zoom,
@@ -808,8 +808,48 @@ function change_sort(orderby){
 	search(false, orderby);
 }
 
-function set_directions(lat, lng, distance){
+var infoWindows = new Object();
+var markers = new Object();
+
+function set_directions(lat, lng, distance, bz_name, post_id){
+
 	var destination = new google.maps.LatLng(lat, lng);
+	routeToHere(destination, distance);
+
+	num = new Number(distance);
+
+	if(!isTouch){
+		var contentString = '<div class="panel radius">' + 
+		'<h5>' + bz_name + '</h5>' +
+		'<small>' + num.toPrecision(2) + 'km</small>' +		
+		'</div>';
+		
+		infoWindows[post_id] = new google.maps.InfoWindow({
+			content: contentString
+		});		
+	}
+	
+	addMarker(post_id, destination);
+		
+	markers[post_id].setTitle(bz_name + ' (' + num.toPrecision(2) + 'km)');
+	google.maps.event.addListener(markers[post_id], 'click', function() {
+		if(!isTouch){
+			closeInfoWindows();
+			infoWindows[post_id].open(map, markers[post_id]);
+		}
+		routeToHere(destination, distance);
+	});
+
+}
+
+function closeInfoWindows(){
+	$.each( infoWindows, function( post_id, win ) {
+		win.close();
+	});
+}
+
+function routeToHere(destination, distance){
+	
 	var travelMode = google.maps.TravelMode.DRIVING;
 	
 	if(distance <= 1)
@@ -827,14 +867,13 @@ function set_directions(lat, lng, distance){
 		}else{
 			alert("Sorry, We couldn't get the directions.");
 		}
-	});
-}
-
-function get_bz_by_type(type_id){
-	console.log(type_id);
+	});	
 }
 
 function search(openModal, orderby){
+	
+	removeMarkers();
+	directionsDisplay.set('directions', null);
 	
 	orderby = orderby ? orderby : $('#sort').val();
 	$.ajax({
@@ -868,6 +907,14 @@ function search(openModal, orderby){
 	$('#back-results-btn').show();
 }
 
+function removeMarkers(){
+	$.each( markers, function( post_id, mark ) {
+		removeMarker(post_id);
+	});
+	
+	markers = new Object();
+}
+
 function removeMarker(id){
     markers[id].setMap(null);
     markers[id] = null;
@@ -882,7 +929,7 @@ function placeMarker(location) {
         position : location,
         map : map
     });
-    map.setCenter(location);
+    //map.setCenter(location);
 	
     return marker;
 }

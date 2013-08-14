@@ -116,8 +116,11 @@
 				var lat = $(this).attr('lat');
 				var lng = $(this).attr('lng');
 				var d = $(this).attr('dist');
-				console.log(lat);
-				set_directions(lat, lng, d);
+				var bz_name = $(this).attr('bz-name');
+				var post_id = $(this).attr('post-id');
+				
+				//console.log(lat);
+				set_directions(lat, lng, d, bz_name, post_id);
 				$('#add-qualification-wrapper').foundation('reveal', 'close');
 			})
 		</script>

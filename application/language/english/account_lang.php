@@ -19,6 +19,8 @@ $lang['createbiz.title'] = 'Add your business for free!';
 $lang['createbiz.step1'] = 'Step 1: Business Info';
 $lang['createbiz.step2'] = 'Step 2: Improve your presence';
 $lang['createbiz.step2.subheader'] = 'Adding extra features for small prices';
+$lang['createbiz.step2.prorateprice'] = 'These prices have the prorated discount value applied, your next billing date is %s';
+
 $lang['createbiz.step3'] = "Step 3: Let's publish it!";
 $lang['createbiz.step3.subheader'] = 'Terms and Conditions';
 $lang['createbiz.step4'] = "Let's pay";

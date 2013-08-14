@@ -163,6 +163,9 @@ class Account extends CI_Controller {
 					$available_products[$i]->price = prorate_value($available_products[$i]->price, $last_billing_date, $billing_cycle);
 				}
 				
+				$next_billing_date = $this->business_model->get_next_billing_date($post_id);
+				$params['next_billing_date'] = $next_billing_date;
+				
 				if($billing_cycle)
 					$params['billing_cycle'] = $billing_cycle;
 				
