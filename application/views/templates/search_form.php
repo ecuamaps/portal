@@ -27,6 +27,13 @@
 
 	<!-- Advanced Search Form -->
 	<div class="f-dropdown content" id="adv-search-block" data-dropdown-content>	
+
+		<div class="row margin-top-10px">
+			<div class="large-12 columns">
+				<label for="exact-match"><input type="checkbox" id="exact-match">&nbsp;<?=lang('dashboard.searchform.exactmatch')?></label>
+			</div>
+    	</div>
+
 		<div class="row margin-top-10px">
 			<div class="large-12 columns">
 				<label for="distance"><?=lang('dashboard.searchform.radio')?></label>

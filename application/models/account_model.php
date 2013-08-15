@@ -177,7 +177,7 @@ class Account_model extends CI_Model {
 	
 	function get_businesses($account_id){
 		$this->db->order_by('name', 'desc');
-		$this->db->where_in('state', array('A', 'I'));
+		$this->db->where_in('state', array('A', 'P'));
 		$biz = $this->db->get_where('post', array('user_id' => $account_id, 'post_type_id' => 1, ))->result();
 		if(!count($biz))
 			return null;

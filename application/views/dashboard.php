@@ -31,7 +31,7 @@
 
   <script src="<?=base_url()?>assets/galleria/galleria-1.2.9.min.js"></script>
 
-  <script>
+  <script>  		
         var lang = '<?=$this->lang->lang()?>';
   </script>
   
@@ -181,6 +181,8 @@
 			var err_msg_missing_field_signin = '<?=lang('dashboard.signupform.errmsg')?>';
 			var err_msg_mismatch_pass = '<?=lang('dashboard.signupform.errmsg.pass')?>'
 			var err_msg_wrong_email_format = '<?=lang('dashboard.signupform.errmsg.emailformat')?>';
+			var leave_msg_ff = '<?=lang('dashboard.leave.msgff')?>';
+			var leave_msg_ch = '<?=lang('dashboard.leave.msgch')?>';
 			
 			$(document).ready(function(){
 				$('#waiting, #succesfull').hide();

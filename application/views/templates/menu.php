@@ -13,7 +13,7 @@
 	        </li> 
 	      
 	        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-	        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+	        <li class="toggle-topbar menu-icon"><a href="javascript:void(0)" id="toggle-menu"><span id="open-m"><?=lang('dashboard.navmenu.open')?></span><span id="close-m" style="display: none;"><?=lang('dashboard.navmenu.close')?></span></a></li>
 	      </ul>
 		<!-- Left Nav Section -->
 		
@@ -49,7 +49,7 @@
 	          		<li><a href="<?=base_url($this->lang->lang().'/account/create_enterprise_form')?>" data-reveal-id="add-enterprise-form" data-reveal-ajax="true"><?=lang('dashboard.addbuz')?></a></li>
 	          		<? if(isset($businesses)): ?>
 		          		<? foreach($businesses as $b): ?>
-		          		<li><a href="javascript:void(0)" id="<?=$b->id?>" class="mybiz-link"><?=$b->name?></a></li>
+		          		<li><a href="javascript:void(0)" id="<?=$b->id?>" class="<?= ($b->state == 'A') ? 'mybiz-link' : 'inactive-href'?>"><?=$b->name?></a></li>
 		          		<? endforeach; ?>
 	          		<? endif; ?>
 	          	</ul>

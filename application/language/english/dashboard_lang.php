@@ -28,6 +28,8 @@ $lang['dashboard.preference.button'] = "Close";
 $lang['dashboard.navmenu.back'] = "Where is the blue icon?";
 $lang['dashboard.navmenu.move'] = "Center the map here";
 $lang['dashboard.navmenu.location'] = "Go to";
+$lang['dashboard.navmenu.open'] = "Open Menu";
+$lang['dashboard.navmenu.close'] = "Close Menu";
 
 $lang['dashboard.leftpanel.clearresults'] = "Clear";
 $lang['dashboard.leftpanel.viewall'] = "View All";
@@ -47,7 +49,7 @@ $lang['dashboard.searchform.hideadvsearch'] = "Hide Advanced Search";
 $lang['dashboard.searchform.radio'] = "Radio Search";
 $lang['dashboard.searchform.noradio'] = "Search for All";
 $lang['dashboard.searchform.orderby'] = "Order by:";
-$lang['dashboard.searchform.maxresults'] = "Results Amount:";
+$lang['dashboard.searchform.maxresults'] = "Results per page:";
 $lang['dashboard.searchform.all'] = "All (Can be a bunch)";
 $lang['dashboard.searchform.viewmore'] = "View All";
 $lang['dashboard.searchform.hide'] = "Hide";
@@ -61,6 +63,7 @@ $lang['dashboard.searchform.sortby.score'] = "Relevance";
 $lang['dashboard.searchform.sortby.scoreavg'] = "Score";
 $lang['dashboard.searchform.sortby.distance'] = "Distance";
 $lang['dashboard.searchform.reopensearchresults'] = "Back to the results";
+$lang['dashboard.searchform.exactmatch'] = "Exact Match";
 
 $lang['dashboard.loginform.title'] = "User Login";
 $lang['dashboard.loginform.username'] = "Email";
@@ -107,3 +110,7 @@ $lang['dashboard.wrong.browser'] = 'For better experience use: \n' .
 $lang['dashboard.navmenu.tooltip.target'] = "Go to my current location";
 $lang['dashboard.navmenu.tooltip.whereami'] = "Find the blue little man";
 $lang['dashboard.navmenu.tooltip.placemehere'] = "Place me at the map center";
+
+$lang['dashboard.leave.msgff'] = "Your are about to leave buskoo, are you sure?";
+$lang['dashboard.leave.msgch'] = "You are about to leave buskoo";
+

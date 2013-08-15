@@ -27,6 +27,8 @@ $lang['dashboard.preference.button'] = "Cerrar";
 $lang['dashboard.navmenu.back'] = "Donde esta el icono azul?";
 $lang['dashboard.navmenu.move'] = "Centrar el mapa aqu&itilde;";
 $lang['dashboard.navmenu.location'] = "Ir a";
+$lang['dashboard.navmenu.open'] = "Abrir Menu";
+$lang['dashboard.navmenu.close'] = "Cerrar Menu";
 
 $lang['dashboard.leftpanel.clearresults'] = "Limpiar";
 $lang['dashboard.leftpanel.viewall'] = "Ver Todos";
@@ -44,7 +46,7 @@ $lang['dashboard.searchform.advsearch'] = "Avanzada";
 $lang['dashboard.searchform.hideadvsearch'] = "Ocultar";
 $lang['dashboard.searchform.radio'] = "Buscar por distancia";
 $lang['dashboard.searchform.noradio'] = "Cualquier Distancia";
-$lang['dashboard.searchform.maxresults'] = "Cantidad de Resultados:";
+$lang['dashboard.searchform.maxresults'] = "Resultados por página:";
 $lang['dashboard.searchform.all'] = "Todos (Pueden ser muchos)";
 $lang['dashboard.searchform.viewmore'] = "Ver Todas";
 $lang['dashboard.searchform.hide'] = "Ocultar";
@@ -58,6 +60,7 @@ $lang['dashboard.searchform.sortby.score'] = "Relevancia";
 $lang['dashboard.searchform.sortby.scoreavg'] = "Puntuaci&oacute;n";
 $lang['dashboard.searchform.sortby.distance'] = "Distancia";
 $lang['dashboard.searchform.reopensearchresults'] = "Volver a los resultados";
+$lang['dashboard.searchform.exactmatch'] = "Coincidencia Exacta";
 
 $lang['dashboard.loginform.title'] = "Ingreso de usuario";
 $lang['dashboard.loginform.username'] = "Email";
@@ -111,4 +114,6 @@ $lang['dashboard.navmenu.tooltip.target'] = "Ir a mi ubicaci&oacute;n actual";
 $lang['dashboard.navmenu.tooltip.whereami'] = "Buscar el hombrecito azul";
 $lang['dashboard.navmenu.tooltip.placemehere'] = "Colocarme en el centro del mapa";
 
+$lang['dashboard.leave.msgff'] = "Estas a punto de salir de buskoo, estas seguro?";
+$lang['dashboard.leave.msgch'] = "Estas a punto de salir de buskoo";
 

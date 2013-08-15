@@ -153,3 +153,7 @@ height: 100%;
 	#d45848 -3px 3px 0,
 	#d45848 -4px 4px 0;
 }
+
+.inactive-href {
+	color: #585858 !important;
+}

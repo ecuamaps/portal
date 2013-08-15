@@ -1739,7 +1739,7 @@ function is_quoted($text){
 	return false;
 }
 
-function search_query($text, $post_type){
+function search_query($text, $post_type, $exact_match){
 	$terms = array();
 
 	if(!$text)
@@ -1756,6 +1756,10 @@ function search_query($text, $post_type){
 		return build_solr_query($text, $post_type);
 	}
 
+	if($exact_match){
+		return build_solr_query('"'.$text.'"', $post_type);
+	}
+	
 	$terms = explode(' ', $text);
 		
 	if(count($terms) == 1)

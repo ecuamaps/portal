@@ -25,6 +25,7 @@ class Api extends CI_Controller {
 		$lat = $this->input->post('lat', TRUE);
 		$lng = $this->input->post('lng', TRUE);
 		$sort_field = $this->input->post('sort', TRUE);
+		$exact_match = $this->input->post('exact_match', TRUE);
 
 		$options = ci_config('solr_options');
 		$max_results = ci_config('max_solr_results');
@@ -46,7 +47,7 @@ class Api extends CI_Controller {
 				$sort = 'score desc,score_avg desc,geodist() asc';
 		}
 		
-		$q = search_query($text, $post_type);
+		$q = search_query($text, $post_type, $exact_match);
 		$query = array(
 			'q' => $q,
 			'fq' => '{!geofilt}',

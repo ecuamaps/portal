@@ -37,6 +37,7 @@ $config['max_amt_pages'] = 5;
 $config['not_allowed_browsers'] = array(	
 	'Internet Explorer 7.0',
 	'Internet Explorer 8.0',
+	'Internet Explorer 9.0',
 	'Mozilla 15.0'
 );
 
