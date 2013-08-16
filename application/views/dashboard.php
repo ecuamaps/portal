@@ -212,7 +212,7 @@
   <script src="<?=base_url()?>assets/foundation/js/foundation/foundation.topbar.js"></script>
  
   <script>
-  $("#bsk-logo").fitText(1.2);
+  $("#bsk-logo").fitText();
   	
   $(function(){
     $(document).foundation();    

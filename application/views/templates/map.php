@@ -9,14 +9,6 @@
 		
 		<div class="panel callout opacity07 text-color-white padding-10px">
 			<div class="row">
-			<?php foreach($bztop5types as $type):?>
-				<div class="small-2 columns">
-					<label class="text-color-white" for="<?="type_".$type->id?>"><input class="bz-type" type="checkbox" name="<?="type_".$type->id?>" id="<?="type_".$type->id?>" value="<?=$type->id?>"><?=$type->name?></label>
-				</div>				
-			<?php endforeach; ?>
-				<div class="small-2 columns">
-					<a href="javascript:void(0)" id="view-all-types"><span id="hiden-types-bar"><?=lang('dashboard.searchform.viewmore')?></span><span class="hide" id="visible-types-bar"><?=lang('dashboard.searchform.hide')?></span></a>
-  				</div>				
 			</div>
 				
 			<div class="hide" id="extra-types"></div>

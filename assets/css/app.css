@@ -1,3 +1,9 @@
+/*@import url(http://fonts.googleapis.com/css?family=Kavoon&subset=latin,latin-ext);  
+@import url(http://fonts.googleapis.com/css?family=Mouse+Memoirs&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Press+Start+2P&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Crafty+Girls);*/
+@import url(http://fonts.googleapis.com/css?family=Galindo&subset=latin,latin-ext);
+
 .centered-text{
 	text-align: center;
 }
@@ -141,17 +147,29 @@ height: 100%;
 }
 
 #bsk-logo {
-	color: #ffffff;
+	/*color: #ffffff;*/
 	font: 30px "anchor-web-1","anchor-web-2", 'Impact', sans-serif;
-	font-weight: 900;
+	/*font-family: 'Kavoon', cursive;*/
+	/*font-family: 'Mouse Memoirs', sans-serif;*/
+	/*font-family: 'Press Start 2P', cursive;*/
+	/*font-family: 'Crafty Girls', cursive;*/
+	font-family: 'Galindo', cursive;
+	/*font-weight: 900;*/
 	display: inline-block;
 	margin: 0 auto;
 	line-height: 1;
 	width: 100%;
-	text-shadow:#253e45 -1px 1px 0,
+	/*text-shadow:#253e45 -1px 1px 0,
 	#253e45 -2px 2px 0,
 	#d45848 -3px 3px 0,
-	#d45848 -4px 4px 0;
+	#d45848 -4px 4px 0;*/
+}
+
+.font-black{
+	color: #000000 !important;
+}
+.font-red{
+	color: RED !important;
 }
 
 .inactive-href {

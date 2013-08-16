@@ -2,23 +2,28 @@ jQuery.fn.reset = function () {
 	$(this).each (function() { this.reset(); });
 }
 
+var leaveConfirmationFlag = true;
+
 var isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0));
 
-if(isTouch){
+/*if(isTouch){
 	$(window).bind('beforeunload', function() {
-	    if(/Firefox[\/\s](\d+)/.test(navigator.userAgent) && new Number(RegExp.$1) >= 4) {
-	        if(confirm(leave_msg_ff)) {
-	            history.go();
-	        } else {
-	            window.setTimeout(function() {
-	                window.stop();
-	            }, 1);
-	        }
-	    } else {
-	        return leave_msg_ch;
-	    }
+		if(leaveConfirmationFlag){
+			leaveConfirmationFlag = true;
+		    if(/Firefox[\/\s](\d+)/.test(navigator.userAgent) && new Number(RegExp.$1) >= 4) {
+		        if(confirm(leave_msg_ff)) {
+		            history.go();
+		        } else {
+		            window.setTimeout(function() {
+		                window.stop();
+		            }, 1);
+		        }
+		    } else {
+		        return leave_msg_ch;
+		    }			
+		}
 	});	
-}
+}*/
 
 var directionsService = new google.maps.DirectionsService();
 
@@ -299,7 +304,9 @@ $(document).ready(function() {
 
     $('#login-action').click(function(e) {
         e.preventDefault();
-
+        
+        leaveConfirmationFlag = false;
+        
         $.ajax({
             type : "POST",
             url : $('#login-form').attr('action'),
@@ -314,7 +321,8 @@ $(document).ready(function() {
                 $('#login-error-msg').html(response.msg);
                 $('#login-error-wrapper').show();
             } else {
-                window.location.reload(true);
+            	//window.location.href = '.';
+            	window.location.reload(true);
             }
         });
 

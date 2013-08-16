@@ -7,7 +7,7 @@
 				<div class="row">
 					<!--<div class="small-3 columns hide-for-small show-for-medium-up"><? logo_big_svg(200, 36); ?></div>
 					<div class="small-3 columns show-for-small hide-for-medium-up"><? logo_big_svg(80, 15); ?></div>-->
-					<div class="small-3 columns"><h1 id="bsk-logo">buskoo.com</h1></div>
+					<div class="small-3 columns"><h1 id="bsk-logo"><span class="font-black">buskoo</span><span class="font-red">.com</span></h1></div>
 					<div class="small-4 columns">
 						<input type="text" name="search-text" placeholder="<?=lang('dashboard.searchform.searchtext')?>" class="radius clear-margin" />
 						<h6><small class="text-color-white"><?=lang('dashboard.searchform.nearto')?>: <span id="current-address"></span> <a href="#" data-dropdown="change-location-wrapper" id="chlocation"><?=lang('dashboard.chlocationform.change')?></a></small></h6>		
