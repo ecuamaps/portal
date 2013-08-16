@@ -5,11 +5,7 @@
 
 	        <!-- Title Area -->
 	        <li class="name">
-	        	<? if(!$user): ?>
-	           	<a href="#" data-reveal-id="login-form-wrapper" class="button alert"><?=lang('dashboard.login')?></a>
-	           	<? else: ?>
-	            <h1 style="color: white;"><?=$user->name?></h1>
-	           	<? endif; ?>
+	        	<h1 id="bsk-logo"><span class="font-white">buskoo</span><span class="font-red">.com</span></h1>
 	        </li> 
 	      
 	        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->

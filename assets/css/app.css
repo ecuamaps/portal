@@ -148,12 +148,12 @@ height: 100%;
 
 #bsk-logo {
 	/*color: #ffffff;*/
-	font: 30px "anchor-web-1","anchor-web-2", 'Impact', sans-serif;
+	font: 30px "anchor-web-1","anchor-web-2", 'Impact', sans-serif !important;
 	/*font-family: 'Kavoon', cursive;*/
 	/*font-family: 'Mouse Memoirs', sans-serif;*/
 	/*font-family: 'Press Start 2P', cursive;*/
 	/*font-family: 'Crafty Girls', cursive;*/
-	font-family: 'Galindo', cursive;
+	font-family: 'Galindo', cursive !important;
 	/*font-weight: 900;*/
 	display: inline-block;
 	margin: 0 auto;
@@ -165,6 +165,9 @@ height: 100%;
 	#d45848 -4px 4px 0;*/
 }
 
+.font-white{
+	color: #ffffff !important;
+}
 .font-black{
 	color: #000000 !important;
 }
