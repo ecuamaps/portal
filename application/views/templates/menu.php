@@ -88,13 +88,10 @@
 	          <li class="divider"></li>
 	          <li class="has-dropdown"><a href="javascript:void(0)" id="about"><?=lang('dashboard.about')?></a>
 	         	 <ul class="dropdown">	         	 	
-	         	 	<li><a href="http://www.buskoo.com">Historia</a></li>
-	         	 	<li><a href="mailto:ventas@buskoo.com">Ventas</a></li>
-	         	 	<li><a href="mailto:webmaster@buskoo.com">Soporte</a></li>
+	         	 	<li><a href="javascript:void(0)" data-reveal-id="contact-modal"><?=lang('dashboard.contactus')?></a></li>
+	         	 	<li><a href="<?=base_url($this->lang->lang().'/terms')?>" data-reveal-id="terms-modal" data-reveal-ajax="true"><?=lang('dashboard.terms')?></a></li>
 	         	 </ul>
 	          </li>
-	          
-	          
 			
        	<?
        		if($this->lang->lang() == 'en'){
@@ -119,6 +116,76 @@
 	      </section>
 	    </nav>
 
+	<!-- Terms modal -->
+	<div class="reveal-modal expand" id="terms-modal"></div>
+	<!-- End Terms modal -->
+
+	<!-- Contact modal -->
+	<div class="reveal-modal small" id="contact-modal">
+		<?= form_open('api/contact', array('id' => 'contact-form', 'class' => '')) ?>
+			<h4><?=lang('dashboard.contactform.title')?></h4>
+
+			<div class="row">
+				<div class="large-12 columns">
+					<p><small><?=lang('dashboard.contactform.help')?></small></p>
+			    </div>
+    		</div>
+						
+			<div class="row">
+				<div class="large-12 columns">
+			    	<label><?=lang('dashboard.loginform.username')?>*</label>
+			        <input type="text" name="ct-email" id="ct-email"/>
+			    </div>
+    		</div>
+    		<?php
+    			$lang = $this->lang->lang() ;
+    			$contact_subjects = get_config_val("comunication_types_$lang");
+    			$contact_subjects = explode(',', $contact_subjects);
+    		?>
+			<div class="row">
+				<div class="large-12 columns">
+			    	<label><?=lang('dashboard.contactform.subject')?>*</label>
+					<select id="ct-subject" name="ct-subject" class="medium">
+						<? foreach($contact_subjects as $cs): ?>
+						<option value="<?=$cs?>"><?=$cs?></option>
+						<? endforeach; ?>
+					</select>			        
+			    </div>
+    		</div>
+
+			<div class="row">
+				<div class="large-12 columns">
+			    	<label><?=lang('dashboard.contactform.bzid')?> (<small><?=lang('dashboard.contactform.bzid-help')?></small>)</label>
+			        <input type="text" name="ct-bzid" id="ct-bzid"/>
+			    </div>
+    		</div>
+
+			<div class="row">
+				<div class="large-12 columns">
+			    	<label><?=lang('dashboard.contactform.msg')?>* (<span id="chcount-ct-msg"></span>)</label> 
+			        <textarea maxlength="250" name="ct-msg" id="ct-msg"></textarea>
+			        
+			    </div>
+    		</div>
+
+			<div class="row">
+				<div class="large-12 columns"><a href="javascript:void(0)" id="contactform-action" class="button"><?=lang('dashboard.contactform.button')?></a></div>
+    		</div>
+		</form>
+		<script>
+			var ct_max_chars = 250;
+			var ct_form_err_msg_missing_field = '<?=lang('dashboard.contactform.errmsg-misfield')?>';
+			
+			$(document).ready(function(){
+				count_chars($('#ct-msg'), $('#chcount-ct-msg'), ct_max_chars);
+				$('#ct-msg').keyup(function(event) {
+					count_chars($(this), $('#chcount-ct-msg'), ct_max_chars);
+				});	
+			});
+		</script>
+		<a class="close-reveal-modal" id="contact-close-modal">&#215;</a>
+	</div>
+	<!-- End Contact modal -->
 
 	<? if($user): ?>
 	<!-- Add Location Form -->

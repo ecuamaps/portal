@@ -1,8 +1,9 @@
 /*@import url(http://fonts.googleapis.com/css?family=Kavoon&subset=latin,latin-ext);  
 @import url(http://fonts.googleapis.com/css?family=Mouse+Memoirs&subset=latin,latin-ext);
 @import url(http://fonts.googleapis.com/css?family=Press+Start+2P&subset=latin,latin-ext);
-@import url(http://fonts.googleapis.com/css?family=Crafty+Girls);*/
-@import url(http://fonts.googleapis.com/css?family=Galindo&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Crafty+Girls);
+@import url(http://fonts.googleapis.com/css?family=Galindo&subset=latin,latin-ext);*/
+@import url(http://fonts.googleapis.com/css?family=Audiowide);
 
 .centered-text{
 	text-align: center;
@@ -153,7 +154,8 @@ height: 100%;
 	/*font-family: 'Mouse Memoirs', sans-serif;*/
 	/*font-family: 'Press Start 2P', cursive;*/
 	/*font-family: 'Crafty Girls', cursive;*/
-	font-family: 'Galindo', cursive !important;
+	/*font-family: 'Galindo', cursive !important;*/
+	font-family: 'Audiowide', cursive !important;;
 	/*font-weight: 900;*/
 	display: inline-block;
 	margin: 0 auto;
@@ -177,4 +179,9 @@ height: 100%;
 
 .inactive-href {
 	color: #585858 !important;
+}
+ 
+#search-text{
+	border-radius: 1em;
+	box-shadow: 0 4px 6px -5px hsl(0, 0%, 40%), inset 0px 4px 6px -5px hsl(0, 0%, 2%) !important;
 }

@@ -782,6 +782,10 @@ $(document).ready(function() {
 		$('#recoverypass-form').hide();
 	});
 
+	$('#contact-close-modal').click(function (e){
+		$('#contact-form').reset();
+	});
+	
 	$('#singup-close-modal').click(function (e){
 		$('#signup-form').reset();
 	});
@@ -835,6 +839,24 @@ $(document).ready(function() {
 		}
 	});
 	
+	$('#contactform-action').click(function(e){
+		e.preventDefault();
+		
+    	var hms1 = $('input[name="hms1"]').val();
+    	var email = $('input[name="ct-email"]').val();
+		var subject = $('select[name="ct-subject"]').val();
+    	var bzid = $('select[name="ct-bzid"]').val();
+		
+    	if(!email){
+    		alert(ct_form_err_msg_missing_field);
+    		return false;
+    	}
+    	
+    	if(subject == 'Reportar local' || subject == 'Business issue'){
+    		
+    	}
+    	console.log(subject);
+	})
 });
 
 function change_sort(orderby){

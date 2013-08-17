@@ -3,7 +3,9 @@
 $lang['dashboard.login'] = "Iniciar Sesi&oacute;n";
 $lang['dashboard.signup'] = "Registrate gratis!";
 $lang['dashboard.followus'] = "Siguenos!";
-$lang['dashboard.about'] = "Quienes Somos";
+$lang['dashboard.about'] = "Nosotros";
+$lang['dashboard.contactus'] = "Comunicate";
+$lang['dashboard.terms'] = "Terminos y condiciones";
 $lang['dashboard.logout'] = "Salir";
 $lang['dashboard.myaccount'] = "Mi Cuenta";
 $lang['dashboard.mylocations'] = "Mis Ubicaciones";
@@ -116,4 +118,15 @@ $lang['dashboard.navmenu.tooltip.placemehere'] = "Colocarme en el centro del map
 
 $lang['dashboard.leave.msgff'] = "Estas a punto de salir de buskoo, estas seguro?";
 $lang['dashboard.leave.msgch'] = "Estas a punto de salir de buskoo";
+
+$lang['dashboard.contactform.title'] = 'Comunicate con nosotros';
+$lang['dashboard.contactform.help'] = 'Puedes reportar si un local es tuyo, si tiene alguna información errada, si ya no existe, ' .
+		'si es un abuso o simplemente si deseas que se adicione uno a nuestra red, solo adjunta en ID del negocio o dinos donde y como lo podriamos encontrar.';
+$lang['dashboard.contactform.subject'] = 'Asunto';
+$lang['dashboard.contactform.bzid'] = 'ID del local';
+$lang['dashboard.contactform.bzid-help'] = 'Requerido solo para hacer algún reporte a un local';
+$lang['dashboard.contactform.msg'] = 'Mensaje';
+$lang['dashboard.contactform.button'] = 'Enviar';
+$lang['dashboard.contactform.errmsg-misfield'] = 'Los campos marcados con asterisco son obligatorios';
+
 
