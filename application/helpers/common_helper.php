@@ -2002,7 +2002,7 @@ function pattern($key){
 	switch($key){
 		case 'phone':
 		case 'phones':
-			$pattern = '^([0-9]{1,3}-[0-9]{1,3}-[0-9]{1,9})$';
+			$pattern = '^(\([0-9]{1,3}\) [0-9]{1,3}-[0-9]{1,9})$';
 			break;
 		case 'email':
 		case 'mail':

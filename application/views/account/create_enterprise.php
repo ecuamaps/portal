@@ -29,7 +29,7 @@
     <legend><?= lang('createbiz.step2') ?></legend>
 	<h6 class="subheader"><?=lang('createbiz.step2.subheader')?></h6>
 	
-	<? if($next_billing_date): ?>
+	<? if(isset($next_billing_date)): ?>
 	<h6 class="subheader"><?= sprintf(lang('createbiz.step2.prorateprice'), $next_billing_date) ?></h6>
 	<? endif; ?>
 	
