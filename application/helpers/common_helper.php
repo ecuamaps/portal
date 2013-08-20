@@ -1964,7 +1964,8 @@ function show_biz_form($post = null){
 				$(this).hide();
 			});
 			
-			$("#bz-phones").mask("999-99-9999999?99");
+			//$.mask.definitions['x'] = "[0-9]";
+			$("#bz-phones").mask("(999) 99-9999999?99");
 			
 			$( "#bz-type" ).combobox();
 		});

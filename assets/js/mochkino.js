@@ -852,10 +852,10 @@ $(document).ready(function() {
     		return false;
     	}
     	
-    	if(subject == 'Reportar local' || subject == 'Business issue'){
-    		
+    	if((subject == 'Reportar local' || subject == 'Business issue') && !bzid){
+    		alert(ct_form_err_msg_missing_field);
+    		return false;    		
     	}
-    	console.log(subject);
 	})
 });
 
