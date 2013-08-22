@@ -14,7 +14,8 @@ function phones_show($post_id){
 	$phones = array();
 	foreach($prod as $p){
 		$i_data = unserialize($p->implementation_data);
-		$phones = array_merge($phones, $i_data['phones']);
+		if(isset($i_data['phones']) && is_array($i_data['phones']))
+			$phones = array_merge($phones, $i_data['phones']);
 	}
 	
 	return implode(", ", $phones);	

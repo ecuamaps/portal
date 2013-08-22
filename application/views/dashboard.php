@@ -212,7 +212,7 @@
   <script src="<?=base_url()?>assets/foundation/js/foundation/foundation.topbar.js"></script>
  
   <script>
-  $("#bsk-logo").fitText();
+  
   	
   $(function(){
     $(document).foundation();    
@@ -222,7 +222,8 @@
   <script>
   
   $(document).ready(function(){
-  	  	Galleria.loadTheme("<?=base_url()?>assets/galleria/themes/classic/galleria.classic.min.js");
+  	//$("#bsk-logo").fitText();
+  	Galleria.loadTheme("<?=base_url()?>assets/galleria/themes/classic/galleria.classic.min.js");
   });
   </script>
 </body>
