@@ -395,6 +395,9 @@ $config['extrainfo_product_id'] = array(7, 8);
 $config['ytvideo_product_id'] = array(9, 10);
 $config['tags_product_id'] = array(11, 12);
 $config['promo_product_id'] = array(13, 14);
+$config['fbpage_product_id'] = array(15, 16);
+$config['website_product_id'] = array(17, 18);
+$config['email_product_id'] = array(19, 20);
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

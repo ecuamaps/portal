@@ -42,7 +42,6 @@
 							$(this).css('background-color', '#FFFFFF');
 							phones.push(val);
 						}
-						
 					}
 				}
 			);

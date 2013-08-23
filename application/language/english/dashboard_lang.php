@@ -116,3 +116,14 @@ $lang['dashboard.navmenu.tooltip.placemehere'] = "Place me at the map center";
 $lang['dashboard.leave.msgff'] = "Your are about to leave buskoo, are you sure?";
 $lang['dashboard.leave.msgch'] = "You are about to leave buskoo";
 
+$lang['dashboard.contactform.title'] = 'Be in touch with us';
+$lang['dashboard.contactform.help'] = 'You can inform us that a business is yours, any data mistake, whether a business does not exists any more, ' .
+		'whether is an abuse or you can postulate a business to be added to our network, just add the business ID and tell us where and how we could find it.';
+$lang['dashboard.contactform.subject'] = 'Subject';
+$lang['dashboard.contactform.bzid'] = 'Business ID';
+$lang['dashboard.contactform.bzid-help'] = 'Required only for report about a business';
+$lang['dashboard.contactform.msg'] = 'Messsage';
+$lang['dashboard.contactform.button'] = 'Send';
+$lang['dashboard.contactform.errmsg-misfield'] = 'The fields with * are required';
+$lang['dashboard.contactform.errmsg-misbzid'] = 'The business ID is required when you need report about a business';
+$lang['dashboard.contactform.okmsg'] = 'We have received your message, thank you.';

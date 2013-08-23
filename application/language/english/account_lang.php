@@ -70,7 +70,7 @@ $lang['createbiz.postdisclaimer'] = 'If you did not buy any of our products your
 $lang['createbiz.billname'] = 'Name*';
 $lang['createbiz.billid'] = 'Id*';
 $lang['createbiz.billaddr'] = 'Address (For money pickup)';
-$lang['createbiz.selerid'] = 'Seler (Only for agents)';
+$lang['createbiz.selerid'] = 'Seller (Only for agents)';
 $lang['createbiz.payment.confirmation.process'] = 'For deposits, transfers and money transfers the user must confirm payment via email.' .
 		'<br/>Email to s% with the following information:' .
 		'<br/>Invoice number, customer email, payment date.' .

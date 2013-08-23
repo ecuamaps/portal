@@ -91,6 +91,9 @@ class Api extends CI_Controller {
 		$this->load->helper('products/extrainfo');
 		$this->load->helper('products/phones');
 		$this->load->helper('products/promo');
+		$this->load->helper('products/fbpage');
+		$this->load->helper('products/website');
+		$this->load->helper('products/email');
 		
 		$this->load->view('api/search', $params);		
 	}
@@ -249,7 +252,7 @@ class Api extends CI_Controller {
 			die();
 		}
 		
-		$executed = array('logo', 'extrainfo', 'phones', 'ytvideo', 'tags', 'promo'); //Excluded the logo and others
+		$executed = array('logo', 'extrainfo', 'phones', 'ytvideo', 'tags', 'promo', 'fbpage', 'website', 'email'); //Excluded the logo and others
 		$params = array();
 		foreach($products as $p){
 			if(!in_array($p->helper_file, $executed)){
@@ -264,4 +267,20 @@ class Api extends CI_Controller {
 		
 		$this->load->view('api/show_products', $params);
 	}
+	
+	function contact(){
+		
+		$this->load->model('tasks_model');
+		
+		$email = $this->input->post('email', TRUE);
+		$subject = $this->input->post('subject', TRUE);
+		$msg = $this->input->post('msg', TRUE);
+		$bzid = $this->input->post('bzid', TRUE);
+		
+		$content = "Asunto: $subject, local ID: $bzid, $msg";
+		$this->tasks_model->create('pqr', $email, $content);
+		
+		die(json_encode(array('status' => 'ok')));
+	}
+	
 }

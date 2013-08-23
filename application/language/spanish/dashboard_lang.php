@@ -128,5 +128,8 @@ $lang['dashboard.contactform.bzid-help'] = 'Requerido solo para hacer algún rep
 $lang['dashboard.contactform.msg'] = 'Mensaje';
 $lang['dashboard.contactform.button'] = 'Enviar';
 $lang['dashboard.contactform.errmsg-misfield'] = 'Los campos marcados con asterisco son obligatorios';
+$lang['dashboard.contactform.errmsg-misbzid'] = 'El ID del local es requerido para hacer un reporte de un local';
+$lang['dashboard.contactform.okmsg'] = 'Hemos recibido su comunicación, gracias.';
+
 
 

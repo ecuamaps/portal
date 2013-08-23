@@ -175,6 +175,8 @@
 		<script>
 			var ct_max_chars = 250;
 			var ct_form_err_msg_missing_field = '<?=lang('dashboard.contactform.errmsg-misfield')?>';
+			var ct_form_err_msg_missing_bz_id = '<?=lang('dashboard.contactform.errmsg-misbzid')?>';
+			var ct_form_err_okmsg = '<?=lang('dashboard.contactform.okmsg')?>';
 			
 			$(document).ready(function(){
 				count_chars($('#ct-msg'), $('#chcount-ct-msg'), ct_max_chars);

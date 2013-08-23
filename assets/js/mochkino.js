@@ -845,18 +845,41 @@ $(document).ready(function() {
     	var hms1 = $('input[name="hms1"]').val();
     	var email = $('input[name="ct-email"]').val();
 		var subject = $('select[name="ct-subject"]').val();
-    	var bzid = $('select[name="ct-bzid"]').val();
+    	var bzid = $('input[name="ct-bzid"]').val();
+    	var msg = $('#ct-msg').val();
 		
-    	if(!email){
+    	if(!email || !msg || !subject){
     		alert(ct_form_err_msg_missing_field);
     		return false;
     	}
     	
     	if((subject == 'Reportar local' || subject == 'Business issue') && !bzid){
-    		alert(ct_form_err_msg_missing_field);
+    		alert(ct_form_err_msg_missing_bz_id);
     		return false;    		
     	}
-	})
+    	
+        $.ajax({
+            type : "POST",
+            url : $('#contact-form').attr('action'),        
+            dataType : "json",
+            data : {
+                hms1 : hms1,
+                email: email,
+                subject : subject,
+                msg : msg,
+                bzid : bzid
+            }
+        }).done(function(response){
+            if(response.state == 'error'){
+                alert(response.msg);
+                return false;
+            }
+            $('#contact-close-modal').trigger('click');
+            alert(ct_form_err_okmsg);
+        });
+    	
+	});    	
+
 });
 
 function change_sort(orderby){

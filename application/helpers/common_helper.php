@@ -2008,6 +2008,12 @@ function pattern($key){
 		case 'mail':
 			$pattern = '^[a-zA-Z0-9._-]+([+][a-zA-Z0-9._-]+){0,1}[@][a-zA-Z0-9._-]+[.][a-zA-Z]{2,6}$';
 			break;
+		case 'fburl':
+			$pattern = '(http|https):\/\/(?:www.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-]*)?';
+			break;
+		case 'url':
+			$pattern = '(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?';
+			break;
 		default:
 			$pattern = '';
 	}
