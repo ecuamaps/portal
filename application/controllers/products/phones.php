@@ -66,6 +66,9 @@ class Phones extends CI_Controller {
 		
 		$this->business_model->update_bz_product($bz_product_id, array('implementation_data' => $serialized));
 		
+		//Update the solr 
+		$this->business_model->syncronize($post_id);
+		
  	   	die( json_encode(array('status' => 'success', 'msg' => lang('phones.success'))));
 	}
 }

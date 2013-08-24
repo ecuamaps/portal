@@ -12,7 +12,7 @@
 	<? for($x=0; $x<$unit; $x++):?>		
 		<div class="row">
 	      <div class="large-4 columns">
-	        <input type="tel" maxlength="16" pattern="<?=pattern('phones')?>" class="phone" name="phone-<?=$x?>" value="<?=isset($phones[$x]) ? $phones[$x] : ''?>"/>
+	        <input type="tel" maxlength="16" pattern="<?=pattern('phone')?>" class="phone" name="phone-<?=$x?>" value="<?=isset($phones[$x]) ? $phones[$x] : ''?>"/>
 	      </div>
 	    </div>
 	<? endfor; ?>	
@@ -23,9 +23,12 @@
 
 <script>
 	$(document).ready(function(){
-		$('.phone').keypress(function(event) {
-			keysForPhones(event);
-		});
+		
+		$(".phone").mask("(593) 0#-#######?##");
+		
+		//$('.phone').keypress(function(event) {
+		//	keysForPhones(event);
+		//});
 		
 		$('#save-phones').click(function(e){
 			var error = false;

@@ -169,6 +169,10 @@ class Business_model extends CI_Model {
 		
 		//Set the text fields
 		$phones = isset($metas['phones']) ? ' '.$metas['phones'] : '';
+		$this->load->helper('products/phones');
+		$extra_phoones = phones_show($id);
+		$phones = $phones.' '.$extra_phoones;
+		
 		$address = isset($metas['address']) ? ' '.$metas['address'] : '';
 		$CEO = isset($metas['CEO_name']) ? ' '.$metas['CEO_name'] : '';
 		$email = isset($metas['CEO_email']) ? ' '.$metas['CEO_email'] : '';

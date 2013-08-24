@@ -18,5 +18,5 @@ function phones_show($post_id){
 			$phones = array_merge($phones, $i_data['phones']);
 	}
 	
-	return implode(", ", $phones);	
+	return implode(" ", $phones);	
 }

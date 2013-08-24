@@ -3,26 +3,26 @@
 	<input type="hidden" name="search-start" id="search-start" value="0"/>
 	<div class="row full-width">
 		<div class="large-12 columns">
-			<div class="panel callout opacity07 text-color-white padding-10px clear-margin">
+			<div class="panel callout opacity07 text-color-white padding-5px clear-margin">
 				<div class="row">
 					<!--<div class="small-3 columns hide-for-small show-for-medium-up"><? logo_big_svg(200, 36); ?></div>
 					<div class="small-3 columns show-for-small hide-for-medium-up"><? logo_big_svg(80, 15); ?></div>-->
 					<!--<div class="small-3 columns"><h1 id="bsk-logo"><span class="font-black">buskoo</span><span class="font-red">.com</span></h1></div>-->
 					<div class="small-2 columns">
 						<? if(!$user): ?>
-				           	<a href="#" data-reveal-id="login-form-wrapper" class="button alert tiny radius"><?=lang('dashboard.login')?></a>
+				           	<a href="javascript:void(0)" data-reveal-id="login-form-wrapper" class="button alert tiny radius"><?=lang('dashboard.login')?></a>
 				        <? else: ?>
 				            <span style="color: white;"><?=$user->name?></span>
 				        <? endif; ?>
 					</div>
 					<div class="small-5 columns">
 						<input type="text" id="search-text" name="search-text" placeholder="<?=lang('dashboard.searchform.searchtext')?>" class="radius clear-margin" />
-						<h6><small class="text-color-white"><?=lang('dashboard.searchform.nearto')?>: <span id="current-address"></span> <a href="#" data-dropdown="change-location-wrapper" id="chlocation"><?=lang('dashboard.chlocationform.change')?></a></small></h6>		
+						<h6 class="clear-margin"><small class="text-color-white"><?=lang('dashboard.searchform.nearto')?>: <span id="current-address"></span> <a href="#" data-dropdown="change-location-wrapper" id="chlocation"><?=lang('dashboard.chlocationform.change')?></a></small></h6>		
 					</div>
 					<div class="small-5 columns">
-						<a href="javascript:void(0)" id="search-btn" class="button alert small radius"><?icon_magni_glass(8, 9)?></a>
-						<a href="javascript:void(0)" id="back-results-btn" class="button small success radius" style=""><?=lang('dashboard.searchform.reopensearchresults')?></a>
-						<a href="javascript:void(0)" id="adv-search" data-dropdown="adv-search-block"><?=lang('dashboard.searchform.advsearch')?></a>
+						<a href="javascript:void(0)" id="search-btn" class="button alert small radius"><?icon_magni_glass(10, 11)?></a>
+						<a href="javascript:void(0)" id="back-results-btn" class="button small success radius" style=""><?return_arrow_icon(12,12)?></a>
+						<a href="javascript:void(0)" id="adv-search" class="button small radius" data-dropdown="adv-search-block"><?advanced_icon(12,12)?></a>
 					</div>
 					<!-- <div class="small-2 columns"></div> -->
 				</div>					
