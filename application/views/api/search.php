@@ -122,6 +122,22 @@
 				//console.log(lat);
 				set_directions(lat, lng, d, bz_name, post_id);
 				$('#add-qualification-wrapper').foundation('reveal', 'close');
-			})
+			});
+			
+			$('.where-is').click(function(e){
+				e.preventDefault();
+				var lat = $(this).attr('lat');
+				var lng = $(this).attr('lng');
+				var d = $(this).attr('dist');
+				var bz_name = $(this).attr('bz-name');
+				var post_id = $(this).attr('post-id');
+				var msg1 = $(this).attr('msg1');
+				
+				//console.log(lat);
+				set_drop(lat, lng, d, bz_name, post_id, msg1);
+				$('#add-qualification-wrapper').foundation('reveal', 'close');
+			});
+			
+			
 		</script>
 		

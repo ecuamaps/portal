@@ -4,6 +4,7 @@ $lang['search.resultstitle'] = 'Hemos encontrado %d resultado(s) para la búsque
 		'usa la busqueda avanzada para afinar los resultados.';
 $lang['search.score'] = "Puntaje";
 $lang['search.howtoget'] = "C&oacute;mo llegar?";
+$lang['search.whereis'] = "Donde esta?";
 $lang['search.phone'] = "Tel(s)";
 $lang['search.review'] = "Rese&ntilde;a/Califica";
 $lang['search.more'] = "Ver Mas";

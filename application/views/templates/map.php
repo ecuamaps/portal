@@ -46,6 +46,8 @@
 	var locationErrorMsg = "<?=lang('dashboard.searchform.locationerror')?>";
 	var location_failed = "<?=lang('dashboard.location.failed')?>";
 	
+	var post = <?= isset($post) ? $post : 'null' ?>;
+	
 </script>
 
 

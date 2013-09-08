@@ -31,6 +31,15 @@ class Dashboard extends CI_Controller {
 		//Get the top five of business types
 		//$this->dasboard_params['bztop5types'] = $this->get_top5_bztypes();
 		
+		//Load the post
+		$pid = $this->input->get_post('pid', TRUE);
+		if($pid){
+			
+			$post = $this->business_model->get_by_id($pid);
+			$this->dasboard_params['post'] = json_encode($post);
+		}
+		
+			
 		//Get the follow us urls
 		$this->dasboard_params['follow_us_links'] = $this->config_model->get_follow_us_links();
 		

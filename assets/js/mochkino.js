@@ -97,7 +97,7 @@ function mapInitialize(location) {
 		position : myLatlng,
 		map : map,
 		title : currentPosLbl,
-		icon : 'assets/images/myLocation.png',
+		icon : base_url + 'assets/images/myLocation.png',
 		draggable : true
 	});
 	
@@ -210,6 +210,21 @@ function goToMyCurrentLocation(location){
 	myLocation.setPosition(myLatlng);
 }
 
+rad = function(x) {return x*Math.PI/180;}
+
+distHaversine = function(p1, p2) {
+	  var R = 6371; // earth's mean radius in km
+	  var dLat  = rad(p2.lat() - p1.lat());
+	  var dLong = rad(p2.lng() - p1.lng());
+
+	  var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+	          Math.cos(rad(p1.lat())) * Math.cos(rad(p2.lat())) * Math.sin(dLong/2) * Math.sin(dLong/2);
+	  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	  var d = R * c;
+
+	  return d.toFixed(3);
+}
+
 $(document).ready(function() {
     $.cookie.json = true;
     $.cookie.expires = 1;
@@ -236,7 +251,16 @@ $(document).ready(function() {
 			$('#adv-search-block').slideDown("slow");
 		}
 	});*/
+    
+    if(post){
+    	//console.log(post);
+    	var y = new google.maps.LatLng(post.lat, post.lng);
+    	var kmdistance = distHaversine(myLatlng, y);
 
+    	set_drop(post.lat, post.lng, kmdistance, post.name, post.id);
+    }
+    
+    
     $('#view-all-types').click(function(e) {
         e.preventDefault();
 
@@ -921,6 +945,36 @@ function set_directions(lat, lng, distance, bz_name, post_id){
 		routeToHere(destination, distance);
 	});
 
+}
+
+function set_drop(lat, lng, distance, bz_name, post_id){
+	var destination = new google.maps.LatLng(lat, lng);
+	
+	num = new Number(distance);
+
+	if(!isTouch){
+		var contentString = '<div class="panel radius">' + 
+		'<h5>' + bz_name + '</h5>' +
+	//	'<small><a href="">' + msg1 + '</a></small><br/>' +		
+		'<small>' + num.toPrecision(2) + 'km</small>' +		
+		'</div>';
+		
+		infoWindows[post_id] = new google.maps.InfoWindow({
+			content: contentString
+		});		
+	}
+	
+	map.setZoom(12);
+	
+	addMarker(post_id, destination);
+	markers[post_id].setTitle(bz_name + ' (' + num.toPrecision(2) + 'km)');
+	google.maps.event.addListener(markers[post_id], 'click', function() {
+		if(!isTouch){
+			closeInfoWindows();
+			infoWindows[post_id].open(map, markers[post_id]);
+		}
+		routeToHere(destination, distance);
+	});
 }
 
 function closeInfoWindows(){

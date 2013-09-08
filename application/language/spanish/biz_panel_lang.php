@@ -22,3 +22,27 @@ $lang['bizpanel.products.availableprod'] = 'Puede agregar mejoras a su negocio y
 $lang['bizpanel.products.inactivateconfirm'] = 'Esta seguro de inactivar este producto?\nSi a la fecha de corte el producto esta inactivo será eliminado junto sus datos y no será incluido en la facturación.';
 $lang['bizpanel.products.activateconfirm'] = 'Esta seguro de activar este producto?\nSi a la fecha de corte el producto esta activo será incluido en la facturación.';
 $lang['bizpanel.products.addmoreprod'] = 'Obtener Mas';
+
+$lang['bizpanel.bills.billinginfo'] = 'Información de la facturacion';
+$lang['bizpanel.bills.cycle'] = 'Ciclo';
+$lang['bizpanel.bills.monthly'] = 'Mensual';
+$lang['bizpanel.bills.yearly'] = 'Anual';
+$lang['bizpanel.bills.nextbill'] = 'Próxima facturación';
+$lang['bizpanel.bills.lastbill'] = 'Última facturación';
+$lang['bizpanel.bills.id'] = '#';
+$lang['bizpanel.bills.date'] = 'Fecha';
+$lang['bizpanel.bills.balance'] = 'Por pagar';
+$lang['bizpanel.bills.total'] = 'Total';
+$lang['bizpanel.bills.state'] = 'Estado';
+$lang['bizpanel.bills.state.outstanding'] = 'Pendiente';
+$lang['bizpanel.bills.state.paid'] = 'Pagada';
+$lang['bizpanel.bills.state.canceled'] = 'Cancelada';
+$lang['bizpanel.bills.state.error'] = 'Error';
+$lang['bizpanel.bills.sendemail'] = 'Enviar Email';
+$lang['bizpanel.bills.listtitle'] = 'Facturas';
+$lang['bizpanel.bills.listsexpl'] = 'Para ves mas detalles de las facturas click en "Envia Email" y consutelas en el correo inscrito a esta cuenta.';
+$lang['bizpanel.bills.emailsent'] = 'La factura ha sido enviada por email.';
+
+
+
+

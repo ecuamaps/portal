@@ -183,7 +183,7 @@ class MY_Email extends CI_Email {
 		$this->message($this->message);	
 		
 		$r = $this->send();    
-		$this->print_debugger();
+		//$this->print_debugger();
 		return $r;	
     }
 }

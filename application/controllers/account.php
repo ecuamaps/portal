@@ -415,4 +415,46 @@ class Account extends CI_Controller {
 		
 		die(json_encode(array('state' => 'ok', 'msg' => lang('pwdrecover.success'))));
 	}
+	
+	function get_invoices(){
+		$this->load->model('business_model');
+		$this->lang->load('biz_panel');
+
+		$post_id = $this->input->post('bz_id');
+
+		//get the billig cycle
+		$billing_cycle = $this->business_model->get_billing_cycle($post_id);
+		
+		//Get the last billing date
+		$last_billing_date = $this->business_model->get_last_billing_date($post_id);
+
+		//Get the next billing date
+		$next_billing_date = $this->business_model->get_next_billing_date($post_id);
+		
+		//Get active bills
+		$invoices =$this->business_model->get_invoices($post_id);
+		
+		$params = array(
+			'post_id' => $post_id,
+			'invoices' => $invoices,
+			'next_billing_date' => $next_billing_date,
+			'billing_cycle' => $billing_cycle,
+			'last_billing_date' => $last_billing_date,
+			'user' => $this->user
+		);
+		
+		$this->load->view('account/biz_invoices_list', $params);		
+		
+	}
+	
+	function send_invoice(){
+		
+		$invoice_id = $this->input->post('invoice_id');
+		
+		$this->email->send_invoice($invoice_id);
+		
+		$this->lang->load('biz_panel');
+		
+		die(json_encode(array('state' => 'ok', 'msg' => lang('bizpanel.bills.emailsent'))));
+	}
 }

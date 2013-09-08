@@ -44,6 +44,10 @@
 </div>
 
 <div class="row">
+	<div class="large-12 columns">&nbsp;</div>
+</div>
+
+<div class="row">
 	<div class="large-12 columns">
 		<a href="javascript:void(0)" class="small button" id="bizpanel-products-addmoreprod"><?=lang('bizpanel.products.addmoreprod')?></a>
 	</div>

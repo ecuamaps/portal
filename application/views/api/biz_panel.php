@@ -43,12 +43,10 @@
     <div class="content" data-slug="section2" id="bizpanel-tab2-wrapper"></div>
   </section>
 
-	<!--
   <section>
     <p class="title" data-section-title><a href="#panel4" id="bizpanel-tab4"><?=lang('bizpanel.tab4')?></a></p>
     <div class="content" data-slug="section4" id="bizpanel-tab4-wrapper"></div>
   </section>
--->
 
 </div>
 
@@ -98,6 +96,23 @@
 		        	$(document).foundation('section','reflow');
 		        });				
 			//}
+		});
+		
+		$('#bizpanel-tab4').click(function(e){
+				$.ajax({
+		            type : "POST",
+		            url : '<?=current_lang()?>/account/get_invoices',
+		            dataType : "html",
+		            data : {
+		            	user_id: <?=$user->id?>,
+		            	bz_id : $('input[name="bz-id"]').val(),
+		            	hms1 : $('input[name="hms1"]').val()
+		            }
+		        }).done(function(response) {
+		        	$('#bizpanel-tab4-wrapper').html(response);
+		        	//$('#bizpanel-tab2-wrapper').foundation('section', 'reflow');
+		        	$(document).foundation('section','reflow');
+		        });			
 		});
 		
 		$('#bizpanel-update').click(function(e){

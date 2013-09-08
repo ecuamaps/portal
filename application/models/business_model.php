@@ -185,7 +185,7 @@ class Business_model extends CI_Model {
 		$biz_type = $this->db->query($sql)->result();
 		$biz_type = $biz_type[0]; 
 		
-		$tags = trim(trim(strtolower($biz_type->name)).' '.trim(strtolower($biz_type->tag)).' '.trim(strtolower($post->tags)));
+		$tags = trim(trim(strtolower($biz_type->name)).' '.trim(strtolower($biz_type->tag)).' '.trim(mb_strtolower($post->tags)));
 		
 		//Get the bought business tags
 		$this->load->helper('products/tags');
@@ -195,7 +195,7 @@ class Business_model extends CI_Model {
 		//Solr data
 		$data = array(
 			'id' => $id,
-			'name' => $post->name,
+			'name' => mb_strtolower($post->name),
 			'tags' => $tags,
 			'content' => $post->content,
 			'post_type_es' => $post_type[0]->name_es,
@@ -327,5 +327,10 @@ class Business_model extends CI_Model {
 	
 	function update_last_date($post_id){
 		return $this->db->update('post', array('last_update' => date('Y-m-d')), "id = $post_id");
+	}
+	
+	function get_invoices($post_id){
+		return $this->db->get_where('invoice', array('post_id' => $post_id))->result();
+		
 	}
 }

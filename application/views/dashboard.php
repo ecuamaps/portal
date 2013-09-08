@@ -33,6 +33,7 @@
 
   <script>  		
         var lang = '<?=$this->lang->lang()?>';
+        var base_url = '<?=base_url()?>';
   </script>
   
   <?=$_scripts?>
