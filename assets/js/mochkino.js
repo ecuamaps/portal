@@ -964,7 +964,9 @@ function set_drop(lat, lng, distance, bz_name, post_id){
 		});		
 	}
 	
-	map.setZoom(12);
+	map.setZoom(15);
+	
+	map.setCenter(destination);
 	
 	addMarker(post_id, destination);
 	markers[post_id].setTitle(bz_name + ' (' + num.toPrecision(2) + 'km)');

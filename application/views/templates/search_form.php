@@ -46,11 +46,12 @@
 				<label for="distance"><?=lang('dashboard.searchform.radio')?></label>
 				<select id="distance" name="distance" class="medium">
 					<option value="1">1Km</option>
-				    <option value="2" selected>2Km</option>
+				    <option value="2">2Km</option>
 				    <option value="3">3Km</option>
 				    <option value="5">5Km</option>
 				    <option value="10">10Km</option>
-				    <option value="15">15Km</option>
+				    <option value="15" selected>15Km</option>
+				    <option value="30">30Km</option>
 				</select>
 			</div>
     	</div>
