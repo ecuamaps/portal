@@ -50,10 +50,10 @@
 								<div class="row">
 									<div class="large-2 columns"><? show_logo($d->id) ?></div>
 									<div class="large-10 columns">
-										<h6 class="clear-margin font-weight-normal"><small><?= show_extrainfo($d->id) ?></small></h6>
-										<h6 class="clear-margin font-weight-normal"><small><?= ucfirst($d->address) ?></small></h6>
-										<h6 class="clear-margin font-weight-normal"><small><?= lang('search.phone') ?>: <?= $d->phones ?></small></h6>
-										<h6 class="clear-margin font-weight-normal"><small><?= email_show($d->id) ?></small></h6>								
+										<h6 class="clear-margin font-weight-normal"><?= show_extrainfo($d->id) ?></h6>
+										<h6 class="clear-margin font-weight-normal"><?= ucfirst($d->address) ?></h6>
+										<h6 class="clear-margin font-weight-normal"><?= lang('search.phone') ?>: <?= $d->phones ?></h6>
+										<h6 class="clear-margin font-weight-normal"><?= email_show($d->id) ?></h6>								
 										<?= website_show($d->id) ?>								
 										<?= fbpage_show($d->id) ?>								
 									</div>

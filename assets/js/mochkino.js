@@ -964,7 +964,7 @@ function set_drop(lat, lng, distance, bz_name, post_id){
 		});		
 	}
 	
-	map.setZoom(15);
+	map.setZoom(16);
 	
 	map.setCenter(destination);
 	
