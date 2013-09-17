@@ -12,6 +12,7 @@ class Api extends CI_Controller {
 		
 		//Get the search params
 		$text = $this->input->post('text', TRUE);
+		$pid = $this->input->post('pid', TRUE);
 		
 		$distance = $this->input->post('distance', TRUE);
 		if(is_quoted($text))
@@ -47,7 +48,7 @@ class Api extends CI_Controller {
 				$sort = 'score desc,score_avg desc,geodist() asc';
 		}
 		
-		$q = search_query($text, $post_type, $exact_match);
+		$q = search_query($text, $post_type, $exact_match, $pid);
 		$query = array(
 			'q' => $q,
 			'fq' => '{!geofilt}',
@@ -75,6 +76,10 @@ class Api extends CI_Controller {
 			$results->response->numFound = $max_results;
 		
 		$this->load->helper('pagination');
+		
+		if($pid){
+			$text = $docs[0]->name;
+		}
 		
 		$params = array(
 			'text' => $text,

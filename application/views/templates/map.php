@@ -47,6 +47,7 @@
 	var location_failed = "<?=lang('dashboard.location.failed')?>";
 	
 	var post = <?= isset($post) ? $post : 'null' ?>;
+	var uposts = <?= isset($uposts) ? $uposts : 'null' ?>;
 	
 </script>
 

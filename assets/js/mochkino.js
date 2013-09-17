@@ -260,6 +260,21 @@ $(document).ready(function() {
     	set_drop(post.lat, post.lng, kmdistance, post.name, post.id);
     }
     
+    if(uposts){
+    	//console.log(uposts);
+    	
+    	map.setZoom(12);
+    	
+    	$.each( uposts, function( index, post ) {
+    		
+        	var y = new google.maps.LatLng(post.lat, post.lng);
+        	var kmdistance = distHaversine(myLatlng, y);
+    		set_drop(post.lat, post.lng, kmdistance, post.name, post.id, true);
+
+    	});
+    	
+    }
+    
     
     $('#view-all-types').click(function(e) {
         e.preventDefault();
@@ -916,13 +931,21 @@ function change_sort(orderby){
 var infoWindows = new Object();
 var markers = new Object();
 
-function set_directions(lat, lng, distance, bz_name, post_id){
+function set_directions(lat, lng, distance, bz_name, post_id, drop_only){
 
 	var destination = new google.maps.LatLng(lat, lng);
-	routeToHere(destination, distance);
 
+	if(!drop_only){
+		routeToHere(destination, distance);
+	}
+	
 	num = new Number(distance);
 
+	if(drop_only){
+		map.setZoom(16);
+		map.setCenter(destination);
+	}
+	
 	if(!isTouch){
 		var contentString = '<div class="panel radius">' + 
 		'<h5>' + bz_name + '</h5>' +
@@ -942,17 +965,19 @@ function set_directions(lat, lng, distance, bz_name, post_id){
 			closeInfoWindows();
 			infoWindows[post_id].open(map, markers[post_id]);
 		}
+		
 		routeToHere(destination, distance);
+			
 	});
 
 }
 
-function set_drop(lat, lng, distance, bz_name, post_id){
+function set_drop(lat, lng, distance, bz_name, post_id, multiple){
 	var destination = new google.maps.LatLng(lat, lng);
 	
 	num = new Number(distance);
 
-	if(!isTouch){
+	/*if(!isTouch){
 		var contentString = '<div class="panel radius">' + 
 		'<h5>' + bz_name + '</h5>' +
 	//	'<small><a href="">' + msg1 + '</a></small><br/>' +		
@@ -962,20 +987,25 @@ function set_drop(lat, lng, distance, bz_name, post_id){
 		infoWindows[post_id] = new google.maps.InfoWindow({
 			content: contentString
 		});		
+	}*/
+	
+	if(!multiple){
+		map.setZoom(16);
+		map.setCenter(destination);		
 	}
-	
-	map.setZoom(16);
-	
-	map.setCenter(destination);
 	
 	addMarker(post_id, destination);
 	markers[post_id].setTitle(bz_name + ' (' + num.toPrecision(2) + 'km)');
 	google.maps.event.addListener(markers[post_id], 'click', function() {
-		if(!isTouch){
+		/*if(!isTouch){
 			closeInfoWindows();
 			infoWindows[post_id].open(map, markers[post_id]);
 		}
 		routeToHere(destination, distance);
+		*/
+		
+		$('input[name="search-pid"]').val(post_id);
+		search(true);
 	});
 }
 
@@ -1021,6 +1051,7 @@ function search(openModal, orderby){
         dataType : "html",
         data : {
             text : $('input[name="search-text"]').val(),
+            pid  : $('input[name="search-pid"]').val(),
             distance : $('#distance').val(),
             rows : $('#rows').val(),
             start: $('input[name="search-start"]').val(),

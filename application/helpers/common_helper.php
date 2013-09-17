@@ -1901,6 +1901,9 @@ imJNYhQykuJmGBAjR5MgVBMbKZpEoJpYSdGkQMh5ANloCc3BtEflAAAAAElFTkSuQmCC
 }
 
 function is_quoted($text){
+	if(!$text)
+		return false;
+		
 	$len = strlen($text);
 	if($text[0] == '"' && $text[$len-1] == '"'){
 		return true;
@@ -1909,9 +1912,13 @@ function is_quoted($text){
 	return false;
 }
 
-function search_query($text, $post_type, $exact_match){
+function search_query($text, $post_type, $exact_match, $pid){
 	$terms = array();
 
+	if($pid){
+		return "id:$pid";
+	}
+	
 	if(!$text)
 		return '*.*';
 

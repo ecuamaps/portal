@@ -34,12 +34,30 @@ class Dashboard extends CI_Controller {
 		//Load the post
 		$pid = $this->input->get_post('pid', TRUE);
 		if($pid){
-			
 			$post = $this->business_model->get_by_id($pid);
-			$this->dasboard_params['post'] = json_encode($post);
+			if($post)
+				$this->dasboard_params['post'] = json_encode($post);
 		}
 		
+		//Load the related user posts
+		$uid = $this->input->get_post('uid', TRUE);
+		if($uid){
+			$uposts = $this->account_model->get_businesses($uid);
+			if($uposts){
+				foreach($uposts as $i => $p){
+					$uposts[$i] = $this->business_model->get_by_id($p->id);
+				}
+			}
 			
+			if(isset($post)){
+				$uposts[] = $post;
+				$this->dasboard_params['post'] = null;
+			}
+			
+			$this->dasboard_params['uposts'] = json_encode($uposts);
+		}
+		
+		
 		//Get the follow us urls
 		$this->dasboard_params['follow_us_links'] = $this->config_model->get_follow_us_links();
 		

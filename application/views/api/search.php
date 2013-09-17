@@ -97,7 +97,7 @@
 						
 					$.ajax({
 			            type : "GET",
-			            url : lang + '/api/show_products',
+			            url : base_url + lang + '/api/show_products',
 			            dataType : "HTML",
 			            data : {
 			                post_id : post_id
@@ -120,7 +120,7 @@
 				var post_id = $(this).attr('post-id');
 				
 				//console.log(lat);
-				set_directions(lat, lng, d, bz_name, post_id);
+				set_directions(lat, lng, d, bz_name, post_id, false);
 				$('#add-qualification-wrapper').foundation('reveal', 'close');
 			});
 			
@@ -134,7 +134,7 @@
 				var msg1 = $(this).attr('msg1');
 				
 				//console.log(lat);
-				set_drop(lat, lng, d, bz_name, post_id, msg1);
+				set_directions(lat, lng, d, bz_name, post_id, true);
 				$('#add-qualification-wrapper').foundation('reveal', 'close');
 			});
 			
