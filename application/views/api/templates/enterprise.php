@@ -24,18 +24,19 @@
 
 	$post = $this->business_model->get_by_id($d->id);
 	$post->last_update = isset($post->last_update) ? $post->last_update : '';
+	$post->visits = isset($post->visits) ? $post->visits : 0;
 ?>
 
 			<h4 class="subheader clear-margin"><?= $index.'. '.ucwords($d->name) ?></h4>
 			<h6 class="clear-margin font-weight-normal line-height-08"><small><?= $str_types ?></small></h6>
-			<h5 class="clear-margin font-weight-normal line-height-08 margin-bottom-5px"><small><?= lang('search.distance') ?>: <?= $distance ?>, <?= lang('search.score') ?>: <?= $score_avg ?>, ID: <?= $d->id ?>, <?= lang('search.lastupdate').': '.$post->last_update ?></small></h5>
+			<h5 class="clear-margin font-weight-normal line-height-08 margin-bottom-5px"><small><?= lang('search.distance') ?>: <?= $distance ?>, <?= lang('search.score') ?>: <?= $score_avg ?>, ID: <?= $d->id ?>, <?= lang('search.lastupdate').': '.$post->last_update ?>, <?= lang('search.visits').': '.$post->visits ?></small></h5>
 
 			<div class="row">
 				<div class="large-4 columns">
 					<nav class="breadcrumbs">
-						<a href="javascript:void(0)" post-id="<?= $d->id ?>" class="qualify-post"><?= lang('search.review') ?></a>
-						<a href="javascript:void(0)" post-id="<?= $d->id ?>" bz-name="<?=$d->name?>" lat="<?= $d->location_0_coordinate ?>" lng="<?= $d->location_1_coordinate ?>" dist="<?= $d->_dist_ ?>" class="set-directions"><?= lang('search.howtoget') ?></a>
-						<a href="javascript:void(0)" post-id="<?= $d->id ?>" bz-name="<?=$d->name?>" lat="<?= $d->location_0_coordinate ?>" lng="<?= $d->location_1_coordinate ?>" dist="<?= $d->_dist_ ?>" class="where-is"><?= lang('search.whereis') ?></a>
+						<a href="javascript:void(0)" post-id="<?= $d->id ?>" class="qualify-post" pid="<?=$d->id?>"><?= lang('search.review') ?></a>
+						<a href="javascript:void(0)" post-id="<?= $d->id ?>" bz-name="<?=$d->name?>" lat="<?= $d->location_0_coordinate ?>" lng="<?= $d->location_1_coordinate ?>" dist="<?= $d->_dist_ ?>" class="set-directions" pid="<?=$d->id?>"><?= lang('search.howtoget') ?></a>
+						<a href="javascript:void(0)" post-id="<?= $d->id ?>" bz-name="<?=$d->name?>" lat="<?= $d->location_0_coordinate ?>" lng="<?= $d->location_1_coordinate ?>" dist="<?= $d->_dist_ ?>" class="where-is" pid="<?=$d->id?>"><?= lang('search.whereis') ?></a>
 					</nav>
 				</div>
 			</div>
@@ -68,7 +69,7 @@
   				</section>
   				
   				 <section>
-				    <p class="title" data-section-title><a href="#panel2" class="enterprise-panel2" id="<?=$d->id?>"><?= lang('search.more') ?></a></p>
+				    <p class="title" data-section-title><a href="#panel2" class="enterprise-panel2" id="<?=$d->id?>" pid="<?=$d->id?>"><?= lang('search.more') ?></a></p>
 				    <div class="content" data-section-content id="section-content-<?=$d->id?>"></div>
  				</section>
 				

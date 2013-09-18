@@ -42,7 +42,7 @@
 			var orderby = '<?=$sort?>';
 			
 			$('.qualify-post').click(function(e){
-				e.preventDefault();
+				//e.preventDefault();
 				var post_id = $(this).attr('post-id');
 				var post = posts[post_id];
     			
@@ -89,7 +89,7 @@
 			}
 			
 			$('.enterprise-panel2').click(function(e){
-				e.preventDefault();
+				//e.preventDefault();
 				
 				var post_id = $(this).attr('id');	
 				
@@ -108,11 +108,26 @@
 			        			
 				}
 				
-			})
+			});
+			
+			$('.enterprise-panel2, .enterprise-panel3, .qualify-post, .set-directions, .where-is').click(function(e){
+				
+				var post_id = $(this).attr('pid');
+				
+				$.ajax({
+			    	type : "GET",
+			        url : base_url + lang + '/api/update_views',
+			        dataType : "JSON",
+			            data : {
+			                post_id : post_id
+			            }
+			        }).done(function(response) {});				
+			});
+			
 		<? endif; ?>
 		
 			$('.set-directions').click(function(e){
-				e.preventDefault();
+				//e.preventDefault();
 				var lat = $(this).attr('lat');
 				var lng = $(this).attr('lng');
 				var d = $(this).attr('dist');
@@ -125,7 +140,7 @@
 			});
 			
 			$('.where-is').click(function(e){
-				e.preventDefault();
+				//e.preventDefault();
 				var lat = $(this).attr('lat');
 				var lng = $(this).attr('lng');
 				var d = $(this).attr('dist');

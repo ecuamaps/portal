@@ -105,4 +105,10 @@ class Post extends CI_Model {
 		$CI->$model->syncronize($post_id);
 	}
 	
+	function increase_views($post_id){
+		$post = $this->get_by_id($post_id);
+		$visits = $post->visits + 1;
+		$this->db->update('post', array('visits' => $visits), array('id' => $post_id));
+	}
+	
 }

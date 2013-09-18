@@ -30,7 +30,7 @@ function show_promos($post_id){
 	?>
 	
 	 <section>
-	    <p class="title" data-section-title><a href="#panel3"><?= lang('promo.tabname') ?></a></p>
+	    <p class="title" data-section-title><a href="#panel3" class="enterprise-panel3" pid="<?=$d->id?>"><?= lang('promo.tabname') ?></a></p>
 	    <div class="content" data-section-content>
 	    	<!--<div class="row">
 		    	<div class="large-12 columns">

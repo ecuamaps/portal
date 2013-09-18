@@ -286,6 +286,15 @@ class Api extends CI_Controller {
 		$this->tasks_model->create('pqr', $email, $content);
 		
 		die(json_encode(array('status' => 'ok')));
+	} 
+	
+	function update_views(){
+		$this->load->model('post');
+		
+		$pid = $this->input->get_post('post_id');
+		
+		$this->post->increase_views($pid);
+		die();
 	}
 	
 }

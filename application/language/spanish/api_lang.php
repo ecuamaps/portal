@@ -11,6 +11,7 @@ $lang['search.more'] = "Ver Mas";
 $lang['search.start'] = "Resumen";
 $lang['search.distance'] = "Distancia apox.";
 $lang['search.lastupdate'] = "Última actividad";
+$lang['search.visits'] = "Visitas";
 
 $lang['qualify.earlierqualify'] = "Tu ya has calificado esta publicaci&oacute;n antes.";
 $lang['qualify.sucess.outstanding'] = "Recibimos tu rese&ntilde;a pero esta pendiente de aprovaci&oacute;n, gracias.";
